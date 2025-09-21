@@ -414,3 +414,28 @@ body {
 .btn--secondary:hover {
   opacity: 0.9;
 }
+.highlight-card {
+  background: #222;
+  border-radius: 8px;
+  padding: 1.5rem;
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(255, 195, 11, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.highlight-card:hover {
+  transform: translateY(-5px);
+}
+
+.highlight-card__title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #FFC30B;
+}
+
+.highlight-card__text {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #ddd;
+}
