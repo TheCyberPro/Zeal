@@ -76,6 +76,23 @@ body {
   color: var(--light-text);
   border-radius: 4px;
 }
+.logo-glow {
+  font-size: 4rem;
+  font-weight: 700;
+  color: #FFC30B;
+  text-shadow: 0 0 8px #FFC30B, 0 0 16px #FFC30B;
+  animation: pulseGlow 2.5s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    text-shadow: 0 0 8px #FFC30B, 0 0 16px #FFC30B;
+  }
+  50% {
+    text-shadow: 0 0 12px #FFD700, 0 0 24px #FFD700;
+  }
+}
+
 
 /*------------------------------------*\
   Hero
@@ -232,6 +249,24 @@ body {
   margin-top: 0.5rem;
   font-size: 0.9rem;
   color: #777;
+}
+.testimonial-slider {
+  position: relative;
+  overflow: hidden;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.testimonial {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  position: absolute;
+  width: 100%;
+}
+
+.testimonial.active {
+  opacity: 1;
+  position: relative;
 }
 
 /*------------------------------------*\

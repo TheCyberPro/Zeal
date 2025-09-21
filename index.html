@@ -49,7 +49,7 @@
   <!-- NAVIGATION -->
   <header class="nav">
     <div class="container nav__inner">
-      <a href="/" class="nav__logo">ZEAL</a>
+<h1 class="logo-glow">ZEAL</h1>
       <nav class="nav__menu">
         <a href="#services">Services</a>
         <a href="#work">Work</a>
@@ -66,9 +66,9 @@
     linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
     url('nq7paJzoabB1PWcrWwhuJ.jpeg') center/cover no-repeat;">
   <div class="container hero__inner">
-    <h1 class="hero__title">ZEAL</h1>
+<h1 class="logo-glow">ZEAL</h1>
     <p class="hero__subtitle">
-      Where luxury meets conversion. I build digital platforms that feel as premium as your brand deserves.
+      Tailored solutions for unique business needs—whether it’s a plugin, API, or CMS. Where luxury meets conversion. We build digital platforms that feel as premium as your brand deserves.
     </p>
     <a href="#about" class="btn btn--secondary">Meet the Developer</a>
   </div>
@@ -142,19 +142,25 @@
   </section>
 
   <!-- TESTIMONIALS -->
-  <section id="testimonials" class="section section--light">
-    <div class="container">
-      <h2 class="section__title">Client Feedback</h2>
-      <blockquote class="testimonial">
+<section id="testimonials" class="section section--light">
+  <div class="container">
+    <h2 class="section__title">Client Feedback</h2>
+    <div class="testimonial-slider">
+      <div class="testimonial active">
         <p>“ZEAL cut our load time in half and boosted conversions by 45%.”</p>
         <footer>— Alex R., CEO of StartupX</footer>
-      </blockquote>
-      <blockquote class="testimonial">
+      </div>
+      <div class="testimonial">
         <p>“Our bounce rate plummeted thanks to crystal-clear navigation.”</p>
         <footer>— Maria S., Marketing Lead</footer>
-      </blockquote>
+      </div>
+      <div class="testimonial">
+        <p>“The payment flow feels premium and frictionless. We finally look like a fintech leader.”</p>
+        <footer>— Jordan T., Product Manager</footer>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- INSTAGRAM EMBED -->
   <section id="instagram" class="section section--light">
@@ -182,7 +188,7 @@
       </p>
       <a href="https://app.zeal.com/login" class="btn btn--light">
         Book a Demo
-      </a>
+]      </a>
     </div>
   </section>
 <!-- ABOUT THE DEVELOPER -->
@@ -190,7 +196,7 @@
   <div class="container">
     <h2 class="section__title">Meet the Developer</h2>
     <p class="developer__intro">
-      I’m [Your Name], a website developer who treats every pixel like a business asset. My specialty is crafting high-conversion fintech interfaces that blend elegance with precision. Whether it’s animated logos, seamless payment flows, or brand-consistent UI, I build experiences that feel expensive, load fast, and speak your customer’s language. I don’t just design websites—I engineer trust.
+      Helping startups, agencies, and entrepreneurs build digital experiences that convert website and treats every pixel like a business asset. With specialty crafting high-conversion fintech interfaces that blend elegance with precision. Whether it’s animated logos, seamless payment flows, or brand-consistent UI, build experiences that feel expensive, load fast, and speak your customer’s language. We don’t just design websites—we engineer trust.
     </p>
     <a href="#contact" class="btn btn--primary">Book a Free Consultation</a>
   </div>
@@ -225,5 +231,16 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
   </script>
+<script>
+  const testimonials = document.querySelectorAll('.testimonial');
+  let index = 0;
+
+  setInterval(() => {
+    testimonials[index].classList.remove('active');
+    index = (index + 1) % testimonials.length;
+    testimonials[index].classList.add('active');
+  }, 5000);
+</script>
+
 </body>
 </html>
