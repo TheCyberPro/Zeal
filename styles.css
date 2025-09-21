@@ -294,3 +294,88 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
+/*------------------------------------*\
+  Brand Colors & Glow
+\*------------------------------------*/
+:root {
+  --color-gold:   #FFC30B;
+  --color-dark:   #1C1410;
+  --shadow-glow:  0 0 8px var(--color-gold),
+                  0 0 16px var(--color-gold);
+}
+
+/* Luxury hero overrides */
+.hero--luxury {
+  color: var(--color-gold);
+  text-shadow: var(--shadow-glow);
+  padding: 6rem 0;
+  text-align: center;
+}
+
+.hero--luxury .hero__title {
+  font-size: 4rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.hero--luxury .hero__subtitle {
+  font-size: 1.25rem;
+  margin-top: 1rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Nav & Footer on dark */
+.nav, .footer {
+  background: var(--color-dark);
+}
+
+.nav__logo,
+.nav__menu a,
+.footer__nav a {
+  color: var(--color-gold);
+}
+
+.nav__menu a:hover,
+.footer__nav a:hover {
+  opacity: 0.8;
+}
+
+/* Luxury section style */
+.section--luxury {
+  background: var(--color-dark);
+  color: var(--color-gold);
+  padding: 4rem 0;
+  text-align: center;
+}
+
+.section--luxury .section__title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.developer__intro {
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--color-gold);
+}
+
+/* Buttons */
+.btn--primary {
+  background: var(--color-gold);
+  color: var(--color-dark);
+}
+
+.btn--secondary {
+  background: transparent;
+  border: 2px solid var(--color-gold);
+  color: var(--color-gold);
+}
+
+.btn--primary:hover,
+.btn--secondary:hover {
+  opacity: 0.9;
+}
