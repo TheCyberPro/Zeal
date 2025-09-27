@@ -455,3 +455,38 @@ body {
     0 0 30px #ff6f00,
     0 0 40px #ff6f00;
 }
+/*------------------------------------*\
+  3D ZEAL Logo
+\*------------------------------------*/
+.logo-3d {
+  font-family: 'ZEALBrand', sans-serif;
+  font-size: 6rem;
+  text-transform: uppercase;
+  color: var(--color-gold-mid);
+  margin: 2rem auto;
+  width: fit-content;
+  perspective: 800px;
+}
+
+.logo-3d span {
+  display: inline-block;
+  transform: rotateX(20deg) rotateY(-15deg);
+  transform-style: preserve-3d;
+  text-shadow:
+    1px 1px 0 var(--color-gold-start),
+    2px 2px 0 var(--color-gold-mid),
+    3px 3px 0 var(--color-gold-end),
+    4px 4px 8px rgba(255, 208, 61, 0.6),
+    5px 5px 16px rgba(255, 208, 61, 0.4);
+}
+
+.logo-3d span::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateZ(-8px);
+  color: var(--color-gold-start);
+  opacity: 0.5;
+  z-index: -1;
+}
