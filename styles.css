@@ -297,11 +297,83 @@ body {
 }
 
 /*------------------------------------*\
-  Instagram Embed
+  Instagram Embed — ZEAL brand frame
 \*------------------------------------*/
-#instagram blockquote {
+#instagram {
+  display: block;
+  padding: 0 0.5rem;
+}
+
+#instagram .instagram-media,
+#instagram blockquote.instagram-media {
   margin: 0 auto;
+  width: 100%;
   max-width: 540px;
+  background: linear-gradient(180deg, rgba(28,20,16,0.98), rgba(28,20,16,0.995));
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow:
+    0 6px 20px rgba(0,0,0,0.45),
+    0 0 28px rgba(255,195,11,0.06);
+  border: 1px solid rgba(255,195,11,0.06);
+  overflow: hidden;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+/* Make the injected iframe or inner wrapper scale to the card */
+#instagram iframe,
+#instagram .instagram-media > iframe,
+#instagram .instagram-media > div,
+#instagram blockquote iframe,
+#instagram blockquote > div {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  border: 0;
+  border-radius: 8px;
+}
+
+/* Caption, author, timestamp and links inside the embed */
+#instagram blockquote,
+#instagram blockquote p,
+#instagram blockquote a,
+#instagram blockquote time,
+#instagram .instagram-media p,
+#instagram .instagram-media a,
+#instagram .instagram-media time {
+  color: rgba(255, 230, 150, 0.98) !important;
+  opacity: 0.95;
+  line-height: 1.4;
+}
+
+/* Tighter spacing for the embed content */
+#instagram blockquote p,
+#instagram .instagram-media p {
+  margin: 0.5rem 0 0;
+  font-size: 0.95rem;
+}
+
+/* Hover / focus affordance for the card */
+#instagram .instagram-media:hover,
+#instagram blockquote.instagram-media:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 12px 30px rgba(0,0,0,0.5),
+    0 0 40px rgba(255,195,11,0.08);
+}
+
+/* Small screens: keep full-bleed feel with reduced padding */
+@media (max-width: 480px) {
+  #instagram .instagram-media,
+  #instagram blockquote.instagram-media {
+    padding: 10px;
+    border-radius: 10px;
+  }
+  #instagram blockquote p,
+  #instagram .instagram-media p {
+    font-size: 0.92rem;
+  }
 }
 
 /*------------------------------------*\
@@ -364,3 +436,22 @@ body {
   transform: translateY(0);
 }
 
+/* -------------------------------------------------- */
+/* ZEAL Hero Title Glow (append at bottom of styles.css) */
+/* -------------------------------------------------- */
+
+.hero__title {
+  font-family: 'Anton', sans-serif;
+  font-size: 8rem;               /* adjust or switch to vw for responsiveness */
+  color: #ffd54f;                /* golden-yellow fill */
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  /* multi-layered glow from bright yellow → deep orange */
+  text-shadow:
+    0 0 5px  #ffd54f,
+    0 0 10px #ffd54f,
+    0 0 20px #ffb300,
+    0 0 30px #ff6f00,
+    0 0 40px #ff6f00;
+}

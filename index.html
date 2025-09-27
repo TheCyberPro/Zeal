@@ -1,4 +1,6 @@
-<!DOCTYPE html> <html lang="en"> <head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ZEAL | Onboard, Pay, and Bill for Staffing Companies</title>
@@ -12,17 +14,38 @@
         content="https://cdn.prod.website-files.com/67631eed00e17775d4407a6b/678003f7c761e7ee321a3a56_meta-image-main.png" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Google Fonts -->
-<link
-  href="https://fonts.googleapis.com/css2?family=Anton&display=swap"
-  rel="stylesheet"
-/>
+  <!-- Google Fonts: Inter + Anton -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Anton&display=swap"
+    rel="stylesheet" />
 
   <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script>
 
-  <!-- Custom CSS -->
+  <!-- Your existing CSS -->
   <link rel="stylesheet" href="/styles.css" />
+
+  <!-- Glow styling for ZEAL -->
+  <style>
+    .hero__title {
+      font-family: 'Anton', sans-serif;
+      font-size: 8rem;               /* adjust or switch to vw for responsiveness */
+      color: #ffd54f;                /* golden-yellow base */
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+
+      /* multi-layered glow from bright yellow → deep orange */
+      text-shadow:
+        0 0 5px  #ffd54f,
+        0 0 10px #ffd54f,
+        0 0 20px #ffb300,
+        0 0 30px #ff6f00,
+        0 0 40px #ff6f00;
+    }
+  </style>
 
   <!-- Google Tag Manager -->
   <script>
@@ -38,7 +61,6 @@
   </script>
 </head>
 <body>
-
   <!-- Google Tag Manager (noscript) -->
   <noscript>
     <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N87XV2R4"
@@ -55,11 +77,10 @@
         <a href="#highlights">Highlights</a>
         <a href="#testimonials">Testimonials</a>
         <a href="#about">About</a>
-<a href="mailto:zeal.io@outlook.com?subject=ZEAL%20Demo%20Request"
-   class="btn btn--light">
-  Book a Demo
-</a>
-
+        <a href="mailto:zeal.io@outlook.com?subject=ZEAL%20Demo%20Request"
+           class="btn btn--light">
+          Book a Demo
+        </a>
       </nav>
     </div>
   </header>
@@ -68,10 +89,12 @@
   <section
     class="hero hero--luxury"
     style="background:
-      linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+      linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
       url('nq7paJzoabB1PWcrWwhuJ.jpeg') center/cover no-repeat;">
     <div class="container hero__inner">
+      <!-- Glow-enhanced title -->
       <h1 class="hero__title">ZEAL</h1>
+
       <p class="hero__subtitle">
         Where luxury meets conversion. We build digital platforms that feel as premium as your brand deserves.
       </p>
