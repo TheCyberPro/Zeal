@@ -255,6 +255,16 @@ body {
 .card__text,
 .highlight-card__text {
   font-size: 0.95rem;
+/*======================================
+  1) Header — Payment.io-Style Overrides
+======================================*/
+:root {
+  --hdr-bg: #0d052d;          /* deep navy */
+  --link-default: rgba(255,255,255,0.85);
+  --link-hover: #ffffff;
+  --btn-bg: #7c3aed;          /* vibrant purple */
+  --btn-bg-hover: #9333ea;
+}
   line-height: 1.5;
   color: #555;
 }
