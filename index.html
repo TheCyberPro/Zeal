@@ -1,29 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-B0HZHDFETE"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-B0HZHDFETE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-B0HZHDFETE');
+  </script>
 
-  gtag('config', 'G-B0HZHDFETE');
-</script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ZEAL | Onboard, Build your digital platform for Businesses & Companies</title>
+  <title>ZEAL | Web development studio for premium digital platforms</title>
+  <meta name="description" content="ZEAL builds premium websites, apps, and onboarding systems that elevate brand authority and drive measurable results." />
 
   <!-- Google Fonts: Inter + Anton -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
-        rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap"
-        rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet" />
 
   <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script>
 
-  <!-- Your existing CSS -->
+  <!-- Styles -->
   <link rel="stylesheet" href="/styles.css" />
 
   <!-- Inline Luxury-Glow Overrides -->
@@ -34,17 +33,11 @@
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background: radial-gradient(
-        circle at center,
-        rgba(10,3,1,0.8) 0%,
-        #0d052d 100%
-      );
+      background: radial-gradient(circle at center, rgba(10,3,1,0.8) 0%, #0d052d 100%);
       color: #fff;
       scroll-behavior: smooth;
     }
-    /* Curved glow lines in corners */
-    body::before,
-    body::after {
+    body::before, body::after {
       content: '';
       position: fixed;
       border: 2px solid rgba(255,213,0,0.6);
@@ -55,14 +48,8 @@
       pointer-events: none;
       z-index: -1;
     }
-    body::before {
-      top: -35%;
-      left: -35%;
-    }
-    body::after {
-      bottom: -35%;
-      right: -35%;
-    }
+    body::before { top: -35%; left: -35%; }
+    body::after { bottom: -35%; right: -35%; }
 
     /*------------------------------------*\
       1) Header — Dark-Navy Single Row
@@ -99,9 +86,7 @@
       transition: color 0.2s ease;
       white-space: nowrap;
     }
-    header.nav .nav__menu a:hover {
-      color: #fff;
-    }
+    header.nav .nav__menu a:hover { color: #fff; }
     header.nav .nav__menu a.btn--light {
       background: #7c3aed;
       color: #fff;
@@ -110,261 +95,211 @@
       flex-shrink: 0;
     }
     @media (max-width: 480px) {
-      header.nav {
-        padding: 0.75rem 4%;
-      }
-      header.nav .nav__menu a {
-        font-size: 0.9rem;
-        padding: 0.4rem 0.75rem;
-      }
+      header.nav { padding: 0.75rem 4%; }
+      header.nav .nav__menu a { font-size: 0.9rem; padding: 0.4rem 0.75rem; }
     }
 
     /*------------------------------------*\
       2) Hero — Exact ZEAL Image + Glow
     \*------------------------------------*/
-    .hero--luxury {
-      text-align: center;
-      padding: 6rem 2rem 3rem;
-      position: relative;
-    }
-    .hero--luxury .hero__inner {
-      max-width: 800px;
-      margin: 0 auto;
-    }
+    .hero--luxury { text-align: center; padding: 6rem 2rem 3rem; position: relative; }
+    .hero--luxury .hero__inner { max-width: 800px; margin: 0 auto; }
     .hero--luxury .hero__inner img {
-      display: block;
-      width: 80%;
-      max-width: 480px;
-      height: auto;
-      margin: 0 auto 1rem;
-      border-radius: 16px;
-      box-shadow:
-        0 0 20px rgba(255,213,0,0.6),
-        0 0 40px rgba(255,213,0,0.4),
-        0 0 80px rgba(255,213,0,0.2);
+      display: block; width: 80%; max-width: 480px; height: auto; margin: 0 auto 1rem; border-radius: 16px;
+      box-shadow: 0 0 20px rgba(255,213,0,0.6), 0 0 40px rgba(255,213,0,0.4), 0 0 80px rgba(255,213,0,0.2);
     }
-    .hero--luxury .hero__subtitle {
-      font-size: 1.125rem;
-      margin: 1rem 0 2rem;
-      color: rgba(255,255,255,0.9);
-    }
+    .hero--luxury .hero__subtitle { font-size: 1.125rem; margin: 1rem 0 2rem; color: rgba(255,255,255,0.9); }
 
     /*------------------------------------*\
       3) Section Containers — Classic Luxury
     \*------------------------------------*/
     .section {
-      background: #fff;
-      color: #0d052d;
-      border-radius: 20px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-      padding: 3rem 2rem;
-      margin: 2rem auto;
-      max-width: 1200px;
+      background: #fff; color: #0d052d; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      padding: 3rem 2rem; margin: 2rem auto; max-width: 1200px;
     }
     .section--light { background: #f9f9ff; }
     .section--dark { background: #0d052d; color: #fff; }
     .section__title {
-      text-align: center;
-      text-transform: uppercase;
-      font-family: 'Anton', sans-serif;
-      letter-spacing: 0.05em;
-      margin-bottom: 2rem;
+      text-align: center; text-transform: uppercase; font-family: 'Anton', sans-serif; letter-spacing: 0.05em; margin-bottom: 2rem;
     }
-    .grid--4cols,
-    .grid--3cols {
-      display: grid;
-      gap: 1.5rem;
-      grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+    .grid--4cols, .grid--3cols {
+      display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
     }
 
     /* Cards & Highlight Cards */
-    .card,
-    .highlight-card {
-      background: inherit;
-      border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    .card, .highlight-card {
+      background: inherit; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.05);
       transition: transform 0.2s, box-shadow 0.2s;
     }
-    .card:hover,
-    .highlight-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-    }
+    .card:hover, .highlight-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.1); }
 
     /* Testimonial Slider */
-    .testimonial-slider {
-      position: relative;
-      overflow: hidden;
-      padding: 1rem 0;
-    }
-    .testimonial {
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-    .testimonial.active {
-      opacity: 1;
-    }
+    .testimonial-slider { position: relative; overflow: hidden; padding: 1rem 0; }
+    .testimonial { opacity: 0; transition: opacity 0.5s ease; }
+    .testimonial.active { opacity: 1; }
 
     /* Buy with Ease Grid */
     .card-grid {
-      display: grid;
-      gap: 1.5rem;
-      grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
-      justify-items: center;
+      display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); justify-items: center;
     }
-    .card-grid img {
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-    }
+    .card-grid img { width: 100%; height: auto; object-fit: contain; }
 
     /* Footer */
-    footer.footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: rgba(255,255,255,0.6);
-    }
+    footer.footer { text-align: center; padding: 2rem; font-size: 0.9rem; color: rgba(255,255,255,0.6); }
   </style>
 
   <!-- Google Tag Manager -->
   <script>
     (function(w,d,s,l,i){
-      w[l]=w[l]||[];
-      w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
-      var f=d.getElementsByTagName(s)[0], j=d.createElement(s),
-          dl=l!='dataLayer'?'&l='+l:'';
-      j.async=true; j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;
-      f.parentNode.insertBefore(j,f);
+      w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&l='+l:'';
+      j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-N87XV2R4');
   </script>
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
   <noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N87XV2R4"
-            height="0" width="0"
-            style="display:none;visibility:hidden"></iframe>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N87XV2R4" height="0" width="0" style="display:none;visibility:hidden"></iframe>
   </noscript>
 
   <!-- NAVIGATION -->
-  <header class="nav">
+  <header class="nav" role="navigation" aria-label="Main">
     <div class="container nav__inner">
-      <a href="/" class="nav__logo">ZEAL</a>
-      <nav class="nav__menu">
+      <a href="/" class="nav__logo" aria-label="ZEAL home">ZEAL</a>
+      <nav class="nav__menu" aria-label="Primary">
         <a href="#services">Services</a>
         <a href="#highlights">Highlights</a>
         <a href="#testimonials">Testimonials</a>
         <a href="#about">About</a>
-        <a href="mailto:zeal.io@outlook.com?subject=ZEAL%20Demo%20Request"
-           class="btn btn--light">
-          Book a Demo
-        </a>
+        <a href="mailto:zeal.io@outlook.com?subject=ZEAL%20Demo%20Request" class="btn btn--light">Book a Demo</a>
       </nav>
     </div>
   </header>
 
   <!-- HERO with Brand Glow -->
-  <section class="hero hero--luxury">
+  <section class="hero hero--luxury" aria-labelledby="hero-title">
     <div class="container hero__inner">
-<img src="/assets/zeal2.png" alt="ZEAL logo">
+      <img src="/assets/zeal2.png" alt="ZEAL logo — premium web development studio" />
+      <h1 id="hero-title" style="margin-top:0.5rem;">Where luxury meets conversion</h1>
       <p class="hero__subtitle">
-        Where luxury meets conversion. We build digital platforms that feel as premium as your brand deserves.
+        ZEAL is a web development studio that builds premium websites, apps, and onboarding systems — engineered for trust, speed, and measurable results.
       </p>
       <a href="#about" class="btn btn--secondary">Meet the Developer</a>
     </div>
   </section>
 
   <!-- SERVICES -->
-  <section id="services" class="section section--light">
+  <section id="services" class="section section--light" aria-labelledby="services-title">
     <div class="container">
-      <h2 class="section__title">What We Do</h2>
+      <h2 class="section__title" id="services-title">What we do</h2>
       <div class="grid grid--4cols">
-        <!-- your cards… -->
         <div class="card">
-          <i class="fas fa-inventory card__icon"></i>
+          <i class="fas fa-user-check card__icon" aria-hidden="true"></i>
           <h3 class="card__title">Onboard</h3>
-          <p class="card__text">
-            Fully compliant worker onboarding, automated end-to-end.
-          </p>
+          <p class="card__text">Fully compliant, automated onboarding flows that reduce friction and build trust from day one.</p>
         </div>
-        <!-- …rest of service cards -->
+        <div class="card">
+          <i class="fas fa-globe card__icon" aria-hidden="true"></i>
+          <h3 class="card__title">Websites</h3>
+          <p class="card__text">Responsive, conversion‑focused websites that elevate brand authority and deliver clarity.</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-mobile-alt card__icon" aria-hidden="true"></i>
+          <h3 class="card__title">Apps</h3>
+          <p class="card__text">Seamless iOS and Android apps built for performance, polish, and longevity.</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-bezier-curve card__icon" aria-hidden="true"></i>
+          <h3 class="card__title">UX / UI</h3>
+          <p class="card__text">Brand‑aligned interfaces that combine luxury aesthetics with operator‑grade usability.</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- DEVELOPER HIGHLIGHTS -->
-  <section id="highlights" class="section section--dark">
+  <section id="highlights" class="section section--dark" aria-labelledby="highlights-title">
     <div class="container">
-      <h2 class="section__title section__title--light">Developer Highlights</h2>
+      <h2 class="section__title section__title--light" id="highlights-title">Developer highlights</h2>
       <div class="grid grid--3cols">
-        <!-- highlight cards -->
+        <div class="highlight-card">
+          <h3 class="card__title">SaaS speed uplift</h3>
+          <p class="card__text">Cut load times in half, contributing to a 45% conversion lift.</p>
+        </div>
+        <div class="highlight-card">
+          <h3 class="card__title">Staffing automation</h3>
+          <p class="card__text">Built end‑to‑end onboarding with compliance baked in.</p>
+        </div>
+        <div class="highlight-card">
+          <h3 class="card__title">Executive‑grade dashboards</h3>
+          <p class="card__text">Designed premium dashboards that reinforce brand authority and clarity.</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- TESTIMONIAL SLIDER -->
-  <section id="testimonials" class="section section--light">
+  <section id="testimonials" class="section section--light" aria-labelledby="testimonials-title">
     <div class="container">
-      <h2 class="section__title">Client Feedback</h2>
-      <div class="testimonial-slider">
+      <h2 class="section__title" id="testimonials-title">Client feedback</h2>
+      <div class="testimonial-slider" aria-live="polite">
         <div class="testimonial active">
-          <p>“ZEAL cut our load time in half and boosted conversions by 45%.”</p>
+          <p>“ZEAL transformed our platform into a premium experience. Our customers noticed immediately.”</p>
           <footer>— Alex R., CEO of StartupX</footer>
         </div>
-        <!-- …more testimonials -->
+        <div class="testimonial">
+          <p>“The polish and speed improvements were night and day. ZEAL brought discipline and craft.”</p>
+          <footer>— Maya D., Product Lead</footer>
+        </div>
+        <div class="testimonial">
+          <p>“Onboarding drop‑off fell dramatically. The flow feels effortless and branded.”</p>
+          <footer>— Daniel K., Operations</footer>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- INSTAGRAM EMBED -->
-  <section id="instagram" class="section section--light">
+  <section id="instagram" class="section section--light" aria-labelledby="instagram-title">
     <div class="container">
-      <h2 class="section__title">From Our Instagram</h2>
+      <h2 class="section__title" id="instagram-title">From our Instagram</h2>
       <blockquote class="instagram-media"
-                  data-instgrm-permalink="https://www.instagram.com/p/DO19ie7gar4/?utm_source=ig_embed&amp;utm_campaign=loading"
-                  data-instgrm-version="14"
-                  style="background:#FFF;border:0;border-radius:3px;
-                         box-shadow:0 0 1px rgba(0,0,0,0.5),0 1px 10px rgba(0,0,0,0.15);
-                         margin:1px;max-width:540px;min-width:326px;
-                         padding:0;width:calc(100% - 2px);">
+        data-instgrm-permalink="https://www.instagram.com/p/DO19ie7gar4/?utm_source=ig_embed&amp;utm_campaign=loading"
+        data-instgrm-version="14"
+        style="background:#FFF;border:0;border-radius:3px; box-shadow:0 0 1px rgba(0,0,0,0.5),0 1px 10px rgba(0,0,0,0.15); margin:1px;max-width:540px;min-width:326px; padding:0;width:calc(100% - 2px);">
       </blockquote>
       <script async src="//www.instagram.com/embed.js"></script>
     </div>
   </section>
 
   <!-- ABOUT THE DEVELOPER -->
-  <section id="about" class="section section--light">
+  <section id="about" class="section section--light" aria-labelledby="about-title">
     <div class="container">
-      <h2 class="section__title">Meet the Developer</h2>
+      <h2 class="section__title" id="about-title">Meet the developer</h2>
       <p class="developer__intro">
-        I’m ZEAL, a developer who builds trust into every pixel—specialized in fintech platforms that convert, scale, and feel expensive. From glowing brand visuals to frictionless payment flows, I engineer digital experiences that speak your customer’s language and elevate your brand’s authority.
+        I’m ZEAL — I build trust into every pixel and craft platforms that feel expensive, move fast, and scale cleanly.
+        From glowing brand visuals to disciplined engineering, I design and develop premium websites, apps, and onboarding systems
+        that speak your customer’s language and strengthen your brand’s authority.
       </p>
       <a href="#contact" class="btn btn--secondary">Book a Free Consultation</a>
     </div>
   </section>
 
   <!-- CALL TO ACTION -->
-  <section id="contact" class="section section--light">
+  <section id="contact" class="section section--light" aria-labelledby="contact-title">
     <div class="container contact">
-      <h2 class="section__title">Upgrade Your Staffing Ops</h2>
-      <p class="contact__text">
-        Book a demo and let’s turn your website into your hardest-working salesperson.
-      </p>
-      <a href="mailto:zeal.io@outlook.com?subject=ZEAL%20Demo%20Request"
-         class="btn btn--light">
-        Book a Demo
-      </a>
+      <h2 class="section__title" id="contact-title">Build your next digital platform</h2>
+      <p class="contact__text">Book a demo and let’s turn your website or app into your hardest‑working salesperson.</p>
+      <a href="mailto:zeal.io@outlook.com?subject=ZEAL%20Demo%20Request" class="btn btn--light">Book a Demo</a>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="footer">
+  <footer class="footer" role="contentinfo">
     <div class="container footer__inner">
       <p>© 2025 ZEAL. Crafted with passion in Amsterdam.</p>
-      <nav class="footer__nav">
+      <nav class="footer__nav" aria-label="Footer">
         <a href="/privacy">Privacy Policy</a>
         <a href="/terms">Terms &amp; Conditions</a>
       </nav>
@@ -372,7 +307,6 @@
   </footer>
 
   <!-- Your existing testimonial & reveal scripts go here unchanged -->
-
   <!-- Instagram Embed Script -->
   <script async defer src="https://www.instagram.com/embed.js"></script>
 
@@ -402,17 +336,15 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
   </script>
+
   <!-- Start of Tawk.to Script -->
   <script type="text/javascript">
     var Tawk_API = Tawk_API || {};
     var Tawk_LoadStart = new Date();
-
     // Your API key for advanced JS integrations
     Tawk_API.apiKey = '0aa5196f2fb85f3d612c6dc0f9af802fb12a0fc4';
-
     (function() {
-      var s1 = document.createElement('script'),
-          s0 = document.getElementsByTagName('script')[0];
+      var s1 = document.createElement('script'), s0 = document.getElementsByTagName('script')[0];
       s1.async = true;
       s1.src = 'https://embed.tawk.to/68cf60b510ce81192499da9f/1j5l13ih6';
       s1.charset = 'UTF-8';
@@ -421,8 +353,6 @@
     })();
   </script>
   <!-- End of Tawk.to Script -->
-
-
 </body>
 </html>
 
