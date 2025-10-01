@@ -1,7 +1,7 @@
-/* styles.css */
+/* styles.css — ZEAL premium web development studio */
 
 /*------------------------------------*\
-  Custom Brand Font
+  0) Custom Brand Font
 \*------------------------------------*/
 @font-face {
   font-family: 'ZEALBrand';
@@ -13,29 +13,37 @@
 }
 
 /*------------------------------------*\
-  Base & Variables
+  1) Base & Variables
 \*------------------------------------*/
 :root {
+  /* Core palette */
   --color-gold-start: #B39F00;
   --color-gold-mid:   #FFC30B;
   --color-gold-end:   #FFD83D;
-  --color-dark:       #1C1410;
+  --color-dark:       #1C1410; /* site dark */
+  --color-navy:       #0d052d; /* header / luxury bg */
   --color-light:      #F9F9F9;
+
+  /* Text */
   --text-dark:        #333333;
   --text-light:       #FFFFFF;
+
+  /* Layout */
   --max-width:        1200px;
 
-  --hdr-bg: #0d052d;          /* deep navy */
-  --link-default: rgba(255,255,255,0.85);
-  --link-hover: #ffffff;
-  --btn-bg: #7c3aed;          /* vibrant purple */
-  --btn-bg-hover: #9333ea;
+  /* Header accent (Payment.io style) */
+  --hdr-bg:           var(--color-navy);
+  --link-default:     rgba(255,255,255,0.85);
+  --link-hover:       #ffffff;
+  --btn-bg:           #7c3aed;
+  --btn-bg-hover:     #9333ea;
 }
 
 *,
 *::before,
-*::after {
-  box-sizing: border-box;
+*::after { box-sizing: border-box; }
+
+html, body {
   margin: 0;
   padding: 0;
 }
@@ -47,8 +55,15 @@ body {
   line-height: 1.6;
 }
 
+/* Global responsive typography */
+h1, h2, h3 {
+  font-family: 'ZEALBrand', sans-serif;
+  /* Smoothly scale across devices */
+  font-size: clamp(1.25rem, 2vw + 1rem, 2.5rem);
+}
+
 /*------------------------------------*\
-  Container
+  2) Container
 \*------------------------------------*/
 .container {
   width: 90%;
@@ -57,14 +72,14 @@ body {
 }
 
 /*------------------------------------*\
-  Navigation
+  3) Navigation
 \*------------------------------------*/
 .nav {
   position: sticky;
   top: 0;
   background: var(--hdr-bg);
   z-index: 100;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
 .nav__inner {
@@ -80,35 +95,53 @@ body {
   font-weight: 700;
   color: var(--color-gold-mid);
   text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.nav__menu {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
 }
 
 .nav__menu a {
-  margin-left: 1.5rem;
   color: var(--link-default);
   text-decoration: none;
   font-weight: 600;
-  transition: color 0.2s ease;
+  padding: 0.5rem 0.75rem;
+  transition: color 0.2s ease, opacity 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
-.nav__menu a:hover {
-  color: var(--link-hover);
+.nav__menu a:hover { color: var(--link-hover); }
+
+/* Desktop CTA style from header */
+.nav__menu .btn--light {
+  background: var(--btn-bg);
+  color: var(--text-light);
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.2);
 }
 
 /*------------------------------------*\
-  Buttons
+  4) Buttons
 \*------------------------------------*/
 .btn {
   display: inline-block;
-  border-radius: 4px;
-  font-weight: 600;
+  border-radius: 6px;
+  font-weight: 700;
   text-decoration: none;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  letter-spacing: 0.04em;
 }
 
 .btn--primary {
   background: var(--color-gold-mid);
   color: var(--color-dark);
   padding: 0.75rem 1.5rem;
+  box-shadow: 0 6px 18px rgba(255,195,11,0.24);
 }
 
 .btn--secondary {
@@ -125,27 +158,26 @@ body {
 }
 
 .btn:hover {
-  opacity: 0.9;
+  opacity: 0.95;
   transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.18);
 }
 
 /*------------------------------------*\
-  Hero & 3D Glow Logo
+  5) Hero & Brand Glow
 \*------------------------------------*/
 .hero--luxury {
   position: relative;
   color: var(--color-gold-mid);
   text-align: center;
   padding: 6rem 2rem 3rem;
-
-  /* multiple backgrounds: gradient overlay + hero image */
+  /* multiple backgrounds: gradient overlay + brand image */
   background-image:
     linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-    url('assets/zeal2.png');
+    url('/assets/zeal2.png'); /* root-relative for Vercel */
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-
   text-shadow:
     0 1px 0 var(--color-gold-start),
     0 2px 0 #AA8500,
@@ -156,34 +188,9 @@ body {
     0 0 24px rgba(255,200,59,0.4);
 }
 
-.hero--luxury .hero__title {
-  font-family: 'ZEALBrand', sans-serif;
-  font-size: clamp(2.5rem, 6vw, 8rem);
-  font-weight: 700;
-  letter-spacing: 2px;
-  line-height: 1;
-  background: linear-gradient(
-    90deg,
-    var(--color-gold-start),
-    var(--color-gold-mid),
-    var(--color-gold-end)
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 1rem;
-}
-
-.hero--luxury .hero__subtitle {
-  font-size: 1.25rem;
-  max-width: 600px;
-  margin: 0 auto 2rem;
-  color: rgba(255,255,255,0.9);
-}
-
-/* ZEAL Hero Title Glow */
 .hero__title {
   font-family: 'Anton', sans-serif;
-  font-size: clamp(2.5rem, 8vw, 8rem);
+  font-size: clamp(2rem, 6vw, 8rem);
   color: #ffd54f;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -195,10 +202,291 @@ body {
     0 0 40px #ff6f00;
 }
 
-/* 3D ZEAL Logo */
+.hero__subtitle {
+  font-size: clamp(1rem, 2.2vw, 1.25rem);
+  max-width: 700px;
+  margin: 1rem auto 2rem;
+  color: rgba(255,255,255,0.92);
+}
+
+/* Logo image inside hero (if used) */
+.hero__inner img {
+  display: block;
+  width: 80%;
+  max-width: 480px;
+  height: auto;
+  margin: 0 auto 1rem;
+  border-radius: 16px;
+  box-shadow:
+    0 0 20px rgba(255,213,0,0.6),
+    0 0 40px rgba(255,213,0,0.4),
+    0 0 80px rgba(255,213,0,0.2);
+}
+
+/*------------------------------------*\
+  6) Sections & Backgrounds
+\*------------------------------------*/
+.section { padding: 4rem 0; }
+
+.section--light {
+  background: var(--color-light);
+  color: var(--text-dark);
+}
+
+.section--dark {
+  background: var(--hdr-bg);
+  color: var(--text-light);
+}
+
+.section--accent {
+  background: var(--color-gold-mid);
+  color: var(--color-dark);
+}
+
+.section--luxury {
+  background: var(--hdr-bg);
+  color: var(--color-gold-mid);
+  text-align: center;
+}
+
+.section__title {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/*------------------------------------*\
+  7) Grid Utilities
+\*------------------------------------*/
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.grid--4cols {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.grid--3cols {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/*------------------------------------*\
+  8) Cards & Highlights
+\*------------------------------------*/
+.card,
+.highlight-card {
+  background: var(--text-light);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.highlight-card {
+  background: var(--hdr-bg);
+  color: var(--text-light);
+  box-shadow: 0 2px 10px rgba(255,195,11,0.18);
+}
+
+.card:hover,
+.highlight-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.18);
+}
+
+.card__icon {
+  font-size: 2rem;
+  color: var(--color-gold-mid);
+  margin-bottom: 0.75rem;
+}
+
+.card__title,
+.highlight-card__title {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-gold-mid);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.card__text,
+.highlight-card__text {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #555;
+}
+
+/*------------------------------------*\
+  9) Testimonials Slider
+\*------------------------------------*/
+.testimonial-slider {
+  position: relative;
+  overflow: hidden;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.testimonial {
+  position: absolute;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  background: var(--text-light);
+  padding: 1.5rem;
+  border-left: 4px solid var(--color-gold-mid);
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.testimonial.active {
+  position: relative;
+  opacity: 1;
+}
+
+.testimonial p {
+  font-style: italic;
+  margin-bottom: 0.75rem;
+}
+
+.testimonial footer {
+  text-align: right;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+/*------------------------------------*\
+  10) Instagram Embed — ZEAL brand frame
+\*------------------------------------*/
+#instagram {
+  display: block;
+  padding: 0 0.5rem;
+}
+
+#instagram .instagram-media,
+#instagram blockquote.instagram-media {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 540px;
+  background: linear-gradient(180deg, rgba(28,20,16,0.98), rgba(28,20,16,0.995));
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow:
+    0 6px 20px rgba(0,0,0,0.45),
+    0 0 28px rgba(255,195,11,0.06);
+  border: 1px solid rgba(255,195,11,0.06);
+  overflow: hidden;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+/* Make injected iframe/inner wrapper scale */
+#instagram iframe,
+#instagram .instagram-media > iframe,
+#instagram .instagram-media > div,
+#instagram blockquote iframe,
+#instagram blockquote > div {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  border: 0;
+  border-radius: 8px;
+}
+
+/* Caption, author, timestamp and links inside the embed */
+#instagram blockquote,
+#instagram blockquote p,
+#instagram blockquote a,
+#instagram blockquote time,
+#instagram .instagram-media p,
+#instagram .instagram-media a,
+#instagram .instagram-media time {
+  color: rgba(255, 230, 150, 0.98) !important;
+  opacity: 0.95;
+  line-height: 1.4;
+}
+
+/* Tighter spacing for the embed content */
+#instagram blockquote p,
+#instagram .instagram-media p {
+  margin: 0.5rem 0 0;
+  font-size: 0.95rem;
+}
+
+/* Hover / focus affordance for the card */
+#instagram .instagram-media:hover,
+#instagram blockquote.instagram-media:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 12px 30px rgba(0,0,0,0.5),
+    0 0 40px rgba(255,195,11,0.08);
+}
+
+/*------------------------------------*\
+  11) Developer Intro
+\*------------------------------------*/
+.developer__intro {
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--color-gold-mid);
+}
+
+/*------------------------------------*\
+  12) Contact / CTA
+\*------------------------------------*/
+.contact { text-align: center; }
+
+/*------------------------------------*\
+  13) Footer
+\*------------------------------------*/
+.footer {
+  background: var(--hdr-bg);
+  color: var(--text-light);
+  padding: 2rem 0;
+}
+
+.footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.footer__nav a {
+  color: var(--text-light);
+  margin-left: 1rem;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: opacity 0.2s ease;
+}
+
+.footer__nav a:hover { opacity: 0.8; }
+
+/*------------------------------------*\
+  14) Reveal Animations
+\*------------------------------------*/
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/*------------------------------------*\
+  15) 3D ZEAL Logo (optional)
+\*------------------------------------*/
 .logo-3d {
   font-family: 'ZEALBrand', sans-serif;
-  font-size: 6rem;
+  font-size: clamp(2.5rem, 8vw, 6rem);
   text-transform: uppercase;
   color: var(--color-gold-mid);
   margin: 2rem auto;
@@ -214,15 +502,14 @@ body {
     1px 1px 0 var(--color-gold-start),
     2px 2px 0 var(--color-gold-mid),
     3px 3px 0 var(--color-gold-end),
-    4px 4px 8px rgba(255, 208, 61, 0.6),
-    5px 5px 16px rgba(255, 208, 61, 0.4);
+    4px 4px 8px rgba(255,208,61,0.6),
+    5px 5px 16px rgba(255,208,61,0.4);
 }
 
 .logo-3d span::after {
   content: attr(data-text);
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   transform: translateZ(-8px);
   color: var(--color-gold-start);
   opacity: 0.5;
@@ -230,38 +517,41 @@ body {
 }
 
 /*------------------------------------*\
-  Sections & Backgrounds
+  16) Responsive refinements
 \*------------------------------------*/
-.section { padding: 4rem 0; }
-.section--light { background: var(--color-light); color: var(--text-dark); }
-.section--dark { background: var(--color-dark); color: var(--text-light); }
-.section--accent { background: var(--color-gold-mid); color: var(--color-dark); }
-.section--luxury { background: var(--color-dark); color: var(--color-gold-mid); text-align: center; }
 
-.section__title {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
+/* Tablet */
+@media (max-width: 768px) {
+  .nav__menu {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .hero--luxury {
+    padding: 4rem 1rem 2rem;
+  }
+
+  .hero__subtitle {
+    max-width: 90%;
+  }
 }
 
-/*------------------------------------*\
-  Grid Utilities
-\*------------------------------------*/
-.grid { display: grid; gap: 1.5rem; }
-.grid--4cols { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-.grid--3cols { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+/* Mobile */
+@media (max-width: 480px) {
+  .nav__inner { padding: 0.75rem 0; }
+  .nav__menu a { font-size: 0.9rem; padding: 0.4rem 0.5rem; }
 
-/*------------------------------------*\
-  Cards & Highlights
-\*------------------------------------*/
-.card,
-.highlight-card {
-  background: var(--text-light);
-  border-radius: 8px;
-  padding: 1.5rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  .section { padding: 3rem 0; }
+
+  #instagram .instagram-media,
+  #instagram blockquote.instagram-media {
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  #instagram blockquote p,
+  #instagram .instagram-media p {
+    font-size: 0.92rem;
+  }
 }
-
-.highlight-card {
-  background: var(--color-dark);
