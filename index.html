@@ -308,6 +308,64 @@ header.nav .dropdown {
   display: block;
 }
 
+/* Mega menu panel */
+.mega-menu {
+  display: none; /* hidden by default */
+  position: absolute;
+  top: 100%; /* sits below header */
+  left: 0;
+  width: 100%;
+  background: #0d052d;
+  padding: 2rem;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  z-index: 3000;
+}
+
+.mega-inner {
+  display: flex;
+  justify-content: space-around;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.mega-column {
+  flex: 1;
+}
+
+.mega-column h3 {
+  color: #ffd54f;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.mega-column a {
+  display: block;
+  color: #ddd;
+  text-decoration: none;
+  padding: 6px 0;
+  transition: color 0.3s ease;
+}
+
+.mega-column a:hover {
+  color: #fff;
+}
+
+/* Trigger button */
+.mega-trigger {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.mega-trigger:hover {
+  border-color: #ffd54f;
+  color: #ffd54f;
+}
+
   </style>
 
   <!-- Google Tag Manager -->
@@ -329,63 +387,65 @@ header.nav .dropdown {
 <!-- NAVIGATION -->
 <header class="nav" role="navigation" aria-label="Main">
   <div class="container nav__inner">
+    <!-- Logo far left -->
     <a href="/" class="nav__logo" aria-label="ZEAL home">ZEAL</a>
 
+    <!-- Explore trigger far right -->
     <nav class="nav__menu" aria-label="Primary">
-      <div class="dropdown">
-        <button class="dropdown-trigger">Explore ▼</button>
-        <ul class="dropdown-content">
-          <!-- Top-level items -->
-          <li><a href="/about">About</a></li>
-
-          <!-- Services with sub-menu -->
-          <li class="has-submenu">
-            <button class="submenu-trigger">Services ▸</button>
-            <ul class="submenu-content">
-              <!-- Web Dev -->
-              <li class="submenu-group">
-                <span>Web Development</span>
-                <a href="#">Business Page</a>
-                <a href="#">Landing Page</a>
-                <a href="#">Single HTML+CSS Page</a>
-              </li>
-
-              <!-- UX/UI -->
-              <li class="submenu-group">
-                <span>UX/UI Design</span>
-                <a href="#">JavaScript</a>
-                <a href="#">React</a>
-                <a href="#">Vue</a>
-                <a href="#">CSS</a>
-              </li>
-
-              <!-- Social Media -->
-              <li class="submenu-group">
-                <span>Social Media Engagement</span>
-                <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
-                <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
-                <a href="#"><i class="fab fa-tiktok"></i> TikTok</a>
-                <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
-                <a href="#"><i class="fab fa-telegram"></i> Telegram</a>
-                <a href="#"><i class="fab fa-spotify"></i> Spotify</a>
-                <a href="#"><i class="fab fa-snapchat"></i> Snapchat</a>
-                <a href="#"><i class="fab fa-reddit"></i> Reddit</a>
-                <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                <a href="#"><i class="fab fa-discord"></i> Discord</a>
-              </li>
-            </ul>
-          </li>
-
-          <!-- Book a Demo -->
-          <li><a href="mailto:zeal.io@outlook.com?subject=ZEAL%20Demo%20Request">Book a Demo</a></li>
-        </ul>
-      </div>
+      <button class="mega-trigger">Explore ▼</button>
     </nav>
   </div>
 </header>
 
+<!-- Mega Menu lives OUTSIDE the header -->
+<div class="mega-menu" id="megaMenu">
+  <div class="mega-inner">
+    <!-- Column 1 -->
+    <div class="mega-column">
+      <h3>About</h3>
+      <a href="/about">Who We Are</a>
+      <a href="/about#team">Our Team</a>
+    </div>
 
+    <!-- Column 2 -->
+    <div class="mega-column">
+      <h3>Services</h3>
+      <div class="submenu-group">
+        <span>Web Development</span>
+        <a href="#">Business Page</a>
+        <a href="#">Landing Page</a>
+        <a href="#">Single HTML+CSS Page</a>
+      </div>
+      <div class="submenu-group">
+        <span>UX/UI Design</span>
+        <a href="#">JavaScript</a>
+        <a href="#">React</a>
+        <a href="#">Vue</a>
+        <a href="#">CSS</a>
+      </div>
+      <div class="submenu-group">
+        <span>Social Media Engagement</span>
+        <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+        <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+        <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+        <a href="#"><i class="fab fa-tiktok"></i> TikTok</a>
+        <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
+        <a href="#"><i class="fab fa-telegram"></i> Telegram</a>
+        <a href="#"><i class="fab fa-spotify"></i> Spotify</a>
+        <a href="#"><i class="fab fa-snapchat"></i> Snapchat</a>
+        <a href="#"><i class="fab fa-reddit"></i> Reddit</a>
+        <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        <a href="#"><i class="fab fa-discord"></i> Discord</a>
+      </div>
+    </div>
+
+    <!-- Column 3 -->
+    <div class="mega-column">
+      <h3>Book a Demo</h3>
+      <a href="mailto:zeal.io@outlook.com?subject=ZEAL%20Demo%20Request">Request a Demo</a>
+    </div>
+  </div>
+</div>
 
   <!-- HERO with Brand Glow -->
   <section class="hero hero--luxury" aria-labelledby="hero-title">
@@ -572,6 +632,21 @@ header.nav .dropdown {
   });
   document.querySelector('.close-drawer').addEventListener('click', () => {
     drawer.classList.remove('open');
+  });
+</script>
+<script>
+  const trigger = document.querySelector('.mega-trigger');
+  const megaMenu = document.getElementById('megaMenu');
+
+  trigger.addEventListener('click', () => {
+    megaMenu.style.display = megaMenu.style.display === 'block' ? 'none' : 'block';
+  });
+
+  // Optional: close if clicking outside
+  document.addEventListener('click', (e) => {
+    if (!megaMenu.contains(e.target) && !trigger.contains(e.target)) {
+      megaMenu.style.display = 'none';
+    }
   });
 </script>
 
