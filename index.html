@@ -799,17 +799,52 @@ header.nav .nav__menu {
   </section>
 
   <!-- INSTAGRAM EMBED -->
+.s-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 12px 36px rgba(2,6,23,0.6);
+  display:flex; flex-direction:column;
+  border: 1px solid rgba(255,213,79,0.06);
+}
+.s-card-media { height:160px; background-size:cover; background-position:center; }
+.s-card-body { padding:1rem; display:flex; flex-direction:column; gap:0.5rem; }
+.s-card-body h5 { margin:0; color:#ffd54f; font-family:'Anton',sans-serif; }
+.s-card-sub { margin:0; color:#e6e6e6; font-size:0.95rem; }
+.s-card-ctas { margin-top:auto; display:flex; gap:0.5rem; }
+.s-btn { padding:0.5rem 0.9rem; border-radius:10px; font-weight:700; cursor:pointer; text-decoration:none; text-align:center; }
+.s-btn-primary { background:#ffd54f; color:#0d052d; }
+.s-btn-ghost { background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.08); }
+
   <section id="instagram" class="section section--light" aria-labelledby="instagram-title">
     <div class="container">
       <h2 class="section__title" id="instagram-title">From our Instagram</h2>
-      <blockquote class="instagram-media"
-        data-instgrm-permalink="https://www.instagram.com/p/DO19ie7gar4/?utm_source=ig_embed&amp;utm_campaign=loading"
-        data-instgrm-version="14"
-        style="background:#FFF;border:0;border-radius:3px; box-shadow:0 0 1px rgba(0,0,0,0.5),0 1px 10px rgba(0,0,0,0.15); margin:1px;max-width:540px;min-width:326px; padding:0;width:calc(100% - 2px);">
-      </blockquote>
-      <script async src="//www.instagram.com/embed.js"></script>
-    </div>
-  </section>
+
+    <!-- Premium Instagram card -->
+    <article class="s-card" id="instagramCard" tabindex="0" aria-labelledby="inst-title">
+      <div class="s-card-media" role="img" aria-label="Instagram marketing" style="background-image:url('/assets/instagram-hero.jpg');"></div>
+      <div class="s-card-body">
+        <h5 id="inst-title">Instagram Growth</h5>
+        <p class="s-card-sub">Reels, creative campaigns, and creator partnerships that scale engagement.</p>
+        <div class="s-card-ctas">
+          <!-- Direct link to your Instagram profile -->
+          <a class="s-btn s-btn-primary" href="https://instagram.com/yourprofile" target="_blank" rel="noopener">Visit Instagram</a>
+          <!-- Optional: embed a featured post -->
+          <button class="s-btn s-btn-ghost" id="viewPost">View Post</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- Instagram embed container -->
+    <div id="instagramEmbedContainer" style="margin-top:1.5rem;"></div>
+  </div>
+</section>
+
+<!-- Instagram embed script -->
+<script async src="//www.instagram.com/embed.js"></script>
+
+
+
 
   <!-- ABOUT THE DEVELOPER -->
   <section id="about" class="section section--light" aria-labelledby="about-title">
