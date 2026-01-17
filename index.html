@@ -628,6 +628,23 @@ header.nav .nav__menu {
   .mega-inner { grid-template-columns: 1fr; padding: 1rem; }
   .mega-menu { position: fixed; top: 0; left: 0; right: 0; height: 100vh; overflow:auto; }
 }
+.s-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 12px 36px rgba(2,6,23,0.6);
+  display:flex; flex-direction:column;
+  border: 1px solid rgba(255,213,79,0.06);
+}
+.s-card-media { height:160px; background-size:cover; background-position:center; }
+.s-card-body { padding:1rem; display:flex; flex-direction:column; gap:0.5rem; }
+.s-card-body h5 { margin:0; color:#ffd54f; font-family:'Anton',sans-serif; }
+.s-card-sub { margin:0; color:#e6e6e6; font-size:0.95rem; }
+.s-card-ctas { margin-top:auto; display:flex; gap:0.5rem; }
+.s-btn { padding:0.5rem 0.9rem; border-radius:10px; font-weight:700; cursor:pointer; text-decoration:none; text-align:center; }
+.s-btn-primary { background:#ffd54f; color:#0d052d; }
+.s-btn-ghost { background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.08); }
+
 
   </style>
 
@@ -799,22 +816,6 @@ header.nav .nav__menu {
   </section>
 
   <!-- INSTAGRAM EMBED -->
-.s-card {
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  border-radius: 14px;
-  overflow: hidden;
-  box-shadow: 0 12px 36px rgba(2,6,23,0.6);
-  display:flex; flex-direction:column;
-  border: 1px solid rgba(255,213,79,0.06);
-}
-.s-card-media { height:160px; background-size:cover; background-position:center; }
-.s-card-body { padding:1rem; display:flex; flex-direction:column; gap:0.5rem; }
-.s-card-body h5 { margin:0; color:#ffd54f; font-family:'Anton',sans-serif; }
-.s-card-sub { margin:0; color:#e6e6e6; font-size:0.95rem; }
-.s-card-ctas { margin-top:auto; display:flex; gap:0.5rem; }
-.s-btn { padding:0.5rem 0.9rem; border-radius:10px; font-weight:700; cursor:pointer; text-decoration:none; text-align:center; }
-.s-btn-primary { background:#ffd54f; color:#0d052d; }
-.s-btn-ghost { background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.08); }
 
   <section id="instagram" class="section section--light" aria-labelledby="instagram-title">
     <div class="container">
