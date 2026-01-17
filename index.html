@@ -146,6 +146,7 @@
 
     /* Footer */
     footer.footer { text-align: center; padding: 2rem; font-size: 0.9rem; color: rgba(255,255,255,0.6); }
+
 .services-drawer {
   position: fixed;
   top: 0;
@@ -163,6 +164,57 @@
 
 .services-drawer.open {
   right: 0;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-trigger {
+  background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+  border: 1px solid #333;
+  color: #fff;
+  font-size: 1.05em;
+  font-weight: 500;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dropdown-trigger:hover {
+  background: linear-gradient(135deg, #2a2a2a, #3a3a3a);
+  color: #e63946;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: rgba(17,17,17,0.95);
+  backdrop-filter: blur(8px);
+  min-width: 200px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  border-radius: 8px;
+  z-index: 1000;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 12px 16px;
+  color: #ddd;
+  text-decoration: none;
+  transition: color 0.3s ease, background 0.3s ease;
+}
+
+.dropdown-content a:hover {
+  background: #222;
+  color: #fff;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 
   </style>
@@ -184,14 +236,19 @@
 
 
 <!-- NAVIGATION -->
+<!-- NAVIGATION -->
 <header class="nav" role="navigation" aria-label="Main">
   <div class="container nav__inner">
     <a href="/" class="nav__logo" aria-label="ZEAL home">ZEAL</a>
 
     <nav class="nav__menu" aria-label="Primary">
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
 
       <!-- Trigger Button -->
       <button class="services-trigger">Services</button>
+
+      <!-- CTA -->
       <a href="mailto:zeal.io@outlook.com?subject=ZEAL%20Demo%20Request">Book a Demo</a>
     </nav>
   </div>
@@ -235,6 +292,7 @@
     </div>
   </div>
 </aside>
+
 
 
   <!-- HERO with Brand Glow -->
