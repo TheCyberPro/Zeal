@@ -509,6 +509,125 @@ header.nav .nav__menu .btn--light {
   .mega-inner { grid-template-columns: 1fr; padding: 1rem; }
   .mega-menu { position: fixed; left: 0; right: 0; top: 0; height: 100vh; overflow-y: auto; }
 }
+/* Header layout */
+header.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 5%;
+  background: #0d052d;
+  position: relative;
+  z-index: 1000;
+  box-shadow: inset 0 -1px 0 rgba(255,255,255,0.05);
+}
+
+/* Logo flush left */
+header.nav .nav__logo {
+  font-family: 'Anton', sans-serif;
+  font-size: 1.6rem;
+  color: #ffd54f;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin-right: auto; /* forces menu to the far right */
+  padding-right: 0.5rem;
+}
+
+/* Nav menu sits right */
+header.nav .nav__menu {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+/* Explore trigger styling */
+.explore-trigger {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.95);
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+/* Small Explore panel (three big buttons) */
+.explore-panel {
+  position: absolute;
+  top: 100%;
+  right: 2.5%;
+  transform-origin: top right;
+  background: linear-gradient(180deg,#0d052d,#08031e);
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+  padding: 0.75rem;
+  z-index: 1400;
+  display: none;
+  min-width: 220px;
+}
+
+.explore-panel.open { display: block; animation: fadeIn 180ms ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-6px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+.explore-inner { display:flex; flex-direction:column; gap:0.5rem; }
+.explore-btn {
+  background: linear-gradient(90deg,#111,#1a1a1a);
+  color: #fff;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.06);
+  font-weight:700;
+  cursor:pointer;
+  text-align:center;
+}
+.explore-btn:hover { color:#ffd54f; transform: translateY(-2px); }
+
+/* Mega menu (sibling, outside header) */
+.mega-menu {
+  position: absolute; /* JS will set top under header */
+  left: 0;
+  width: 100%;
+  display: none;
+  z-index: 1300;
+  background: linear-gradient(180deg, rgba(13,5,45,0.98), rgba(8,3,30,0.98));
+  box-shadow: 0 20px 40px rgba(0,0,0,0.45);
+  border-top: 1px solid rgba(255,255,255,0.03);
+  padding: 1rem 0;
+}
+.mega-menu.open { display:block; }
+
+/* Mega inner grid */
+.mega-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 1.25rem;
+  color: #ddd;
+}
+
+/* Column heading toggles */
+.mega-column h4.mega-toggle {
+  color: #ffd54f;
+  font-family: 'Anton', sans-serif;
+  margin: 0 0 0.5rem 0;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Hidden lists */
+.mega-list { list-style:none; padding:0; margin:0; }
+.mega-list li a {
+  display:block; padding:8px 6px; color:#ddd; text-decoration:none; border-radius:6px;
+}
+.mega-list li a:hover { background: rgba(255,255,255,0.03); color:#fff; }
+
+/* Responsive */
+@media (max-width:900px) {
+  .explore-panel { right: 1rem; left: 1rem; }
+  .mega-inner { grid-template-columns: 1fr; padding: 1rem; }
+  .mega-menu { position: fixed; top: 0; left: 0; right: 0; height: 100vh; overflow:auto; }
+}
 
   </style>
 
@@ -532,28 +651,38 @@ header.nav .nav__menu .btn--light {
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
+<!-- Header -->
 <header class="nav" role="navigation" aria-label="Main">
   <div class="container nav__inner">
     <a href="/" class="nav__logo" aria-label="ZEAL home">ZEAL</a>
 
     <nav class="nav__menu" aria-label="Primary">
-      <a href="/about" class="nav-link">About</a>
+      <!-- Optional top-level link -->
+      <a href="#what-we-do" class="nav-link">About</a>
 
-      <button id="exploreToggle" class="dropdown-trigger" aria-expanded="false" aria-controls="megaMenu">
+      <!-- Explore trigger (far right) -->
+      <button id="exploreToggle" class="explore-trigger" aria-expanded="false" aria-controls="explorePanel">
         Explore ▾
       </button>
-
-      <a href="mailto:zeal.io@outlook.com?subject=ZEAL%20Demo%20Request" class="btn--light">Book a Demo</a>
     </nav>
   </div>
 </header>
+
+<!-- Small Explore panel (appears under header) -->
+<div id="explorePanel" class="explore-panel" aria-hidden="true" role="dialog" aria-label="Explore menu">
+  <div class="explore-inner">
+    <button class="explore-btn" id="exploreAbout">About</button>
+    <button class="explore-btn" id="exploreServices">Services</button>
+    <button class="explore-btn" id="exploreDemo">Book a Demo</button>
+  </div>
+</div>
 
 <!-- Mega menu panel (sibling, outside header) -->
 <div id="megaMenu" class="mega-menu" role="menu" aria-hidden="true">
   <div class="mega-inner">
     <div class="mega-column">
-      <h4>Web Development</h4>
-      <ul>
+      <h4 class="mega-toggle" data-target="col-web">Web Development ▾</h4>
+      <ul id="col-web" class="mega-list" hidden>
         <li><a href="#">Business Page</a></li>
         <li><a href="#">Landing Page</a></li>
         <li><a href="#">Single HTML + CSS Page</a></li>
@@ -561,8 +690,8 @@ header.nav .nav__menu .btn--light {
     </div>
 
     <div class="mega-column">
-      <h4>UX / UI Design</h4>
-      <ul>
+      <h4 class="mega-toggle" data-target="col-ux">UX / UI Design ▾</h4>
+      <ul id="col-ux" class="mega-list" hidden>
         <li><a href="#">JavaScript</a></li>
         <li><a href="#">React</a></li>
         <li><a href="#">Vue</a></li>
@@ -572,19 +701,25 @@ header.nav .nav__menu .btn--light {
     </div>
 
     <div class="mega-column">
-      <h4>Social Media Engagement</h4>
-      <ul class="social-list">
-        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
-        <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
-        <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
-        <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
-        <li><a href="#"><i class="fab fa-tiktok"></i> TikTok</a></li>
-        <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
-        <li><a href="#"><i class="fab fa-discord"></i> Discord</a></li>
+      <h4 class="mega-toggle" data-target="col-social">Social Media Engagement ▾</h4>
+      <ul id="col-social" class="mega-list" hidden>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Twitter</a></li>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">YouTube</a></li>
+        <li><a href="#">TikTok</a></li>
+        <li><a href="#">LinkedIn</a></li>
+        <li><a href="#" id="getCatalogue">Get Catalogue (PDF)</a></li>
       </ul>
     </div>
   </div>
 </div>
+
+<!-- Example target section for About -->
+<section id="what-we-do" style="padding:6rem 2rem; max-width:1200px; margin:0 auto;">
+  <h2>What we do</h2>
+  <p>Placeholder content for the "What we do" section. Replace with your real content.</p>
+</section>
 
 
   <!-- HERO with Brand Glow -->
@@ -847,6 +982,138 @@ header.nav .nav__menu .btn--light {
   window.addEventListener('resize', positionMega);
   window.addEventListener('scroll', positionMega);
 
+  positionMega();
+})();
+</script>
+<script>
+(function () {
+  const header = document.querySelector('header.nav');
+  const exploreToggle = document.getElementById('exploreToggle');
+  const explorePanel = document.getElementById('explorePanel');
+  const exploreAbout = document.getElementById('exploreAbout');
+  const exploreServices = document.getElementById('exploreServices');
+  const exploreDemo = document.getElementById('exploreDemo');
+  const megaMenu = document.getElementById('megaMenu');
+  const megaToggles = document.querySelectorAll('.mega-toggle');
+  const getCatalogue = document.getElementById('getCatalogue');
+
+  if (!header || !exploreToggle || !explorePanel) return;
+
+  // Position explorePanel under header (right aligned)
+  function positionExplore() {
+    // nothing complex needed; CSS positions it absolute relative to header
+  }
+
+  // Position mega menu under header
+  function positionMega() {
+    const rect = header.getBoundingClientRect();
+    if (window.innerWidth > 900) {
+      megaMenu.style.position = 'absolute';
+      megaMenu.style.top = (window.scrollY + rect.bottom) + 'px';
+      megaMenu.style.left = '0';
+      megaMenu.style.width = '100%';
+    } else {
+      megaMenu.style.position = 'fixed';
+      megaMenu.style.top = '0';
+      megaMenu.style.left = '0';
+      megaMenu.style.width = '100%';
+      megaMenu.style.height = '100vh';
+    }
+  }
+
+  // Toggle explore panel
+  exploreToggle.addEventListener('click', function (e) {
+    e.stopPropagation();
+    const open = explorePanel.classList.toggle('open');
+    explorePanel.setAttribute('aria-hidden', !open);
+    exploreToggle.setAttribute('aria-expanded', open);
+    // close mega if opening explore
+    if (open) { megaMenu.classList.remove('open'); megaMenu.setAttribute('aria-hidden','true'); }
+  });
+
+  // About: scroll to #what-we-do
+  exploreAbout.addEventListener('click', function () {
+    const target = document.getElementById('what-we-do');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      // fallback: go to /about
+      window.location.href = '/about';
+    }
+    explorePanel.classList.remove('open');
+    explorePanel.setAttribute('aria-hidden','true');
+    exploreToggle.setAttribute('aria-expanded','false');
+  });
+
+  // Book a Demo: open mail client
+  exploreDemo.addEventListener('click', function () {
+    const mailto = 'mailto:zeal.io@outlook.com?subject=' + encodeURIComponent('ZEAL Demo Request') +
+                   '&body=' + encodeURIComponent('Hi ZEAL team,%0D%0A%0D%0AI would like to request a demo. Please get in touch.%0D%0A%0D%0AThanks.');
+    window.location.href = mailto;
+  });
+
+  // Services: open mega menu
+  exploreServices.addEventListener('click', function () {
+    positionMega();
+    const open = megaMenu.classList.toggle('open');
+    megaMenu.setAttribute('aria-hidden', !open);
+    // close explore panel
+    explorePanel.classList.remove('open');
+    explorePanel.setAttribute('aria-hidden','true');
+    exploreToggle.setAttribute('aria-expanded','false');
+  });
+
+  // Toggle each mega column list
+  megaToggles.forEach(function (h) {
+    h.addEventListener('click', function () {
+      const id = h.getAttribute('data-target');
+      const el = document.getElementById(id);
+      if (!el) return;
+      const isHidden = el.hasAttribute('hidden');
+      // hide all lists first (optional: keep only one open)
+      document.querySelectorAll('.mega-list').forEach(function (list) {
+        list.setAttribute('hidden', '');
+      });
+      if (isHidden) el.removeAttribute('hidden');
+      else el.setAttribute('hidden', '');
+    });
+  });
+
+  // Get Catalogue: open mail client with PDF link (replace PDF_URL)
+  if (getCatalogue) {
+    getCatalogue.addEventListener('click', function (e) {
+      e.preventDefault();
+      const PDF_URL = 'https://example.com/ZEAL-catalogue.pdf'; // <-- REPLACE with your hosted PDF URL
+      const subject = encodeURIComponent('Request: ZEAL Catalogue');
+      const body = encodeURIComponent('Hi ZEAL team,%0D%0A%0D%0APlease send me the ZEAL services catalogue. You can also download it here: ' + PDF_URL + '%0D%0A%0D%0AThanks.');
+      window.location.href = 'mailto:zeal.io@outlook.com?subject=' + subject + '&body=' + body;
+    });
+  }
+
+  // Close panels on outside click or Escape
+  document.addEventListener('click', function (e) {
+    if (!explorePanel.contains(e.target) && !exploreToggle.contains(e.target)) {
+      explorePanel.classList.remove('open');
+      explorePanel.setAttribute('aria-hidden','true');
+      exploreToggle.setAttribute('aria-expanded','false');
+    }
+    if (!megaMenu.contains(e.target) && !exploreServices.contains(e.target)) {
+      // keep mega open only if click inside
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      explorePanel.classList.remove('open');
+      explorePanel.setAttribute('aria-hidden','true');
+      exploreToggle.setAttribute('aria-expanded','false');
+      megaMenu.classList.remove('open');
+      megaMenu.setAttribute('aria-hidden','true');
+    }
+  });
+
+  window.addEventListener('resize', positionMega);
+  window.addEventListener('scroll', positionMega);
   positionMega();
 })();
 </script>
