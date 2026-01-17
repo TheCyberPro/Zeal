@@ -151,6 +151,64 @@
 
 
 
+/* Dropdown wrapper stays inline in header */
+.dropdown {
+  position: relative; /* anchor for absolute children */
+}
+
+/* First-level dropdown */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;   /* sits below the Explore button */
+  left: 0;
+  background: #0d052d;
+  min-width: 220px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  border-radius: 8px;
+  z-index: 2000; /* higher than header */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Submenus */
+.submenu-content {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 100%; /* slide out to the right */
+  background: #0d052d;
+  min-width: 220px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  border-radius: 8px;
+  z-index: 2000;
+}
+
+/* Hover logic */
+.dropdown:hover > .dropdown-content { display: block; }
+.has-submenu:hover > .submenu-content { display: block; }
+
+/* Links/buttons inside */
+.dropdown-content a,
+.submenu-content a,
+.submenu-trigger {
+  display: block;
+  padding: 10px 16px;
+  color: #ddd;
+  text-decoration: none;
+  background: none;
+  border: none;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+}
+.dropdown-content a:hover,
+.submenu-content a:hover,
+.submenu-trigger:hover {
+  background: #222;
+  color: #fff;
+}
 
 /* Submenu wrapper */
 .dropdown-submenu {
