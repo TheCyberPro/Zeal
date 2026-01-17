@@ -194,6 +194,61 @@
 .dropdown:hover .dropdown-content {
   display: block;
 }
+/* Dropdown wrapper */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Trigger button styled to match your header */
+.dropdown-trigger {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.85);
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dropdown-trigger:hover {
+  color: #ffd54f; /* matches ZEAL logo gold */
+  border-color: #ffd54f;
+}
+
+/* Dropdown content panel */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0; /* aligns under button */
+  background: #0d052d;
+  min-width: 200px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  border-radius: 8px;
+  z-index: 1000;
+}
+
+/* Links inside dropdown */
+.dropdown-content a {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-content a:hover {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
 
   </style>
 
@@ -214,7 +269,23 @@
 
 
 <!-- NAVIGATION -->
-<header class="nav" role="navigation" aria-label="Main"> <div class="container nav__inner"> <!-- Logo far left --> <a href="/" class="nav__logo" aria-label="ZEAL home">ZEAL</a> <!-- Explore dropdown far right --> <nav class="nav__menu" aria-label="Primary"> <div class="dropdown"> <button class="dropdown-trigger">Explore ▼</button> <div class="dropdown-content"> <a href="/about">About</a> <a href="/contact">Contact</a> <!-- Services triggers drawer --> <button class="services-trigger">Services</button> <a href="mailto:zeal.io@outlook.com?subject=ZEAL%20Demo%20Request">Book a Demo</a> </div> </div> </nav> </div> </header>
+<header class="nav" role="navigation" aria-label="Main"> <div class="container nav__inner"> 
+<!-- Logo far left --> 
+<a href="/" class="nav__logo" aria-label="ZEAL home">ZEAL</a>
+ <!-- Explore dropdown far right --> 
+<nav class="nav__menu" aria-label="Primary">
+
+ <div class="dropdown"> <button class="dropdown-trigger">Explore ▼</button> <div class="dropdown-content">
+ <a href="/about">About</a>
+ <a href="/contact">Contact</a> 
+<!-- Services triggers drawer -->
+ <button class="services-trigger">Services</button> 
+<a href="mailto:zeal.io@outlook.com?subject=ZEAL%20Demo%20Request">Book a Demo</a> 
+</div>
+ </div>
+ </nav>
+ </div>
+ </header>
 
 
 
