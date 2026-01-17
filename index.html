@@ -163,15 +163,23 @@
     <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N87XV2R4" height="0" width="0" style="display:none;visibility:hidden"></iframe>
   </noscript>
 
-  <!-- NAVIGATION -->
-  <header class="nav" role="navigation" aria-label="Main">
-    <div class="container nav__inner">
-      <a href="/" class="nav__logo" aria-label="ZEAL home">ZEAL</a>
-      <nav class="nav__menu" aria-label="Primary">
-	<a href="/about">About</a>
- 	<a href="/contact">Contact</a>
- 	<button class="services-trigger">Services</button>
-	<!-- Side Drawer -->
+
+<!-- NAVIGATION -->
+<header class="nav" role="navigation" aria-label="Main">
+  <div class="container nav__inner">
+    <a href="/" class="nav__logo" aria-label="ZEAL home">ZEAL</a>
+
+    <nav class="nav__menu" aria-label="Primary">
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <!-- Trigger Button -->
+      <button class="services-trigger">Services</button>
+      <a href="mailto:zeal.io@outlook.com?subject=ZEAL%20Demo%20Request">Book a Demo</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Side Drawer lives OUTSIDE the header -->
 <aside class="services-drawer" id="servicesDrawer">
   <div class="drawer-header">
     <h2>Our Services</h2>
@@ -209,10 +217,7 @@
     </div>
   </div>
 </aside>
-        <a href="mailto:zeal.io@outlook.com?subject=ZEAL%20Demo%20Request" class="btn btn--light">Book a Demo</a>
-      </nav>
-    </div>
-  </header>
+
 
   <!-- HERO with Brand Glow -->
   <section class="hero hero--luxury" aria-labelledby="hero-title">
