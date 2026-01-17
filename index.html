@@ -168,8 +168,47 @@
     <div class="container nav__inner">
       <a href="/" class="nav__logo" aria-label="ZEAL home">ZEAL</a>
       <nav class="nav__menu" aria-label="Primary">
-
-
+	<a href="/about">About</a>
+ 	<a href="/contact">Contact</a>
+ 	<button class="services-trigger">Services</button>
+	<!-- Side Drawer -->
+<aside class="services-drawer" id="servicesDrawer">
+  <div class="drawer-header">
+    <h2>Our Services</h2>
+    <button class="close-drawer">&times;</button>
+  </div>
+  <div class="drawer-content">
+    <div class="drawer-section">
+      <h3>Development</h3>
+      <ul>
+        <li><i class="fas fa-code"></i> Web Development</li>
+        <li><i class="fas fa-mobile-alt"></i> Apps</li>
+      </ul>
+    </div>
+    <div class="drawer-section">
+      <h3>Design</h3>
+      <ul>
+        <li><i class="fas fa-pencil-ruler"></i> UX/UI Design</li>
+      </ul>
+    </div>
+    <div class="drawer-section">
+      <h3>Engagement</h3>
+      <ul>
+        <li><i class="fab fa-facebook"></i> Facebook</li>
+        <li><i class="fab fa-instagram"></i> Instagram</li>
+        <li><i class="fab fa-twitter"></i> Twitter</li>
+        <li><i class="fab fa-tiktok"></i> TikTok</li>
+        <li><i class="fab fa-youtube"></i> YouTube</li>
+        <li><i class="fab fa-telegram"></i> Telegram</li>
+        <li><i class="fab fa-spotify"></i> Spotify</li>
+        <li><i class="fab fa-snapchat"></i> Snapchat</li>
+        <li><i class="fab fa-reddit"></i> Reddit</li>
+        <li><i class="fab fa-linkedin"></i> LinkedIn</li>
+        <li><i class="fab fa-discord"></i> Discord</li>
+      </ul>
+    </div>
+  </div>
+</aside>
         <a href="mailto:zeal.io@outlook.com?subject=ZEAL%20Demo%20Request" class="btn btn--light">Book a Demo</a>
       </nav>
     </div>
@@ -290,6 +329,8 @@
       <h2 class="section__title" id="contact-title">Build your next digital platform</h2>
       <p class="contact__text">Book a demo and let’s turn your website or app into your hardest‑working salesperson.</p>
       <a href="mailto:zeal.io@outlook.com?subject=ZEAL%20Demo%20Request" class="btn btn--light">Book a Demo</a>
+        <a href="mailto:zeal.io@outlook.com?subject=ZEAL%20Demo%20Request" clas>
+  
     </div>
   </section>
 
@@ -351,6 +392,16 @@
     })();
   </script>
   <!-- End of Tawk.to Script -->
+<script>
+  const drawer = document.getElementById('servicesDrawer');
+  document.querySelector('.services-trigger').addEventListener('click', () => {
+    drawer.classList.add('open');
+  });
+  document.querySelector('.close-drawer').addEventListener('click', () => {
+    drawer.classList.remove('open');
+  });
+</script>
+
 </body>
 </html>
 
