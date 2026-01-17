@@ -18,7 +18,7 @@
   <!-- Google Fonts: Inter + Anton -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet" />
-
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script>
 
@@ -366,6 +366,150 @@ header.nav .dropdown {
   color: #ffd54f;
 }
 
+
+
+/* Header base */
+header.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 5%;
+  background: #0d052d;
+  position: relative;
+  z-index: 1000;
+  box-shadow: inset 0 -1px 0 rgba(255,255,255,0.05);
+}
+
+/* Logo: Anton fallback to Montserrat for animated label */
+header.nav .nav__logo {
+  font-family: 'Montserrat', 'Anton', sans-serif;
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: #ffd54f;
+  text-transform: uppercase;
+  text-decoration: none;
+  flex-shrink: 0;
+  margin-right: auto; /* forces logo to far left */
+  letter-spacing: 0.06em;
+  display: inline-block;
+  transform-origin: center;
+  /* glow + subtle pulse animation */
+  text-shadow: 0 0 8px rgba(255,213,79,0.85), 0 0 18px rgba(255,213,79,0.35);
+  animation: zealPulse 6s ease-in-out infinite;
+}
+
+/* Pulse keyframes (slow, premium) */
+@keyframes zealPulse {
+  0%   { transform: scale(1); filter: drop-shadow(0 0 6px rgba(255,213,79,0.25)); }
+  50%  { transform: scale(1.02); filter: drop-shadow(0 0 18px rgba(255,213,79,0.45)); }
+  100% { transform: scale(1); filter: drop-shadow(0 0 6px rgba(255,213,79,0.25)); }
+}
+
+/* Hover accent for logo */
+header.nav .nav__logo:hover {
+  transform: scale(1.04);
+  text-shadow: 0 0 12px rgba(255,213,79,0.95), 0 0 28px rgba(255,213,79,0.45);
+}
+
+/* Nav menu */
+header.nav .nav__menu {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-left: 0;
+}
+
+/* Links */
+header.nav .nav__menu .nav-link,
+header.nav .nav__menu .btn--light {
+  color: rgba(255,255,255,0.9);
+  text-transform: uppercase;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+}
+
+/* Explore trigger */
+.dropdown-trigger {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.95);
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: color 0.18s ease, border-color 0.18s ease, transform 0.12s ease;
+}
+.dropdown-trigger:hover { color: #ffd54f; border-color: #ffd54f; transform: translateY(-1px); }
+
+/* CTA */
+.btn--light {
+  background: #7c3aed;
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.45rem 0.9rem;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(124,58,237,0.12);
+}
+
+/* Mega menu panel (hidden by default) */
+.mega-menu {
+  position: absolute; /* positioned by JS under header */
+  left: 0;
+  width: 100%;
+  display: none;
+  z-index: 1500;
+  background: linear-gradient(180deg, rgba(13,5,45,0.98), rgba(8,3,30,0.98));
+  box-shadow: 0 20px 40px rgba(0,0,0,0.45);
+  border-top: 1px solid rgba(255,255,255,0.03);
+}
+
+/* Inner grid */
+.mega-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.25rem 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  color: #ddd;
+}
+
+/* Column headings */
+.mega-column h4 {
+  color: #ffd54f;
+  font-family: 'Anton', sans-serif;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+}
+
+/* Links inside panel */
+.mega-column ul { list-style: none; padding: 0; margin: 0; }
+.mega-column a {
+  display: block;
+  padding: 8px 6px;
+  color: #ddd;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+.mega-column a:hover { background: rgba(255,255,255,0.03); color: #fff; }
+
+/* Social list smaller font */
+.social-list a { font-size: 0.95rem; }
+
+/* Visible state */
+.mega-menu.open { display: block; animation: megaFade 220ms ease; }
+@keyframes megaFade { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Responsive: stack columns on small screens and make panel full-screen */
+@media (max-width: 900px) {
+  .mega-inner { grid-template-columns: 1fr; padding: 1rem; }
+  .mega-menu { position: fixed; left: 0; right: 0; top: 0; height: 100vh; overflow-y: auto; }
+}
+
   </style>
 
   <!-- Google Tag Manager -->
@@ -385,67 +529,63 @@ header.nav .dropdown {
 
 
 <!-- NAVIGATION -->
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
 <header class="nav" role="navigation" aria-label="Main">
   <div class="container nav__inner">
-    <!-- Logo far left -->
     <a href="/" class="nav__logo" aria-label="ZEAL home">ZEAL</a>
 
-    <!-- Explore trigger far right -->
     <nav class="nav__menu" aria-label="Primary">
-      <button class="mega-trigger">Explore ▼</button>
+      <a href="/about" class="nav-link">About</a>
+
+      <button id="exploreToggle" class="dropdown-trigger" aria-expanded="false" aria-controls="megaMenu">
+        Explore ▾
+      </button>
+
+      <a href="mailto:zeal.io@outlook.com?subject=ZEAL%20Demo%20Request" class="btn--light">Book a Demo</a>
     </nav>
   </div>
 </header>
 
-<!-- Mega Menu lives OUTSIDE the header -->
-<div class="mega-menu" id="megaMenu">
+<!-- Mega menu panel (sibling, outside header) -->
+<div id="megaMenu" class="mega-menu" role="menu" aria-hidden="true">
   <div class="mega-inner">
-    <!-- Column 1 -->
     <div class="mega-column">
-      <h3>About</h3>
-      <a href="/about">Who We Are</a>
-      <a href="/about#team">Our Team</a>
+      <h4>Web Development</h4>
+      <ul>
+        <li><a href="#">Business Page</a></li>
+        <li><a href="#">Landing Page</a></li>
+        <li><a href="#">Single HTML + CSS Page</a></li>
+      </ul>
     </div>
 
-    <!-- Column 2 -->
     <div class="mega-column">
-      <h3>Services</h3>
-      <div class="submenu-group">
-        <span>Web Development</span>
-        <a href="#">Business Page</a>
-        <a href="#">Landing Page</a>
-        <a href="#">Single HTML+CSS Page</a>
-      </div>
-      <div class="submenu-group">
-        <span>UX/UI Design</span>
-        <a href="#">JavaScript</a>
-        <a href="#">React</a>
-        <a href="#">Vue</a>
-        <a href="#">CSS</a>
-      </div>
-      <div class="submenu-group">
-        <span>Social Media Engagement</span>
-        <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-        <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
-        <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
-        <a href="#"><i class="fab fa-tiktok"></i> TikTok</a>
-        <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
-        <a href="#"><i class="fab fa-telegram"></i> Telegram</a>
-        <a href="#"><i class="fab fa-spotify"></i> Spotify</a>
-        <a href="#"><i class="fab fa-snapchat"></i> Snapchat</a>
-        <a href="#"><i class="fab fa-reddit"></i> Reddit</a>
-        <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
-        <a href="#"><i class="fab fa-discord"></i> Discord</a>
-      </div>
+      <h4>UX / UI Design</h4>
+      <ul>
+        <li><a href="#">JavaScript</a></li>
+        <li><a href="#">React</a></li>
+        <li><a href="#">Vue</a></li>
+        <li><a href="#">CSS</a></li>
+        <li><a href="#">Prototyping & Research</a></li>
+      </ul>
     </div>
 
-    <!-- Column 3 -->
     <div class="mega-column">
-      <h3>Book a Demo</h3>
-      <a href="mailto:zeal.io@outlook.com?subject=ZEAL%20Demo%20Request">Request a Demo</a>
+      <h4>Social Media Engagement</h4>
+      <ul class="social-list">
+        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+        <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+        <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+        <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+        <li><a href="#"><i class="fab fa-tiktok"></i> TikTok</a></li>
+        <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+        <li><a href="#"><i class="fab fa-discord"></i> Discord</a></li>
+      </ul>
     </div>
   </div>
 </div>
+
 
   <!-- HERO with Brand Glow -->
   <section class="hero hero--luxury" aria-labelledby="hero-title">
@@ -648,6 +788,67 @@ header.nav .dropdown {
       megaMenu.style.display = 'none';
     }
   });
+</script>
+<script>
+(function () {
+  const header = document.querySelector('header.nav');
+  const toggle = document.getElementById('exploreToggle');
+  const mega = document.getElementById('megaMenu');
+
+  if (!header || !toggle || !mega) return;
+
+  function positionMega() {
+    const rect = header.getBoundingClientRect();
+    if (window.innerWidth > 900) {
+      mega.style.position = 'absolute';
+      mega.style.top = (window.scrollY + rect.bottom) + 'px';
+      mega.style.left = '0';
+      mega.style.width = '100%';
+      mega.style.height = 'auto';
+    } else {
+      mega.style.position = 'fixed';
+      mega.style.top = '0';
+      mega.style.left = '0';
+      mega.style.width = '100%';
+      mega.style.height = '100vh';
+    }
+  }
+
+  function openMega() {
+    positionMega();
+    mega.classList.add('open');
+    mega.setAttribute('aria-hidden', 'false');
+    toggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMega() {
+    mega.classList.remove('open');
+    mega.setAttribute('aria-hidden', 'true');
+    toggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  toggle.addEventListener('click', function (e) {
+    e.stopPropagation();
+    if (mega.classList.contains('open')) closeMega();
+    else openMega();
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!mega.classList.contains('open')) return;
+    if (mega.contains(e.target) || toggle.contains(e.target)) return;
+    closeMega();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeMega();
+  });
+
+  window.addEventListener('resize', positionMega);
+  window.addEventListener('scroll', positionMega);
+
+  positionMega();
+})();
 </script>
 
 </body>
