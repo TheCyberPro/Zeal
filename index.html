@@ -657,8 +657,6 @@ header.nav .nav__menu {
     <a href="/" class="nav__logo" aria-label="ZEAL home">ZEAL</a>
 
     <nav class="nav__menu" aria-label="Primary">
-      <!-- Optional top-level link -->
-      <a href="#what-we-do" class="nav-link">About</a>
 
       <!-- Explore trigger (far right) -->
       <button id="exploreToggle" class="explore-trigger" aria-expanded="false" aria-controls="explorePanel">
@@ -671,7 +669,9 @@ header.nav .nav__menu {
 <!-- Small Explore panel (appears under header) -->
 <div id="explorePanel" class="explore-panel" aria-hidden="true" role="dialog" aria-label="Explore menu">
   <div class="explore-inner">
-    <button class="explore-btn" id="exploreAbout">About</button>
+    <button class="explore-btn" id="exploreAbout">About</button> 
+     <a href="#what-we-do" class="nav-link">About</a>
+
     <button class="explore-btn" id="exploreServices">Services</button>
     <button class="explore-btn" id="exploreDemo">Book a Demo</button>
   </div>
@@ -714,13 +714,6 @@ header.nav .nav__menu {
     </div>
   </div>
 </div>
-
-<!-- Example target section for About -->
-<section id="what-we-do" style="padding:6rem 2rem; max-width:1200px; margin:0 auto;">
-  <h2>What we do</h2>
-  <p>Placeholder content for the "What we do" section. Replace with your real content.</p>
-</section>
-
 
   <!-- HERO with Brand Glow -->
   <section class="hero hero--luxury" aria-labelledby="hero-title">
