@@ -146,6 +146,25 @@
 
     /* Footer */
     footer.footer { text-align: center; padding: 2rem; font-size: 0.9rem; color: rgba(255,255,255,0.6); }
+.services-drawer {
+  position: fixed;
+  top: 0;
+  right: -400px; /* hidden by default */
+  width: 400px;
+  height: 100%;
+  background: rgba(17,17,17,0.95);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  transition: right 0.4s ease;
+  box-shadow: -4px 0 12px rgba(0,0,0,0.3);
+  z-index: 1000;
+  padding: 20px;
+}
+
+.services-drawer.open {
+  right: 0;
+}
+
   </style>
 
   <!-- Google Tag Manager -->
@@ -170,8 +189,7 @@
     <a href="/" class="nav__logo" aria-label="ZEAL home">ZEAL</a>
 
     <nav class="nav__menu" aria-label="Primary">
-      <a href="/about">About</a>
-      <a href="/contact">Contact</a>
+
       <!-- Trigger Button -->
       <button class="services-trigger">Services</button>
       <a href="mailto:zeal.io@outlook.com?subject=ZEAL%20Demo%20Request">Book a Demo</a>
