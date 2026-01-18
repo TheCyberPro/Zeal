@@ -372,6 +372,47 @@ header.nav .nav__menu a:hover { color: #fff; }
 .nav__actions { margin-left: auto; display: flex; gap: 0.75rem; align-items: center; }
 
 
+
+
+
+
+/* Centered footer */
+footer.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  background: transparent; /* keep existing background if any */
+  color: rgba(255,255,255,0.85);
+  text-align: center;
+}
+
+footer.footer .footer__inner {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Footer nav / text */
+footer .footer__nav,
+footer .footer__nav p {
+  margin: 0;
+  display: inline-block;
+  color: inherit;
+}
+
+/* Small screens: keep spacing tidy */
+@media (max-width: 480px) {
+  footer.footer { padding: 1.25rem 0.75rem; }
+  footer.footer .footer__inner { gap: 0.5rem; padding: 0 0.5rem; }
+}
+
+
   </style>
 
   <!-- Google Tag Manager -->
@@ -652,13 +693,52 @@ header.nav .nav__menu a:hover { color: #fff; }
   </section>
 
   <!-- FOOTER -->
-  <footer class="footer" role="contentinfo">
-    <div class="container footer__inner">
-      <nav class="footer__nav" aria-label="Footer">
-        <p>© 2026 ZEAL</p>
+
+<footer class="footer" role="contentinfo" aria-label="Site footer">
+  <div class="container footer__inner">
+    <!-- Left: brand / logo -->
+    <div class="footer__brand" style="display:flex;align-items:center;gap:0.75rem;">
+      <a href="/" class="nav__logo" aria-label="ZEAL home" style="text-decoration:none;">ZEAL</a>
+      <span class="footer__tagline" style="color:rgba(255,255,255,0.7);font-size:0.95rem;">Premium web development</span>
+    </div>
+
+    <!-- Center: link groups -->
+    <div class="footer__links" style="display:flex;gap:2rem;align-items:center;flex-wrap:wrap;">
+      <nav class="footer__nav" aria-label="Footer navigation">
+        <ul style="list-style:none;display:flex;gap:1rem;margin:0;padding:0;align-items:center;">
+          <li><a href="/about" style="color:inherit;text-decoration:none;">About</a></li>
+          <li><a href="/services" style="color:inherit;text-decoration:none;">Services</a></li>
+          <li><a href="/pricing" style="color:inherit;text-decoration:none;">Pricing</a></li>
+          <li><a href="/blog" style="color:inherit;text-decoration:none;">Blog</a></li>
+          <li><a href="/contact" style="color:inherit;text-decoration:none;">Contact</a></li>
+        </ul>
       </nav>
     </div>
-  </footer>
+
+    <!-- Right: utilities (language, social, copyright) -->
+    <div class="footer__utils" style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+      <!-- Language selector (non-functional placeholder) -->
+      <div class="footer__lang" role="group" aria-label="Language selector">
+        <button class="s-btn s-btn-ghost" type="button" aria-haspopup="listbox" aria-expanded="false">English</button>
+      </div>
+
+      <!-- Social icons (placeholders) -->
+      <div class="footer__social" aria-hidden="false" style="display:flex;gap:0.5rem;align-items:center;">
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram" class="s-btn s-btn-ghost">IG</a>
+        <a href="https://twitter.com/" target="_blank" rel="noopener" aria-label="Twitter" class="s-btn s-btn-ghost">TW</a>
+        <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn" class="s-btn s-btn-ghost">IN</a>
+      </div>
+
+      <!-- Copyright -->
+      <div class="footer__copy" style="color:rgba(255,255,255,0.7);font-size:0.95rem;">
+        <span>© 2026 Zeal Web Studios</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
 <script>
 /* ============================
    Helpers
