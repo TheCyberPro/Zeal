@@ -753,9 +753,7 @@ header.nav .nav__menu {
 <!-- Small Explore panel (appears under header) -->
 <div id="explorePanel" class="explore-panel" aria-hidden="true" role="dialog" aria-label="Explore menu">
   <div class="explore-inner">
-    <button class="explore-btn" id="exploreAbout">About</button> 
-     <a href="#what-we-do" class="nav-link">About</a>
-
+    <button class="explore-btn" id="exploreAbout">About</button>
     <button class="explore-btn" id="exploreServices">Services</button>
     <button class="explore-btn" id="exploreDemo">Book a Demo</button>
   </div>
@@ -786,16 +784,21 @@ header.nav .nav__menu {
 
     <div class="mega-column">
       <h4 class="mega-toggle" data-target="col-social">Social Media Engagement ▾</h4>
-
-<ul id="col-social" class="mega-list" hidden> 
-<li><button class="social-link" data-service="instagram">Instagram</button></li>
- <li><a href="#" class="social-link" data-service="twitter">Twitter</a></li>
- <li><a href="#" class="social-link" data-service="facebook">Facebook</a></li>
- <li><a href="#" class="social-link" data-service="youtube">YouTube</a></li>
- <li><a href="#" class="social-link" data-service="tiktok">TikTok</a></li>
- <li><a href="#" class="social-link" data-service="linkedin">LinkedIn</a>
-</li> <li><a href="#" id="getCatalogue">Get Catalogue (PDF)</a></li> 
+      <ul id="col-social" class="mega-list" hidden>
+        <li><a href="#" data-service="instagram">Instagram</a></li>
+        <li><a href="#" data-service="twitter">Twitter</a></li>
+        <li><a href="#" data-service="facebook">Facebook</a></li>
+        <li><a href="#" data-service="youtube">YouTube</a></li>
+        <li><a href="#" data-service="tiktok">TikTok</a></li>
+        <li><a href="#" data-service="linkedin">LinkedIn</a></li>
+        <li><a href="#" id="getCatalogue">Get Catalogue (PDF)</a></li>
       </ul>
+    </div>
+  </div>
+</div>
+
+
+
 <!-- Inline expanded area for the selected social service (hidden by default) -->
  <div id="col-social-expanded" class="mega-expanded" hidden>
  <!-- Instagram premium card (shown when Instagram is selected) -->
@@ -1325,84 +1328,55 @@ header.nav .nav__menu {
 </script>
 <script>
 (function(){
-  // Toggle social list -> show expanded area for selected service
-  document.querySelectorAll('#col-social .social-link').forEach(function(btn){
-    btn.addEventListener('click', function(e){
-      const service = btn.dataset.service;
-      const expanded = document.getElementById('col-social-expanded');
-      // if Instagram selected, show expanded area and ensure it's visible
-      if (service === 'instagram') {
-        expanded.removeAttribute('hidden');
-        // scroll mega menu if needed (optional)
-        expanded.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        // ensure Instagram embed renders
-        if (window.instgrm && typeof window.instgrm.Embeds === 'object') {
-          window.instgrm.Embeds.process();
-        }
-      } else {
-        // hide expanded area for other services (you can implement other cards similarly)
-        expanded.setAttribute('hidden','');
-      }
-    });
+  const exploreAbout = document.getElementById('exploreAbout');
+  const exploreServices = document.getElementById('exploreServices');
+  const exploreDemo = document.getElementById('exploreDemo');
+  const megaMenu = document.getElementById('megaMenu');
+
+  // About: smooth scroll to section with id="what-we-do"
+  exploreAbout?.addEventListener('click', function(){
+    const target = document.getElementById('what-we-do');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      window.location.href = '/about';
+    }
+    // close panel if needed
+    document.getElementById('explorePanel')?.classList.remove('open');
   });
 
-  // Modal behavior for View Services inside the expanded area
-  const viewBtn = document.querySelector('#instagramCard .view-services');
-  const modal = document.getElementById('platformModal');
-  const modalClose = modal ? modal.querySelector('.modal-close') : null;
-  const modalEmbedContainer = document.getElementById('modalInstagramEmbed');
-  const modalCatalogue = document.getElementById('modalCatalogue');
-  const instCatalogue = document.getElementById('instCatalogue');
+  // Services: open the mega menu
+  exploreServices?.addEventListener('click', function(){
+    megaMenu.classList.toggle('open');
+    megaMenu.setAttribute('aria-hidden', megaMenu.classList.contains('open') ? 'false' : 'true');
+    document.getElementById('explorePanel')?.classList.remove('open');
+  });
 
-  const PDF_URL = 'https://yourdomain.com/ZEAL-catalogue.pdf'; // replace with your PDF
+  // Book a Demo: open mail client
+  exploreDemo?.addEventListener('click', function(){
+    window.location.href = 'mailto:zeal.io@outlook.com?subject=' + encodeURIComponent('ZEAL Demo Request');
+  });
 
-  if (viewBtn && modal) {
-    viewBtn.addEventListener('click', function(){
-      // inject featured embed into modal (same permalink as card)
-      modalEmbedContainer.innerHTML = `
-        <blockquote class="instagram-media"
-          data-instgrm-permalink="https://www.instagram.com/p/DO19ie7gar4/?utm_source=ig_embed"
-          data-instgrm-version="14"
-          style="background:#FFF; border:0; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.08); margin:0 auto; max-width:540px;">
-        </blockquote>`;
-      if (window.instgrm && typeof window.instgrm.Embeds === 'object') {
-        window.instgrm.Embeds.process();
-      }
-      modal.classList.add('open');
-      modal.setAttribute('aria-hidden','false');
-      document.body.style.overflow = 'hidden';
-      // set catalogue mailto
-      if (modalCatalogue) {
-        modalCatalogue.href = 'mailto:zeal.io@outlook.com?subject=' + encodeURIComponent('Request: ZEAL Instagram Catalogue') +
-                              '&body=' + encodeURIComponent('Hi ZEAL team,%0D%0A%0D%0APlease send the Instagram services catalogue or download here: ' + PDF_URL);
-      }
-    });
-  }
+  // Close explore panel on outside click (optional)
+  document.addEventListener('click', function(e){
+    const panel = document.getElementById('explorePanel');
+    const toggle = document.getElementById('exploreToggle');
+    if (!panel || panel.classList.contains('open') === false) return;
+    if (panel.contains(e.target) || (toggle && toggle.contains(e.target))) return;
+    panel.classList.remove('open');
+    panel.setAttribute('aria-hidden','true');
+  });
 
-  if (modalClose) {
-    modalClose.addEventListener('click', closeModal);
-    modal.addEventListener('click', function(e){ if (e.target === modal) closeModal(); });
-    document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeModal(); });
-  }
-
-  function closeModal(){
-    modal.classList.remove('open');
-    modal.setAttribute('aria-hidden','true');
-    document.body.style.overflow = '';
-    if (modalEmbedContainer) modalEmbedContainer.innerHTML = '';
-  }
-
-  // Get Catalogue from card
-  if (instCatalogue) {
-    instCatalogue.addEventListener('click', function(e){
-      e.preventDefault();
-      const subject = encodeURIComponent('Request: ZEAL Catalogue');
-      const body = encodeURIComponent('Hi ZEAL team,%0D%0A%0D%0APlease send me the ZEAL catalogue or download here: ' + PDF_URL + '%0D%0A%0D%0AThanks.');
-      window.location.href = 'mailto:zeal.io@outlook.com?subject=' + subject + '&body=' + body;
-    });
-  }
+  // Close on Escape
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') {
+      document.getElementById('explorePanel')?.classList.remove('open');
+      megaMenu?.classList.remove('open');
+    }
+  });
 })();
 </script>
+
 
 </body>
 </html>
