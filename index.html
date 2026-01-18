@@ -790,8 +790,6 @@ header.nav .nav__menu {
     <a href="/" class="nav__logo" aria-label="ZEAL home">ZEAL</a>
 
     <nav class="nav__menu" aria-label="Primary">
-      <!-- left/center links (optional) -->
-      <a class="nav-link" href="#what-we-do">About</a>
 
       <!-- actions group pinned to the far right -->
       <div class="nav__actions">
@@ -807,9 +805,6 @@ header.nav .nav__menu {
 <!-- Small Explore panel (appears under header) -->
 <div id="explorePanel" class="explore-panel" aria-hidden="true" role="dialog" aria-label="Explore menu">
   <div class="explore-inner">
-    <button class="explore-btn" id="exploreAbout">About</button>
-    <button class="explore-btn" id="exploreServices">Services</button>
-    <button class="explore-btn" id="exploreDemo">Book a Demo</button>
   </div>
 </div>
 
@@ -1390,6 +1385,86 @@ header.nav .nav__menu {
       if (e.key === 'Enter' || e.key === ' ') viewBtn.click();
     });
   }
+})();
+</script>
+<script>
+(function(){
+  const exploreToggle = document.getElementById('exploreToggle');
+  const explorePanel = document.getElementById('explorePanel');
+  const exploreAbout = document.getElementById('exploreAbout');
+  const exploreServices = document.getElementById('exploreServices');
+  const exploreDemo = document.getElementById('exploreDemo');
+  const megaMenu = document.getElementById('megaMenu');
+  const socialLinks = document.querySelectorAll('#col-social .social-link');
+  const colSocialExpanded = document.getElementById('col-social-expanded');
+
+  // Toggle explore panel
+  exploreToggle?.addEventListener('click', function(e){
+    e.stopPropagation();
+    const open = explorePanel.classList.toggle('open');
+    explorePanel.setAttribute('aria-hidden', !open);
+    exploreToggle.setAttribute('aria-expanded', open);
+    if (open) megaMenu.classList.remove('open');
+  });
+
+  // About scroll
+  exploreAbout?.addEventListener('click', function(){
+    const target = document.getElementById('what-we-do');
+    if (target) target.scrollIntoView({ behavior:'smooth', block:'start' });
+    explorePanel.classList.remove('open');
+    explorePanel.setAttribute('aria-hidden','true');
+    exploreToggle.setAttribute('aria-expanded','false');
+  });
+
+  // Services opens mega menu
+  exploreServices?.addEventListener('click', function(){
+    const open = megaMenu.classList.toggle('open');
+    megaMenu.setAttribute('aria-hidden', !open);
+    explorePanel.classList.remove('open');
+    explorePanel.setAttribute('aria-hidden','true');
+    exploreToggle.setAttribute('aria-expanded','false');
+  });
+
+  // Book a Demo
+  exploreDemo?.addEventListener('click', function(){
+    window.location.href = 'mailto:zeal.io@outlook.com?subject=' + encodeURIComponent('ZEAL Demo Request');
+  });
+
+  // Social links: show inline expanded area for Instagram
+  socialLinks.forEach(btn => {
+    btn.addEventListener('click', function(){
+      const service = btn.dataset.service;
+      if (service === 'instagram') {
+        colSocialExpanded.removeAttribute('hidden');
+        // ensure Instagram embed renders
+        if (window.instgrm && typeof window.instgrm.Embeds === 'object') window.instgrm.Embeds.process();
+        colSocialExpanded.scrollIntoView({ behavior:'smooth', block:'nearest' });
+      } else {
+        colSocialExpanded.setAttribute('hidden','');
+      }
+    });
+  });
+
+  // Close panels on outside click or Escape
+  document.addEventListener('click', function(e){
+    if (!explorePanel.contains(e.target) && !exploreToggle.contains(e.target)) {
+      explorePanel.classList.remove('open');
+      explorePanel.setAttribute('aria-hidden','true');
+      exploreToggle.setAttribute('aria-expanded','false');
+    }
+    if (!megaMenu.contains(e.target) && !exploreServices.contains(e.target)) {
+      // keep mega menu open only when explicitly toggled
+    }
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') {
+      explorePanel.classList.remove('open');
+      megaMenu.classList.remove('open');
+      explorePanel.setAttribute('aria-hidden','true');
+      megaMenu.setAttribute('aria-hidden','true');
+      exploreToggle.setAttribute('aria-expanded','false');
+    }
+  });
 })();
 </script>
 
