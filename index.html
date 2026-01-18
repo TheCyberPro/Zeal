@@ -375,13 +375,14 @@ header.nav .nav__menu a:hover { color: #fff; }
   </style>
 
   <!-- Google Tag Manager -->
-  <script>
-    (function(w,d,s,l,i){
-      w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
-      var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&l='+l:'';
-      j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-N87XV2R4');
-  </script>
+<!-- Google Tag Manager -->
+<script>
+  (function(w,d,s,l,i){
+    w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+    var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&l='+l:'';
+    j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-N87XV2R4');
+</script>
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
@@ -389,119 +390,115 @@ header.nav .nav__menu a:hover { color: #fff; }
     <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N87XV2R4" height="0" width="0" style="display:none;visibility:hidden"></iframe>
   </noscript>
 
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 
-<!-- NAVIGATION -->
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Header -->
+  <header class="nav" role="navigation" aria-label="Main">
+    <div class="container nav__inner">
+      <a href="/" class="nav__logo anton-sc-regular" aria-label="ZEAL home">ZEAL</a>
 
-<!-- Header -->
-<header class="nav" role="navigation" aria-label="Main">
-  <div class="container nav__inner">
-    <a href="/" class="nav__logo anton-sc-regular" aria-label="ZEAL home">ZEAL</a>
+      <nav class="nav__menu" aria-label="Primary">
+        <div class="nav__actions">
+          <button id="exploreToggle"
+                  class="explore-trigger"
+                  aria-expanded="false"
+                  aria-controls="explorePanel"
+                  type="button">
+            Explore ▾
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
 
-    <nav class="nav__menu" aria-label="Primary">
-      <div class="nav__actions">
-        <button id="exploreToggle"
-                class="explore-trigger"
-                aria-expanded="false"
-                aria-controls="explorePanel"
-                type="button">
-          Explore ▾
-        </button>
+  <!-- Small Explore panel (appears under header) -->
+  <div id="explorePanel"
+       class="explore-panel"
+       aria-hidden="true"
+       role="dialog"
+       aria-label="Explore menu">
+    <div class="explore-inner">
+      <button class="explore-btn" id="exploreAbout" type="button">About</button>
+      <button class="explore-btn" id="exploreServices" type="button">Services</button>
+      <button class="explore-btn" id="exploreDemo" type="button">Book a Demo</button>
+    </div>
+  </div>
+
+  <!-- Mega menu panel (sibling, outside header) -->
+  <div id="megaMenu" class="mega-menu" role="menu" aria-hidden="true">
+    <div class="mega-inner">
+
+      <div class="mega-column">
+        <h4 class="mega-toggle" data-target="col-web" role="button" aria-expanded="false" aria-controls="col-web">Web Development ▾</h4>
+        <ul id="col-web" class="mega-list" hidden aria-hidden="true">
+          <li><a href="#">Business Page</a></li>
+          <li><a href="#">Landing Page</a></li>
+          <li><a href="#">Single HTML + CSS Page</a></li>
+        </ul>
       </div>
-    </nav>
-  </div>
-</header>
 
-<!-- Small Explore panel (appears under header) -->
-<div id="explorePanel"
-     class="explore-panel"
-     aria-hidden="true"
-     role="dialog"
-     aria-label="Explore menu">
-  <div class="explore-inner">
-    <button class="explore-btn" id="exploreAbout" type="button">About</button>
-    <button class="explore-btn" id="exploreServices" type="button">Services</button>
-    <button class="explore-btn" id="exploreDemo" type="button">Book a Demo</button>
-  </div>
-</div>
+      <div class="mega-column">
+        <h4 class="mega-toggle" data-target="col-ux" role="button" aria-expanded="false" aria-controls="col-ux">UX / UI Design ▾</h4>
+        <ul id="col-ux" class="mega-list" hidden aria-hidden="true">
+          <li><a href="#">JavaScript</a></li>
+          <li><a href="#">React</a></li>
+          <li><a href="#">Vue</a></li>
+          <li><a href="#">CSS</a></li>
+          <li><a href="#">Prototyping & Research</a></li>
+        </ul>
+      </div>
 
-<!-- Mega menu panel (sibling, outside header) -->
-<div id="megaMenu" class="mega-menu" role="menu" aria-hidden="true">
-  <div class="mega-inner">
+      <div class="mega-column">
+        <h4 class="mega-toggle" data-target="col-social" role="button" aria-expanded="false" aria-controls="col-social">Social Media Engagement ▾</h4>
+        <ul id="col-social" class="mega-list" hidden aria-hidden="true">
+          <li><button class="social-link" data-service="instagram" type="button">Instagram</button></li>
+          <li><button class="social-link" data-service="twitter" type="button">Twitter</button></li>
+          <li><button class="social-link" data-service="facebook" type="button">Facebook</button></li>
+          <li><button class="social-link" data-service="youtube" type="button">YouTube</button></li>
+          <li><button class="social-link" data-service="tiktok" type="button">TikTok</button></li>
+          <li><button class="social-link" data-service="linkedin" type="button">LinkedIn</button></li>
+          <li><a href="#" id="getCatalogue">Get Catalogue (PDF)</a></li>
+        </ul>
 
-    <div class="mega-column">
-      <h4 class="mega-toggle" data-target="col-web">Web Development ▾</h4>
-      <ul id="col-web" class="mega-list" hidden>
-        <li><a href="#">Business Page</a></li>
-        <li><a href="#">Landing Page</a></li>
-        <li><a href="#">Single HTML + CSS Page</a></li>
-      </ul>
-    </div>
+        <!-- Inline expanded area for the selected social service (hidden by default) -->
+        <div id="col-social-expanded" class="mega-expanded" hidden aria-hidden="true">
+          <!-- Instagram premium card -->
+          <article class="s-card" id="instagramCardInline" tabindex="0" aria-labelledby="inst-title-inline">
+            <div class="s-card-media"
+                 role="img"
+                 aria-label="Instagram preview"
+                 style="background-image:url('/assets/instagram-hero.jpg');"></div>
 
-    <div class="mega-column">
-      <h4 class="mega-toggle" data-target="col-ux">UX / UI Design ▾</h4>
-      <ul id="col-ux" class="mega-list" hidden>
-        <li><a href="#">JavaScript</a></li>
-        <li><a href="#">React</a></li>
-        <li><a href="#">Vue</a></li>
-        <li><a href="#">CSS</a></li>
-        <li><a href="#">Prototyping & Research</a></li>
-      </ul>
-    </div>
+            <div class="s-card-body">
+              <h5 id="inst-title-inline">Instagram Growth</h5>
+              <p class="s-card-sub">
+                Reels, creative campaigns, and creator partnerships that scale engagement.
+              </p>
 
-    <div class="mega-column">
-      <h4 class="mega-toggle" data-target="col-social">Social Media Engagement ▾</h4>
-      <ul id="col-social" class="mega-list" hidden>
-        <li><button class="social-link" data-service="instagram">Instagram</button></li>
-        <li><button class="social-link" data-service="twitter">Twitter</button></li>
-        <li><button class="social-link" data-service="facebook">Facebook</button></li>
-        <li><button class="social-link" data-service="youtube">YouTube</button></li>
-        <li><button class="social-link" data-service="tiktok">TikTok</button></li>
-        <li><button class="social-link" data-service="linkedin">LinkedIn</button></li>
-        <li><a href="#" id="getCatalogue">Get Catalogue (PDF)</a></li>
-      </ul>
+              <div class="s-card-ctas">
+                <a class="s-btn s-btn-primary"
+                   id="visitInstagramInline"
+                   href="https://www.instagram.com/zeal_web/"
+                   target="_blank"
+                   rel="noopener">Visit Instagram</a>
 
-      <!-- Inline expanded area for the selected social service (hidden by default) -->
-      <div id="col-social-expanded" class="mega-expanded" hidden>
-        <!-- Instagram premium card -->
-        <article class="s-card" id="instagramCard" tabindex="0" aria-labelledby="inst-title">
-          <div class="s-card-media"
-               role="img"
-               aria-label="Instagram preview"
-               style="background-image:url('/assets/instagram-hero.jpg');"></div>
+                <a class="s-btn s-btn-ghost"
+                   id="instCatalogueInline"
+                   href="mailto:zeal.io@outlook.com?subject=ZEAL%20Catalogue&body=Please%20send%20me%20the%20catalogue.">
+                   Get Catalogue
+                </a>
 
-          <div class="s-card-body">
-            <h5 id="inst-title">Instagram Growth</h5>
-            <p class="s-card-sub">
-              Reels, creative campaigns, and creator partnerships that scale engagement.
-            </p>
-
-            <div class="s-card-ctas">
-              <a class="s-btn s-btn-primary"
-                 id="visitInstagram"
-                 href="https://www.instagram.com/zeal_web/?igsh=MXZnc3l3ZWQ1YjVucg%3D%3D#"
-                 target="_blank"
-                 rel="noopener">Visit Instagram</a>
-
-              <a class="s-btn s-btn-ghost"
-                 id="instCatalogue"
-                 href="mailto:zeal.io@outlook.com?subject=ZEAL%20Catalogue&body=Please%20send%20me%20the%20catalogue.">
-                 Get Catalogue
-              </a>
-
-              <button class="s-btn s-btn-outline view-services" type="button">
-                View Services
-              </button>
+                <button class="s-btn s-btn-outline view-services" type="button">
+                  View Services
+                </button>
+              </div>
             </div>
-          </div>
-        </article>
+          </article>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
-<!-- HERO with Brand Glow -->
 
   <!-- HERO with Brand Glow -->
   <section class="hero hero--luxury" aria-labelledby="hero-title">
@@ -585,62 +582,52 @@ header.nav .nav__menu a:hover { color: #fff; }
       </div>
     </div>
   </section>
-<!-- INSTAGRAM SECTION -->
-<section id="instagram" class="section section--light" aria-labelledby="instagram-title">
-  <div class="container">
-    <h2 class="section__title" id="instagram-title">From our Instagram</h2>
 
-    <!-- Premium Instagram card -->
-    <article class="s-card" id="instagramCard" tabindex="0" aria-labelledby="inst-title">
-      <div class="s-card-media" role="img" aria-label="Instagram preview" style="background-image:url('/assets/instagram-hero.jpg');"></div>
+  <!-- INSTAGRAM SECTION -->
+  <section id="instagram" class="section section--light" aria-labelledby="instagram-title">
+    <div class="container">
+      <h2 class="section__title" id="instagram-title">From our Instagram</h2>
 
-      <div class="s-card-body">
-        <h5 id="inst-title">Instagram Highlight</h5>
-        <p class="s-card-sub">Reels, creative campaigns, and creator partnerships that scale engagement.</p>
+      <!-- Premium Instagram card -->
+      <article class="s-card" id="instagramCard" tabindex="0" aria-labelledby="inst-title">
+        <div class="s-card-media" role="img" aria-label="Instagram preview" style="background-image:url('/assets/instagram-hero.jpg');"></div>
 
-        <!-- Official Instagram embed (replace permalink with your post link) -->
+        <div class="s-card-body">
+          <h5 id="inst-title">Instagram Highlight</h5>
+          <p class="s-card-sub">Reels, creative campaigns, and creator partnerships that scale engagement.</p>
 
-        <div class="s-card-ctas">
-          <a class="s-btn s-btn-primary" id="visitInstagram" href="https://www.instagram.com/zeal_web/?igsh=MXZnc3l3ZWQ1YjVucg%3D%3D#" target="_blank" rel="noopener">Visit Instagram</a>
-          <a class="s-btn s-btn-ghost" id="instCatalogue" href="mailto:zeal.io@outlook.com?subject=ZEAL%20Catalogue&body=Please%20send%20me%20the%20catalogue.">Get Catalogue</a>
-          <button class="s-btn s-btn-outline view-services" type="button">View Services</button>
+          <div class="s-card-ctas">
+            <a class="s-btn s-btn-primary" id="visitInstagram" href="https://www.instagram.com/zeal_web/" target="_blank" rel="noopener">Visit Instagram</a>
+            <a class="s-btn s-btn-ghost" id="instCatalogue" href="mailto:zeal.io@outlook.com?subject=ZEAL%20Catalogue&body=Please%20send%20me%20the%20catalogue.">Get Catalogue</a>
+            <button class="s-btn s-btn-outline view-services" type="button">View Services</button>
+          </div>
         </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Modal for platform details -->
+  <div id="platformModal" class="platform-modal" role="dialog" aria-hidden="true" aria-labelledby="platformModalTitle">
+    <div class="platform-modal-inner" role="document">
+      <button class="modal-close" aria-label="Close" type="button">×</button>
+      <h3 id="platformModalTitle">Instagram Growth Services</h3>
+      <div id="platformModalContent">
+        <p>Reels strategy, content calendar, influencer outreach, paid ads, and analytics dashboards.</p>
+        <ul>
+          <li>Reels production</li>
+          <li>Creator partnerships</li>
+          <li>Paid campaign setup</li>
+          <li>Monthly analytics report</li>
+        </ul>
+        <div id="modalInstagramEmbed" style="margin-top:1rem;"></div>
       </div>
-    </article>
 
-    <!-- Optional: add more blockquotes here for a grid of posts -->
-  </div>
-</section>
-
-<!-- Modal for platform details -->
-<div id="platformModal" class="platform-modal" role="dialog" aria-hidden="true" aria-labelledby="platformModalTitle">
-  <div class="platform-modal-inner" role="document">
-    <button class="modal-close" aria-label="Close">×</button>
-    <h3 id="platformModalTitle">Instagram Growth Services</h3>
-    <div id="platformModalContent">
-      <p>Reels strategy, content calendar, influencer outreach, paid ads, and analytics dashboards.</p>
-      <ul>
-        <li>Reels production</li>
-        <li>Creator partnerships</li>
-        <li>Paid campaign setup</li>
-        <li>Monthly analytics report</li>
-      </ul>
-
-      <!-- Optional: featured embed injected here when modal opens -->
-      <div id="modalInstagramEmbed" style="margin-top:1rem;"></div>
-    </div>
-
-    <div class="modal-actions" style="margin-top:1rem;">
-      <a id="modalCatalogue" class="s-btn s-btn-primary" href="#">Request Catalogue</a>
-      <a class="s-btn s-btn-ghost" id="modalContact" href="mailto:zeal.io@outlook.com?subject=ZEAL%20Instagram%20Services">Contact Us</a>
+      <div class="modal-actions" style="margin-top:1rem;">
+        <a id="modalCatalogue" class="s-btn s-btn-primary" href="#">Request Catalogue</a>
+        <a class="s-btn s-btn-ghost" id="modalContact" href="mailto:zeal.io@outlook.com?subject=ZEAL%20Instagram%20Services">Contact Us</a>
+      </div>
     </div>
   </div>
-</div>
-
-
-
-
-
 
   <!-- ABOUT THE DEVELOPER -->
   <section id="about" class="section section--light" aria-labelledby="about-title">
@@ -661,116 +648,140 @@ header.nav .nav__menu a:hover { color: #fff; }
       <h2 class="section__title" id="contact-title">Build your next digital platform</h2>
       <p class="contact__text">Book a demo and let’s turn your website or app into your hardest‑working salesperson.</p>
       <a href="mailto:zeal.io@outlook.com?subject=ZEAL%20Demo%20Request" class="btn btn--light">Book a Demo</a>
-        <a href="mailto:zeal.io@outlook.com?subject=ZEAL%20Demo%20Request" clas>
-  
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer class="footer" role="contentinfo">
     <div class="container footer__inner">
-
-<nav class="footer__nav" aria-label="Footer">
-      <p>© 2026 ZEAL.</p>
-
+      <nav class="footer__nav" aria-label="Footer">
+        <p>© 2026 ZEAL</p>
       </nav>
     </div>
   </footer>
+<script>
+/* ============================
+   Helpers
+   ============================ */
+const $ = (sel, ctx = document) => ctx.querySelector(sel);
+const $$ = (sel, ctx = document) => Array.from((ctx || document).querySelectorAll(sel));
+const debounce = (fn, wait = 100) => {
+  let t;
+  return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), wait); };
+};
 
-  <!-- Your existing testimonial & reveal scripts go here unchanged -->
+/* ============================
+   Testimonial slider
+   ============================ */
+(function testimonialSlider() {
+  const items = $$('.testimonial');
+  if (!items.length) return;
+  let idx = 0;
+  items.forEach((el, i) => el.classList.toggle('active', i === 0));
+  setInterval(() => {
+    items[idx].classList.remove('active');
+    idx = (idx + 1) % items.length;
+    items[idx].classList.add('active');
+  }, 5000);
+})();
 
-  <!-- Testimonial Slider Script -->
-  <script>
-    const testimonials = document.querySelectorAll('.testimonial');
-    let tIndex = 0;
-    setInterval(() => {
-      testimonials[tIndex].classList.remove('active');
-      tIndex = (tIndex + 1) % testimonials.length;
-      testimonials[tIndex].classList.add('active');
-    }, 5000);
-  </script>
-
-  <!-- Intersection Observer for Reveal Animations -->
-  <script>
-    document.querySelectorAll('.card, .highlight-card, .testimonial').forEach(el => {
-      el.classList.add('reveal');
+/* ============================
+   Reveal on scroll
+   ============================ */
+(function revealOnScroll() {
+  const els = $$('.card, .highlight-card, .testimonial');
+  if (!els.length) return;
+  els.forEach(el => el.classList.add('reveal'));
+  const obs = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        observer.unobserve(entry.target);
+      }
     });
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('active');
-          obs.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-  </script>
+  }, { threshold: 0.1 });
+  $$('.reveal').forEach(el => obs.observe(el));
+})();
 
-  <!-- Start of Tawk.to Script -->
-  <script type="text/javascript">
-    var Tawk_API = Tawk_API || {};
-    var Tawk_LoadStart = new Date();
-    // Your API key for advanced JS integrations
-    Tawk_API.apiKey = '0aa5196f2fb85f3d612c6dc0f9af802fb12a0fc4';
+/* ============================
+   Tawk.to loader (safe)
+   ============================ */
+(function loadTawk() {
+  try {
+    window.Tawk_API = window.Tawk_API || {};
+    window.Tawk_LoadStart = new Date();
+    window.Tawk_API.apiKey = '0aa5196f2fb85f3d612c6dc0f9af802fb12a0fc4';
     (function() {
-      var s1 = document.createElement('script'), s0 = document.getElementsByTagName('script')[0];
+      const s1 = document.createElement('script');
+      const s0 = document.getElementsByTagName('script')[0];
       s1.async = true;
       s1.src = 'https://embed.tawk.to/68cf60b510ce81192499da9f/1j5l13ih6';
       s1.charset = 'UTF-8';
       s1.setAttribute('crossorigin', '*');
       s0.parentNode.insertBefore(s1, s0);
     })();
-  </script>
-  <!-- End of Tawk.to Script -->
-<script>
-  const drawer = document.getElementById('servicesDrawer');
-  document.querySelector('.services-trigger').addEventListener('click', () => {
-    drawer.classList.add('open');
-  });
-  document.querySelector('.close-drawer').addEventListener('click', () => {
-    drawer.classList.remove('open');
-  });
-</script>
-<script>
+  } catch (err) {
+    console.warn('Tawk load failed', err);
+  }
+})();
+
+/* ============================
+   Drawer (optional)
+   ============================ */
+(function drawerSetup() {
+  const drawer = $('#servicesDrawer');
+  if (!drawer) return;
+  const openBtn = document.querySelector('.services-trigger');
+  const closeBtn = document.querySelector('.close-drawer');
+  openBtn?.addEventListener('click', () => drawer.classList.add('open'));
+  closeBtn?.addEventListener('click', () => drawer.classList.remove('open'));
+})();
+
+/* ============================
+   Legacy mega trigger (optional)
+   ============================ */
+(function legacyMegaTrigger() {
   const trigger = document.querySelector('.mega-trigger');
-  const megaMenu = document.getElementById('megaMenu');
-
-  trigger.addEventListener('click', () => {
-    megaMenu.style.display = megaMenu.style.display === 'block' ? 'none' : 'block';
+  const megaMenu = $('#megaMenu');
+  if (!trigger || !megaMenu) return;
+  trigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = megaMenu.classList.toggle('open');
+    megaMenu.setAttribute('aria-hidden', String(!isOpen));
   });
-
-  // Optional: close if clicking outside
   document.addEventListener('click', (e) => {
     if (!megaMenu.contains(e.target) && !trigger.contains(e.target)) {
-      megaMenu.style.display = 'none';
+      megaMenu.classList.remove('open');
+      megaMenu.setAttribute('aria-hidden', 'true');
     }
   });
-(function () {
-  const header = document.querySelector('header.nav');
-  const exploreToggle = document.getElementById('exploreToggle');
-  const explorePanel = document.getElementById('explorePanel');
-  const exploreAbout = document.getElementById('exploreAbout');
-  const exploreServices = document.getElementById('exploreServices');
-  const exploreDemo = document.getElementById('exploreDemo');
-  const megaMenu = document.getElementById('megaMenu');
-  const megaToggles = document.querySelectorAll('.mega-toggle');
-  const getCatalogue = document.getElementById('getCatalogue');
+})();
 
-  if (!header || !exploreToggle || !explorePanel) return;
+/* ============================
+   Header: Explore panel, Mega menu, Mega toggles
+   ============================ */
+(function headerMenus() {
+  const header = $('header.nav');
+  const exploreToggle = $('#exploreToggle');
+  const explorePanel = $('#explorePanel');
+  const exploreAbout = $('#exploreAbout');
+  const exploreServices = $('#exploreServices');
+  const exploreDemo = $('#exploreDemo');
+  const megaMenu = $('#megaMenu');
+  const megaToggles = $$('.mega-toggle');
+  const getCatalogue = $('#getCatalogue');
 
-  // Position explorePanel under header (right aligned)
-  function positionExplore() {
-    // nothing complex needed; CSS positions it absolute relative to header
-  }
+  if (!header) return;
 
-  // Position mega menu under header
   function positionMega() {
+    if (!megaMenu) return;
     const rect = header.getBoundingClientRect();
     if (window.innerWidth > 900) {
       megaMenu.style.position = 'absolute';
       megaMenu.style.top = (window.scrollY + rect.bottom) + 'px';
       megaMenu.style.left = '0';
       megaMenu.style.width = '100%';
+      megaMenu.style.height = '';
     } else {
       megaMenu.style.position = 'fixed';
       megaMenu.style.top = '0';
@@ -780,209 +791,182 @@ header.nav .nav__menu a:hover { color: #fff; }
     }
   }
 
-  // Toggle explore panel
-  exploreToggle.addEventListener('click', function (e) {
+  function closeExplore() {
+    if (!explorePanel) return;
+    explorePanel.classList.remove('open');
+    explorePanel.setAttribute('aria-hidden', 'true');
+    exploreToggle?.setAttribute('aria-expanded', 'false');
+  }
+  function closeMega() {
+    if (!megaMenu) return;
+    megaMenu.classList.remove('open');
+    megaMenu.setAttribute('aria-hidden', 'true');
+    $$('.mega-list').forEach(list => list.setAttribute('hidden', ''));
+    $$('.mega-toggle').forEach(t => t.setAttribute('aria-expanded', 'false'));
+  }
+
+  // Explore toggle
+  exploreToggle?.addEventListener('click', function (e) {
     e.stopPropagation();
     const open = explorePanel.classList.toggle('open');
-    explorePanel.setAttribute('aria-hidden', !open);
-    exploreToggle.setAttribute('aria-expanded', open);
-    // close mega if opening explore
-    if (open) { megaMenu.classList.remove('open'); megaMenu.setAttribute('aria-hidden','true'); }
+    explorePanel.setAttribute('aria-hidden', String(!open));
+    exploreToggle.setAttribute('aria-expanded', String(open));
+    if (open) closeMega();
   });
 
-  // About: scroll to #what-we-do
-  exploreAbout.addEventListener('click', function () {
-    const target = document.getElementById('what-we-do');
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    } else {
-      // fallback: go to /about
-      window.location.href = '/about';
-    }
-    explorePanel.classList.remove('open');
-    explorePanel.setAttribute('aria-hidden','true');
-    exploreToggle.setAttribute('aria-expanded','false');
+  // Explore actions
+  exploreAbout?.addEventListener('click', function () {
+    const target = document.getElementById('what-we-do') || document.getElementById('services');
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    else window.location.href = '/about';
+    closeExplore();
   });
 
-  // Book a Demo: open mail client
-  exploreDemo.addEventListener('click', function () {
+  exploreDemo?.addEventListener('click', function () {
     const mailto = 'mailto:zeal.io@outlook.com?subject=' + encodeURIComponent('ZEAL Demo Request') +
-                   '&body=' + encodeURIComponent('Hi ZEAL team,%0D%0A%0D%0AI would like to request a demo. Please get in touch.%0D%0A%0D%0AThanks.');
+                   '&body=' + encodeURIComponent('Hi ZEAL team,\n\nI would like to request a demo. Please get in touch.\n\nThanks.');
     window.location.href = mailto;
+    closeExplore();
   });
 
-  // Services: open mega menu
-  exploreServices.addEventListener('click', function () {
+  exploreServices?.addEventListener('click', function () {
     positionMega();
-    const open = megaMenu.classList.toggle('open');
-    megaMenu.setAttribute('aria-hidden', !open);
-    // close explore panel
-    explorePanel.classList.remove('open');
-    explorePanel.setAttribute('aria-hidden','true');
-    exploreToggle.setAttribute('aria-expanded','false');
+    const isOpen = megaMenu.classList.toggle('open');
+    megaMenu.setAttribute('aria-hidden', String(!isOpen));
+    closeExplore();
   });
 
-  // Toggle each mega column list
-  megaToggles.forEach(function (h) {
+  // Mega column toggles
+  megaToggles.forEach(h => {
     h.addEventListener('click', function () {
       const id = h.getAttribute('data-target');
       const el = document.getElementById(id);
       if (!el) return;
-      const isHidden = el.hasAttribute('hidden');
-      // hide all lists first (optional: keep only one open)
-      document.querySelectorAll('.mega-list').forEach(function (list) {
-        list.setAttribute('hidden', '');
-      });
-      if (isHidden) el.removeAttribute('hidden');
-      else el.setAttribute('hidden', '');
-    });
-  });
-
-  // Get Catalogue: open mail client with PDF link (replace PDF_URL)
-  if (getCatalogue) {
-    getCatalogue.addEventListener('click', function (e) {
-      e.preventDefault();
-      const PDF_URL = 'https://example.com/ZEAL-catalogue.pdf'; // <-- REPLACE with your hosted PDF URL
-      const subject = encodeURIComponent('Request: ZEAL Catalogue');
-      const body = encodeURIComponent('Hi ZEAL team,%0D%0A%0D%0APlease send me the ZEAL services catalogue. You can also download it here: ' + PDF_URL + '%0D%0A%0D%0AThanks.');
-      window.location.href = 'mailto:zeal.io@outlook.com?subject=' + subject + '&body=' + body;
-    });
-  }
-
-  // Close panels on outside click or Escape
-  document.addEventListener('click', function (e) {
-    if (!explorePanel.contains(e.target) && !exploreToggle.contains(e.target)) {
-      explorePanel.classList.remove('open');
-      explorePanel.setAttribute('aria-hidden','true');
-      exploreToggle.setAttribute('aria-expanded','false');
-    }
-    if (!megaMenu.contains(e.target) && !exploreServices.contains(e.target)) {
-      // keep mega open only if click inside
-    }
-  });
-
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') {
-      explorePanel.classList.remove('open');
-      explorePanel.setAttribute('aria-hidden','true');
-      exploreToggle.setAttribute('aria-expanded','false');
-      megaMenu.classList.remove('open');
-      megaMenu.setAttribute('aria-hidden','true');
-    }
-  });
-
-  window.addEventListener('resize', positionMega);
-  window.addEventListener('scroll', positionMega);
-  positionMega();
-})();
-(function(){
-  const exploreToggle = document.getElementById('exploreToggle');
-  const explorePanel = document.getElementById('explorePanel');
-  const exploreAbout = document.getElementById('exploreAbout');
-  const exploreServices = document.getElementById('exploreServices');
-  const exploreDemo = document.getElementById('exploreDemo');
-  const megaMenu = document.getElementById('megaMenu');
-  const socialLinks = document.querySelectorAll('#col-social .social-link');
-  const colSocialExpanded = document.getElementById('col-social-expanded');
-
-  // Toggle explore panel
-  exploreToggle?.addEventListener('click', function(e){
-    e.stopPropagation();
-    const isOpen = explorePanel.classList.toggle('open');
-    explorePanel.setAttribute('aria-hidden', !isOpen);
-    exploreToggle.setAttribute('aria-expanded', isOpen);
-    if (isOpen) {
-      megaMenu.classList.remove('open');
-      megaMenu.setAttribute('aria-hidden', 'true');
-    }
-  });
-
-  // About scroll
-  exploreAbout?.addEventListener('click', function(){
-    const target = document.getElementById('what-we-do');
-    if (target) target.scrollIntoView({ behavior:'smooth', block:'start' });
-    closeExplore();
-  });
-
-  // Services opens mega menu
-  exploreServices?.addEventListener('click', function(){
-    const isOpen = megaMenu.classList.toggle('open');
-    megaMenu.setAttribute('aria-hidden', !isOpen);
-    closeExplore();
-  });
-
-  // Book a Demo
-  exploreDemo?.addEventListener('click', function(){
-    window.location.href = 'mailto:zeal.io@outlook.com?subject=' + encodeURIComponent('ZEAL Demo Request');
-    closeExplore();
-  });
-
-  // Social links: show inline expanded area for Instagram
-  socialLinks.forEach(btn => {
-    btn.addEventListener('click', function(){
-      const service = btn.dataset.service;
-      if (service === 'instagram') {
-        colSocialExpanded.removeAttribute('hidden');
-        if (window.instgrm && typeof window.instgrm.Embeds === 'object') window.instgrm.Embeds.process();
-        colSocialExpanded.scrollIntoView({ behavior:'smooth', block:'nearest' });
+      const wasHidden = el.hasAttribute('hidden');
+      // close others
+      $$('.mega-list').forEach(list => list.setAttribute('hidden', ''));
+      $$('.mega-toggle').forEach(t => t.setAttribute('aria-expanded', 'false'));
+      if (wasHidden) {
+        el.removeAttribute('hidden');
+        h.setAttribute('aria-expanded', 'true');
       } else {
-        colSocialExpanded.setAttribute('hidden','');
+        el.setAttribute('hidden', '');
+        h.setAttribute('aria-expanded', 'false');
       }
     });
   });
 
-  // Close explore panel helper
-  function closeExplore(){
-    explorePanel.classList.remove('open');
-    explorePanel.setAttribute('aria-hidden','true');
-    exploreToggle.setAttribute('aria-expanded','false');
+  // Get Catalogue mailto (replace PDF_URL)
+  if (getCatalogue) {
+    getCatalogue.addEventListener('click', function (e) {
+      e.preventDefault();
+      const PDF_URL = 'https://example.com/ZEAL-catalogue.pdf'; // replace with real URL
+      const subject = encodeURIComponent('Request: ZEAL Catalogue');
+      const body = encodeURIComponent('Hi ZEAL team,\n\nPlease send me the ZEAL services catalogue. You can also download it here: ' + PDF_URL + '\n\nThanks.');
+      window.location.href = 'mailto:zeal.io@outlook.com?subject=' + subject + '&body=' + body;
+    });
   }
 
-  // Close panels on outside click or Escape
-  document.addEventListener('click', function(e){
-    if (!explorePanel.contains(e.target) && !exploreToggle.contains(e.target)) closeExplore();
+  // Close on outside click and Escape
+  document.addEventListener('click', function (e) {
+    if (explorePanel && !explorePanel.contains(e.target) && !exploreToggle.contains(e.target)) closeExplore();
+    if (megaMenu && !megaMenu.contains(e.target) && !exploreServices?.contains(e.target)) closeMega();
   });
-  document.addEventListener('keydown', function(e){
+
+  document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') {
       closeExplore();
-      megaMenu.classList.remove('open');
-      megaMenu.setAttribute('aria-hidden','true');
+      closeMega();
     }
   });
+
+  window.addEventListener('resize', debounce(positionMega, 120));
+  window.addEventListener('scroll', debounce(positionMega, 120));
+  positionMega();
 })();
 
+/* ============================
+   Social links → inline Instagram & modal wiring
+   ============================ */
+(function socialAndModal() {
+  const socialLinks = $$('#col-social .social-link');
+  const colSocialExpanded = $('#col-social-expanded');
+  const viewBtns = $$('.view-services');
+  const platformModal = $('#platformModal');
+  const modalClose = platformModal?.querySelector('.modal-close');
+
+  if (socialLinks.length && colSocialExpanded) {
+    socialLinks.forEach(btn => {
+      btn.addEventListener('click', function () {
+        const service = btn.dataset.service;
+        if (service === 'instagram') {
+          colSocialExpanded.removeAttribute('hidden');
+          colSocialExpanded.setAttribute('aria-hidden', 'false');
+          // If Instagram embed script is present, re-process embeds
+          try {
+            if (window.instgrm && typeof window.instgrm.Embeds === 'object') window.instgrm.Embeds.process();
+          } catch (err) { /* ignore */ }
+          colSocialExpanded.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } else {
+          colSocialExpanded.setAttribute('hidden', '');
+          colSocialExpanded.setAttribute('aria-hidden', 'true');
+          // fallback: open social profile
+          const urls = {
+            instagram: 'https://www.instagram.com/zeal_web/',
+            twitter: 'https://twitter.com/',
+            facebook: 'https://facebook.com/',
+            youtube: 'https://youtube.com/',
+            tiktok: 'https://tiktok.com/',
+            linkedin: 'https://linkedin.com/'
+          };
+          const url = urls[service] || '#';
+          if (url !== '#') window.open(url, '_blank', 'noopener');
+        }
+      });
+    });
+  }
+
+  // View Services opens modal
+  if (viewBtns.length && platformModal) {
+    viewBtns.forEach(b => b.addEventListener('click', function () {
+      platformModal.classList.add('open');
+      platformModal.setAttribute('aria-hidden', 'false');
+      // optionally inject dynamic content into #modalInstagramEmbed
+    }));
+    modalClose?.addEventListener('click', function () {
+      platformModal.classList.remove('open');
+      platformModal.setAttribute('aria-hidden', 'true');
+    });
+
+    // close modal on outside click
+    document.addEventListener('click', function (e) {
+      if (platformModal && platformModal.classList.contains('open')) {
+        const inner = platformModal.querySelector('.platform-modal-inner');
+        if (inner && !inner.contains(e.target)) {
+          platformModal.classList.remove('open');
+          platformModal.setAttribute('aria-hidden', 'true');
+        }
+      }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && platformModal && platformModal.classList.contains('open')) {
+        platformModal.classList.remove('open');
+        platformModal.setAttribute('aria-hidden', 'true');
+      }
+    });
+  }
+})();
+
+/* ============================
+   DOMContentLoaded safety (no-op)
+   ============================ */
 document.addEventListener('DOMContentLoaded', function () {
-  const toggle = document.getElementById('exploreToggle');
-  const panel = document.getElementById('explorePanel');
-
-  function openPanel() {
-    panel.classList.add('open');
-    panel.setAttribute('aria-hidden','false');
-    toggle.setAttribute('aria-expanded','true');
-  }
-  function closePanel() {
-    panel.classList.remove('open');
-    panel.setAttribute('aria-hidden','true');
-    toggle.setAttribute('aria-expanded','false');
-  }
-
-  toggle.addEventListener('click', function(e){
-    e.stopPropagation();
-    if (panel.classList.contains('open')) closePanel();
-    else openPanel();
-  });
-
-  // Close when clicking outside or pressing Escape
-  document.addEventListener('click', function(e){
-    if (!panel.contains(e.target) && !toggle.contains(e.target)) closePanel();
-  });
-  document.addEventListener('keydown', function(e){
-    if (e.key === 'Escape') closePanel();
-  });
+  // All modules are defensive and run immediately; nothing required here.
 });
 </script>
 
 
 </body>
 </html>
+
 
