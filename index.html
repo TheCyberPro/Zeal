@@ -664,34 +664,52 @@ header.nav .nav__menu {
   font-size: 0.95rem;
 }
 
-.insta-embed {
-  margin-top: 1rem;
+/* Card */
+.s-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 12px 36px rgba(2,6,23,0.6);
+  display:flex;
+  flex-direction:column;
+  border: 1px solid rgba(255,213,79,0.06);
+  margin-top: 1.25rem;
 }
+.s-card-media { height:160px; background-size:cover; background-position:center; }
+.s-card-body { padding:1rem; display:flex; flex-direction:column; gap:0.5rem; }
+.s-card-body h5 { margin:0; color:#ffd54f; font-family:'Anton',sans-serif; font-size:1.05rem; }
+.s-card-sub { margin:0; color:#e6e6e6; font-size:0.95rem; }
+.s-card-meta { display:flex; gap:0.6rem; list-style:none; padding:0; margin:0; color:#cfcfcf; font-size:0.85rem; }
+.s-card-meta li { background: rgba(255,255,255,0.02); padding:6px 8px; border-radius:8px; }
 
-.s-card-ctas {
-  margin-top: 1rem;
-  display: flex;
-  gap: 0.5rem;
+.s-card-ctas { margin-top:auto; display:flex; gap:0.5rem; flex-wrap:wrap; }
+.s-btn { padding:0.5rem 0.9rem; border-radius:10px; font-weight:700; cursor:pointer; text-decoration:none; text-align:center; display:inline-block; border:0; }
+.s-btn-primary { background:#ffd54f; color:#0d052d; }
+.s-btn-outline { background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.08); }
+.s-btn-ghost { background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.06); }
+
+/* Modal */
+.platform-modal { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(2,6,23,0.6); z-index:3000; padding:2rem; }
+.platform-modal.open { display:flex; }
+.platform-modal-inner { background:linear-gradient(180deg,#0d052d,#08031e); border-radius:12px; padding:1.25rem; width:min(880px,96%); box-shadow:0 30px 80px rgba(0,0,0,0.6); color:#ddd; position:relative; }
+.modal-close { position:absolute; right:1rem; top:1rem; background:transparent; border:none; color:#fff; font-size:1.6rem; cursor:pointer; }
+
+/* Responsive embed container */
+.insta-embed blockquote.instagram-media { width:100% !important; max-width:540px; margin:0 auto; border-radius:12px; overflow:hidden; }
+
+/* Section title */
+.section__title { font-family:'Anton',sans-serif; color:#ffd54f; margin:0 0 1rem 0; }
+
+/* Responsive adjustments */
+@media (max-width:900px) {
+  .s-card-media { height:140px; }
+  .platform-modal-inner { padding:1rem; width:94%; }
 }
-
-.s-btn {
-  padding: 0.5rem 0.9rem;
-  border-radius: 10px;
-  font-weight: 700;
-  cursor: pointer;
-  text-decoration: none;
-  text-align: center;
-}
-
-.s-btn-primary {
-  background: #ffd54f;
-  color: #0d052d;
-}
-
-.s-btn-ghost {
-  background: transparent;
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.08);
+@media (max-width:480px) {
+  .s-card-media { height:120px; }
+  .s-card-body h5 { font-size:1rem; }
+  .s-card-ctas { flex-direction:column; align-items:stretch; }
+  .s-btn { width:100%; }
 }
 
 
@@ -863,8 +881,7 @@ header.nav .nav__menu {
       </div>
     </div>
   </section>
-
-  <!-- INSTAGRAM EMBED -->
+<!-- INSTAGRAM SECTION -->
 <section id="instagram" class="section section--light" aria-labelledby="instagram-title">
   <div class="container">
     <h2 class="section__title" id="instagram-title">From our Instagram</h2>
@@ -875,28 +892,57 @@ header.nav .nav__menu {
 
       <div class="s-card-body">
         <h5 id="inst-title">Instagram Highlight</h5>
-        <p class="s-card-sub">Catch up with our latest post directly from Instagram.</p>
+        <p class="s-card-sub">Reels, creative campaigns, and creator partnerships that scale engagement.</p>
 
-        <!-- Embed lives inside the card -->
+        <!-- Official Instagram embed (replace permalink with your post link) -->
         <div class="insta-embed">
           <blockquote class="instagram-media"
             data-instgrm-permalink="https://www.instagram.com/p/DO19ie7gar4/?utm_source=ig_embed"
             data-instgrm-version="14"
-            style="background:#FFF; border:0; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.1); margin:0 auto; max-width:540px;">
+            style="background:#FFF; border:0; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.08); margin:0 auto; max-width:540px;">
           </blockquote>
         </div>
 
         <div class="s-card-ctas">
-          <a class="s-btn s-btn-primary" href="https://www.instagram.com/zeal_web?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener">Visit Instagram</a>
-          <a class="s-btn s-btn-ghost" href="mailto:zeal.io@outlook.com?subject=ZEAL%20Catalogue&body=Please%20send%20me%20the%20catalogue.">Get Catalogue</a>
+          <a class="s-btn s-btn-primary" id="visitInstagram" href="https://www.instagram.com/zeal_web/?igsh=MXZnc3l3ZWQ1YjVucg%3D%3D#" target="_blank" rel="noopener">Visit Instagram</a>
+          <a class="s-btn s-btn-ghost" id="instCatalogue" href="mailto:zeal.io@outlook.com?subject=ZEAL%20Catalogue&body=Please%20send%20me%20the%20catalogue.">Get Catalogue</a>
+          <button class="s-btn s-btn-outline view-services" type="button">View Services</button>
         </div>
       </div>
     </article>
 
-    <!-- Instagram embed script -->
-    <script async src="//www.instagram.com/embed.js"></script>
+    <!-- Optional: add more blockquotes here for a grid of posts -->
   </div>
 </section>
+
+<!-- Modal for platform details -->
+<div id="platformModal" class="platform-modal" role="dialog" aria-hidden="true" aria-labelledby="platformModalTitle">
+  <div class="platform-modal-inner" role="document">
+    <button class="modal-close" aria-label="Close">×</button>
+    <h3 id="platformModalTitle">Instagram Growth Services</h3>
+    <div id="platformModalContent">
+      <p>Reels strategy, content calendar, influencer outreach, paid ads, and analytics dashboards.</p>
+      <ul>
+        <li>Reels production</li>
+        <li>Creator partnerships</li>
+        <li>Paid campaign setup</li>
+        <li>Monthly analytics report</li>
+      </ul>
+
+      <!-- Optional: featured embed injected here when modal opens -->
+      <div id="modalInstagramEmbed" style="margin-top:1rem;"></div>
+    </div>
+
+    <div class="modal-actions" style="margin-top:1rem;">
+      <a id="modalCatalogue" class="s-btn s-btn-primary" href="#">Request Catalogue</a>
+      <a class="s-btn s-btn-ghost" id="modalContact" href="mailto:zeal.io@outlook.com?subject=ZEAL%20Instagram%20Services">Contact Us</a>
+    </div>
+  </div>
+</div>
+
+<!-- Instagram embed script (include once per page) -->
+<script async src="//www.instagram.com/embed.js"></script>
+
 
 
 
@@ -1198,6 +1244,72 @@ header.nav .nav__menu {
   window.addEventListener('resize', positionMega);
   window.addEventListener('scroll', positionMega);
   positionMega();
+})();
+</script>
+<script>
+(function(){
+  const viewBtn = document.querySelector('.s-card .view-services');
+  const modal = document.getElementById('platformModal');
+  const modalClose = modal.querySelector('.modal-close');
+  const modalCatalogue = document.getElementById('modalCatalogue');
+  const instCatalogue = document.getElementById('instCatalogue');
+  const modalEmbedContainer = document.getElementById('modalInstagramEmbed');
+
+  // Replace with your hosted PDF URL (no trailing spaces)
+  const PDF_URL = 'https://yourdomain.com/ZEAL-catalogue.pdf';
+
+  // Open modal and inject a featured embed (optional)
+  if (viewBtn) {
+    viewBtn.addEventListener('click', ()=> {
+      // inject the same permalink used in the card (replace if you want a different post)
+      modalEmbedContainer.innerHTML = `
+        <blockquote class="instagram-media"
+          data-instgrm-permalink="https://www.instagram.com/p/DO19ie7gar4/?utm_source=ig_embed"
+          data-instgrm-version="14"
+          style="background:#FFF; border:0; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.08); margin:0 auto; max-width:540px;">
+        </blockquote>`;
+      if (window.instgrm && typeof window.instgrm.Embeds === 'object') {
+        window.instgrm.Embeds.process();
+      }
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+
+      // set catalogue mailto
+      modalCatalogue.href = 'mailto:zeal.io@outlook.com?subject=' + encodeURIComponent('Request: ZEAL Instagram Catalogue') +
+                            '&body=' + encodeURIComponent('Hi ZEAL team,%0D%0A%0D%0APlease send the Instagram services catalogue or download here: ' + PDF_URL);
+    });
+  }
+
+  // Close modal
+  modalClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', function(e){ if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeModal(); });
+
+  function closeModal(){
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+    modalEmbedContainer.innerHTML = ''; // remove injected embed to avoid duplicate scripts
+  }
+
+  // Get Catalogue from card
+  if (instCatalogue) {
+    instCatalogue.addEventListener('click', function(e){
+      e.preventDefault();
+      const subject = encodeURIComponent('Request: ZEAL Catalogue');
+      const body = encodeURIComponent('Hi ZEAL team,%0D%0A%0D%0APlease send me the ZEAL catalogue or download here: ' + PDF_URL + '%0D%0A%0D%0AThanks.');
+      window.location.href = 'mailto:zeal.io@outlook.com?subject=' + subject + '&body=' + body;
+    });
+  }
+
+  // Accessibility: Enter on card opens modal
+  const card = document.getElementById('instagramCard');
+  if (card && viewBtn) {
+    card.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' ') viewBtn.click();
+    });
+  }
 })();
 </script>
 
