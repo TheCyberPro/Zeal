@@ -787,6 +787,30 @@ header.nav .nav__menu {
 @media (max-width:900px) {
   .explore-panel { right:1rem; left:1rem; }
 }
+/* header layout */
+.nav__inner { display:flex; align-items:center; gap:1rem; width:100%; }
+.nav__logo { flex:0 0 auto; font-family:'Anton',sans-serif; color:#ffd54f; text-decoration:none; }
+.nav__menu { display:flex; align-items:center; gap:1rem; width:100%; }
+
+/* actions group pinned to the far right */
+.nav__actions { margin-left:auto; display:flex; gap:0.75rem; align-items:center; }
+
+/* Explore button */
+.explore-trigger { background:transparent; border:1px solid rgba(255,255,255,0.12); color:#fff; padding:0.45rem 0.9rem; border-radius:8px; cursor:pointer; }
+
+/* explore panel basic */
+.explore-panel { position:absolute; top:100%; right:2.5%; display:none; background:linear-gradient(180deg,#0d052d,#08031e); padding:0.75rem; border-radius:10px; box-shadow:0 12px 30px rgba(0,0,0,0.4); z-index:1400; }
+.explore-panel.open { display:block; }
+
+/* mega menu visible state */
+.mega-menu { position:absolute; left:0; width:100%; display:none; z-index:1300; }
+.mega-menu.open { display:block; }
+
+/* small responsive tweaks */
+@media (max-width:900px) {
+  .nav__inner { padding:0 1rem; }
+  .explore-panel { right:1rem; left:1rem; }
+}
 
   </style>
 
