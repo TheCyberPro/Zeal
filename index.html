@@ -786,15 +786,26 @@ header.nav .nav__menu {
 
     <div class="mega-column">
       <h4 class="mega-toggle" data-target="col-social">Social Media Engagement ▾</h4>
-      <ul id="col-social" class="mega-list" hidden>
-        <li><a href="#">Instagram</a></li>
-        <li><a href="#">Twitter</a></li>
-        <li><a href="#">Facebook</a></li>
-        <li><a href="#">YouTube</a></li>
-        <li><a href="#">TikTok</a></li>
-        <li><a href="#">LinkedIn</a></li>
-        <li><a href="#" id="getCatalogue">Get Catalogue (PDF)</a></li>
+
+<ul id="col-social" class="mega-list" hidden> 
+<li><button class="social-link" data-service="instagram">Instagram</button></li>
+ <li><a href="#" class="social-link" data-service="twitter">Twitter</a></li>
+ <li><a href="#" class="social-link" data-service="facebook">Facebook</a></li>
+ <li><a href="#" class="social-link" data-service="youtube">YouTube</a></li>
+ <li><a href="#" class="social-link" data-service="tiktok">TikTok</a></li>
+ <li><a href="#" class="social-link" data-service="linkedin">LinkedIn</a>
+</li> <li><a href="#" id="getCatalogue">Get Catalogue (PDF)</a></li> 
       </ul>
+<!-- Inline expanded area for the selected social service (hidden by default) -->
+ <div id="col-social-expanded" class="mega-expanded" hidden>
+ <!-- Instagram premium card (shown when Instagram is selected) -->
+ <article class="s-card" id="instagramCard" tabindex="0" aria-labelledby="inst-title"> 
+<div class="s-card-media" role="img" aria-label="Instagram preview" style="background-image:url('/assets/instagram-hero.jpg');"></div>
+ <div class="s-card-body"> <h5 id="inst-title">Instagram Growth</h5> <p class="s-card-sub">Reels, creative campaigns, and creator partnerships that scale engagement.</p>
+ <!-- Optional featured embed (replace permalink with the post you want) -->
+ <div class="insta-embed">
+ <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DO19ie7gar4/?utm_source=ig_embed" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.08); margin:0 auto; max-width:540px;">
+ </blockquote> </div> <div class="s-card-ctas"> <a class="s-btn s-btn-primary" id="visitInstagram" href="https://www.instagram.com/zeal_web/?igsh=MXZnc3l3ZWQ1YjVucg%3D%3D#" target="_blank" rel="noopener">Visit Instagram</a> <a class="s-btn s-btn-ghost" id="instCatalogue" href="mailto:zeal.io@outlook.com?subject=ZEAL%20Catalogue&body=Please%20send%20me%20the%20catalogue.">Get Catalogue</a> <button class="s-btn s-btn-outline view-services" type="button">View Services</button> </div> </div> </article>
     </div>
   </div>
 </div>
@@ -1308,6 +1319,86 @@ header.nav .nav__menu {
   if (card && viewBtn) {
     card.addEventListener('keydown', function(e){
       if (e.key === 'Enter' || e.key === ' ') viewBtn.click();
+    });
+  }
+})();
+</script>
+<script>
+(function(){
+  // Toggle social list -> show expanded area for selected service
+  document.querySelectorAll('#col-social .social-link').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      const service = btn.dataset.service;
+      const expanded = document.getElementById('col-social-expanded');
+      // if Instagram selected, show expanded area and ensure it's visible
+      if (service === 'instagram') {
+        expanded.removeAttribute('hidden');
+        // scroll mega menu if needed (optional)
+        expanded.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        // ensure Instagram embed renders
+        if (window.instgrm && typeof window.instgrm.Embeds === 'object') {
+          window.instgrm.Embeds.process();
+        }
+      } else {
+        // hide expanded area for other services (you can implement other cards similarly)
+        expanded.setAttribute('hidden','');
+      }
+    });
+  });
+
+  // Modal behavior for View Services inside the expanded area
+  const viewBtn = document.querySelector('#instagramCard .view-services');
+  const modal = document.getElementById('platformModal');
+  const modalClose = modal ? modal.querySelector('.modal-close') : null;
+  const modalEmbedContainer = document.getElementById('modalInstagramEmbed');
+  const modalCatalogue = document.getElementById('modalCatalogue');
+  const instCatalogue = document.getElementById('instCatalogue');
+
+  const PDF_URL = 'https://yourdomain.com/ZEAL-catalogue.pdf'; // replace with your PDF
+
+  if (viewBtn && modal) {
+    viewBtn.addEventListener('click', function(){
+      // inject featured embed into modal (same permalink as card)
+      modalEmbedContainer.innerHTML = `
+        <blockquote class="instagram-media"
+          data-instgrm-permalink="https://www.instagram.com/p/DO19ie7gar4/?utm_source=ig_embed"
+          data-instgrm-version="14"
+          style="background:#FFF; border:0; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.08); margin:0 auto; max-width:540px;">
+        </blockquote>`;
+      if (window.instgrm && typeof window.instgrm.Embeds === 'object') {
+        window.instgrm.Embeds.process();
+      }
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+      // set catalogue mailto
+      if (modalCatalogue) {
+        modalCatalogue.href = 'mailto:zeal.io@outlook.com?subject=' + encodeURIComponent('Request: ZEAL Instagram Catalogue') +
+                              '&body=' + encodeURIComponent('Hi ZEAL team,%0D%0A%0D%0APlease send the Instagram services catalogue or download here: ' + PDF_URL);
+      }
+    });
+  }
+
+  if (modalClose) {
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', function(e){ if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeModal(); });
+  }
+
+  function closeModal(){
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+    if (modalEmbedContainer) modalEmbedContainer.innerHTML = '';
+  }
+
+  // Get Catalogue from card
+  if (instCatalogue) {
+    instCatalogue.addEventListener('click', function(e){
+      e.preventDefault();
+      const subject = encodeURIComponent('Request: ZEAL Catalogue');
+      const body = encodeURIComponent('Hi ZEAL team,%0D%0A%0D%0APlease send me the ZEAL catalogue or download here: ' + PDF_URL + '%0D%0A%0D%0AThanks.');
+      window.location.href = 'mailto:zeal.io@outlook.com?subject=' + subject + '&body=' + body;
     });
   }
 })();
