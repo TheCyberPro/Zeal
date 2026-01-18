@@ -747,6 +747,40 @@ header.nav .nav__menu {
 /* Explore button */
 .explore-trigger { background:transparent; border:1px solid rgba(255,255,255,0.12); color:#fff; padding:0.45rem 0.9rem; border-radius:8px; cursor:pointer; }
 
+
+
+
+/* Container inside header */
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* reduce vertical padding */
+  padding: 0.5rem 1rem;   /* was probably larger */
+  min-height: 56px;       /* set a consistent height */
+}
+
+/* Logo */
+.nav__logo {
+  font-family: 'Anton', sans-serif;
+  font-size: 1.25rem;     /* adjust size if logo text feels too tall */
+  line-height: 1;         /* keeps text snug */
+  padding: 0;             /* remove extra padding */
+}
+
+/* Nav menu links */
+.nav__menu .nav-link {
+  padding: 0.25rem 0.5rem; /* smaller vertical padding */
+  line-height: 1.2;
+}
+
+/* Explore button */
+.explore-trigger {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.95rem;
+  line-height: 1.2;
+}
+
 /* explore panel basic */
 .explore-panel { position:absolute; top:100%; right:2.5%; display:none; background:linear-gradient(180deg,#0d052d,#08031e); padding:0.75rem; border-radius:10px; box-shadow:0 12px 30px rgba(0,0,0,0.4); z-index:1400; }
 .explore-panel.open { display:block; }
