@@ -712,23 +712,54 @@ header.nav .nav__menu {
   .s-btn { width:100%; }
 }
 
-/* ensure header inner is a flex row */
 .nav__inner {
   display: flex;
   align-items: center;
+  width: 100%;
   gap: 1rem;
 }
 
-/* push everything after the logo to the right */
-.nav__logo {
-  margin-right: 1rem; /* keep logo left */
+/* logo stays left */
+.nav__logo { flex: 0 0 auto; }
+
+/* center group (optional) */
+.nav__center {
+  display: flex;
+  gap: 1rem;
+  margin: 0 auto; /* centers this group */
 }
 
-/* this pushes Explore to the far right */
-.explore-trigger {
-  margin-left: auto;
+/* explore pinned to the far right */
+.nav__actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-left: auto; /* ensures this block is at the far right */
 }
 
+/* header layout */
+.nav__inner { display:flex; align-items:center; gap:1rem; width:100%; }
+.nav__logo { flex:0 0 auto; font-family:'Anton',sans-serif; color:#ffd54f; text-decoration:none; }
+.nav__menu { display:flex; align-items:center; gap:1rem; width:100%; }
+
+/* actions group pinned to the far right */
+.nav__actions { margin-left:auto; display:flex; gap:0.75rem; align-items:center; }
+
+/* Explore button */
+.explore-trigger { background:transparent; border:1px solid rgba(255,255,255,0.12); color:#fff; padding:0.45rem 0.9rem; border-radius:8px; cursor:pointer; }
+
+/* explore panel basic */
+.explore-panel { position:absolute; top:100%; right:2.5%; display:none; background:linear-gradient(180deg,#0d052d,#08031e); padding:0.75rem; border-radius:10px; box-shadow:0 12px 30px rgba(0,0,0,0.4); z-index:1400; }
+.explore-panel.open { display:block; }
+
+/* mega menu visible state */
+.mega-menu { position:absolute; left:0; width:100%; display:none; z-index:1300; }
+.mega-menu.open { display:block; }
+
+/* small responsive tweaks */
+@media (max-width:900px) {
+  .nav__inner { padding:0 1rem; }
+  .explore-panel { right:1rem; left:1rem; }
+}
 
 
   </style>
@@ -751,7 +782,7 @@ header.nav .nav__menu {
 
 <!-- NAVIGATION -->
 <!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 
 <!-- Header -->
 <header class="nav" role="navigation" aria-label="Main">
@@ -759,11 +790,16 @@ header.nav .nav__menu {
     <a href="/" class="nav__logo" aria-label="ZEAL home">ZEAL</a>
 
     <nav class="nav__menu" aria-label="Primary">
+      <!-- left/center links (optional) -->
+      <a class="nav-link" href="#what-we-do">About</a>
 
-      <!-- Explore trigger (far right) -->
-      <button id="exploreToggle" class="explore-trigger" aria-expanded="false" aria-controls="explorePanel">
-        Explore ▾
-      </button>
+      <!-- actions group pinned to the far right -->
+      <div class="nav__actions">
+        <a class="btn--light" href="mailto:zeal.io@outlook.com?subject=ZEAL%20Demo%20Request">Book a Demo</a>
+        <button id="exploreToggle" class="explore-trigger" aria-expanded="false" aria-controls="explorePanel">
+          Explore ▾
+        </button>
+      </div>
     </nav>
   </div>
 </header>
@@ -803,33 +839,47 @@ header.nav .nav__menu {
     <div class="mega-column">
       <h4 class="mega-toggle" data-target="col-social">Social Media Engagement ▾</h4>
       <ul id="col-social" class="mega-list" hidden>
-        <li><a href="#" data-service="instagram">Instagram</a></li>
-        <li><a href="#" data-service="twitter">Twitter</a></li>
-        <li><a href="#" data-service="facebook">Facebook</a></li>
-        <li><a href="#" data-service="youtube">YouTube</a></li>
-        <li><a href="#" data-service="tiktok">TikTok</a></li>
-        <li><a href="#" data-service="linkedin">LinkedIn</a></li>
+        <li><button class="social-link" data-service="instagram">Instagram</button></li>
+        <li><button class="social-link" data-service="twitter">Twitter</button></li>
+        <li><button class="social-link" data-service="facebook">Facebook</button></li>
+        <li><button class="social-link" data-service="youtube">YouTube</button></li>
+        <li><button class="social-link" data-service="tiktok">TikTok</button></li>
+        <li><button class="social-link" data-service="linkedin">LinkedIn</button></li>
         <li><a href="#" id="getCatalogue">Get Catalogue (PDF)</a></li>
       </ul>
+
+      <!-- Inline expanded area for the selected social service (hidden by default) -->
+      <div id="col-social-expanded" class="mega-expanded" hidden>
+        <!-- Instagram premium card -->
+        <article class="s-card" id="instagramCard" tabindex="0" aria-labelledby="inst-title">
+          <div class="s-card-media" role="img" aria-label="Instagram preview" style="background-image:url('/assets/instagram-hero.jpg');"></div>
+
+          <div class="s-card-body">
+            <h5 id="inst-title">Instagram Growth</h5>
+            <p class="s-card-sub">Reels, creative campaigns, and creator partnerships that scale engagement.</p>
+
+            <div class="insta-embed">
+              <blockquote class="instagram-media"
+                data-instgrm-permalink="https://www.instagram.com/p/DO19ie7gar4/?utm_source=ig_embed"
+                data-instgrm-version="14"
+                style="background:#FFF; border:0; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.08); margin:0 auto; max-width:540px;">
+              </blockquote>
+            </div>
+
+            <div class="s-card-ctas">
+              <a class="s-btn s-btn-primary" id="visitInstagram" href="https://www.instagram.com/zeal_web/?igsh=MXZnc3l3ZWQ1YjVucg%3D%3D#" target="_blank" rel="noopener">Visit Instagram</a>
+              <a class="s-btn s-btn-ghost" id="instCatalogue" href="mailto:zeal.io@outlook.com?subject=ZEAL%20Catalogue&body=Please%20send%20me%20the%20catalogue.">Get Catalogue</a>
+              <button class="s-btn s-btn-outline view-services" type="button">View Services</button>
+            </div>
+          </div>
+        </article>
+      </div>
     </div>
   </div>
 </div>
 
-
-
-<!-- Inline expanded area for the selected social service (hidden by default) -->
- <div id="col-social-expanded" class="mega-expanded" hidden>
- <!-- Instagram premium card (shown when Instagram is selected) -->
- <article class="s-card" id="instagramCard" tabindex="0" aria-labelledby="inst-title"> 
-<div class="s-card-media" role="img" aria-label="Instagram preview" style="background-image:url('/assets/instagram-hero.jpg');"></div>
- <div class="s-card-body"> <h5 id="inst-title">Instagram Growth</h5> <p class="s-card-sub">Reels, creative campaigns, and creator partnerships that scale engagement.</p>
- <!-- Optional featured embed (replace permalink with the post you want) -->
- <div class="insta-embed">
- <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DO19ie7gar4/?utm_source=ig_embed" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.08); margin:0 auto; max-width:540px;">
- </blockquote> </div> <div class="s-card-ctas"> <a class="s-btn s-btn-primary" id="visitInstagram" href="https://www.instagram.com/zeal_web/?igsh=MXZnc3l3ZWQ1YjVucg%3D%3D#" target="_blank" rel="noopener">Visit Instagram</a> <a class="s-btn s-btn-ghost" id="instCatalogue" href="mailto:zeal.io@outlook.com?subject=ZEAL%20Catalogue&body=Please%20send%20me%20the%20catalogue.">Get Catalogue</a> <button class="s-btn s-btn-outline view-services" type="button">View Services</button> </div> </div> </article>
-    </div>
-  </div>
-</div>
+<!-- Instagram embed script (include once per page) -->
+<script async src="//www.instagram.com/embed.js"></script>
 
   <!-- HERO with Brand Glow -->
   <section class="hero hero--luxury" aria-labelledby="hero-title">
@@ -1015,8 +1065,6 @@ header.nav .nav__menu {
   </footer>
 
   <!-- Your existing testimonial & reveal scripts go here unchanged -->
-  <!-- Instagram Embed Script -->
-  <script async defer src="https://www.instagram.com/embed.js"></script>
 
   <!-- Testimonial Slider Script -->
   <script>
@@ -1342,56 +1390,6 @@ header.nav .nav__menu {
       if (e.key === 'Enter' || e.key === ' ') viewBtn.click();
     });
   }
-})();
-</script>
-<script>
-(function(){
-  const exploreAbout = document.getElementById('exploreAbout');
-  const exploreServices = document.getElementById('exploreServices');
-  const exploreDemo = document.getElementById('exploreDemo');
-  const megaMenu = document.getElementById('megaMenu');
-
-  // About: smooth scroll to section with id="what-we-do"
-  exploreAbout?.addEventListener('click', function(){
-    const target = document.getElementById('what-we-do');
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    } else {
-      window.location.href = '/about';
-    }
-    // close panel if needed
-    document.getElementById('explorePanel')?.classList.remove('open');
-  });
-
-  // Services: open the mega menu
-  exploreServices?.addEventListener('click', function(){
-    megaMenu.classList.toggle('open');
-    megaMenu.setAttribute('aria-hidden', megaMenu.classList.contains('open') ? 'false' : 'true');
-    document.getElementById('explorePanel')?.classList.remove('open');
-  });
-
-  // Book a Demo: open mail client
-  exploreDemo?.addEventListener('click', function(){
-    window.location.href = 'mailto:zeal.io@outlook.com?subject=' + encodeURIComponent('ZEAL Demo Request');
-  });
-
-  // Close explore panel on outside click (optional)
-  document.addEventListener('click', function(e){
-    const panel = document.getElementById('explorePanel');
-    const toggle = document.getElementById('exploreToggle');
-    if (!panel || panel.classList.contains('open') === false) return;
-    if (panel.contains(e.target) || (toggle && toggle.contains(e.target))) return;
-    panel.classList.remove('open');
-    panel.setAttribute('aria-hidden','true');
-  });
-
-  // Close on Escape
-  document.addEventListener('keydown', function(e){
-    if (e.key === 'Escape') {
-      document.getElementById('explorePanel')?.classList.remove('open');
-      megaMenu?.classList.remove('open');
-    }
-  });
 })();
 </script>
 
