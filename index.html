@@ -1306,69 +1306,6 @@ header.nav .nav__menu {
       megaMenu.style.display = 'none';
     }
   });
-</script>
-<script>
-(function () {
-  const header = document.querySelector('header.nav');
-  const toggle = document.getElementById('exploreToggle');
-  const mega = document.getElementById('megaMenu');
-
-  if (!header || !toggle || !mega) return;
-
-  function positionMega() {
-    const rect = header.getBoundingClientRect();
-    if (window.innerWidth > 900) {
-      mega.style.position = 'absolute';
-      mega.style.top = (window.scrollY + rect.bottom) + 'px';
-      mega.style.left = '0';
-      mega.style.width = '100%';
-      mega.style.height = 'auto';
-    } else {
-      mega.style.position = 'fixed';
-      mega.style.top = '0';
-      mega.style.left = '0';
-      mega.style.width = '100%';
-      mega.style.height = '100vh';
-    }
-  }
-
-  function openMega() {
-    positionMega();
-    mega.classList.add('open');
-    mega.setAttribute('aria-hidden', 'false');
-    toggle.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeMega() {
-    mega.classList.remove('open');
-    mega.setAttribute('aria-hidden', 'true');
-    toggle.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-  }
-
-  toggle.addEventListener('click', function (e) {
-    e.stopPropagation();
-    if (mega.classList.contains('open')) closeMega();
-    else openMega();
-  });
-
-  document.addEventListener('click', function (e) {
-    if (!mega.classList.contains('open')) return;
-    if (mega.contains(e.target) || toggle.contains(e.target)) return;
-    closeMega();
-  });
-
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') closeMega();
-  });
-
-  window.addEventListener('resize', positionMega);
-  window.addEventListener('scroll', positionMega);
-
-  positionMega();
-})();
-</script>
-<script>
 (function () {
   const header = document.querySelector('header.nav');
   const exploreToggle = document.getElementById('exploreToggle');
@@ -1499,8 +1436,6 @@ header.nav .nav__menu {
   window.addEventListener('scroll', positionMega);
   positionMega();
 })();
-</script>
-<script>
 (function(){
   const exploreToggle = document.getElementById('exploreToggle');
   const explorePanel = document.getElementById('explorePanel');
@@ -1576,8 +1511,7 @@ header.nav .nav__menu {
     }
   });
 })();
-</script>
-<script>
+
 document.addEventListener('DOMContentLoaded', function () {
   const toggle = document.getElementById('exploreToggle');
   const panel = document.getElementById('explorePanel');
