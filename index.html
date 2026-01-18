@@ -372,63 +372,49 @@ header.nav .nav__menu a:hover { color: #fff; }
 .nav__actions { margin-left: auto; display: flex; gap: 0.75rem; align-items: center; }
 
 
-/* ================================
-   CLEAN 3‑ZONE HEADER LAYOUT
-   ================================ */
-.nav__inner {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  gap: 1rem;
+/* Instagram section — ZEAL premium theme */
+#instagram.section--light {
+  background: linear-gradient(180deg, #0d052d 0%, #08031e 100%);
+  color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+  padding: 3rem 2rem;
 }
 
-/* Logo stays on the far left */
-.nav__logo {
-  flex: 0 0 auto;
-  margin-right: auto; /* pushes everything else right */
+/* Title in gold */
+#instagram .section__title {
+  color: #ffd54f;
+  text-shadow: 0 0 12px rgba(255,213,79,0.35);
 }
 
-/* Middle menu (optional future links) */
-.nav__menu {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+/* Instagram card inside the dark section */
+#instagram .s-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,213,79,0.08);
+  box-shadow: 0 12px 36px rgba(2,6,23,0.7);
 }
 
-/* Explore button group ALWAYS stays far right */
-.nav__actions {
-  margin-left: auto;        /* forces Explore to the far right */
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  position: relative;       /* ANCHOR for the dropdown */
+/* Card text colors */
+#instagram .s-card-sub {
+  color: rgba(255,255,255,0.85);
 }
 
-/* ================================
-   EXPLORE PANEL — FIVERR STYLE
-   Opens directly under the button
-   ================================ */
-.explore-panel {
-  position: absolute;
-  top: calc(100% + 6px);     /* sits 6px under the Explore button */
-  right: 0;                  /* aligns perfectly with the button */
-  display: none;
-  background: linear-gradient(180deg,#0d052d,#08031e);
-  padding: 0.75rem;
-  border-radius: 10px;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.4);
-  z-index: 1400;
+/* Buttons inside Instagram section */
+#instagram .s-btn-primary {
+  background: #ffd54f;
+  color: #0d052d;
 }
 
-/* When JS adds .open */
-.explore-panel.open {
-  display: block;
-  animation: fadeIn 160ms ease-out;
+#instagram .s-btn-outline,
+#instagram .s-btn-ghost {
+  color: #fff;
+  border-color: rgba(255,255,255,0.15);
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-4px); }
-  to   { opacity: 1; transform: translateY(0); }
+/* Media image glow */
+#instagram .s-card-media {
+  box-shadow: 0 0 20px rgba(255,213,79,0.25);
+  border-bottom: 1px solid rgba(255,213,79,0.1);
 }
 
 
