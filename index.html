@@ -456,6 +456,46 @@ footer .footer__nav p {
   footer.footer .footer__inner { gap: 0.5rem; padding: 0 0.5rem; }
 }
 
+/* Header container */
+.nav__inner {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1rem 5%;
+}
+
+/* Logo stays on the far left */
+.nav__logo {
+  flex: 0 0 auto;
+  margin-right: auto; /* pushes Explore to the right */
+}
+
+/* Explore button group stays on the far right */
+.nav__actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  position: relative; /* anchor for dropdown */
+}
+
+/* Explore dropdown sits directly under the button */
+.explore-panel {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  display: none;
+  background: linear-gradient(180deg,#0d052d,#08031e);
+  padding: 0.75rem;
+  border-radius: 10px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+  z-index: 1400;
+}
+
+.explore-panel.open {
+  display: block;
+}
+
+
 
   </style>
 
@@ -484,6 +524,8 @@ footer .footer__nav p {
       <a href="/" class="nav__logo anton-sc-regular" aria-label="ZEAL home">ZEAL</a>
 
       <nav class="nav__menu" aria-label="Primary">
+
+
         <div class="nav__actions">
           <button id="exploreToggle"
                   class="explore-trigger"
