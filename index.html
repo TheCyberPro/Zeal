@@ -63,7 +63,7 @@
       display: flex-start;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 5%;
+      padding: 0.5rem 4%;
       background: #0d052d;
       overflow-x: auto;
       white-space: nowrap;
@@ -912,6 +912,27 @@ header.nav .nav__menu {
   font-style: normal;
 }
 
+
+.explore-panel {
+  position:absolute;
+  top:100%; right:2.5%;
+  display:none;
+  background:linear-gradient(180deg,#0d052d,#08031e);
+  padding:0.75rem;
+  border-radius:10px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.4);
+  z-index:1400;
+  opacity:0;
+  transform: translateY(-6px) scale(0.98);
+  transition: opacity .22s ease, transform .22s ease;
+}
+.explore-panel.open {
+  display:block;
+  opacity:1;
+  transform: translateY(0) scale(1);
+}
+
+
   </style>
 
   <!-- Google Tag Manager -->
@@ -1555,6 +1576,37 @@ header.nav .nav__menu {
     }
   });
 })();
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const toggle = document.getElementById('exploreToggle');
+  const panel = document.getElementById('explorePanel');
+
+  function openPanel() {
+    panel.classList.add('open');
+    panel.setAttribute('aria-hidden','false');
+    toggle.setAttribute('aria-expanded','true');
+  }
+  function closePanel() {
+    panel.classList.remove('open');
+    panel.setAttribute('aria-hidden','true');
+    toggle.setAttribute('aria-expanded','false');
+  }
+
+  toggle.addEventListener('click', function(e){
+    e.stopPropagation();
+    if (panel.classList.contains('open')) closePanel();
+    else openPanel();
+  });
+
+  // Close when clicking outside or pressing Escape
+  document.addEventListener('click', function(e){
+    if (!panel.contains(e.target) && !toggle.contains(e.target)) closePanel();
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') closePanel();
+  });
+});
 </script>
 
 
