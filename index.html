@@ -372,6 +372,64 @@ header.nav .nav__menu a:hover { color: #fff; }
 .nav__actions { margin-left: auto; display: flex; gap: 0.75rem; align-items: center; }
 
 
+/* ================================
+   CLEAN 3‑ZONE HEADER LAYOUT
+   ================================ */
+.nav__inner {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+}
+
+/* Logo stays on the far left */
+.nav__logo {
+  flex: 0 0 auto;
+  margin-right: auto; /* pushes everything else right */
+}
+
+/* Middle menu (optional future links) */
+.nav__menu {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Explore button group ALWAYS stays far right */
+.nav__actions {
+  margin-left: auto;        /* forces Explore to the far right */
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  position: relative;       /* ANCHOR for the dropdown */
+}
+
+/* ================================
+   EXPLORE PANEL — FIVERR STYLE
+   Opens directly under the button
+   ================================ */
+.explore-panel {
+  position: absolute;
+  top: calc(100% + 6px);     /* sits 6px under the Explore button */
+  right: 0;                  /* aligns perfectly with the button */
+  display: none;
+  background: linear-gradient(180deg,#0d052d,#08031e);
+  padding: 0.75rem;
+  border-radius: 10px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+  z-index: 1400;
+}
+
+/* When JS adds .open */
+.explore-panel.open {
+  display: block;
+  animation: fadeIn 160ms ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 
 
 
@@ -699,7 +757,6 @@ footer .footer__nav p {
     <!-- Left: brand / logo -->
     <div class="footer__brand" style="display:flex;align-items:center;gap:0.75rem;">
       <a href="/" class="nav__logo" aria-label="ZEAL home" style="text-decoration:none;">ZEAL</a>
-      <span class="footer__tagline" style="color:rgba(255,255,255,0.7);font-size:0.95rem;">Premium web development</span>
     </div>
 
     <!-- Center: link groups -->
@@ -722,16 +779,10 @@ footer .footer__nav p {
         <button class="s-btn s-btn-ghost" type="button" aria-haspopup="listbox" aria-expanded="false">English</button>
       </div>
 
-      <!-- Social icons (placeholders) -->
-      <div class="footer__social" aria-hidden="false" style="display:flex;gap:0.5rem;align-items:center;">
-        <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram" class="s-btn s-btn-ghost">IG</a>
-        <a href="https://twitter.com/" target="_blank" rel="noopener" aria-label="Twitter" class="s-btn s-btn-ghost">TW</a>
-        <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn" class="s-btn s-btn-ghost">IN</a>
-      </div>
 
       <!-- Copyright -->
       <div class="footer__copy" style="color:rgba(255,255,255,0.7);font-size:0.95rem;">
-        <span>© 2026 Zeal Web Studios</span>
+        <span>© 2026 Zeal </span>
       </div>
     </div>
   </div>
