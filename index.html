@@ -785,6 +785,80 @@ header.nav .nav__menu {
   .nav__inner { padding:0 1rem; }
   .explore-panel { right:1rem; left:1rem; }
 }
+/* -- Logo animation variables -- */
+:root{
+  --logo-glow: rgba(255,213,79,0.18);
+  --logo-color: #ffd54f;
+  --logo-text-color: #0d052d;
+}
+
+/* Entrance animation: slide from left + fade */
+@keyframes logoEntrance {
+  0% { transform: translateX(-10px) scale(0.98); opacity: 0; filter: blur(2px); }
+  60% { transform: translateX(4px) scale(1.02); opacity: 1; filter: blur(0); }
+  100% { transform: translateX(0) scale(1); opacity: 1; filter: none; }
+}
+
+/* Subtle glow pulse for hover/focus */
+@keyframes logoPulse {
+  0% { box-shadow: 0 0 0 0 rgba(255,213,79,0); transform: scale(1); }
+  50% { box-shadow: 0 8px 30px 6px var(--logo-glow); transform: scale(1.03); }
+  100% { box-shadow: 0 0 0 0 rgba(255,213,79,0); transform: scale(1); }
+}
+
+/* Logo base styling */
+.nav__logo {
+  display:inline-block;
+  font-family: 'Anton', system-ui, sans-serif;
+  color: var(--logo-color);
+  background: transparent;
+  text-decoration: none;
+  padding: 0.15rem 0.35rem;
+  border-radius: 6px;
+  will-change: transform, box-shadow, opacity;
+  /* entrance */
+  animation: logoEntrance 700ms cubic-bezier(.2,.9,.2,1) both;
+  /* small transform origin for nicer scale */
+  transform-origin: left center;
+}
+
+/* Hover and keyboard focus state */
+.nav__logo:hover,
+.nav__logo:focus {
+  outline: none;
+  animation: logoPulse 900ms ease-in-out 0s 1;
+  color: var(--logo-text-color);
+  background: linear-gradient(90deg, rgba(255,213,79,0.06), rgba(255,213,79,0.02));
+  box-shadow: 0 8px 30px 6px var(--logo-glow);
+}
+
+/* Keep hover effect subtle on touch devices */
+@media (hover: none) {
+  .nav__logo:hover,
+  .nav__logo:focus {
+    animation: none;
+    box-shadow: none;
+    transform: none;
+  }
+}
+
+/* Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .nav__logo {
+    animation: none;
+    transition: none;
+  }
+  .nav__logo:hover,
+  .nav__logo:focus {
+    box-shadow: none;
+    transform: none;
+  }
+}
+
+/* Optional: slightly larger logo on wide screens */
+@media (min-width:1200px) {
+  .nav__logo { font-size: 1.25rem; }
+}
 
   </style>
 
@@ -814,7 +888,7 @@ header.nav .nav__menu {
     <a href="/" class="nav__logo" aria-label="ZEAL home">ZEAL</a>
 
     <nav class="nav__menu" aria-label="Primary">
-      <a class="nav-link" href="#what-we-do">About</a>
+      <a class="nav-link" href="#what-we-do">Z</a>
 
       <div class="nav__actions">
         <button id="exploreToggle" class="explore-trigger" aria-expanded="false" aria-controls="explorePanel">
@@ -879,13 +953,6 @@ header.nav .nav__menu {
             <h5 id="inst-title">Instagram Growth</h5>
             <p class="s-card-sub">Reels, creative campaigns, and creator partnerships that scale engagement.</p>
 
-            <div class="insta-embed">
-              <blockquote class="instagram-media"
-                data-instgrm-permalink="https://www.instagram.com/p/DO19ie7gar4/?utm_source=ig_embed"
-                data-instgrm-version="14"
-                style="background:#FFF; border:0; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.08); margin:0 auto; max-width:540px;">
-              </blockquote>
-            </div>
 
             <div class="s-card-ctas">
               <a class="s-btn s-btn-primary" id="visitInstagram" href="https://www.instagram.com/zeal_web/?igsh=MXZnc3l3ZWQ1YjVucg%3D%3D#" target="_blank" rel="noopener">Visit Instagram</a>
@@ -899,8 +966,6 @@ header.nav .nav__menu {
   </div>
 </div>
 
-<!-- Instagram embed script (include once per page) -->
-<script async src="//www.instagram.com/embed.js"></script>
 
 
 
@@ -1002,13 +1067,6 @@ header.nav .nav__menu {
         <p class="s-card-sub">Reels, creative campaigns, and creator partnerships that scale engagement.</p>
 
         <!-- Official Instagram embed (replace permalink with your post link) -->
-        <div class="insta-embed">
-          <blockquote class="instagram-media"
-            data-instgrm-permalink="https://www.instagram.com/p/DO19ie7gar4/?utm_source=ig_embed"
-            data-instgrm-version="14"
-            style="background:#FFF; border:0; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.08); margin:0 auto; max-width:540px;">
-          </blockquote>
-        </div>
 
         <div class="s-card-ctas">
           <a class="s-btn s-btn-primary" id="visitInstagram" href="https://www.instagram.com/zeal_web/?igsh=MXZnc3l3ZWQ1YjVucg%3D%3D#" target="_blank" rel="noopener">Visit Instagram</a>
@@ -1351,72 +1409,6 @@ header.nav .nav__menu {
 </script>
 <script>
 (function(){
-  const viewBtn = document.querySelector('.s-card .view-services');
-  const modal = document.getElementById('platformModal');
-  const modalClose = modal.querySelector('.modal-close');
-  const modalCatalogue = document.getElementById('modalCatalogue');
-  const instCatalogue = document.getElementById('instCatalogue');
-  const modalEmbedContainer = document.getElementById('modalInstagramEmbed');
-
-  // Replace with your hosted PDF URL (no trailing spaces)
-  const PDF_URL = 'https://yourdomain.com/ZEAL-catalogue.pdf';
-
-  // Open modal and inject a featured embed (optional)
-  if (viewBtn) {
-    viewBtn.addEventListener('click', ()=> {
-      // inject the same permalink used in the card (replace if you want a different post)
-      modalEmbedContainer.innerHTML = `
-        <blockquote class="instagram-media"
-          data-instgrm-permalink="https://www.instagram.com/p/DO19ie7gar4/?utm_source=ig_embed"
-          data-instgrm-version="14"
-          style="background:#FFF; border:0; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.08); margin:0 auto; max-width:540px;">
-        </blockquote>`;
-      if (window.instgrm && typeof window.instgrm.Embeds === 'object') {
-        window.instgrm.Embeds.process();
-      }
-      modal.classList.add('open');
-      modal.setAttribute('aria-hidden','false');
-      document.body.style.overflow = 'hidden';
-
-      // set catalogue mailto
-      modalCatalogue.href = 'mailto:zeal.io@outlook.com?subject=' + encodeURIComponent('Request: ZEAL Instagram Catalogue') +
-                            '&body=' + encodeURIComponent('Hi ZEAL team,%0D%0A%0D%0APlease send the Instagram services catalogue or download here: ' + PDF_URL);
-    });
-  }
-
-  // Close modal
-  modalClose.addEventListener('click', closeModal);
-  modal.addEventListener('click', function(e){ if (e.target === modal) closeModal(); });
-  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeModal(); });
-
-  function closeModal(){
-    modal.classList.remove('open');
-    modal.setAttribute('aria-hidden','true');
-    document.body.style.overflow = '';
-    modalEmbedContainer.innerHTML = ''; // remove injected embed to avoid duplicate scripts
-  }
-
-  // Get Catalogue from card
-  if (instCatalogue) {
-    instCatalogue.addEventListener('click', function(e){
-      e.preventDefault();
-      const subject = encodeURIComponent('Request: ZEAL Catalogue');
-      const body = encodeURIComponent('Hi ZEAL team,%0D%0A%0D%0APlease send me the ZEAL catalogue or download here: ' + PDF_URL + '%0D%0A%0D%0AThanks.');
-      window.location.href = 'mailto:zeal.io@outlook.com?subject=' + subject + '&body=' + body;
-    });
-  }
-
-  // Accessibility: Enter on card opens modal
-  const card = document.getElementById('instagramCard');
-  if (card && viewBtn) {
-    card.addEventListener('keydown', function(e){
-      if (e.key === 'Enter' || e.key === ' ') viewBtn.click();
-    });
-  }
-})();
-</script>
-<script>
-(function(){
   const exploreToggle = document.getElementById('exploreToggle');
   const explorePanel = document.getElementById('explorePanel');
   const exploreAbout = document.getElementById('exploreAbout');
@@ -1433,7 +1425,6 @@ header.nav .nav__menu {
     explorePanel.setAttribute('aria-hidden', !isOpen);
     exploreToggle.setAttribute('aria-expanded', isOpen);
     if (isOpen) {
-      // close mega menu if open
       megaMenu.classList.remove('open');
       megaMenu.setAttribute('aria-hidden', 'true');
     }
