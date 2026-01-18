@@ -761,32 +761,6 @@ header.nav .nav__menu {
   .explore-panel { right:1rem; left:1rem; }
 }
 
-.nav__inner { display:flex; align-items:center; gap:1rem; width:100%; }
-.nav__logo { flex:0 0 auto; font-family:'Anton',sans-serif; color:#ffd54f; text-decoration:none; }
-.nav__menu { display:flex; align-items:center; width:100%; }
-
-/* actions group pinned to the far right */
-.nav__actions { margin-left:auto; display:flex; gap:0.75rem; align-items:center; }
-
-/* Explore button */
-.explore-trigger { background:transparent; border:1px solid rgba(255,255,255,0.12); color:#fff; padding:0.45rem 0.9rem; border-radius:8px; cursor:pointer; }
-
-/* explore panel */
-.explore-panel { position:absolute; top:100%; right:2.5%; display:none; background:linear-gradient(180deg,#0d052d,#08031e); padding:0.75rem; border-radius:10px; box-shadow:0 12px 30px rgba(0,0,0,0.4); z-index:1400; min-width:220px; }
-.explore-panel.open { display:block; }
-
-/* basic styles for buttons inside panel */
-.explore-inner { display:flex; flex-direction:column; gap:0.5rem; }
-.explore-btn { background:#111; color:#fff; padding:0.6rem 0.9rem; border-radius:8px; border:1px solid rgba(255,255,255,0.04); cursor:pointer; text-align:center; }
-
-/* mega menu visible state */
-.mega-menu { position:absolute; left:0; width:100%; display:none; z-index:1300; }
-.mega-menu.open { display:block; }
-
-/* responsive */
-@media (max-width:900px) {
-  .explore-panel { right:1rem; left:1rem; }
-}
 /* header layout */
 .nav__inner { display:flex; align-items:center; gap:1rem; width:100%; }
 .nav__logo { flex:0 0 auto; font-family:'Anton',sans-serif; color:#ffd54f; text-decoration:none; }
@@ -1073,8 +1047,6 @@ header.nav .nav__menu {
   </div>
 </div>
 
-<!-- Instagram embed script (include once per page) -->
-<script async src="//www.instagram.com/embed.js"></script>
 
 
 
@@ -1451,55 +1423,72 @@ header.nav .nav__menu {
   const exploreServices = document.getElementById('exploreServices');
   const exploreDemo = document.getElementById('exploreDemo');
   const megaMenu = document.getElementById('megaMenu');
+  const socialLinks = document.querySelectorAll('#col-social .social-link');
+  const colSocialExpanded = document.getElementById('col-social-expanded');
 
   // Toggle explore panel
   exploreToggle?.addEventListener('click', function(e){
     e.stopPropagation();
-    const open = explorePanel.classList.toggle('open');
-    explorePanel.setAttribute('aria-hidden', !open);
-    exploreToggle.setAttribute('aria-expanded', open);
-    if (open) megaMenu.classList.remove('open');
-  });
-
-  // About: smooth scroll to section with id="what-we-do"
-  exploreAbout?.addEventListener('click', function(){
-    const target = document.getElementById('what-we-do');
-    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    explorePanel.classList.remove('open');
-    explorePanel.setAttribute('aria-hidden','true');
-    exploreToggle.setAttribute('aria-expanded','false');
-  });
-
-  // Services: open the mega menu
-  exploreServices?.addEventListener('click', function(){
-    const open = megaMenu.classList.toggle('open');
-    megaMenu.setAttribute('aria-hidden', !open);
-    explorePanel.classList.remove('open');
-    explorePanel.setAttribute('aria-hidden','true');
-    exploreToggle.setAttribute('aria-expanded','false');
-  });
-
-  // Book a Demo: open mail client
-  exploreDemo?.addEventListener('click', function(){
-    window.location.href = 'mailto:zeal.io@outlook.com?subject=' + encodeURIComponent('ZEAL Demo Request');
-  });
-
-  // Close panels on outside click or Escape
-  document.addEventListener('click', function(e){
-    if (!explorePanel.contains(e.target) && !exploreToggle.contains(e.target)) {
-      explorePanel.classList.remove('open');
-      explorePanel.setAttribute('aria-hidden','true');
-      exploreToggle.setAttribute('aria-expanded','false');
+    const isOpen = explorePanel.classList.toggle('open');
+    explorePanel.setAttribute('aria-hidden', !isOpen);
+    exploreToggle.setAttribute('aria-expanded', isOpen);
+    if (isOpen) {
+      // close mega menu if open
+      megaMenu.classList.remove('open');
+      megaMenu.setAttribute('aria-hidden', 'true');
     }
   });
 
+  // About scroll
+  exploreAbout?.addEventListener('click', function(){
+    const target = document.getElementById('what-we-do');
+    if (target) target.scrollIntoView({ behavior:'smooth', block:'start' });
+    closeExplore();
+  });
+
+  // Services opens mega menu
+  exploreServices?.addEventListener('click', function(){
+    const isOpen = megaMenu.classList.toggle('open');
+    megaMenu.setAttribute('aria-hidden', !isOpen);
+    closeExplore();
+  });
+
+  // Book a Demo
+  exploreDemo?.addEventListener('click', function(){
+    window.location.href = 'mailto:zeal.io@outlook.com?subject=' + encodeURIComponent('ZEAL Demo Request');
+    closeExplore();
+  });
+
+  // Social links: show inline expanded area for Instagram
+  socialLinks.forEach(btn => {
+    btn.addEventListener('click', function(){
+      const service = btn.dataset.service;
+      if (service === 'instagram') {
+        colSocialExpanded.removeAttribute('hidden');
+        if (window.instgrm && typeof window.instgrm.Embeds === 'object') window.instgrm.Embeds.process();
+        colSocialExpanded.scrollIntoView({ behavior:'smooth', block:'nearest' });
+      } else {
+        colSocialExpanded.setAttribute('hidden','');
+      }
+    });
+  });
+
+  // Close explore panel helper
+  function closeExplore(){
+    explorePanel.classList.remove('open');
+    explorePanel.setAttribute('aria-hidden','true');
+    exploreToggle.setAttribute('aria-expanded','false');
+  }
+
+  // Close panels on outside click or Escape
+  document.addEventListener('click', function(e){
+    if (!explorePanel.contains(e.target) && !exploreToggle.contains(e.target)) closeExplore();
+  });
   document.addEventListener('keydown', function(e){
     if (e.key === 'Escape') {
-      explorePanel.classList.remove('open');
+      closeExplore();
       megaMenu.classList.remove('open');
-      explorePanel.setAttribute('aria-hidden','true');
       megaMenu.setAttribute('aria-hidden','true');
-      exploreToggle.setAttribute('aria-expanded','false');
     }
   });
 })();
