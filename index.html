@@ -566,6 +566,80 @@ footer .footer__nav p {
 }
 
  /* Global */ body { margin: 0; font-family: 'Inter', sans-serif; background: radial-gradient(circle at top left, #0d052d 0%, #05030f 70%); color: #fff; overflow-x: hidden; } /* Header */ .zeal-header { width: 100%; padding: 1.5rem 4%; position: absolute; top: 0; left: 0; z-index: 2000; } .zeal-nav { display: flex; align-items: center; justify-content: space-between; } .nav-left { display: flex; gap: 2rem; } .nav-link { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: color .2s ease; } .nav-link:hover { color: #fff; } .nav-logo { font-size: 1.4rem; font-weight: 800; letter-spacing: 0.1em; color: #fff; } /* Hamburger Explore */ .hamburger { width: 32px; height: 26px; display: flex; flex-direction: column; justify-content: space-between; background: transparent; border: none; cursor: pointer; padding: 0; } .hamburger span { display: block; height: 3px; width: 100%; background: #fff; border-radius: 4px; transition: 0.3s ease; } .hamburger.active span:nth-child(1) { transform: translateY(11px) rotate(45deg); } .hamburger.active span:nth-child(2) { opacity: 0; } .hamburger.active span:nth-child(3) { transform: translateY(-11px) rotate(-45deg); } /* Hero */ .zeal-hero { position: relative; height: 100vh; width: 100%; padding: 0 4%; display: flex; align-items: center; justify-content: flex-start; overflow: hidden; } .hero-content { max-width: 650px; z-index: 2; } .hero-title { font-size: clamp(2.8rem, 6vw, 4rem); font-weight: 800; line-height: 1.1; margin: 0 0 1.2rem; text-shadow: 0 0 20px rgba(255,255,255,0.25); } .hero-subtitle { font-size: 1.1rem; color: rgba(255,255,255,0.85); max-width: 520px; line-height: 1.6; margin: 0; } .hero-orb { position: absolute; top: 8%; right: -12%; width: 640px; height: 640px; border-radius: 50%; background: url('/assets/zeal_ogimage.png') center/cover no-repeat; filter: blur(22px) brightness(1.25) saturate(1.1); opacity: 0.85; z-index: 1; animation: orbFloat 12s ease-in-out infinite; } @keyframes orbFloat { 0% { transform: translateY(0); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0); } } 
+/* Panel + mega menu default hidden */
+.explore-panel,
+.mega-menu {
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  display: none;            /* hidden by default */
+  z-index: 3000;            /* above hero/header */
+}
+
+/* Explore panel styling */
+.explore-panel {
+  top: 72px;                /* below header */
+  background: rgba(13,5,45,0.9);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 0.75rem;
+  animation: panelIn 220ms ease-out;
+}
+
+/* Mega menu styling */
+.mega-menu {
+  top: 140px;               /* below explore panel */
+  background: rgba(13,5,45,0.92);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 1rem 1.25rem;
+  animation: panelIn 240ms ease-out;
+}
+
+/* Columns */
+.mega-inner {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.mega-toggle {
+  margin: 0 0 0.5rem;
+  font-weight: 700;
+  color: #ffd54f;
+  cursor: pointer;
+}
+
+.mega-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mega-list li a,
+.mega-list li button {
+  display: block;
+  padding: 0.5rem 0.25rem;
+  color: rgba(255,255,255,0.9);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.mega-list li a:hover,
+.mega-list li button:hover {
+  background: rgba(255,213,79,0.08);
+  color: #fff;
+}
+
+/* Slide-in animation */
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
   </style>
 
   <!-- Google Tag Manager -->
@@ -1183,6 +1257,56 @@ document.addEventListener('DOMContentLoaded', function () {
     panel.setAttribute("aria-hidden", !isOpen);
     mega.setAttribute("aria-hidden", !isOpen);
   });
+  const toggle = document.getElementById("exploreToggle");
+  const panel = document.getElementById("explorePanel");
+  const mega  = document.getElementById("megaMenu");
+
+  // Utility to show/hide with aria + hidden + display
+  function setVisible(el, visible) {
+    if (!el) return;
+    el.style.display = visible ? "block" : "none";
+    el.setAttribute("aria-hidden", String(!visible));
+  }
+
+  // Ensure nested lists are visible when mega menu opens
+  function openMegaLists() {
+    document.querySelectorAll(".mega-list[hidden]").forEach(ul => {
+      ul.hidden = false;
+      ul.setAttribute("aria-hidden", "false");
+    });
+  }
+
+  toggle.addEventListener("click", () => {
+    const isActive = toggle.classList.toggle("active");
+    setVisible(panel, isActive);
+    setVisible(mega, isActive);
+    if (isActive) openMegaLists();
+  });
+
+  // Optional: close when clicking outside
+  document.addEventListener("click", (e) => {
+    const withinHeader = e.target.closest(".zeal-header");
+    const withinPanel  = e.target.closest("#explorePanel");
+    const withinMega   = e.target.closest("#megaMenu");
+    if (!withinHeader && !withinPanel && !withinMega) {
+      toggle.classList.remove("active");
+      setVisible(panel, false);
+      setVisible(mega, false);
+    }
+  });
+
+  // Optional: toggle individual columns
+  document.querySelectorAll(".mega-toggle").forEach(t => {
+    t.addEventListener("click", () => {
+      const targetId = t.getAttribute("data-target");
+      const list = document.getElementById(targetId);
+      const expanded = t.getAttribute("aria-expanded") === "true";
+      t.setAttribute("aria-expanded", String(!expanded));
+      list.hidden = expanded;
+      list.setAttribute("aria-hidden", String(expanded));
+    });
+  });
+
 </script>
 
 </body>
