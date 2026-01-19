@@ -491,53 +491,89 @@ footer .footer__nav p {
       <a href="/" class="nav-link">Home</a>
       <a href="#about" class="nav-link">About</a>
     </div>
-    <span class="nav-logo">ZEAL</span>
-    <button id="exploreToggle" class="hamburger" aria-label="Toggle Explore Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
+<span class="nav-logo">ZEAL</span>
+<button id="exploreToggle" class="hamburger" aria-label="Toggle Explore Menu">
+  <span></span><span></span><span></span>
+</button>
+</nav>
 </header>
 
+<!-- Mega menu panel (sibling, outside header) -->
+<div id="megaMenu" class="mega-menu" role="menu" aria-hidden="true">
+  <div class="mega-inner">
 
+    <div class="mega-column">
+      <h4 class="mega-toggle" data-target="col-web" role="button" aria-expanded="false">Web Development ▾</h4>
+      <ul id="col-web" class="mega-list" hidden aria-hidden="true">
+        <li><a href="#">Business Page</a></li>
+        <li><a href="#">Landing Page</a></li>
+        <li><a href="#">Single HTML + CSS Page</a></li>
+      </ul>
+    </div>
 
-  <!-- Mega menu panel (sibling, outside header) -->
-  <div id="megaMenu" class="mega-menu" role="menu" aria-hidden="true">
-    <div class="mega-inner">
+    <div class="mega-column">
+      <h4 class="mega-toggle" data-target="col-ux" role="button" aria-expanded="false">UX / UI Design ▾</h4>
+      <ul id="col-ux" class="mega-list" hidden aria-hidden="true">
+        <li><a href="#">JavaScript</a></li>
+        <li><a href="#">React</a></li>
+        <li><a href="#">Vue</a></li>
+        <li><a href="#">CSS</a></li>
+        <li><a href="#">Prototyping & Research</a></li>
+      </ul>
+    </div>
 
-      <div class="mega-column">
-        <h4 class="mega-toggle" data-target="col-web" role="button" aria-expanded="false" aria-controls="col-web">Web Development ▾</h4>
-        <ul id="col-web" class="mega-list" hidden aria-hidden="true">
-          <li><a href="#">Business Page</a></li>
-          <li><a href="#">Landing Page</a></li>
-          <li><a href="#">Single HTML + CSS Page</a></li>
-        </ul>
+    <div class="mega-column">
+      <h4 class="mega-toggle" data-target="col-social" role="button" aria-expanded="false">Social Media Engagement ▾</h4>
+      <ul id="col-social" class="mega-list" hidden aria-hidden="true">
+        <li><button class="social-link" data-service="instagram" type="button">Instagram</button></li>
+        <li><button class="social-link" data-service="twitter" type="button">Twitter</button></li>
+        <li><button class="social-link" data-service="facebook" type="button">Facebook</button></li>
+        <li><button class="social-link" data-service="youtube" type="button">YouTube</button></li>
+        <li><button class="social-link" data-service="tiktok" type="button">TikTok</button></li>
+        <li><button class="social-link" data-service="linkedin" type="button">LinkedIn</button></li>
+        <li><a href="#" id="getCatalogue">Get Catalogue (PDF)</a></li>
+      </ul>
+
+      <div id="col-social-expanded" class="mega-expanded" hidden aria-hidden="true">
+        <!-- Instagram premium card -->
+        <article class="s-card" id="instagramCardInline" tabindex="0" aria-labelledby="inst-title-inline">
+          <div class="s-card-media"
+               role="img"
+               aria-label="Instagram preview"
+               style="background-image:url('/assets/instagram-hero.jpg');"></div>
+
+          <div class="s-card-body">
+            <h5 id="inst-title-inline">Instagram Growth</h5>
+            <p class="s-card-sub">
+              Reels, creative campaigns, and creator partnerships that scale engagement.
+            </p>
+
+            <div class="s-card-ctas">
+              <a class="s-btn s-btn-primary"
+                 id="visitInstagramInline"
+                 href="https://www.instagram.com/zeal_web/"
+                 target="_blank"
+                 rel="noopener">Visit Instagram</a>
+
+              <a class="s-btn s-btn-ghost"
+                 id="instCatalogueInline"
+                 href="mailto:zeal.io@outlook.com?subject=ZEAL%20Catalogue&body=Please%20send%20me%20the%20catalogue.">
+                 Get Catalogue
+              </a>
+
+            </div>
+          </div>
+        </article>
       </div>
+    </div>
 
-      <div class="mega-column">
-        <h4 class="mega-toggle" data-target="col-ux" role="button" aria-expanded="false" aria-controls="col-ux">UX / UI Design ▾</h4>
-        <ul id="col-ux" class="mega-list" hidden aria-hidden="true">
-          <li><a href="#">JavaScript</a></li>
-          <li><a href="#">React</a></li>
-          <li><a href="#">Vue</a></li>
-          <li><a href="#">CSS</a></li>
-          <li><a href="#">Prototyping & Research</a></li>
-        </ul>
-      </div>
+  </div>
+</div>
 
-      <div class="mega-column">
-        <h4 class="mega-toggle" data-target="col-social" role="button" aria-expanded="false" aria-controls="col-social">Social Media Engagement ▾</h4>
-        <ul id="col-social" class="mega-list" hidden aria-hidden="true">
-          <li><button class="social-link" data-service="instagram" type="button">Instagram</button></li>
-          <li><button class="social-link" data-service="twitter" type="button">Twitter</button></li>
-          <li><button class="social-link" data-service="facebook" type="button">Facebook</button></li>
-          <li><button class="social-link" data-service="youtube" type="button">YouTube</button></li>
-          <li><button class="social-link" data-service="tiktok" type="button">TikTok</button></li>
-          <li><button class="social-link" data-service="linkedin" type="button">LinkedIn</button></li>
-          <li><a href="#" id="getCatalogue">Get Catalogue (PDF)</a></li>
-        </ul>
 
-        <!-- Inline expanded area for the selected social service (hidden by default) -->
-        <div id="col-social-expanded" class="mega-expanded" hidden aria-hidden="true">
+
+
+
           <!-- Instagram premium card -->
           <article class="s-card" id="instagramCardInline" tabindex="0" aria-labelledby="inst-title-inline">
             <div class="s-card-media"
