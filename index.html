@@ -329,6 +329,101 @@ body::after  { bottom: -35%; right: -35%; }
 .s-btn-outline { background: transparent; color: #fff; border: 1px solid rgba(255,255,2
 .s-btn-ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255
 
+/*------------------------------------*\
+  Modal (platform modal)
+\*------------------------------------*/
+.platform-modal { position: fixed; inset: 0; display: none; align-items: center; justifindex: 3000; padding: 2rem; }
+.platform-modal.open { display: flex; }
+.platform-modal-inner { background: linear-gradient(180deg,#0d052d,#08031e); border-rad box-shadow: 0 30px 80px rgba(0,0,0,0.6); color: #ddd; position: relative; }
+.modal-close { position: absolute; right: 1rem; top: 1rem; background: transparent; borpointer; }
+
+/* Instagram embed */
+.insta-embed blockquote.instagram-media { width: 100% !important; max-width: 540px; mar }
+
+/* Utilities */
+.is-open { display: block !important; }
+.is-hidden { display: none !important; }
+
+/*------------------------------------*\
+  Responsive
+\*------------------------------------*/
+@media (max-width: 900px) {
+  .mega-inner { grid-template-columns: 1fr; padding: 1rem; }
+  .hero--luxury .hero__inner img { width: 90%; }
+  .explore-panel { right: 1rem; left: 1rem; }
+  .mega-menu { position: fixed; top: 0; left: 0; right: 0; height: 100vh; overflow-y: a
+  .s-card-media { height: 140px; }
+  .platform-modal-inner { padding: 1rem; width: 94%; }
+  .nav__inner { padding: 0 1rem; }
+}
+@media (max-width: 480px) {
+  header.nav { padding: 0.75rem 4%; }
+  header.nav .nav__menu a { font-size: 0.9rem; padding: 0.4rem 0.75rem; }
+  .hero--luxury { padding: 4rem 1rem 2rem; }
+  .section { padding: 2rem 1rem; margin: 1rem; }
+  .s-card-media { height: 120px; }
+  .s-card-body h5 { font-size: 1rem; }
+  .s-card-ctas { flex-direction: column; align-items: stretch; }
+  .s-btn { width: 100%; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .nav__logo, .nav__logo:hover, .nav__logo:focus { animation: none; transition: none; b
+}
+
+/* Small utility spacing for nav inner */
+.nav__inner { display: flex; align-items: center; gap: 1rem; width: 100%; }
+.nav__center { display: flex; gap: 1rem; margin: 0 auto; }
+.nav__actions { margin-left: auto; display: flex; gap: 0.75rem; align-items: center; }
+
+
+/* Instagram section — ZEAL premium theme */
+#instagram.section--light {
+  background: linear-gradient(180deg, #0d052d 0%, #08031e 100%);
+  color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+  padding: 3rem 2rem;
+}
+
+/* Title in gold */
+#instagram .section__title {
+  color: #ffd54f;
+  text-shadow: 0 0 12px rgba(255,213,79,0.35);
+}
+
+/* Instagram card inside the dark section */
+#instagram .s-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,213,79,0.08);
+  box-shadow: 0 12px 36px rgba(2,6,23,0.7);
+}
+
+/* Card text colors */
+#instagram .s-card-sub {
+  color: rgba(255,255,255,0.85);
+}
+
+/* Buttons inside Instagram section */
+#instagram .s-btn-primary {
+  background: #ffd54f;
+  color: #0d052d;
+}
+
+#instagram .s-btn-outline,
+#instagram .s-btn-ghost {
+  color: #fff;
+  border-color: rgba(255,255,255,0.15);
+}
+
+/* Media image glow */
+#instagram .s-card-media {
+  box-shadow: 0 0 20px rgba(255,213,79,0.25);
+  border-bottom: 1px solid rgba(255,213,79,0.1);
+}
+
+
 
 
 
@@ -658,7 +753,7 @@ footer .footer__nav p {
 
       <!-- Copyright -->
       <div class="footer__copy" style="color:rgba(255,255,255,0.7);font-size:0.95rem;">
-        <span>© 2026 Zeal </span>
+        <span>© 2026 </span>
       </div>
     </div>
   </div>
@@ -907,6 +1002,144 @@ const debounce = (fn, wait = 100) => {
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeAll();
   });
+</script>
+<script>
+(function headerMenus() {
+  try {
+    // Wait for DOM if script loaded early
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else init();
+
+    function init() {
+      const header = document.querySelector('.zeal-header') || document.querySelector('header.nav');
+      const exploreToggle = document.getElementById('exploreToggle');
+      const explorePanel = document.getElementById('explorePanel');
+      const exploreServices = document.getElementById('exploreServices');
+      const megaMenu = document.getElementById('megaMenu');
+      const megaToggles = document.querySelectorAll('.mega-toggle');
+
+      // Basic sanity checks
+      if (!exploreToggle) console.error('Missing element: #exploreToggle');
+      if (!explorePanel) console.error('Missing element: #explorePanel');
+      if (!megaMenu) console.error('Missing element: #megaMenu');
+
+      // Positioning helper
+      function positionMega() {
+        if (!megaMenu || !header) return;
+        const rect = header.getBoundingClientRect();
+        if (window.innerWidth > 900) {
+          megaMenu.style.position = 'absolute';
+          megaMenu.style.top = (window.scrollY + rect.bottom + 8) + 'px';
+          megaMenu.style.left = '0';
+          megaMenu.style.width = '100%';
+          megaMenu.style.height = '';
+        } else {
+          megaMenu.style.position = 'fixed';
+          megaMenu.style.top = '0';
+          megaMenu.style.left = '0';
+          megaMenu.style.width = '100%';
+          megaMenu.style.height = '100vh';
+        }
+      }
+
+      function closeExplore() {
+        explorePanel?.classList.remove('open');
+        explorePanel?.setAttribute('aria-hidden', 'true');
+        exploreToggle?.setAttribute('aria-expanded', 'false');
+        exploreToggle?.classList.remove('active');
+      }
+
+      function closeMega() {
+        megaMenu?.classList.remove('open');
+        megaMenu?.setAttribute('aria-hidden', 'true');
+        document.querySelectorAll('.mega-list').forEach(list => list.setAttribute('hidden', ''));
+        document.querySelectorAll('.mega-toggle').forEach(t => t.setAttribute('aria-expanded', 'false'));
+      }
+
+      // Attach toggle
+      if (exploreToggle && explorePanel) {
+        exploreToggle.addEventListener('click', function (e) {
+          e.stopPropagation();
+          const open = explorePanel.classList.toggle('open');
+          explorePanel.setAttribute('aria-hidden', String(!open));
+          exploreToggle.setAttribute('aria-expanded', String(open));
+          exploreToggle.classList.toggle('active', open);
+          if (open) closeMega();
+          console.log('Explore toggle clicked — open:', open);
+        });
+      }
+
+      // Explore -> Services opens mega menu
+      if (exploreServices && megaMenu) {
+        exploreServices.addEventListener('click', function (e) {
+          e.stopPropagation();
+          positionMega();
+          const isOpen = megaMenu.classList.toggle('open');
+          megaMenu.setAttribute('aria-hidden', String(!isOpen));
+          if (isOpen) {
+            // ensure lists are closed initially
+            document.querySelectorAll('.mega-list').forEach(list => list.setAttribute('hidden', ''));
+            document.querySelectorAll('.mega-toggle').forEach(t => t.setAttribute('aria-expanded', 'false'));
+          }
+          closeExplore();
+          console.log('Explore -> Services clicked — mega open:', isOpen);
+        });
+      }
+
+      // Mega column toggles
+      if (megaToggles.length) {
+        megaToggles.forEach(h => {
+          h.addEventListener('click', function (ev) {
+            ev.stopPropagation();
+            const id = h.getAttribute('data-target');
+            const el = document.getElementById(id);
+            if (!el) {
+              console.warn('Mega toggle target not found:', id);
+              return;
+            }
+            const wasHidden = el.hasAttribute('hidden');
+            // close others
+            document.querySelectorAll('.mega-list').forEach(list => list.setAttribute('hidden', ''));
+            document.querySelectorAll('.mega-toggle').forEach(t => t.setAttribute('aria-expanded', 'false'));
+            if (wasHidden) {
+              el.removeAttribute('hidden');
+              h.setAttribute('aria-expanded', 'true');
+            } else {
+              el.setAttribute('hidden', '');
+              h.setAttribute('aria-expanded', 'false');
+            }
+          });
+        });
+      }
+
+      // Close on outside click and Escape
+      document.addEventListener('click', function (e) {
+        if (explorePanel && !explorePanel.contains(e.target) && !exploreToggle.contains(e.target)) closeExplore();
+        if (megaMenu && !megaMenu.contains(e.target) && !exploreServices?.contains(e.target)) closeMega();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          closeExplore();
+          closeMega();
+        }
+      });
+
+      // Reposition on resize/scroll
+      let t;
+      function debouncePosition() {
+        clearTimeout(t);
+        t = setTimeout(positionMega, 120);
+      }
+      window.addEventListener('resize', debouncePosition);
+      window.addEventListener('scroll', debouncePosition);
+      positionMega();
+    }
+  } catch (err) {
+    console.error('headerMenus error:', err);
+  }
+})();
 </script>
 
 </body>
