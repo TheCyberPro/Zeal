@@ -10,11 +10,7 @@
     gtag('config', 'G-B0HZHDFETE');
   </script>
 
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ZEAL | Web development studio for premium digital platforms</title>
-  <meta name="description" content="ZEAL builds premium websites, apps, and onboarding systems that elevate brand authority and drive measurable results." />
-
+<meta charset="utf-8" /> <meta name="viewport" content="width=device-width, initial-scale=1" /> <title>ZEAL — We create digital experiences</title> <meta name="description" content="We are a digital agency specializing in web design, development, and branding." /> <!-- Open Graph --> <meta property="og:title" content="ZEAL — We create digital experiences"> <meta property="og:description" content="We are a digital agency specializing in web design, development, and branding."> <meta property="og:image" content="/assets/zeal_ogimage.png"> <meta property="og:type" content="website"> <meta property="og:url" content="https://zealweb.xyz">
   <!-- Google Fonts: Inter + Anton -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet" />
@@ -683,7 +679,7 @@ body {
 .hero-subtitle {
   font-size: 1.1rem;
 
-
+<style> /* Global */ :root { --bg-deep: #05030f; --bg-navy: #0d052d; --text: #ffffff; --text-soft: rgba(255,255,255,0.85); } * { box-sizing: border-box; } html, body { height: 100%; } body { margin: 0; font-family: 'Inter', system-ui, -apple-system, sans-serif; color: var(--text); background: radial-gradient(circle at top left, var(--bg-navy) 0%, var(--bg-deep) 70%); overflow-x: hidden; } /* Header (Home / About / ZEAL) */ .zeal-header { width: 100%; padding: 1.5rem 4%; position: absolute; top: 0; left: 0; z-index: 20; } .zeal-nav { display: flex; align-items: center; gap: 2rem; } .nav-link { color: var(--text-soft); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: color .2s ease; } .nav-link:hover { color: var(--text); } .nav-logo { margin-left: auto; font-size: 1.4rem; font-weight: 800; letter-spacing: 0.1em; color: var(--text); } /* Hero */ .zeal-hero { position: relative; height: 100vh; width: 100%; padding: 0 4%; display: flex; align-items: center; justify-content: flex-start; overflow: hidden; } .hero-content { max-width: 650px; z-index: 2; } .hero-title { font-size: clamp(2.8rem, 6vw, 4rem); font-weight: 800; line-height: 1.1; margin: 0 0 1.2rem; text-shadow: 0 0 20px rgba(255,255,255,0.25); } .hero-subtitle { font-size: 1.1rem; color: var(--text-soft); max-width: 520px; line-height: 1.6; margin: 0; } /* Glowing crescent orb (right) */ .hero-orb { position: absolute; top: 8%; right: -12%; width: 640px; height: 640px; border-radius: 50%; /* Use your OG image as the glow source */ background: url('/assets/zeal_ogimage.png') center/cover no-repeat; filter: blur(22px) brightness(1.25) saturate(1.1); opacity: 0.85; z-index: 1; /* Optional subtle drift */ animation: orbFloat 12s ease-in-out infinite; } @keyframes orbFloat { 0% { transform: translateY(0); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0); } } /* Responsive */ @media (max-width: 768px) { .nav-logo { font-size: 1.2rem; } .hero-subtitle { font-size: 1rem; } .hero-orb { right: -30%; width: 520px; height: 520px; filter: blur(20px) brightness(1.2); } } </style>
 
   </style>
 
@@ -708,20 +704,14 @@ body {
   <!-- Header -->
 <header class="zeal-header">
   <nav class="zeal-nav">
-
-    <img src="/assets/zeal_ogimage.png" class="header-og-image" alt="">
-
     <div class="nav-left">
       <a href="/" class="nav-link">Home</a>
       <a href="#about" class="nav-link">About</a>
     </div>
-
     <span class="nav-logo">ZEAL</span>
-
-    <button id="exploreToggle" class="hamburger">
+    <button id="exploreToggle" class="hamburger" aria-label="Toggle Explore Menu">
       <span></span><span></span><span></span>
     </button>
-
   </nav>
 </header>
 
@@ -799,14 +789,13 @@ body {
     </div>
   </div>
 
-  <!-- HERO with Brand Glow -->
-<!-- NEW HERO SECTION ( EXACTLY) --> 
-	<section class="zeal-hero"> 
-     <div class="hero-content"> 
-      <h1 class="hero-title">WE CREATE DIGITAL EXPERIENCES</h1>
- 	<p class="hero-subtitle"> ZEAL is a web development studio that builds premium websites, apps, and onboarding systems — engineered for trust, speed, and measurable results. </p> </div>
- <!-- OG IMAGE GLOW ORB -->
- 	<div class="hero-orb"></div> </section>
+
+<!-- Hero -->
+ <section class="zeal-hero" aria-labelledby="hero-title"> <div class="hero-content"> 
+<h1 id="hero-title" class="hero-title">WE CREATE DIGITAL EXPERIENCES</h1> 
+<p class="hero-subtitle"> We are a digital agency specializing in web design, development, and branding. </p> </div>
+ <!-- Glowing crescent orb -->
+ <div class="hero-orb" aria-hidden="true"></div> </section>
 
 
 
@@ -1297,27 +1286,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-</script>
-<script>
-
   const toggle = document.getElementById("exploreToggle");
   const panel = document.getElementById("explorePanel");
   const mega = document.getElementById("megaMenu");
 
   toggle.addEventListener("click", () => {
     toggle.classList.toggle("active");
-
     const isOpen = toggle.classList.contains("active");
-
-    panel.setAttribute("aria-hidden", !isOpen);
-    mega.setAttribute("aria-hidden", !isOpen);
-
     panel.style.display = isOpen ? "block" : "none";
     mega.style.display = isOpen ? "block" : "none";
+    panel.setAttribute("aria-hidden", !isOpen);
+    mega.setAttribute("aria-hidden", !isOpen);
   });
-
 </script>
-
 
 </body>
 </html>
