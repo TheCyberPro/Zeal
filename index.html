@@ -494,13 +494,199 @@ footer .footer__nav p {
 .explore-panel.open {
   display: block;
 }
+/* NEW ZEAL HEADER */
+.zeal-header {
+  width: 100%;
+  padding: 1.5rem 4%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2000;
+}
 
+.zeal-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
+.nav-left {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-link {
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #fff;
+}
+
+.nav-logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #fff;
+}
+
+/* HAMBURGER (Explore button) */
+.hamburger {
+  width: 32px;
+  height: 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.hamburger span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: #fff;
+  border-radius: 4px;
+  transition: 0.3s ease;
+}
+
+/* ACTIVE STATE (X animation) */
+.hamburger.active span:nth-child(1) {
+  transform: translateY(11px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-11px) rotate(-45deg);
+}
+
+/* GLOBAL */
+body {
+  margin: 0;
+  padding: 0;
+  background: #05030f;
+  font-family: 'Inter', sans-serif;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* HEADER */
+.zeal-header {
+  width: 100%;
+  padding: 1.5rem 4%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2000;
+}
+
+.zeal-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-left {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-link {
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #fff;
+}
+
+.nav-logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #fff;
+}
+
+/* HAMBURGER (Explore button) */
+.hamburger {
+  width: 32px;
+  height: 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.hamburger span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: #fff;
+  border-radius: 4px;
+  transition: 0.3s ease;
+}
+
+/* ACTIVE STATE */
+.hamburger.active span:nth-child(1) {
+  transform: translateY(11px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-11px) rotate(-45deg);
+}
+
+/* HERO SECTION */
+.zeal-hero {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  padding: 0 4%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background: radial-gradient(circle at top left, #0d052d 0%, #05030f 70%);
+  overflow: hidden;
+}
+
+.hero-content {
+  max-width: 650px;
+  z-index: 2;
+}
+
+.hero-title {
+  font-size: 3.8rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.2rem;
+  text-shadow: 0 0 20px rgba(255,255,255,0.25);
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+]
 
   </style>
 
   <!-- Google Tag Manager -->
-<!-- Google Tag Manager -->
 <script>
   (function(w,d,s,l,i){
     w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
@@ -519,30 +705,29 @@ footer .footer__nav p {
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 
   <!-- Header -->
-<header class="nav">
-  <div class="nav__inner">
+<!-- NEW ZEAL HEADER (replaces your old header) -->
+<header class="zeal-header">
+  <nav class="zeal-nav">
 
-    <a href="/" class="nav__logo">ZEAL</a>
-
-    <div class="nav__actions">
-      <button id="exploreToggle" class="explore-trigger">Explore ▾</button>
+    <!-- Left navigation -->
+    <div class="nav-left">
+      <a href="/" class="nav-link">Home</a>
+      <a href="#about" class="nav-link">About</a>
     </div>
 
-  </div>
+    <!-- Center logo -->
+    <span class="nav-logo">ZEAL</span>
+
+    <!-- Right: Explore hamburger -->
+    <button id="exploreToggle" class="hamburger" aria-label="Toggle Explore Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+  </nav>
 </header>
 
-  <!-- Small Explore panel (appears under header) -->
-  <div id="explorePanel"
-       class="explore-panel"
-       aria-hidden="true"
-       role="dialog"
-       aria-label="Explore menu">
-    <div class="explore-inner">
-      <button class="explore-btn" id="exploreAbout" type="button">About</button>
-      <button class="explore-btn" id="exploreServices" type="button">Services</button>
-      <button class="explore-btn" id="exploreDemo" type="button">Book a Demo</button>
-    </div>
-  </div>
 
   <!-- Mega menu panel (sibling, outside header) -->
   <div id="megaMenu" class="mega-menu" role="menu" aria-hidden="true">
@@ -617,16 +802,15 @@ footer .footer__nav p {
   </div>
 
   <!-- HERO with Brand Glow -->
-  <section class="hero hero--luxury" aria-labelledby="hero-title">
-    <div class="container hero__inner">
-      <img src="/assets/zeal2.png" alt="ZEAL logo — premium web development studio" />
-      <h1 id="hero-title" style="margin-top:0.5rem;">Where Preference meets Perfection</h1>
-      <p class="hero__subtitle">
-        ZEAL is a web development studio that builds premium websites, apps, and onboarding systems — engineered for trust, speed, and measurable results.
-      </p>
-      <a href="#about" class="btn btn--secondary">Meet the Developer</a>
-    </div>
-  </section>
+<!-- NEW HERO SECTION ( EXACTLY) --> 
+	<section class="zeal-hero"> 
+     <div class="hero-content"> 
+      <h1 class="hero-title">WE CREATE DIGITAL EXPERIENCES</h1>
+ 	<p class="hero-subtitle"> ZEAL is a web development studio that builds premium websites, apps, and onboarding systems — engineered for trust, speed, and measurable results. </p> </div>
+ <!-- OG IMAGE GLOW ORB -->
+ 	<div class="hero-orb"></div> </section>
+
+
 
   <!-- SERVICES -->
   <section id="services" class="section section--light" aria-labelledby="services-title">
@@ -1111,6 +1295,29 @@ const debounce = (fn, wait = 100) => {
 document.addEventListener('DOMContentLoaded', function () {
   // All modules are defensive and run immediately; nothing required here.
 });
+
+
+
+
+</script>
+<script>
+
+  const toggle = document.getElementById("exploreToggle");
+  const panel = document.getElementById("explorePanel");
+  const mega = document.getElementById("megaMenu");
+
+  toggle.addEventListener("click", () => {
+    toggle.classList.toggle("active");
+
+    const isOpen = toggle.classList.contains("active");
+
+    panel.setAttribute("aria-hidden", !isOpen);
+    mega.setAttribute("aria-hidden", !isOpen);
+
+    panel.style.display = isOpen ? "block" : "none";
+    mega.style.display = isOpen ? "block" : "none";
+  });
+
 </script>
 
 
