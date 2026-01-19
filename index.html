@@ -682,28 +682,8 @@ body {
 
 .hero-subtitle {
   font-size: 1.1rem;
-]
 
-.header-og-image {
-  position: absolute;
-  top: -20px;
-  right: 0;
-  width: 180px;
-  opacity: 0.8;
-  filter: drop-shadow(0 0 25px rgba(255,213,0,0.45));
-  pointer-events: none;
-  z-index: -1;
-}
-.header-og-image {
-  position: absolute;
-  top: -20px;
-  right: 0;
-  width: 180px;
-  opacity: 0.8;
-  filter: drop-shadow(0 0 25px rgba(255,213,0,0.45));
-  pointer-events: none;
-  z-index: -1;
-}
+
 
   </style>
 
@@ -726,29 +706,25 @@ body {
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 
   <!-- Header -->
-<!-- NEW ZEAL HEADER (replaces your old header) -->
 <header class="zeal-header">
   <nav class="zeal-nav">
-<img src="/assets/zeal_ogimage.png" class="header-og-image" alt="">
 
-    <!-- Left navigation -->
+    <img src="/assets/zeal_ogimage.png" class="header-og-image" alt="">
+
     <div class="nav-left">
       <a href="/" class="nav-link">Home</a>
       <a href="#about" class="nav-link">About</a>
     </div>
 
-    <!-- Center logo -->
     <span class="nav-logo">ZEAL</span>
 
-    <!-- Right: Explore hamburger -->
-    <button id="exploreToggle" class="hamburger" aria-label="Toggle Explore Menu">
-      <span></span>
-      <span></span>
-      <span></span>
+    <button id="exploreToggle" class="hamburger">
+      <span></span><span></span><span></span>
     </button>
 
   </nav>
 </header>
+
 
 
   <!-- Mega menu panel (sibling, outside header) -->
