@@ -540,6 +540,31 @@ footer .footer__nav p { margin: 0; display: inline-block; color: inherit; }
 }
 
 
+/* container */
+.container { width:100%; max-width:1200px; margin:0 auto; padding:0 1rem; }
+
+/* hero */
+.zeal-hero { position:relative; height:100vh; display:flex; align-items:center; padding:6rem 4% 2rem; overflow:hidden; }
+.hero-content { z-index: 3; max-width:720px; }
+.hero-title { color:#ffd54f; font-weight:800; font-size:clamp(2.8rem,6vw,4rem); text-shadow:0 0 18px rgba(255,213,79,0.35); }
+.hero-subtitle { color:rgba(255,255,255,0.9); margin-top:.6rem; }
+
+/* orb */
+.hero-orb {
+  position:absolute; top:6%; right:-10%;
+  width:680px; height:680px; border-radius:50%;
+  background:center/cover no-repeat url('/assets/zeal_ogimage.png');
+  filter: blur(28px) brightness(1.2) saturate(1.05);
+  z-index:1; opacity:.92; pointer-events:none;
+  animation:orbFloat 12s ease-in-out infinite;
+}
+@keyframes orbFloat { 0%{transform:translateY(0)}50%{transform:translateY(-12px)}100%{transform:translateY(0)} }
+
+/* ensure header sits above hero */
+.zeal-header { position:fixed; top:0; left:0; width:100%; z-index:2200; }
+
+/* responsive: hide orb on very small screens to avoid overlap */
+@media (max-width:480px) { .hero-orb { display:none; } }
 
 
 
@@ -813,478 +838,21 @@ footer .footer__nav p { margin: 0; display: inline-block; color: inherit; }
 
 
 <script>
-/* ============================
-   Helpers
-   ============================ */
-const $ = (sel, ctx = document) => (ctx || document).querySelector(sel);
-const $$ = (sel, ctx = document) => Array.from((ctx || document).querySelectorAll(sel));
-const debounce = (fn, wait = 120) => {
-  let t;
-  return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), wait); };
-};
-
-/* ============================
-   Tawk.to loader (safe, idempotent)
-   ============================ */
-(function loadTawk() {
-  try {
-    if (window.Tawk_API || window.Tawk_LoadStart) return;
-    window.Tawk_API = window.Tawk_API || {};
-    window.Tawk_LoadStart = new Date();
-    window.Tawk_API.apiKey = '0aa5196f2fb85f3d612c6dc0f9af802fb12a0fc4';
-
-    const s = document.createElement('script');
-    s.async = true;
-    s.src = 'https://embed.tawk.to/68cf60b510ce81192499da9f/1j5l13ih6';
-    s.charset = 'UTF-8';
-    s.setAttribute('crossorigin', '*');
-
-    const first = document.getElementsByTagName('script')[0];
-    if (first && first.parentNode) first.parentNode.insertBefore(s, first);
-    else document.head.appendChild(s);
-  } catch (err) {
-    console.warn('Tawk load failed', err);
-  }
-})();
-
-/* ============================
-   Header / Explore / Mega menu
-   Consolidated and defensive: preserves original behavior
-   ============================ */
-(function headerMenus() {
-  function init() {
-    const header = document.querySelector('.zeal-header') || document.querySelector('header.nav');
-    const exploreToggle = document.getElementById('exploreToggle');
-    const explorePanel = document.getElementById('explorePanel');
-    const exploreAbout = document.getElementById('exploreAbout');
-    const exploreServices = document.getElementById('exploreServices');
-    const exploreDemo = document.getElementById('exploreDemo');
-    const megaMenu = document.getElementById('megaMenu');
-    const megaToggles = document.querySelectorAll('.mega-toggle');
-    const getCatalogue = document.getElementById('getCatalogue');
-
-    // Sanity
-    if (!header) return console.warn('header not found — headerMenus aborted');
-
-    // Positioning helper
-    function positionMega() {
-      if (!megaMenu) return;
-      const rect = header.getBoundingClientRect();
-      if (window.innerWidth > 900) {
-        megaMenu.style.position = 'absolute';
-        megaMenu.style.top = (window.scrollY + rect.bottom + 8) + 'px';
-        megaMenu.style.left = '0';
-        megaMenu.style.width = '100%';
-        megaMenu.style.height = '';
-      } else {
-        megaMenu.style.position = 'fixed';
-        megaMenu.style.top = '0';
-        megaMenu.style.left = '0';
-        megaMenu.style.width = '100%';
-        megaMenu.style.height = '100vh';
-      }
-    }
-
-    function closeExplore() {
-      explorePanel?.classList.remove('open');
-      explorePanel?.setAttribute('aria-hidden', 'true');
-      exploreToggle?.setAttribute('aria-expanded', 'false');
-      exploreToggle?.classList.remove('active');
-    }
-
-    function closeMega() {
-      megaMenu?.classList.remove('open');
-      megaMenu?.setAttribute('aria-hidden', 'true');
-      document.querySelectorAll('.mega-list').forEach(list => list.setAttribute('hidden', ''));
-      document.querySelectorAll('.mega-toggle').forEach(t => t.setAttribute('aria-expanded', 'false'));
-    }
-
-    // Toggle explore panel
-    if (exploreToggle && explorePanel) {
-      exploreToggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const open = explorePanel.classList.toggle('open');
-        explorePanel.setAttribute('aria-hidden', String(!open));
-        exploreToggle.setAttribute('aria-expanded', String(open));
-        exploreToggle.classList.toggle('active', open);
-        if (open) closeMega();
-      });
-    }
-
-    // Explore -> About / Services / Demo
-    exploreAbout?.addEventListener('click', () => {
-      const target = document.getElementById('what-we-do') || document.getElementById('services') || document.getElementById('services-title');
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      else window.location.href = '/about';
-      closeExplore();
-    });
-
-    exploreServices?.addEventListener('click', (e) => {
-      e?.stopPropagation();
-      positionMega();
-      const isOpen = megaMenu?.classList.toggle('open');
-      if (megaMenu) megaMenu.setAttribute('aria-hidden', String(!isOpen));
-      if (isOpen) {
-        document.querySelectorAll('.mega-list').forEach(list => list.setAttribute('hidden', ''));
-        document.querySelectorAll('.mega-toggle').forEach(t => t.setAttribute('aria-expanded', 'false'));
-      }
-      closeExplore();
-    });
-
-    exploreDemo?.addEventListener('click', () => {
-      const contact = document.getElementById('contact');
-      if (contact) contact.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      else window.location.href = '/contact';
-      closeExplore();
-    });
-
-    // Get catalogue mailto
-    if (getCatalogue) {
-      getCatalogue.addEventListener('click', function (e) {
-        e.preventDefault();
-        const PDF_URL = 'https://example.com/ZEAL-catalogue.pdf'; // replace with real URL
-        const subject = encodeURIComponent('Request: ZEAL Catalogue');
-        const body = encodeURIComponent('Hi ZEAL team,\n\nPlease send me the ZEAL services catalogue. You can also download it here: ' + PDF_URL + '\n\nThanks.');
-        window.location.href = 'mailto:zeal.io@outlook.com?subject=' + subject + '&body=' + body;
-      });
-    }
-
-    // Mega column toggles
-    if (megaToggles.length) {
-      megaToggles.forEach(h => {
-        h.addEventListener('click', (ev) => {
-          ev.stopPropagation();
-          const id = h.getAttribute('data-target');
-          const el = document.getElementById(id);
-          if (!el) return console.warn('Mega toggle target not found:', id);
-          const wasHidden = el.hasAttribute('hidden');
-          document.querySelectorAll('.mega-list').forEach(list => list.setAttribute('hidden', ''));
-          document.querySelectorAll('.mega-toggle').forEach(t => t.setAttribute('aria-expanded', 'false'));
-          if (wasHidden) {
-            el.removeAttribute('hidden');
-            h.setAttribute('aria-expanded', 'true');
-          } else {
-            el.setAttribute('hidden', '');
-            h.setAttribute('aria-expanded', 'false');
-          }
-        });
-      });
-    }
-
-    // Close on outside click and Escape
-    document.addEventListener('click', (e) => {
-      if (explorePanel && !explorePanel.contains(e.target) && !exploreToggle?.contains(e.target)) closeExplore();
-      if (megaMenu && !megaMenu.contains(e.target) && !exploreServices?.contains(e.target)) closeMega();
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        closeExplore();
-        closeMega();
-      }
-    });
-
-    // Reposition on resize/scroll
-    const debouncedPosition = debounce(positionMega, 120);
-    window.addEventListener('resize', debouncedPosition);
-    window.addEventListener('scroll', debouncedPosition);
-    positionMega();
-  }
-
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-  else init();
-})();
-
-/* ============================
-   Small helpers for global click/escape fallback
-   (keeps older inline scripts working if present)
-   ============================ */
-(function globalMenuFallback() {
-  const toggle = document.getElementById('exploreToggle');
-  const panel  = document.getElementById('explorePanel');
-  const mega   = document.getElementById('megaMenu');
-  const exploreServices = document.getElementById('exploreServices');
-
-  if (!toggle) return;
-
-  function closeAll() {
-    panel?.classList.remove('open');
-    mega?.classList.remove('open');
-    toggle.classList.remove('active');
-    toggle.setAttribute('aria-expanded', 'false');
-  }
-
-  toggle.addEventListener('click', () => {
-    const isOpen = panel?.classList.toggle('open');
-    toggle.classList.toggle('active', Boolean(isOpen));
-    toggle.setAttribute('aria-expanded', String(Boolean(isOpen)));
-    if (!isOpen) mega?.classList.remove('open');
-  });
-
-  exploreServices?.addEventListener('click', () => {
-    panel?.classList.remove('open');
-    mega?.classList.add('open');
-    if (mega) mega.setAttribute('aria-hidden', 'false');
-  });
-
-  document.addEventListener('click', (e) => {
-    if (panel && mega && toggle && !panel.contains(e.target) && !mega.contains(e.target) && !toggle.contains(e.target)) {
-      closeAll();
-    }
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeAll();
-  });
-})();
-</script>
-<script>
-/* Consolidated helpers + modules (safe, DOM-ready, no $ collision) */
-document.addEventListener('DOMContentLoaded', () => {
-  /* Helpers (safe names) */
-  const q = (sel, ctx = document) => (ctx || document).querySelector(sel);
-  const qq = (sel, ctx = document) => Array.from((ctx || document).querySelectorAll(sel));
-  const debounce = (fn, wait = 100) => {
-    let t;
-    return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), wait); };
-  };
-
-  console.log('UI script init');
-
-  /* Testimonial slider */
-  (function testimonialSlider() {
-    const items = qq('.testimonial');
-    if (!items.length) return;
-    let idx = 0;
-    items.forEach((el, i) => el.classList.toggle('active', i === 0));
-    setInterval(() => {
-      items[idx].classList.remove('active');
-      idx = (idx + 1) % items.length;
-      items[idx].classList.add('active');
-    }, 5000);
-  })();
-
-  /* Reveal on scroll */
-  (function revealOnScroll() {
-    const els = qq('.card, .highlight-card, .testimonial');
-    if (!els.length) return;
-    els.forEach(el => el.classList.add('reveal'));
-    try {
-      const obs = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1 });
-      qq('.reveal').forEach(el => obs.observe(el));
-    } catch (err) {
-      // Fallback: reveal immediately if IntersectionObserver not supported
-      qq('.reveal').forEach(el => el.classList.add('active'));
-    }
-  })();
-
-  /* Header: Explore panel + Mega menu */
-  (function headerMenus() {
-    const header = q('.zeal-header') || q('header.nav');
-    const exploreToggle = q('#exploreToggle');
-    const explorePanel = q('#explorePanel');
-    const exploreAbout = q('#exploreAbout');
-    const exploreServices = q('#exploreServices');
-    const exploreDemo = q('#exploreDemo');
-    const megaMenu = q('#megaMenu');
-    const megaToggles = qq('.mega-toggle');
-    const getCatalogue = q('#getCatalogue');
-
-    if (!header) {
-      console.warn('header not found: expected .zeal-header or header.nav');
-      return;
-    }
-
-    function positionMega() {
-      if (!megaMenu) return;
-      const rect = header.getBoundingClientRect();
-      if (window.innerWidth > 900) {
-        megaMenu.style.position = 'absolute';
-        megaMenu.style.top = (window.scrollY + rect.bottom + 8) + 'px';
-        megaMenu.style.left = '0';
-        megaMenu.style.width = '100%';
-        megaMenu.style.height = '';
-      } else {
-        megaMenu.style.position = 'fixed';
-        megaMenu.style.top = '0';
-        megaMenu.style.left = '0';
-        megaMenu.style.width = '100%';
-        megaMenu.style.height = '100vh';
-      }
-    }
-
-    function closeExplore() {
-      if (!explorePanel) return;
-      explorePanel.classList.remove('open');
-      explorePanel.setAttribute('aria-hidden', 'true');
-      exploreToggle?.setAttribute('aria-expanded', 'false');
-      exploreToggle?.classList.remove('active');
-    }
-
-    function closeMega() {
-      if (!megaMenu) return;
-      megaMenu.classList.remove('open');
-      megaMenu.setAttribute('aria-hidden', 'true');
-      qq('.mega-list').forEach(list => list.setAttribute('hidden', ''));
-      qq('.mega-toggle').forEach(t => t.setAttribute('aria-expanded', 'false'));
-    }
-
-    // Toggle explore panel
-    if (exploreToggle && explorePanel) {
-      exploreToggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const open = explorePanel.classList.toggle('open');
-        explorePanel.setAttribute('aria-hidden', String(!open));
-        exploreToggle.setAttribute('aria-expanded', String(open));
-        exploreToggle.classList.toggle('active', open);
-        if (open) closeMega();
-      });
-    } else {
-      console.warn('Missing exploreToggle or explorePanel');
-    }
-
-    // Explore -> About
-    exploreAbout?.addEventListener('click', () => {
-      const target = q('#what-we-do') || q('#services') || q('#services-title');
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      else window.location.href = '/about';
-      closeExplore();
-    });
-
-    // Explore -> Demo
-    exploreDemo?.addEventListener('click', () => {
-      const mailto = 'mailto:zeal.io@outlook.com?subject=' + encodeURIComponent('ZEAL Demo Request') +
-                     '&body=' + encodeURIComponent('Hi ZEAL team,\n\nI would like to request a demo. Please get in touch.\n\nThanks.');
-      window.location.href = mailto;
-      closeExplore();
-    });
-
-    // Explore -> Services opens mega menu
-    exploreServices?.addEventListener('click', (e) => {
-      e?.stopPropagation();
-      positionMega();
-      const isOpen = megaMenu?.classList.toggle('open');
-      if (megaMenu) megaMenu.setAttribute('aria-hidden', String(!isOpen));
-      if (isOpen) {
-        qq('.mega-list').forEach(list => list.setAttribute('hidden', ''));
-        qq('.mega-toggle').forEach(t => t.setAttribute('aria-expanded', 'false'));
-      }
-      closeExplore();
-    });
-
-    // Get catalogue mailto
-    if (getCatalogue) {
-      getCatalogue.addEventListener('click', function (e) {
-        e.preventDefault();
-        const PDF_URL = 'https://example.com/ZEAL-catalogue.pdf'; // replace with real URL
-        const subject = encodeURIComponent('Request: ZEAL Catalogue');
-        const body = encodeURIComponent('Hi ZEAL team,\n\nPlease send me the ZEAL services catalogue. You can also download it here: ' + PDF_URL + '\n\nThanks.');
-        window.location.href = 'mailto:zeal.io@outlook.com?subject=' + subject + '&body=' + body;
-      });
-    }
-
-    // Mega column toggles
-    if (megaToggles.length) {
-      megaToggles.forEach(h => {
-        h.addEventListener('click', (ev) => {
-          ev.stopPropagation();
-          const id = h.getAttribute('data-target');
-          const el = q('#' + id);
-          if (!el) {
-            console.warn('Mega toggle target not found:', id);
-            return;
-          }
-          const wasHidden = el.hasAttribute('hidden');
-          qq('.mega-list').forEach(list => list.setAttribute('hidden', ''));
-          qq('.mega-toggle').forEach(t => t.setAttribute('aria-expanded', 'false'));
-          if (wasHidden) {
-            el.removeAttribute('hidden');
-            h.setAttribute('aria-expanded', 'true');
-          } else {
-            el.setAttribute('hidden', '');
-            h.setAttribute('aria-expanded', 'false');
-          }
-        });
-      });
-    }
-
-    // Close on outside click and Escape
-    document.addEventListener('click', (e) => {
-      if (explorePanel && !explorePanel.contains(e.target) && !exploreToggle?.contains(e.target)) closeExplore();
-      if (megaMenu && !megaMenu.contains(e.target) && !exploreServices?.contains(e.target)) closeMega();
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        closeExplore();
-        closeMega();
-      }
-    });
-
-    // Reposition on resize/scroll
-    const debouncedPosition = debounce(positionMega, 120);
-    window.addEventListener('resize', debouncedPosition);
-    window.addEventListener('scroll', debouncedPosition);
-    positionMega();
-  })();
-
-  /* Small helpers for global click/escape fallback (keeps older inline scripts working) */
-  (function globalMenuFallback() {
-    const toggle = q('#exploreToggle');
-    const panel  = q('#explorePanel');
-    const mega   = q('#megaMenu');
-    const exploreServices = q('#exploreServices');
-
-    if (!toggle) return;
-
-    function closeAll() {
-      panel?.classList.remove('open');
-      mega?.classList.remove('open');
-      toggle.classList.remove('active');
-      toggle.setAttribute('aria-expanded', 'false');
-    }
-
-    toggle.addEventListener('click', () => {
-      const isOpen = panel?.classList.toggle('open');
-      toggle.classList.toggle('active', Boolean(isOpen));
-      toggle.setAttribute('aria-expanded', String(Boolean(isOpen)));
-      if (!isOpen) mega?.classList.remove('open');
-    });
-
-    exploreServices?.addEventListener('click', () => {
-      panel?.classList.remove('open');
-      mega?.classList.add('open');
-      if (mega) mega.setAttribute('aria-hidden', 'false');
-    });
-
-    document.addEventListener('click', (e) => {
-      if (panel && mega && toggle && !panel.contains(e.target) && !mega.contains(e.target) && !toggle.contains(e.target)) {
-        closeAll();
-      }
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeAll();
-    });
-  })();
-});
-</script>
-<script>
-/* Consolidated UI script
-   - Single DOMContentLoaded entry
-   - Defensive, idempotent loaders
-   - Preserves original behavior and selectors
+/*
+  ZEAL — Consolidated UI script
+  - Single drop-in to replace existing scripts
+  - Defensive, idempotent, DOM-ready
+  - Handles: helpers, Tawk loader, hero reveal, testimonial slider,
+    explore panel, mega menu, social inline, modal wiring, and fallbacks
+  Place this block once, just before </body>.
 */
 
-document.addEventListener('DOMContentLoaded', () => {
-  /* Helpers */
+(function () {
+  'use strict';
+
+  /* ---------------------------
+     Helpers
+     --------------------------- */
   const q = (sel, ctx = document) => (ctx || document).querySelector(sel);
   const qq = (sel, ctx = document) => Array.from((ctx || document).querySelectorAll(sel));
   const debounce = (fn, wait = 120) => {
@@ -1292,310 +860,339 @@ document.addEventListener('DOMContentLoaded', () => {
     return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), wait); };
   };
 
-  console.log('UI script init');
+  /* ---------------------------
+     Safe DOM ready
+     --------------------------- */
+  function ready(fn) {
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
+    else fn();
+  }
 
-  /* Testimonial slider */
-  (function testimonialSlider() {
-    const items = qq('.testimonial');
-    if (!items.length) return;
-    let idx = 0;
-    items.forEach((el, i) => el.classList.toggle('active', i === 0));
-    setInterval(() => {
-      items[idx].classList.remove('active');
-      idx = (idx + 1) % items.length;
-      items[idx].classList.add('active');
-    }, 5000);
-  })();
+  ready(() => {
+    console.log('ZEAL UI script initializing');
 
-  /* Reveal on scroll (with fallback) */
-  (function revealOnScroll() {
-    const els = qq('.card, .highlight-card, .testimonial');
-    if (!els.length) return;
-    els.forEach(el => el.classList.add('reveal'));
-    try {
-      const obs = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1 });
-      qq('.reveal').forEach(el => obs.observe(el));
-    } catch (err) {
-      qq('.reveal').forEach(el => el.classList.add('active'));
-    }
-  })();
+    /* ============================
+       Tawk.to loader (idempotent)
+       ============================ */
+    (function loadTawk() {
+      try {
+        if (window.Tawk_API || window.Tawk_LoadStart) return;
+        window.Tawk_API = window.Tawk_API || {};
+        window.Tawk_LoadStart = new Date();
+        // optional: set API key if required by your Tawk config
+        // window.Tawk_API.apiKey = '0aa5196f2fb85f3d612c6dc0f9af802fb12a0fc4';
 
-  /* Tawk.to loader (idempotent) */
-  (function loadTawk() {
-    try {
-      if (window.Tawk_API || window.Tawk_LoadStart) return;
-      window.Tawk_API = window.Tawk_API || {};
-      window.Tawk_LoadStart = new Date();
-      window.Tawk_API.apiKey = '0aa5196f2fb85f3d612c6dc0f9af802fb12a0fc4';
+        const s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://embed.tawk.to/68cf60b510ce81192499da9f/1j5l13ih6';
+        s.charset = 'UTF-8';
+        s.setAttribute('crossorigin', '*');
 
-      const s = document.createElement('script');
-      s.async = true;
-      s.src = 'https://embed.tawk.to/68cf60b510ce81192499da9f/1j5l13ih6';
-      s.charset = 'UTF-8';
-      s.setAttribute('crossorigin', '*');
-
-      const first = document.getElementsByTagName('script')[0];
-      if (first && first.parentNode) first.parentNode.insertBefore(s, first);
-      else document.head.appendChild(s);
-    } catch (err) {
-      console.warn('Tawk load failed', err);
-    }
-  })();
-
-  /* Header / Explore / Mega menu */
-  (function headerMenus() {
-    const header = q('.zeal-header') || q('header.nav');
-    const exploreToggle = q('#exploreToggle');
-    const explorePanel = q('#explorePanel');
-    const exploreAbout = q('#exploreAbout');
-    const exploreServices = q('#exploreServices');
-    const exploreDemo = q('#exploreDemo');
-    const megaMenu = q('#megaMenu');
-    const megaToggles = qq('.mega-toggle');
-    const getCatalogue = q('#getCatalogue');
-
-    if (!header) {
-      console.warn('header not found — headerMenus aborted');
-      return;
-    }
-
-    function positionMega() {
-      if (!megaMenu) return;
-      const rect = header.getBoundingClientRect();
-      if (window.innerWidth > 900) {
-        megaMenu.style.position = 'absolute';
-        megaMenu.style.top = (window.scrollY + rect.bottom + 8) + 'px';
-        megaMenu.style.left = '0';
-        megaMenu.style.width = '100%';
-        megaMenu.style.height = '';
-      } else {
-        megaMenu.style.position = 'fixed';
-        megaMenu.style.top = '0';
-        megaMenu.style.left = '0';
-        megaMenu.style.width = '100%';
-        megaMenu.style.height = '100vh';
+        const first = document.getElementsByTagName('script')[0];
+        if (first && first.parentNode) first.parentNode.insertBefore(s, first);
+        else document.head.appendChild(s);
+      } catch (err) {
+        console.warn('Tawk loader failed', err);
       }
-    }
+    })();
 
-    function closeExplore() {
-      explorePanel?.classList.remove('open');
-      explorePanel?.setAttribute('aria-hidden', 'true');
-      exploreToggle?.setAttribute('aria-expanded', 'false');
-      exploreToggle?.classList.remove('active');
-    }
+    /* ============================
+       Testimonial slider
+       ============================ */
+    (function testimonialSlider() {
+      const items = qq('.testimonial');
+      if (!items.length) return;
+      let idx = 0;
+      items.forEach((el, i) => el.classList.toggle('active', i === 0));
+      setInterval(() => {
+        items[idx].classList.remove('active');
+        idx = (idx + 1) % items.length;
+        items[idx].classList.add('active');
+      }, 5000);
+    })();
 
-    function closeMega() {
-      megaMenu?.classList.remove('open');
-      megaMenu?.setAttribute('aria-hidden', 'true');
-      qq('.mega-list').forEach(list => list.setAttribute('hidden', ''));
-      qq('.mega-toggle').forEach(t => t.setAttribute('aria-expanded', 'false'));
-    }
+    /* ============================
+       Reveal on scroll (with fallback)
+       ============================ */
+    (function revealOnScroll() {
+      const els = qq('.card, .highlight-card, .testimonial');
+      if (!els.length) return;
+      els.forEach(el => el.classList.add('reveal'));
+      try {
+        const obs = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('active');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12 });
+        qq('.reveal').forEach(el => obs.observe(el));
+      } catch (err) {
+        // fallback: reveal immediately
+        qq('.reveal').forEach(el => el.classList.add('active'));
+      }
+    })();
 
-    /* Toggle explore panel */
-    if (exploreToggle && explorePanel) {
-      exploreToggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const open = explorePanel.classList.toggle('open');
-        explorePanel.setAttribute('aria-hidden', String(!open));
-        exploreToggle.setAttribute('aria-expanded', String(open));
-        exploreToggle.classList.toggle('active', open);
-        if (open) closeMega();
-      });
-    }
+    /* ============================
+       Header / Explore / Mega menu
+       ============================ */
+    (function headerMenus() {
+      const header = q('.zeal-header') || q('header.nav');
+      const exploreToggle = q('#exploreToggle');
+      const explorePanel = q('#explorePanel');
+      const exploreAbout = q('#exploreAbout');
+      const exploreServices = q('#exploreServices');
+      const exploreDemo = q('#exploreDemo');
+      const megaMenu = q('#megaMenu');
+      const megaToggles = qq('.mega-toggle');
+      const getCatalogue = q('#getCatalogue');
 
-    /* Explore actions */
-    exploreAbout?.addEventListener('click', () => {
-      const target = q('#what-we-do') || q('#services') || q('#services-title');
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      else window.location.href = '/about';
-      closeExplore();
-    });
+      if (!header) {
+        console.warn('ZEAL header not found — headerMenus disabled');
+        return;
+      }
 
-    exploreDemo?.addEventListener('click', () => {
-      const mailto = 'mailto:zeal.io@outlook.com?subject=' + encodeURIComponent('ZEAL Demo Request') +
-                     '&body=' + encodeURIComponent('Hi ZEAL team,\n\nI would like to request a demo. Please get in touch.\n\nThanks.');
-      window.location.href = mailto;
-      closeExplore();
-    });
+      function positionMega() {
+        if (!megaMenu) return;
+        const rect = header.getBoundingClientRect();
+        if (window.innerWidth > 900) {
+          megaMenu.style.position = 'absolute';
+          megaMenu.style.top = (window.scrollY + rect.bottom + 8) + 'px';
+          megaMenu.style.left = '0';
+          megaMenu.style.width = '100%';
+          megaMenu.style.height = '';
+        } else {
+          megaMenu.style.position = 'fixed';
+          megaMenu.style.top = '0';
+          megaMenu.style.left = '0';
+          megaMenu.style.width = '100%';
+          megaMenu.style.height = '100vh';
+        }
+      }
 
-    exploreServices?.addEventListener('click', (e) => {
-      e?.stopPropagation();
-      positionMega();
-      const isOpen = megaMenu?.classList.toggle('open');
-      if (megaMenu) megaMenu.setAttribute('aria-hidden', String(!isOpen));
-      if (isOpen) {
+      function closeExplore() {
+        explorePanel?.classList.remove('open');
+        explorePanel?.setAttribute('aria-hidden', 'true');
+        exploreToggle?.setAttribute('aria-expanded', 'false');
+        exploreToggle?.classList.remove('active');
+      }
+
+      function closeMega() {
+        megaMenu?.classList.remove('open');
+        megaMenu?.setAttribute('aria-hidden', 'true');
         qq('.mega-list').forEach(list => list.setAttribute('hidden', ''));
         qq('.mega-toggle').forEach(t => t.setAttribute('aria-expanded', 'false'));
       }
-      closeExplore();
-    });
 
-    /* Get catalogue mailto */
-    if (getCatalogue) {
-      getCatalogue.addEventListener('click', function (e) {
-        e.preventDefault();
-        const PDF_URL = 'https://example.com/ZEAL-catalogue.pdf'; // replace with real URL
-        const subject = encodeURIComponent('Request: ZEAL Catalogue');
-        const body = encodeURIComponent('Hi ZEAL team,\n\nPlease send me the ZEAL services catalogue. You can also download it here: ' + PDF_URL + '\n\nThanks.');
-        window.location.href = 'mailto:zeal.io@outlook.com?subject=' + subject + '&body=' + body;
+      // Toggle explore panel (hamburger)
+      if (exploreToggle && explorePanel) {
+        exploreToggle.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const open = explorePanel.classList.toggle('open');
+          explorePanel.setAttribute('aria-hidden', String(!open));
+          exploreToggle.setAttribute('aria-expanded', String(open));
+          exploreToggle.classList.toggle('active', open);
+          if (open) closeMega();
+        });
+      } else {
+        if (!exploreToggle) console.warn('#exploreToggle missing');
+        if (!explorePanel) console.warn('#explorePanel missing');
+      }
+
+      // Explore -> About
+      exploreAbout?.addEventListener('click', () => {
+        const target = q('#what-we-do') || q('#services') || q('#services-title');
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        else window.location.href = '/about';
+        closeExplore();
       });
-    }
 
-    /* Mega column toggles */
-    if (megaToggles.length) {
-      megaToggles.forEach(h => {
-        h.addEventListener('click', (ev) => {
-          ev.stopPropagation();
-          const id = h.getAttribute('data-target');
-          const el = q('#' + id);
-          if (!el) return console.warn('Mega toggle target not found:', id);
-          const wasHidden = el.hasAttribute('hidden');
+      // Explore -> Demo
+      exploreDemo?.addEventListener('click', () => {
+        const contact = q('#contact');
+        if (contact) contact.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        else window.location.href = '/contact';
+        closeExplore();
+      });
+
+      // Explore -> Services opens mega menu
+      exploreServices?.addEventListener('click', (e) => {
+        e?.stopPropagation();
+        positionMega();
+        const isOpen = megaMenu?.classList.toggle('open');
+        if (megaMenu) megaMenu.setAttribute('aria-hidden', String(!isOpen));
+        if (isOpen) {
           qq('.mega-list').forEach(list => list.setAttribute('hidden', ''));
           qq('.mega-toggle').forEach(t => t.setAttribute('aria-expanded', 'false'));
-          if (wasHidden) {
-            el.removeAttribute('hidden');
-            h.setAttribute('aria-expanded', 'true');
-          } else {
-            el.setAttribute('hidden', '');
-            h.setAttribute('aria-expanded', 'false');
-          }
-        });
-      });
-    }
-
-    /* Close on outside click and Escape */
-    document.addEventListener('click', (e) => {
-      if (explorePanel && !explorePanel.contains(e.target) && !exploreToggle?.contains(e.target)) closeExplore();
-      if (megaMenu && !megaMenu.contains(e.target) && !exploreServices?.contains(e.target)) closeMega();
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
+        }
         closeExplore();
-        closeMega();
+      });
+
+      // Get catalogue mailto
+      if (getCatalogue) {
+        getCatalogue.addEventListener('click', function (e) {
+          e.preventDefault();
+          const PDF_URL = 'https://example.com/ZEAL-catalogue.pdf'; // replace with real URL
+          const subject = encodeURIComponent('Request: ZEAL Catalogue');
+          const body = encodeURIComponent('Hi ZEAL team,\n\nPlease send me the ZEAL services catalogue. You can also download it here: ' + PDF_URL + '\n\nThanks.');
+          window.location.href = 'mailto:zeal.io@outlook.com?subject=' + subject + '&body=' + body;
+        });
       }
-    });
 
-    /* Reposition on resize/scroll */
-    const debPos = debounce(positionMega, 120);
-    window.addEventListener('resize', debPos);
-    window.addEventListener('scroll', debPos);
-    positionMega();
-  })();
+      // Mega column toggles
+      if (megaToggles.length) {
+        megaToggles.forEach(h => {
+          h.addEventListener('click', (ev) => {
+            ev.stopPropagation();
+            const id = h.getAttribute('data-target');
+            const el = q('#' + id);
+            if (!el) return console.warn('Mega toggle target not found:', id);
+            const wasHidden = el.hasAttribute('hidden');
+            qq('.mega-list').forEach(list => list.setAttribute('hidden', ''));
+            qq('.mega-toggle').forEach(t => t.setAttribute('aria-expanded', 'false'));
+            if (wasHidden) {
+              el.removeAttribute('hidden');
+              h.setAttribute('aria-expanded', 'true');
+            } else {
+              el.setAttribute('hidden', '');
+              h.setAttribute('aria-expanded', 'false');
+            }
+          });
+        });
+      }
 
-  /* Social links → inline Instagram & modal wiring */
-  (function socialAndModal() {
-    const socialLinks = qq('#col-social .social-link');
-    const colSocialExpanded = q('#col-social-expanded');
-    const viewBtns = qq('.view-services');
-    const platformModal = q('#platformModal');
-    const modalClose = platformModal?.querySelector('.modal-close');
+      // Close on outside click and Escape
+      document.addEventListener('click', (e) => {
+        if (explorePanel && !explorePanel.contains(e.target) && !exploreToggle?.contains(e.target)) closeExplore();
+        if (megaMenu && !megaMenu.contains(e.target) && !exploreServices?.contains(e.target)) closeMega();
+      });
 
-    if (socialLinks.length && colSocialExpanded) {
-      socialLinks.forEach(btn => {
-        btn.addEventListener('click', function () {
-          const service = btn.dataset.service;
-          if (service === 'instagram') {
-            colSocialExpanded.removeAttribute('hidden');
-            colSocialExpanded.setAttribute('aria-hidden', 'false');
-            try { if (window.instgrm && typeof window.instgrm.Embeds === 'object') window.instgrm.Embeds.process(); } catch (err) {}
-            colSocialExpanded.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          } else {
-            colSocialExpanded.setAttribute('hidden', '');
-            colSocialExpanded.setAttribute('aria-hidden', 'true');
-            const urls = {
-              instagram: 'https://www.instagram.com/zeal_web/',
-              twitter: 'https://twitter.com/',
-              facebook: 'https://facebook.com/',
-              youtube: 'https://youtube.com/',
-              tiktok: 'https://tiktok.com/',
-              linkedin: 'https://linkedin.com/'
-            };
-            const url = urls[service] || '#';
-            if (url !== '#') window.open(url, '_blank', 'noopener');
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeExplore();
+          closeMega();
+        }
+      });
+
+      // Reposition on resize/scroll
+      const debouncedPosition = debounce(positionMega, 120);
+      window.addEventListener('resize', debouncedPosition);
+      window.addEventListener('scroll', debouncedPosition);
+      positionMega();
+    })();
+
+    /* ============================
+       Social links → inline Instagram & modal wiring
+       ============================ */
+    (function socialAndModal() {
+      const socialLinks = qq('#col-social .social-link');
+      const colSocialExpanded = q('#col-social-expanded');
+      const viewBtns = qq('.view-services');
+      const platformModal = q('#platformModal') || q('.platform-modal');
+      const modalClose = platformModal?.querySelector('.modal-close');
+
+      if (socialLinks.length && colSocialExpanded) {
+        socialLinks.forEach(btn => {
+          btn.addEventListener('click', function () {
+            const service = btn.dataset.service;
+            if (service === 'instagram') {
+              colSocialExpanded.removeAttribute('hidden');
+              colSocialExpanded.setAttribute('aria-hidden', 'false');
+              try { if (window.instgrm && typeof window.instgrm.Embeds === 'object') window.instgrm.Embeds.process(); } catch (err) {}
+              colSocialExpanded.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            } else {
+              colSocialExpanded.setAttribute('hidden', '');
+              colSocialExpanded.setAttribute('aria-hidden', 'true');
+              const urls = {
+                instagram: 'https://www.instagram.com/zeal_web/',
+                twitter: 'https://twitter.com/',
+                facebook: 'https://facebook.com/',
+                youtube: 'https://youtube.com/',
+                tiktok: 'https://tiktok.com/',
+                linkedin: 'https://linkedin.com/'
+              };
+              const url = urls[service] || '#';
+              if (url !== '#') window.open(url, '_blank', 'noopener');
+            }
+          });
+        });
+      }
+
+      if (viewBtns.length && platformModal) {
+        viewBtns.forEach(b => b.addEventListener('click', () => {
+          platformModal.classList.add('open');
+          platformModal.setAttribute('aria-hidden', 'false');
+        }));
+        modalClose?.addEventListener('click', () => {
+          platformModal.classList.remove('open');
+          platformModal.setAttribute('aria-hidden', 'true');
+        });
+
+        document.addEventListener('click', (e) => {
+          if (platformModal && platformModal.classList.contains('open')) {
+            const inner = platformModal.querySelector('.platform-modal-inner');
+            if (inner && !inner.contains(e.target)) {
+              platformModal.classList.remove('open');
+              platformModal.setAttribute('aria-hidden', 'true');
+            }
           }
         });
-      });
-    }
 
-    if (viewBtns.length && platformModal) {
-      viewBtns.forEach(b => b.addEventListener('click', () => {
-        platformModal.classList.add('open');
-        platformModal.setAttribute('aria-hidden', 'false');
-      }));
-      modalClose?.addEventListener('click', () => {
-        platformModal.classList.remove('open');
-        platformModal.setAttribute('aria-hidden', 'true');
-      });
-
-      document.addEventListener('click', (e) => {
-        if (platformModal && platformModal.classList.contains('open')) {
-          const inner = platformModal.querySelector('.platform-modal-inner');
-          if (inner && !inner.contains(e.target)) {
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && platformModal && platformModal.classList.contains('open')) {
             platformModal.classList.remove('open');
             platformModal.setAttribute('aria-hidden', 'true');
           }
+        });
+      }
+    })();
+
+    /* ============================
+       Global fallback for older inline scripts
+       ============================ */
+    (function globalMenuFallback() {
+      const toggle = q('#exploreToggle');
+      const panel  = q('#explorePanel');
+      const mega   = q('#megaMenu');
+      const exploreServices = q('#exploreServices');
+
+      if (!toggle) return;
+
+      function closeAll() {
+        panel?.classList.remove('open');
+        mega?.classList.remove('open');
+        toggle.classList.remove('active');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+
+      toggle.addEventListener('click', () => {
+        const isOpen = panel?.classList.toggle('open');
+        toggle.classList.toggle('active', Boolean(isOpen));
+        toggle.setAttribute('aria-expanded', String(Boolean(isOpen)));
+        if (!isOpen) mega?.classList.remove('open');
+      });
+
+      exploreServices?.addEventListener('click', () => {
+        panel?.classList.remove('open');
+        mega?.classList.add('open');
+        if (mega) mega.setAttribute('aria-hidden', 'false');
+      });
+
+      document.addEventListener('click', (e) => {
+        if (panel && mega && toggle && !panel.contains(e.target) && !mega.contains(e.target) && !toggle.contains(e.target)) {
+          closeAll();
         }
       });
 
       document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && platformModal && platformModal.classList.contains('open')) {
-          platformModal.classList.remove('open');
-          platformModal.setAttribute('aria-hidden', 'true');
-        }
+        if (e.key === 'Escape') closeAll();
       });
-    }
-  })();
+    })();
 
-  /* Global fallback for older inline scripts */
-  (function globalMenuFallback() {
-    const toggle = q('#exploreToggle');
-    const panel  = q('#explorePanel');
-    const mega   = q('#megaMenu');
-    const exploreServices = q('#exploreServices');
-
-    if (!toggle) return;
-
-    function closeAll() {
-      panel?.classList.remove('open');
-      mega?.classList.remove('open');
-      toggle.classList.remove('active');
-      toggle.setAttribute('aria-expanded', 'false');
-    }
-
-    toggle.addEventListener('click', () => {
-      const isOpen = panel?.classList.toggle('open');
-      toggle.classList.toggle('active', Boolean(isOpen));
-      toggle.setAttribute('aria-expanded', String(Boolean(isOpen)));
-      if (!isOpen) mega?.classList.remove('open');
-    });
-
-    exploreServices?.addEventListener('click', () => {
-      panel?.classList.remove('open');
-      mega?.classList.add('open');
-      if (mega) mega.setAttribute('aria-hidden', 'false');
-    });
-
-    document.addEventListener('click', (e) => {
-      if (panel && mega && toggle && !panel.contains(e.target) && !mega.contains(e.target) && !toggle.contains(e.target)) {
-        closeAll();
-      }
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeAll();
-    });
-  })();
-
-  console.log('UI script ready');
-});
+    console.log('ZEAL UI script ready');
+  }); // ready
+})();
 </script>
 
 </body>
