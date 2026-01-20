@@ -162,8 +162,8 @@ body::after  { bottom: -35%; right: -35%; }
   height: 640px;
   border-radius: 50%;
   background: url('/assets/zeal_ogimage.png') center/cover no-repeat;
-  filter: blur(22px) brightness(1.25) saturate(1.05);
-  opacity: 0.9;
+  filter: blur(22px) brightness(1.25) saturate(1.1);
+  opacity: 0.85;
   z-index: 1;
   animation: orbFloat 12s ease-in-out infinite;
 }
@@ -425,6 +425,52 @@ body::after  { bottom: -35%; right: -35%; }
 
 
 
+/* Ensure header sits above hero */
+.zeal-header { position: fixed; top: 0; left: 0; width: 100%; z-index: 2200; }
+
+/* Hamburger visuals */
+.hamburger { z-index: 2300; }
+.hamburger span { transition: transform .28s, opacity .18s; }
+
+/* Explore panel */
+.explore-panel {
+  position: absolute;
+  top: calc(1.25rem + 48px);
+  right: 2.5%;
+  left: auto;
+  min-width: 220px;
+  background: linear-gradient(180deg,#0d052d,#08031e);
+  border-radius: 12px;
+  padding: .75rem;
+  box-shadow: 0 12px 30px rgba(0,0,0,.45);
+  z-index: 3000;
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition: opacity .26s ease, transform .26s ease;
+}
+.explore-panel.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+/* Mega menu */
+.mega-menu {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(1.25rem + 48px + 72px);
+  background: linear-gradient(180deg, rgba(13,5,45,0.98), rgba(8,3,30,0.98));
+  z-index: 3000;
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition: opacity .28s ease, transform .28s ease;
+}
+.mega-menu.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+/* Hide lists by default (JS toggles hidden attribute) */
+.mega-list[hidden] { display: none; }
+
+/* Ensure mega-inner layout */
+.mega-inner { max-width: 1200px; margin: 0 auto; padding: 1rem 2rem; display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; }
 
 
 /* Centered footer */
@@ -1384,6 +1430,110 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log('UI script ready');
 });
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const q = (s, ctx=document) => ctx.querySelector(s);
+  const qq = (s, ctx=document) => Array.from((ctx||document).querySelectorAll(s));
+  const debounce = (fn, wait=120) => { let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), wait); }; };
+
+  const toggle = q('#exploreToggle');
+  const panel  = q('#explorePanel');
+  const mega   = q('#megaMenu');
+  const exploreServices = q('#exploreServices');
+
+  console.log('menu init', { toggle, panel, mega });
+
+  if (!toggle || !panel || !mega) {
+    console.warn('Missing required elements: #exploreToggle, #explorePanel, or #megaMenu');
+    return;
+  }
+
+  function positionMega() {
+    const header = q('.zeal-header') || q('header.nav');
+    if (!header) return;
+    const rect = header.getBoundingClientRect();
+    if (window.innerWidth > 900) {
+      mega.style.position = 'absolute';
+      mega.style.top = (window.scrollY + rect.bottom + 8) + 'px';
+      mega.style.left = '0';
+      mega.style.width = '100%';
+      mega.style.height = '';
+    } else {
+      mega.style.position = 'fixed';
+      mega.style.top = '0';
+      mega.style.left = '0';
+      mega.style.width = '100%';
+      mega.style.height = '100vh';
+    }
+  }
+
+  function closeExplore() {
+    panel.classList.remove('open');
+    panel.setAttribute('aria-hidden', 'true');
+    toggle.classList.remove('active');
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+  function closeMega() {
+    mega.classList.remove('open');
+    mega.setAttribute('aria-hidden', 'true');
+    qq('.mega-list').forEach(l => l.setAttribute('hidden', ''));
+    qq('.mega-toggle').forEach(t => t.setAttribute('aria-expanded', 'false'));
+  }
+
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const open = panel.classList.toggle('open');
+    panel.setAttribute('aria-hidden', String(!open));
+    toggle.classList.toggle('active', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    if (open) closeMega();
+    console.log('Explore toggle ->', open);
+  });
+
+  exploreServices?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    positionMega();
+    const isOpen = mega.classList.toggle('open');
+    mega.setAttribute('aria-hidden', String(!isOpen));
+    if (isOpen) {
+      qq('.mega-list').forEach(l => l.setAttribute('hidden', ''));
+      qq('.mega-toggle').forEach(t => t.setAttribute('aria-expanded', 'false'));
+    }
+    closeExplore();
+    console.log('Services clicked -> mega open:', isOpen);
+  });
+
+  qq('.mega-toggle').forEach(h => {
+    h.addEventListener('click', (ev) => {
+      ev.stopPropagation();
+      const id = h.getAttribute('data-target');
+      const el = document.getElementById(id);
+      if (!el) return console.warn('Missing mega list:', id);
+      const wasHidden = el.hasAttribute('hidden');
+      qq('.mega-list').forEach(l => l.setAttribute('hidden', ''));
+      qq('.mega-toggle').forEach(t => t.setAttribute('aria-expanded', 'false'));
+      if (wasHidden) { el.removeAttribute('hidden'); h.setAttribute('aria-expanded', 'true'); }
+      else { el.setAttribute('hidden', ''); h.setAttribute('aria-expanded', 'false'); }
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!panel.contains(e.target) && !toggle.contains(e.target)) closeExplore();
+    if (!mega.contains(e.target) && !exploreServices?.contains(e.target)) closeMega();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { closeExplore(); closeMega(); }
+  });
+
+  window.addEventListener('resize', debounce(positionMega));
+  window.addEventListener('scroll', debounce(positionMega));
+  positionMega();
+});
+</script>
+
+
+
 
 </body>
 </html>
