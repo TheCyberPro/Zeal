@@ -997,6 +997,64 @@
   }, { passive: true });
 })();
 
+
+
+
+
+
+
+
+(function(){
+  const panel = document.getElementById('explorePanel');
+  const old = document.getElementById('exploreClose');
+  if (!panel) return console.warn('explorePanel not found');
+
+  // Create a fresh anchor that points to home
+  const a = document.createElement('a');
+  a.id = 'exploreClose';
+  a.className = 'explore-close';
+  a.href = '/';
+  a.setAttribute('aria-label','Close Explore menu and return home');
+  a.textContent = '✕';
+  a.style.textDecoration = 'none';
+
+  // Replace old node (removes previous handlers)
+  if (old && old.parentNode) old.parentNode.replaceChild(a, old);
+
+  // Visual close then force navigation using replace (no extra history entry)
+  a.addEventListener('click', function(e){
+    try { panel.classList.remove('open'); panel.setAttribute('aria-hidden','true'); } catch(_) {}
+    // short delay so user sees the close
+    setTimeout(()=> {
+      try { window.location.replace('/'); } catch(_) { window.location.href = '/'; }
+    }, 120);
+    // Do not call e.preventDefault() here so anchor navigation is allowed if nothing intercepts it
+  }, { passive: true });
+})();
+
+
+
+(function(){
+  const panel = document.getElementById('explorePanel');
+  const el = document.getElementById('exploreClose');
+  if (!el) return console.warn('exploreClose not found');
+
+  // Remove inline onclick and replace node to clear listeners
+  const clone = el.cloneNode(true);
+  el.parentNode.replaceChild(clone, el);
+
+  // Stop propagation on the click and force navigation after closing UI
+  clone.addEventListener('click', function(e){
+    e.stopPropagation();
+    try { panel.classList.remove('open'); panel.setAttribute('aria-hidden','true'); } catch(_) {}
+    setTimeout(()=> {
+      // force navigation ignoring router interception
+      window.location.assign('/');
+    }, 120);
+  }, { passive: true });
+})();
+
+
 </script>
 
 </body>
