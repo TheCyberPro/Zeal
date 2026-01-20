@@ -98,7 +98,6 @@
 /*------------------------------------*\
   Sections & Cards
 \*------------------------------------*/
-/* Sections & Cards */
 .section {
   background: #fff;
   color: #0d052d;
@@ -326,6 +325,47 @@ footer .footer__nav p { margin: 0; display: inline-block; color: inherit; }
   border-bottom: 1px solid rgba(255,213,79,0.1);
 }
 
+/* Drop-in: prevent text splitting and keep content inside containers */
+* { box-sizing: border-box; }
+
+.section, .container, .card, .developer__intro, .hero-content {
+  overflow-wrap: break-word;     /* allow long words to wrap */
+  word-break: break-word;        /* break very long tokens */
+  hyphens: auto;                 /* enable hyphenation where supported */
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  max-width: 100%;               /* never exceed parent width */
+}
+
+/* Ensure paragraphs stay inside their parent and don't collapse margins oddly */
+.section p, .developer__intro, .card__text {
+  margin: 0 0 1rem;
+  line-height: 1.5;
+  display: block;
+}
+
+/* Defensive: prevent flex children from overflowing their flex container */
+.section, .container {
+  display: block;                /* prefer block for content sections */
+  min-width: 0;                  /* allow flex children to shrink properly */
+}
+
+/* If you use grid or flex for layout, ensure children can shrink */
+.grid, .grid > * {
+  min-width: 0;
+}
+
+/* Fix for truncated or stray inline elements */
+a, button, span {
+  white-space: normal;
+}
+
+/* Optional: make the About paragraph visually contained */
+.developer__intro {
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  word-wrap: break-word;
+}
 
 
 <!-- Google Tag Manager -->
