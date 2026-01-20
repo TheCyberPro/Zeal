@@ -22,7 +22,8 @@
 
 
   <!-- Inline Luxury-Glow Overrides -->
-<style> :root { --orb-size: 680px; --max-width: 1200px; --gold: #ffd54f; --bg-dark: #0d052d; } html,body { height:100%; margin:0; font-family: Inter, "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background: #070417; color:#fff; }
+<style>
+	 :root { --orb-size: 680px; --max-width: 1200px; --gold: #ffd54f; --bg-dark: #0d052d; } html,body { height:100%; margin:0; font-family: Inter, "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background: #070417; color:#fff; }
 
     /* Header */
     .zeal-header {
@@ -388,12 +389,17 @@ a, button, span {
     <nav class="zeal-nav">
       <div class="nav-left">
 
-<span class="nav-logo">ZEAL</span> <button id="exploreToggle" class="hamburger" aria-label="Toggle Explore Menu" aria-expanded="false"> <span></span><span></span><span></span> </button> </nav> </header>
+<span class="nav-logo">ZEAL</span>
+<!-- Explore panel (drop-in) -->
+<div id="explorePanel" class="explore-panel" aria-hidden="true" role="dialog" aria-label="Explore menu">
+  <div class="explore-inner" role="document">
+    <button id="exploreClose" class="explore-close" aria-label="Close Explore menu">&times;</button>
 
 <!-- Mega menu (hidden by default; script toggles .open) --> <div id="megaMenu" class="mega-menu" role="menu" aria-hidden="true"> <div class="mega-inner" style="max-width:1200px;margin:0 auto;padding:1rem 2rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;color:#ddd;"> <div class="mega-column"> <h4 class="mega-toggle" data-target="col-web" role="button" aria-expanded="false">Web Development ▾</h4> <ul id="col-web" class="mega-list" hidden aria-hidden="true"> <li><a href="#">Business Page</a></li> <li><a href="#">Landing Page</a></li> <li><a href="#">Single HTML + CSS Page</a></li> </ul> </div>
 <div class="mega-column"> <h4 class="mega-toggle" data-target="col-ux" role="button" aria-expanded="false">UX / UI Design ▾</h4> <ul id="col-ux" class="mega-list" hidden aria-hidden="true"> <li><a href="#">JavaScript</a></li> <li><a href="#">React</a></li> <li><a href="#">Vue</a></li> <li><a href="#">CSS</a></li> <li><a href="#">Prototyping & Research</a></li> </ul> </div>      
 <div class="mega-column"> <h4 class="mega-toggle" data-target="col-social" role="button" aria-expanded="false">Social Media ▾</h4> <ul id="col-social" class="mega-list" hidden aria-hidden="true"> <li><button class="social-link" data-service="instagram" type="button">Instagram</button></li> <li><button class="social-link" data-service="twitter" type="button">Twitter</button></li> <li><button class="social-link" data-service="facebook" type="button">Facebook</button></li> <li><a href="#" id="getCatalogue">Get Catalogue (PDF)</a></li> </ul>
 <div id="col-social-expanded" class="mega-expanded" hidden aria-hidden="true" style="margin-top:1rem;"> <article class="s-card" id="instagramCardInline" tabindex="0" aria-labelledby="inst-title-inline" style="max-width:400px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:14px;overflow:hidden;box-shadow:0 12px 36px rgba(2,6,23,0.6);border:1px solid rgba(255,213,79,0.06);"> <div class="s-card-media" role="img" aria-label="Instagram preview" style="height:160px;background-size:cover;background-position:center;background-image:url('/assets/instagram-hero.jpg');"></div> <div class="s-card-body" style="padding:1rem;"> <h5 id="inst-title-inline" style="margin:0;color:var(--gold);font-family:'Anton',sans-serif;font-size:1.05rem;">Instagram Growth</h5> <p class="s-card-sub" style="margin:0;color:#e6e6e6;font-size:.95rem;">Reels, creative campaigns, and creator partnerships that scale engagement.</p> <div class="s-card-ctas" style="margin-top:.75rem;display:flex;gap:.5rem;"> <a class="s-btn s-btn-primary" id="visitInstagramInline" href="https://www.instagram.com/zeal_web/" target="_blank" rel="noopener" style="padding:.5rem .9rem;border-radius:10px;background:var(--gold);color:#0d052d;font-weight:700;text-decoration:none;">Visit Instagram</a> <a class="s-btn s-btn-ghost" id="instCatalogueInline" href="mailto:zeal.io@outlook.com?subject=ZEAL%20Catalogue&body=Please%20send%20me%20the%20catalogue." style="padding:.5rem .9rem;border-radius:10px;background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.06);text-decoration:none;">Get Catalogue</a> </div> </div> </article> </div> </div> </div> </div>
+<div id="megaMenuInline" class="mega-menu-inline">
 <!-- Hero -->
 
   <section class="zeal-hero" aria-labelledby="hero-title">
@@ -561,7 +567,6 @@ a, button, span {
   - Defensive, idempotent, DOM-ready
   - Handles: helpers, Tawk loader, hero reveal, testimonial slider,
     explore panel, mega menu, social inline, modal wiring, and fallbacks
-  Place this block once, just before </body>.
 */
 
 (function () {
