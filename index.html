@@ -1,35 +1,29 @@
-<!DOCTYPE html> <html lang="en"> <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-B0HZHDFETE"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-B0HZHDFETE');
-  </script>
+<!doctype html> <html lang="en"> <head> <!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-B0HZHDFETE"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-B0HZHDFETE'); </script>
+<meta charset="utf-8" /> <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" /> <title>ZEAL — We create digital experiences</title> <meta name="description" content="ZEAL — web design, development, and branding." />
+<!-- Fonts (single, consolidated load) --> <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet"> <!-- Font Awesome (replace kit id) --> <script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script> <!-- Main stylesheet --> <link rel="stylesheet" href="/styles.css">
 
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ZEAL — We create digital experiences</title>
-  <meta name="description" content="ZEAL — web design, development, and branding." />
 
-  <!-- Google Fonts: Inter + Anton + Montserrat -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Anton&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Anton+SC&family=Foldit:wght@400;600&display=swap" rel="stylesheet" />
 
-  <!-- Preconnect for fonts -->
+
+
+
+
+
+  <!-- Fonts: preconnect + load only once -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- Font Awesome (replace your-kit-id with real kit id) -->
+  <!-- Font Awesome (replace the kit id with your real kit id) -->
   <script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script>
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="/styles.css" />
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="/styles.css">
 
 
   <!-- Inline Luxury-Glow Overrides -->
-<style>
+<style> :root { --orb-size: 680px; --max-width: 1200px; --gold: #ffd54f; --bg-dark: #0d052d; } html,body { height:100%; margin:0; font-family: Inter, "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background: #070417; color:#fff; }
+
 /* ---------------------------
    Global / Base
    --------------------------- */
@@ -141,6 +135,31 @@ body::after  { bottom: -35%; right: -35%; }
 .hamburger.active span:nth-child(3) {
   transform: translateY(-11px) rotate(-45deg);
 }
+
+    /* Header */
+    .zeal-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 2200;
+      display:flex;
+      align-items:center;
+      padding: 1rem 2%;
+      background: transparent;
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+    .zeal-nav { display:flex; align-items:center; width:100%; gap:1rem; }
+    .nav-left { display:flex; gap:1rem; align-items:center; }
+    .nav-link { color: rgba(255,255,255,0.9); text-decoration:none; font-weight:600; }
+    .nav-logo { margin-left:auto; font-family: 'Anton', sans-serif; color: var(--gold); letter-spacing: .06em; font-size:1.05rem; }
+
+    .hamburger { background:transparent; border:0; width:44px; height:44px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; }
+    .hamburger span { display:block; width:20px; height:2px; background:#fff; margin:3px 0; transition: transform .28s, opacity .18s; }
+
+    /* Hero */
+
 /* ---------------------------
    Hero
    --------------------------- */
@@ -170,6 +189,35 @@ body::after  { bottom: -35%; right: -35%; }
   line-height: 1.6;
 }
 
+
+ /* Hero */
+    .zeal-hero {
+      position: relative;
+      height: 100vh;
+      display:flex;
+      align-items:center;
+      padding: 6rem 4% 2rem;
+      overflow:hidden;
+    }
+    .hero-content { z-index: 3; max-width: 720px; }
+    .hero-title {
+      font-family: 'Anton', sans-serif;
+      color: var(--gold);
+      font-size: clamp(2.8rem, 6vw, 4rem);
+      line-height: 1.02;
+      margin: 0 0 .6rem;
+      text-shadow: 0 0 18px rgba(255,213,79,0.35);
+    }
+    .hero-subtitle {
+      font-family: 'Montserrat', sans-serif;
+      color: rgba(255,255,255,0.92);
+      max-width: 560px;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+
+
 /* orb / OG image glow */
 .hero-orb {
   position: absolute;
@@ -189,6 +237,23 @@ body::after  { bottom: -35%; right: -35%; }
   50%  { transform: translateY(-10px); }
   100% { transform: translateY(0); }
 }
+
+
+  .hero-orb {
+      position: absolute;
+      top: 6%;
+      right: -12%;
+      width: var(--orb-size);
+      height: var(--orb-size);
+      border-radius: 50%;
+      background: center/cover no-repeat url('/assets/zeal_ogimage.png');
+      filter: blur(28px) brightness(1.15) saturate(1.05);
+      opacity: 0.92;
+      z-index: 1;
+      pointer-events: none;
+      animation: orbFloat 12s ease-in-out infinite;
+    }
+    @keyframes orbFloat { 0%{transform:translateY(0)}50%{transform:translateY(-12px)}100%{transform:translateY(0)} }
 
 /* ---------------------------
    Explore panel (small) & Mega menu
@@ -567,8 +632,23 @@ footer .footer__nav p { margin: 0; display: inline-block; color: inherit; }
 @media (max-width:480px) { .hero-orb { display:none; } }
 
 
+ /* Basic sections */
+    .section { background: rgba(255,255,255,0.02); color: #fff; border-radius: 16px; padding: 2.5rem 1.25rem; margin: 2rem auto; max-width: var(--max-width); box-shadow: 0 12px 30px rgba(0,0,0,0.35); }
 
-  </style>
+    /* Explore panel / mega menu base (kept minimal so script can toggle) */
+    .explore-panel, .mega-menu {
+      left: 4%;
+      right: 4%;
+      z-index: 3000;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: opacity .26s ease, transform .26s ease;
+    }
+    .explore-panel.open, .mega-menu.open { opacity:1; transform: translateY(0); pointer-events:auto; }
+
+    /* Responsive */
+@media (max-width:900px) { .hero-orb { right: -30%; width: 520px; height: 520px; filter: blur(20px); } .zeal-hero { padding-top: 5rem; } } @media (max-width:480px) { .hero-orb { display:none; } .hero-title { font-size: clamp(2rem, 8vw, 2.6rem); } .zeal-hero { padding-top: 4rem; } .nav-left { display:none; } /* simplify nav on very small screens */ } /* Focus styles for accessibility */ a:focus, button:focus { outline: 3px solid rgba(255,213,79,0.18); outline-offset: 3px; } </style>
 
 
 
@@ -594,91 +674,15 @@ footer .footer__nav p { margin: 0; display: inline-block; color: inherit; }
   <header class="zeal-header">
     <nav class="zeal-nav">
       <div class="nav-left">
-      <span class="nav-logo">ZEAL</span>
 
-        <a href="/" class="nav-logo"></a>
-        <a href="#about" class="nav-link"></a>
-      </div>
+<span class="nav-logo">ZEAL</span> <button id="exploreToggle" class="hamburger" aria-label="Toggle Explore Menu" aria-expanded="false"> <span></span><span></span><span></span> </button> </nav> </header>
 
-      <span class="nav-logo"></span>
+<!-- Mega menu (hidden by default; script toggles .open) --> <div id="megaMenu" class="mega-menu" role="menu" aria-hidden="true"> <div class="mega-inner" style="max-width:1200px;margin:0 auto;padding:1rem 2rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;color:#ddd;"> <div class="mega-column"> <h4 class="mega-toggle" data-target="col-web" role="button" aria-expanded="false">Web Development ▾</h4> <ul id="col-web" class="mega-list" hidden aria-hidden="true"> <li><a href="#">Business Page</a></li> <li><a href="#">Landing Page</a></li> <li><a href="#">Single HTML + CSS Page</a></li> </ul> </div>
+<div class="mega-column"> <h4 class="mega-toggle" data-target="col-ux" role="button" aria-expanded="false">UX / UI Design ▾</h4> <ul id="col-ux" class="mega-list" hidden aria-hidden="true"> <li><a href="#">JavaScript</a></li> <li><a href="#">React</a></li> <li><a href="#">Vue</a></li> <li><a href="#">CSS</a></li> <li><a href="#">Prototyping & Research</a></li> </ul> </div>      
+<div class="mega-column"> <h4 class="mega-toggle" data-target="col-social" role="button" aria-expanded="false">Social Media ▾</h4> <ul id="col-social" class="mega-list" hidden aria-hidden="true"> <li><button class="social-link" data-service="instagram" type="button">Instagram</button></li> <li><button class="social-link" data-service="twitter" type="button">Twitter</button></li> <li><button class="social-link" data-service="facebook" type="button">Facebook</button></li> <li><a href="#" id="getCatalogue">Get Catalogue (PDF)</a></li> </ul>
+<div id="col-social-expanded" class="mega-expanded" hidden aria-hidden="true" style="margin-top:1rem;"> <article class="s-card" id="instagramCardInline" tabindex="0" aria-labelledby="inst-title-inline" style="max-width:400px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:14px;overflow:hidden;box-shadow:0 12px 36px rgba(2,6,23,0.6);border:1px solid rgba(255,213,79,0.06);"> <div class="s-card-media" role="img" aria-label="Instagram preview" style="height:160px;background-size:cover;background-position:center;background-image:url('/assets/instagram-hero.jpg');"></div> <div class="s-card-body" style="padding:1rem;"> <h5 id="inst-title-inline" style="margin:0;color:var(--gold);font-family:'Anton',sans-serif;font-size:1.05rem;">Instagram Growth</h5> <p class="s-card-sub" style="margin:0;color:#e6e6e6;font-size:.95rem;">Reels, creative campaigns, and creator partnerships that scale engagement.</p> <div class="s-card-ctas" style="margin-top:.75rem;display:flex;gap:.5rem;"> <a class="s-btn s-btn-primary" id="visitInstagramInline" href="https://www.instagram.com/zeal_web/" target="_blank" rel="noopener" style="padding:.5rem .9rem;border-radius:10px;background:var(--gold);color:#0d052d;font-weight:700;text-decoration:none;">Visit Instagram</a> <a class="s-btn s-btn-ghost" id="instCatalogueInline" href="mailto:zeal.io@outlook.com?subject=ZEAL%20Catalogue&body=Please%20send%20me%20the%20catalogue." style="padding:.5rem .9rem;border-radius:10px;background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.06);text-decoration:none;">Get Catalogue</a> </div> </div> </article> </div> </div> </div> </div>
+<!-- Hero -->
 
-      <button id="exploreToggle" class="hamburger" aria-label="Toggle Explore Menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </nav>
-  </header>
-
-  <!-- Mega menu panel (sibling, outside header) -->
-  <div id="megaMenu" class="mega-menu" role="menu" aria-hidden="true">
-    <div class="mega-inner">
-
-      <div class="mega-column">
-        <h4 class="mega-toggle" data-target="col-web" role="button" aria-expanded="false">Web Development ▾</h4>
-        <ul id="col-web" class="mega-list" hidden aria-hidden="true">
-          <li><a href="#">Business Page</a></li>
-          <li><a href="#">Landing Page</a></li>
-          <li><a href="#">Single HTML + CSS Page</a></li>
-        </ul>
-      </div>
-
-      <div class="mega-column">
-        <h4 class="mega-toggle" data-target="col-ux" role="button" aria-expanded="false">UX / UI Design ▾</h4>
-        <ul id="col-ux" class="mega-list" hidden aria-hidden="true">
-          <li><a href="#">JavaScript</a></li>
-          <li><a href="#">React</a></li>
-          <li><a href="#">Vue</a></li>
-          <li><a href="#">CSS</a></li>
-          <li><a href="#">Prototyping & Research</a></li>
-        </ul>
-      </div>
-
-      <div class="mega-column">
-        <h4 class="mega-toggle" data-target="col-social" role="button" aria-expanded="false">Social Media Engagement ▾</h4>
-        <ul id="col-social" class="mega-list" hidden aria-hidden="true">
-          <li><button class="social-link" data-service="instagram" type="button">Instagram</button></li>
-          <li><button class="social-link" data-service="twitter" type="button">Twitter</button></li>
-          <li><button class="social-link" data-service="facebook" type="button">Facebook</button></li>
-          <li><button class="social-link" data-service="youtube" type="button">YouTube</button></li>
-          <li><button class="social-link" data-service="tiktok" type="button">TikTok</button></li>
-          <li><button class="social-link" data-service="linkedin" type="button">LinkedIn</button></li>
-          <li><a href="#" id="getCatalogue">Get Catalogue (PDF)</a></li>
-        </ul>
-
-        <div id="col-social-expanded" class="mega-expanded" hidden aria-hidden="true">
-          <!-- Instagram premium card -->
-          <article class="s-card" id="instagramCardInline" tabindex="0" aria-labelledby="inst-title-inline">
-            <div class="s-card-media"
-                 role="img"
-                 aria-label="Instagram preview"
-                 style="background-image:url('/assets/Zeal2.png');"></div>
-
-            <div class="s-card-body">
-              <h5 id="inst-title-inline">Instagram Growth</h5>
-              <p class="s-card-sub">
-                Reels, creative campaigns, and creator partnerships that scale engagement.
-              </p>
-
-              <div class="s-card-ctas">
-                <a class="s-btn s-btn-primary"
-                   id="visitInstagramInline"
-                   href="https://www.instagram.com/zeal_web/"
-                   target="_blank"
-                   rel="noopener">Visit Instagram</a>
-
-                <a class="s-btn s-btn-ghost"
-                   id="instCatalogueInline"
-                   href="mailto:zeal.io@outlook.com?subject=ZEAL%20Catalogue&body=Please%20send%20me%20the%20catalogue.">
-                   Get Catalogue
-                </a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Hero -->
   <section class="zeal-hero" aria-labelledby="hero-title">
     <div class="hero-content">
       <h1 id="hero-title" class="hero-title">WE CREATE DIGITAL EXPERIENCES</h1>
@@ -1193,7 +1197,11 @@ footer .footer__nav p { margin: 0; display: inline-block; color: inherit; }
     console.log('ZEAL UI script ready');
   }); // ready
 })();
+
+
 </script>
+<script> (function () { 'use strict'; const q = (sel, ctx = document) => (ctx || document).querySelector(sel); const qq = (sel, ctx = document) => Array.from((ctx || document).querySelectorAll(sel)); const debounce = (fn, wait = 120) => { let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), wait); }; }; function ready(fn){ if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn); else fn(); } ready(() => { // set copyright year const y = new Date().getFullYear(); const yearEl = document.getElementById('year'); if (yearEl) yearEl.textContent = y; // Tawk loader (idempotent) (function loadTawk(){ try { if (window.Tawk_API || window.Tawk_LoadStart) return; window.Tawk_API = window.Tawk_API || {}; window.Tawk_LoadStart = new Date(); const s = document.createElement('script'); s.async = true; s.src = 'https://embed.tawk.to/68cf60b510ce81192499da9f/1j5l13ih6'; s.charset = 'UTF-8'; s.setAttribute('crossorigin','*'); const first = document.getElementsByTagName('script')[0]; if (first && first.parentNode) first.parentNode.insertBefore(s, first); else document.head.appendChild(s); } catch(e){ console.warn('Tawk failed', e); } })(); // simple testimonial slider (if present) (function testimonialSlider(){ const items = qq('.testimonial'); if (!items.length) return; let idx = 0; items.forEach((el,i)=>el.classList.toggle('active', i===0)); setInterval(()=>{ items[idx].classList.remove('active'); idx = (idx+1)%items.length; items[idx].classList.add('active'); }, 5000); })(); // reveal on scroll (with fallback) (function revealOnScroll(){ const els = qq('.card, .highlight-card, .testimonial'); if (!els.length) return; els.forEach(el=>el.classList.add('reveal')); try { const obs = new IntersectionObserver((entries, observer)=>{ entries.forEach(entry=>{ if (entry.isIntersecting){ entry.target.classList.add('active'); observer.unobserve(entry.target); } }); }, { threshold: 0.12 }); qq('.reveal').forEach(el=>obs.observe(el)); } catch(e){ qq('.reveal').forEach(el=>el.classList.add('active')); } })(); // header / explore / mega menu (function headerMenus(){ const header = q('.zeal-header') || q('header.nav'); const exploreToggle = q('#exploreToggle'); const explorePanel = q('#explorePanel'); // optional: if you have a separate explore panel const exploreServices = q('#exploreServices'); const megaMenu = q('#megaMenu'); const megaToggles = qq('.mega-toggle'); const getCatalogue = q('#getCatalogue'); if (!header) return; function positionMega(){ if (!megaMenu) return; const rect = header.getBoundingClientRect(); if (window.innerWidth > 900){ megaMenu.style.position='absolute'; megaMenu.style.top=(window.scrollY + rect.bottom + 8)+'px'; megaMenu.style.left='0'; megaMenu.style.width='100%'; megaMenu.style.height=''; } else { megaMenu.style.position='fixed'; megaMenu.style.top='0'; megaMenu.style.left='0'; megaMenu.style.width='100%'; megaMenu.style.height='100vh'; } } function closeExplore(){ explorePanel?.classList.remove('open'); explorePanel?.setAttribute('aria-hidden','true'); exploreToggle?.setAttribute('aria-expanded','false'); exploreToggle?.classList.remove('active'); } function closeMega(){ megaMenu?.classList.remove('open'); megaMenu?.setAttribute('aria-hidden','true'); qq('.mega-list').forEach(l=>l.setAttribute('hidden','')); qq('.mega-toggle').forEach(t=>t.setAttribute('aria-expanded','false')); } if (exploreToggle && explorePanel) { exploreToggle.addEventListener('click', (e)=>{ e.stopPropagation(); const open = explorePanel.classList.toggle('open'); explorePanel.setAttribute('aria-hidden', String(!open)); exploreToggle.setAttribute('aria-expanded', String(open)); exploreToggle.classList.toggle('active', open); if (open) closeMega(); }); } exploreServices?.addEventListener('click', (e)=>{ e?.stopPropagation(); positionMega(); const isOpen = megaMenu?.classList.toggle('open'); if (megaMenu) megaMenu.setAttribute('aria-hidden', String(!isOpen)); if (isOpen){ qq('.mega-list').forEach(list=>list.setAttribute('hidden','')); qq('.mega-toggle').forEach(t=>t.setAttribute('aria-expanded','false')); } closeExplore(); }); if (getCatalogue) { getCatalogue.addEventListener('click', function(e){ e.preventDefault(); const PDF_URL = 'https://example.com/ZEAL-catalogue.pdf'; const subject = encodeURIComponent('Request: ZEAL Catalogue'); const body = encodeURIComponent('Hi ZEAL team,\n\nPlease send me the ZEAL services catalogue. You can also download it here: ' + PDF_URL + '\n\nThanks.'); window.location.href = 'mailto:zeal.io@outlook.com?subject=' + subject + '&body=' + body; }); } megaToggles.forEach(h => { h.addEventListener('click', (ev)=>{ ev.stopPropagation(); const id = h.getAttribute('data-target'); const el = q('#' + id); if (!el) return; const wasHidden = el.hasAttribute('hidden'); qq('.mega-list').forEach(list=>list.setAttribute('hidden','')); qq('.mega-toggle').forEach(t=>t.setAttribute('aria-expanded','false')); if (wasHidden){ el.removeAttribute('hidden'); h.setAttribute('aria-expanded','true'); } else { el.setAttribute('hidden',''); h.setAttribute('aria-expanded','false'); } }); }); document.addEventListener('click', (e)=>{ if (explorePanel && !explorePanel.contains(e.target) && !exploreToggle?.contains(e.target)) closeExplore(); if (megaMenu && !megaMenu.contains(e.target) && !exploreServices?.contains(e.target)) closeMega(); }); document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape'){ closeExplore(); closeMega(); } }); const debPos = debounce(positionMega, 120); window.addEventListener('resize', debPos); window.addEventListener('scroll', debPos); positionMega(); })(); // social inline / modal wiring (if present) (function socialAndModal(){ const socialLinks = qq('#col-social .social-link'); const colSocialExpanded = q('#col-social-expanded'); const viewBtns = qq('.view-services'); const platformModal = q('#platformModal') || q('.platform-modal'); const modalClose = platformModal?.querySelector('.modal-close'); if (socialLinks.length && colSocialExpanded) { socialLinks.forEach(btn => { btn.addEventListener('click', function () { const service = btn.dataset.service; if (service === 'instagram') { colSocialExpanded.removeAttribute('hidden'); colSocialExpanded.setAttribute('aria-hidden', 'false'); try { if (window.instgrm && typeof window.instgrm.Embeds === 'object') window.instgrm.Embeds.process(); } catch (err) {} colSocialExpanded.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } else { colSocialExpanded.setAttribute('hidden', ''); colSocialExpanded.setAttribute('aria-hidden', 'true'); const urls = { instagram:'https://www.instagram.com/zeal_web/', twitter:'https://twitter.com/', facebook:'https://facebook.com/', youtube:'https://youtube.com/', tiktok:'https://tiktok.com/', linkedin:'https://linkedin.com/' }; const url = urls[service] || '#'; if (url !== '#') window.open(url, '_blank', 'noopener'); } }); }); } if (viewBtns.length && platformModal) { viewBtns.forEach(b => b.addEventListener('click', () => { platformModal.classList.add('open'); platformModal.setAttribute('aria-hidden','false'); })); modalClose?.addEventListener('click', () => { platformModal.classList.remove('open'); platformModal.setAttribute('aria-hidden','true'); }); document.addEventListener('click', (e) => { if (platformModal && platformModal.classList.contains('open')) { const inner = platformModal.querySelector('.platform-modal-inner'); if (inner && !inner.contains(e.target)) { platformModal.classList.remove('open'); platformModal.setAttribute('aria-hidden','true'); } } }); document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && platformModal && platformModal.classList.contains('open')) { platformModal.classList.remove('open'); platformModal.setAttribute('aria-hidden','true'); } }); } })(); }); // ready })(); </script>
+
 
 </body>
 </html>
