@@ -674,28 +674,6 @@ footer .footer__nav p {
     </div>
   </section>
 
-  <!-- Modal for platform details -->
-  <div id="platformModal" class="platform-modal" role="dialog" aria-hidden="true" aria-labelledby="platformModalTitle">
-    <div class="platform-modal-inner" role="document">
-      <button class="modal-close" aria-label="Close" type="button">×</button>
-      <h3 id="platformModalTitle">Instagram Growth Services</h3>
-      <div id="platformModalContent">
-        <p>Reels strategy, content calendar, influencer outreach, paid ads, and analytics dashboards.</p>
-        <ul>
-          <li>Reels production</li>
-          <li>Creator partnerships</li>
-          <li>Paid campaign setup</li>
-          <li>Monthly analytics report</li>
-        </ul>
-        <div id="modalInstagramEmbed" style="margin-top:1rem;"></div>
-      </div>
-
-      <div class="modal-actions" style="margin-top:1rem;">
-        <a id="modalCatalogue" class="s-btn s-btn-primary" href="#">Request Catalogue</a>
-        <a class="s-btn s-btn-ghost" id="modalContact" href="mailto:zeal.io@outlook.com?subject=ZEAL%20Instagram%20Services">Contact Us</a>
-      </div>
-    </div>
-  </div>
 
   <!-- ABOUT THE DEVELOPER -->
   <section id="about" class="section section--light" aria-labelledby="about-title">
@@ -813,8 +791,6 @@ const debounce = (fn, wait = 100) => {
   }
 })();
 
-</script>
-<script>
 (function headerMenus() {
   const header = document.querySelector('.zeal-header');
   const exploreToggle = document.getElementById('exploreToggle');
@@ -954,9 +930,6 @@ const debounce = (fn, wait = 100) => {
   window.addEventListener('scroll', debouncePosition);
   positionMega();
 })();
-</script>
-
-<script>
   const toggle = document.getElementById("exploreToggle");
   const panel  = document.getElementById("explorePanel");
   const mega   = document.getElementById("megaMenu");
@@ -988,8 +961,6 @@ const debounce = (fn, wait = 100) => {
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeAll();
   });
-</script>
-<script>
 (function headerMenus() {
   try {
     // Wait for DOM if script loaded early
@@ -1126,6 +1097,292 @@ const debounce = (fn, wait = 100) => {
     console.error('headerMenus error:', err);
   }
 })();
+
+
+
+
+
+/* Consolidated helpers + modules (safe, DOM-ready, no $ collision) */
+document.addEventListener('DOMContentLoaded', () => {
+  /* ---------------------------
+     Helpers (safe names)
+     --------------------------- */
+  const q = (sel, ctx = document) => ctx.querySelector(sel);
+  const qq = (sel, ctx = document) => Array.from((ctx || document).querySelectorAll(sel));
+  const debounce = (fn, wait = 100) => {
+    let t;
+    return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), wait); };
+  };
+
+  /* ---------------------------
+     Sanity logs (remove in production)
+     --------------------------- */
+  console.log('UI script init');
+
+  /* ============================
+     Testimonial slider
+     ============================ */
+  (function testimonialSlider() {
+    const items = qq('.testimonial');
+    if (!items.length) return;
+    let idx = 0;
+    items.forEach((el, i) => el.classList.toggle('active', i === 0));
+    setInterval(() => {
+      items[idx].classList.remove('active');
+      idx = (idx + 1) % items.length;
+      items[idx].classList.add('active');
+    }, 5000);
+  })();
+
+  /* ============================
+     Reveal on scroll
+     ============================ */
+  (function revealOnScroll() {
+    const els = qq('.card, .highlight-card, .testimonial');
+    if (!els.length) return;
+    els.forEach(el => el.classList.add('reveal'));
+    try {
+      const obs = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      qq('.reveal').forEach(el => obs.observe(el));
+    } catch (err) {
+      // IntersectionObserver not supported — fallback: reveal all
+      qq('.reveal').forEach(el => el.classList.add('active'));
+    }
+  })();
+
+  /* ============================
+     Header: Explore panel + Mega menu
+     ============================ */
+  (function headerMenus() {
+    const header = q('.zeal-header') || q('header.nav');
+    const exploreToggle = q('#exploreToggle');
+    const explorePanel = q('#explorePanel');
+    const exploreAbout = q('#exploreAbout');
+    const exploreServices = q('#exploreServices');
+    const exploreDemo = q('#exploreDemo');
+    const megaMenu = q('#megaMenu');
+    const megaToggles = qq('.mega-toggle');
+    const getCatalogue = q('#getCatalogue');
+
+    if (!header) {
+      console.warn('header not found: expected .zeal-header or header.nav');
+      return;
+    }
+
+    // Positioning helper
+    function positionMega() {
+      if (!megaMenu) return;
+      const rect = header.getBoundingClientRect();
+      if (window.innerWidth > 900) {
+        megaMenu.style.position = 'absolute';
+        megaMenu.style.top = (window.scrollY + rect.bottom + 8) + 'px';
+        megaMenu.style.left = '0';
+        megaMenu.style.width = '100%';
+        megaMenu.style.height = '';
+      } else {
+        megaMenu.style.position = 'fixed';
+        megaMenu.style.top = '0';
+        megaMenu.style.left = '0';
+        megaMenu.style.width = '100%';
+        megaMenu.style.height = '100vh';
+      }
+    }
+
+    function closeExplore() {
+      if (!explorePanel) return;
+      explorePanel.classList.remove('open');
+      explorePanel.setAttribute('aria-hidden', 'true');
+      exploreToggle?.setAttribute('aria-expanded', 'false');
+      exploreToggle?.classList.remove('active');
+    }
+
+    function closeMega() {
+      if (!megaMenu) return;
+      megaMenu.classList.remove('open');
+      megaMenu.setAttribute('aria-hidden', 'true');
+      qq('.mega-list').forEach(list => list.setAttribute('hidden', ''));
+      qq('.mega-toggle').forEach(t => t.setAttribute('aria-expanded', 'false'));
+    }
+
+    // Attach toggle for Explore panel (hamburger)
+    if (exploreToggle && explorePanel) {
+      exploreToggle.addEventListener('click', function (e) {
+        e.stopPropagation();
+        const open = explorePanel.classList.toggle('open');
+        explorePanel.setAttribute('aria-hidden', String(!open));
+        exploreToggle.setAttribute('aria-expanded', String(open));
+        exploreToggle.classList.toggle('active', open);
+        if (open) closeMega();
+        console.log('Explore toggle -> open:', open);
+      });
+    } else {
+      console.warn('Missing exploreToggle or explorePanel');
+    }
+
+    // Explore actions
+    exploreAbout?.addEventListener('click', function () {
+      const target = q('#what-we-do') || q('#services');
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      else window.location.href = '/about';
+      closeExplore();
+    });
+
+    exploreDemo?.addEventListener('click', function () {
+      const mailto = 'mailto:zeal.io@outlook.com?subject=' + encodeURIComponent('ZEAL Demo Request') +
+                     '&body=' + encodeURIComponent('Hi ZEAL team,\n\nI would like to request a demo. Please get in touch.\n\nThanks.');
+      window.location.href = mailto;
+      closeExplore();
+    });
+
+    // Explore -> Services opens mega menu
+    exploreServices?.addEventListener('click', function (e) {
+      e.stopPropagation();
+      positionMega();
+      const isOpen = megaMenu.classList.toggle('open');
+      megaMenu.setAttribute('aria-hidden', String(!isOpen));
+      if (isOpen) {
+        // ensure lists are closed initially
+        qq('.mega-list').forEach(list => list.setAttribute('hidden', ''));
+        qq('.mega-toggle').forEach(t => t.setAttribute('aria-expanded', 'false'));
+      }
+      closeExplore();
+      console.log('Explore -> Services clicked — mega open:', isOpen);
+    });
+
+    // Mega column toggles
+    if (megaToggles.length) {
+      megaToggles.forEach(h => {
+        h.addEventListener('click', function (ev) {
+          ev.stopPropagation();
+          const id = h.getAttribute('data-target');
+          const el = q('#' + id);
+          if (!el) {
+            console.warn('Mega toggle target not found:', id);
+            return;
+          }
+          const wasHidden = el.hasAttribute('hidden');
+          // close others
+          qq('.mega-list').forEach(list => list.setAttribute('hidden', ''));
+          qq('.mega-toggle').forEach(t => t.setAttribute('aria-expanded', 'false'));
+          if (wasHidden) {
+            el.removeAttribute('hidden');
+            h.setAttribute('aria-expanded', 'true');
+          } else {
+            el.setAttribute('hidden', '');
+            h.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+    }
+
+    // Get Catalogue mailto (replace PDF_URL)
+    if (getCatalogue) {
+      getCatalogue.addEventListener('click', function (e) {
+        e.preventDefault();
+        const PDF_URL = 'https://example.com/ZEAL-catalogue.pdf'; // replace with real URL
+        const subject = encodeURIComponent('Request: ZEAL Catalogue');
+        const body = encodeURIComponent('Hi ZEAL team,\n\nPlease send me the ZEAL services catalogue. You can also download it here: ' + PDF_URL + '\n\nThanks.');
+        window.location.href = 'mailto:zeal.io@outlook.com?subject=' + subject + '&body=' + body;
+      });
+    }
+
+    // Close on outside click and Escape
+    document.addEventListener('click', function (e) {
+      if (explorePanel && !explorePanel.contains(e.target) && !exploreToggle.contains(e.target)) closeExplore();
+      if (megaMenu && !megaMenu.contains(e.target) && !exploreServices?.contains(e.target)) closeMega();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        closeExplore();
+        closeMega();
+      }
+    });
+
+    // Reposition on resize/scroll (debounced)
+    const debPos = debounce(positionMega, 120);
+    window.addEventListener('resize', debPos);
+    window.addEventListener('scroll', debPos);
+    positionMega();
+  })();
+
+  /* ============================
+     Social links → inline Instagram & modal wiring
+     ============================ */
+  (function socialAndModal() {
+    const socialLinks = qq('#col-social .social-link');
+    const colSocialExpanded = q('#col-social-expanded');
+    const viewBtns = qq('.view-services');
+    const platformModal = q('#platformModal');
+    const modalClose = platformModal?.querySelector('.modal-close');
+
+    if (socialLinks.length && colSocialExpanded) {
+      socialLinks.forEach(btn => {
+        btn.addEventListener('click', function () {
+          const service = btn.dataset.service;
+          if (service === 'instagram') {
+            colSocialExpanded.removeAttribute('hidden');
+            colSocialExpanded.setAttribute('aria-hidden', 'false');
+            try {
+              if (window.instgrm && typeof window.instgrm.Embeds === 'object') window.instgrm.Embeds.process();
+            } catch (err) { /* ignore */ }
+            colSocialExpanded.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          } else {
+            colSocialExpanded.setAttribute('hidden', '');
+            colSocialExpanded.setAttribute('aria-hidden', 'true');
+            const urls = {
+              instagram: 'https://www.instagram.com/zeal_web/',
+              twitter: 'https://twitter.com/',
+              facebook: 'https://facebook.com/',
+              youtube: 'https://youtube.com/',
+              tiktok: 'https://tiktok.com/',
+              linkedin: 'https://linkedin.com/'
+            };
+            const url = urls[service] || '#';
+            if (url !== '#') window.open(url, '_blank', 'noopener');
+          }
+        });
+      });
+    }
+
+    if (viewBtns.length && platformModal) {
+      viewBtns.forEach(b => b.addEventListener('click', function () {
+        platformModal.classList.add('open');
+        platformModal.setAttribute('aria-hidden', 'false');
+      }));
+      modalClose?.addEventListener('click', function () {
+        platformModal.classList.remove('open');
+        platformModal.setAttribute('aria-hidden', 'true');
+      });
+
+      document.addEventListener('click', function (e) {
+        if (platformModal && platformModal.classList.contains('open')) {
+          const inner = platformModal.querySelector('.platform-modal-inner');
+          if (inner && !inner.contains(e.target)) {
+            platformModal.classList.remove('open');
+            platformModal.setAttribute('aria-hidden', 'true');
+          }
+        }
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && platformModal && platformModal.classList.contains('open')) {
+          platformModal.classList.remove('open');
+          platformModal.setAttribute('aria-hidden', 'true');
+        }
+      });
+    }
+  })();
+
+  /* DOM ready complete */
+  console.log('UI script ready');
+});
 </script>
 
 </body>
