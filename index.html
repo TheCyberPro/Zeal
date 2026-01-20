@@ -953,6 +953,46 @@
 
   }); // ready
 })();
+
+// Replace existing close handler with a robust one
+(function(){
+  const closeBtn = document.getElementById('exploreClose');
+  const panel = document.getElementById('explorePanel');
+
+  if (!closeBtn || !panel) {
+    console.warn('exploreClose or explorePanel not found');
+    return;
+  }
+
+  // Remove any previously attached click handlers to avoid duplicates
+  closeBtn.replaceWith(closeBtn.cloneNode(true));
+  const newClose = document.getElementById('exploreClose');
+
+  newClose.addEventListener('click', function (e) {
+    e.stopPropagation();
+    try {
+      // Close panel UI immediately
+      panel.classList.remove('open');
+      panel.setAttribute('aria-hidden', 'true');
+
+      // Small visual delay so the close feels natural, then navigate
+      // Use replace to avoid adding an extra history entry
+      setTimeout(() => {
+        try {
+          window.location.replace('/');
+        } catch (navErr) {
+          // fallback to href assignment if replace fails
+          window.location.href = '/';
+        }
+      }, 120);
+    } catch (err) {
+      console.error('Close button handler error', err);
+      // fallback navigation if anything goes wrong
+      window.location.href = '/';
+    }
+  }, { passive: true });
+})();
+
 </script>
 
 </body>
