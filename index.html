@@ -12,7 +12,7 @@
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>ZEAL — We create digital experiences</title>
+  <title>ZEAL | Web development studio for premium digital platforms</title>
   <meta name="description" content="ZEAL builds premium websites, apps, and onboarding systems that elevate brand authority and drive measurable results." />
 
   <!-- Fonts -->
@@ -20,13 +20,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- Font Awesome (replace kit id) -->
+  <!-- Font Awesome (replace your-kit-id with your real kit id) -->
   <script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script>
 
-  <!-- Main stylesheet (kept for overrides if you have external CSS) -->
+  <!-- Main stylesheet (external fallback) -->
   <link rel="stylesheet" href="/styles.css">
 
-  <!-- Inline critical CSS (consolidated and fixed) -->
+  <!-- Inline CSS (consolidated and fixed) -->
   <style>
     :root {
       --orb-size: 680px;
@@ -37,33 +37,71 @@
 
     /* Base */
     * { box-sizing: border-box; }
-    html, body { height:100%; margin:0; font-family: Inter, "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#070417; color:#fff; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
-    a { color: inherit; }
+    html,body { height:100%; margin:0; font-family: Inter, "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#070417; color:#fff; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+    a { color: inherit; text-decoration: none; }
 
     /* Header */
-    .zeal-header {
-      position: fixed; top: 0; left: 0; width: 100%; z-index: 2200;
-      display:flex; align-items:center; padding:1rem 2%; background:transparent;
+    .zeal-header, header.nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 2200;
+      display:flex;
+      align-items:center;
+      padding: 1rem 2%;
+      background: transparent;
     }
     .zeal-nav { display:flex; align-items:center; width:100%; gap:1rem; }
     .nav-left { display:flex; gap:1rem; align-items:center; }
     .nav-link { color: rgba(255,255,255,0.9); text-decoration:none; font-weight:600; }
-    .nav-logo { margin-left:auto; font-family:'Anton',sans-serif; color:var(--gold); letter-spacing:.06em; font-size:1.05rem; }
-    .hamburger { background:transparent; border:0; width:44px; height:44px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; }
+    .nav-logo, .nav__logo, .nav_logo { margin-left:auto; font-family: 'Anton', sans-serif; color: var(--gold); letter-spacing: .06em; font-size:1.05rem; }
+    .hamburger, .explore-trigger {
+      background:transparent; border:1px solid rgba(255,255,255,0.12); color:rgba(255,255,255,0.95);
+      padding:0.45rem 0.9rem; border-radius:8px; cursor:pointer; font-weight:700;
+    }
     .hamburger span { display:block; width:20px; height:2px; background:#fff; margin:3px 0; transition: transform .28s, opacity .18s; }
 
     /* Hero */
-    .zeal-hero { position:relative; height:100vh; display:flex; align-items:center; padding:6rem 4% 2rem; overflow:hidden; z-index:1; }
-    .hero-content { z-index:3; max-width:720px; margin:0 auto; text-align:center; }
-    .hero-title { font-family:'Anton',sans-serif; color:var(--gold); font-size:clamp(2.8rem,6vw,4rem); line-height:1.02; margin:0 0 .6rem; text-shadow:0 0 18px rgba(255,213,79,0.35); }
-    .hero-subtitle { font-family:'Montserrat',sans-serif; color:rgba(255,255,255,0.92); max-width:720px; line-height:1.6; margin:0 auto; }
+    .zeal-hero, .hero--luxury {
+      position: relative;
+      min-height: 60vh;
+      display:flex;
+      align-items:center;
+      padding: 6rem 4% 2rem;
+      overflow:hidden;
+    }
+    .hero-content, .hero__inner { z-index: 3; max-width: 900px; margin: 0 auto; text-align:center; }
+    .hero-title, .hero__title {
+      font-family: 'Anton', sans-serif;
+      color: var(--gold);
+      font-size: clamp(2.8rem, 6vw, 4rem);
+      line-height: 1.02;
+      margin: 0 0 .6rem;
+      text-shadow: 0 0 18px rgba(255,213,79,0.35);
+    }
+    .hero-subtitle, .hero__subtitle {
+      font-family: 'Montserrat', sans-serif;
+      color: rgba(255,255,255,0.92);
+      max-width: 720px;
+      line-height: 1.6;
+      margin: 0 auto;
+    }
 
-    /* Decorative orb using zeal_ogimage.png */
-    .hero-bg {
-      position:absolute; top:6%; right:-12%; width:var(--orb-size); height:var(--orb-size); border-radius:50%;
-      background:center/cover no-repeat url('/assets/zeal_ogimage.png');
-      filter: blur(28px) brightness(1.15) saturate(1.05); opacity:.92; pointer-events:none;
-      animation:orbFloat 12s ease-in-out infinite; z-index:1;
+    /* Decorative orb (hero background) */
+    .hero-bg, .hero-orb {
+      position: absolute;
+      top: 6%;
+      right: -12%;
+      width: var(--orb-size);
+      height: var(--orb-size);
+      border-radius: 50%;
+      background: center/cover no-repeat url('/assets/zeal_ogimage.png');
+      filter: blur(28px) brightness(1.15) saturate(1.05);
+      opacity: 0.92;
+      z-index: 1;
+      pointer-events: none;
+      animation: orbFloat 12s ease-in-out infinite;
     }
     @keyframes orbFloat { 0%{transform:translateY(0)}50%{transform:translateY(-12px)}100%{transform:translateY(0)} }
 
@@ -78,65 +116,94 @@
     .grid--3cols { grid-template-columns: repeat(3, 1fr); }
     .grid--4cols { grid-template-columns: repeat(4, 1fr); }
     @media (max-width:900px) { .grid--3cols { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width:700px) { .grid--3cols { grid-template-columns: 1fr; } }
+    @media (max-width:700px) { .grid--3cols { grid-template-columns: 1fr; } .hero-bg { display:none; } }
 
     /* Cards */
-    .card, .highlight-card { background:inherit; border-radius:12px; padding:1.5rem; box-shadow:0 4px 20px rgba(0,0,0,0.05); transition:transform .2s, box-shadow .2s; min-width:0; }
-    .card:hover, .highlight-card:hover { transform:translateY(-4px); box-shadow:0 8px 30px rgba(0,0,0,0.1); }
-    .card__title, .highlight-card h3 { margin:0 0 .5rem; font-weight:700; }
-    .card__text, .highlight-card p { margin:0; line-height:1.5; color:rgba(255,255,255,0.92); }
+    .card, .highlight-card, .s-card { background:inherit; border-radius:12px; padding:1.25rem; box-shadow:0 12px 36px rgba(2,6,23,0.06); transition:transform .2s, box-shadow .2s; min-width:0; }
+    .card:hover, .highlight-card:hover { transform:translateY(-4px); box-shadow:0 8px 30px rgba(0,0,0,0.12); }
+
+    /* Highlights */
+    .highlight-card .card__title, .card__title { margin:0 0 .5rem; font-weight:700; }
+    .card__text { margin:0; line-height:1.5; color:rgba(255,255,255,0.92); }
 
     /* Testimonial slider */
     .testimonial-slider { position:relative; overflow:hidden; padding:1rem 0; }
-    .testimonial { opacity:0; transition:opacity .5s ease; padding:1rem; }
+    .testimonial { opacity:0; transition:opacity .5s ease; }
     .testimonial.active { opacity:1; }
     .testimonial footer { margin-top:.75rem; color:rgba(255,255,255,0.7); font-size:.95rem; }
 
     /* Instagram card */
-    .s-card { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:14px; overflow:hidden; box-shadow:0 12px 36px rgba(2,6,23,0.6); display:flex; flex-direction:column; border:1px solid rgba(255,213,79,0.06); min-width:0; }
-    .s-card-media { height:160px; background-size:cover; background-position:center; }
+    .s-card { display:flex; flex-direction:column; gap:1rem; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:14px; overflow:hidden; border:1px solid rgba(255,213,79,0.06); }
+    .s-card-media { height:160px; background-size:cover; background-position:center; box-shadow:0 0 20px rgba(255,213,79,0.25); border-bottom:1px solid rgba(255,213,79,0.1); }
     .s-card-body { padding:1rem; display:flex; flex-direction:column; gap:.6rem; }
     .s-card-ctas { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:auto; }
-    .s-btn { padding:.5rem .9rem; border-radius:10px; font-weight:700; text-decoration:none; display:inline-block; text-align:center; border:0; cursor:pointer; }
+    .s-btn { padding:.5rem .9rem; border-radius:10px; font-weight:700; cursor:pointer; text-decoration:none; display:inline-block; border:0; text-align:center; }
     .s-btn-primary { background:var(--gold); color:#0d052d; }
     .s-btn-ghost { background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.06); }
+    @media (max-width:700px) { .s-card { flex-direction:column; } .s-card-media { height:220px; } .s-card-ctas { justify-content:flex-start; } }
 
-    /* Explore panel / mega menu */
+    /* Explore / Mega menu */
     .explore-panel {
-      position: fixed; inset: 0; display:flex; align-items:flex-start; justify-content:center; padding-top:72px;
-      background: rgba(6,6,12,0.45); backdrop-filter: blur(6px); opacity:0; pointer-events:none; transform:translateY(-6px);
-      transition: opacity .26s ease, transform .26s ease; z-index:3000;
+      position: fixed;
+      inset: 0;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      padding-top:72px;
+      background: rgba(6,6,12,0.45);
+      backdrop-filter: blur(6px);
+      opacity:0;
+      pointer-events:none;
+      transform: translateY(-6px);
+      transition: opacity .26s ease, transform .26s ease;
+      z-index:3000;
     }
-    .explore-panel.open { opacity:1; pointer-events:auto; transform:translateY(0); }
-    .explore-inner { width:min(1100px,96%); background:linear-gradient(180deg, rgba(10,8,20,0.98), rgba(8,6,18,0.96)); border-radius:14px; box-shadow:0 18px 48px rgba(2,6,23,0.6); overflow:hidden; max-height:calc(100vh - 96px); display:flex; flex-direction:column; position:relative; }
+    .explore-panel.open { opacity:1; pointer-events:auto; transform: translateY(0); }
+    .explore-inner {
+      width: min(1100px, 96%);
+      background: linear-gradient(180deg, rgba(10,8,20,0.98), rgba(8,6,18,0.96));
+      border-radius: 14px;
+      box-shadow: 0 18px 48px rgba(2,6,23,0.6);
+      overflow: hidden;
+      max-height: calc(100vh - 96px);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
     .explore-close { position:absolute; top:12px; right:12px; background:transparent; border:0; color:#fff; font-size:28px; padding:8px; cursor:pointer; }
-    .mega-inner { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; padding:1.25rem; color:#e6e6e6; max-width:1200px; margin:0 auto; }
+    .mega-inner { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; padding:1rem 2rem; color:#ddd; max-width:1200px; margin:0 auto; }
     .mega-column h4 { cursor:pointer; color:var(--gold); margin:0 0 .5rem; font-family:'Anton',sans-serif; }
     .mega-list { margin:0; padding:0; list-style:none; }
     .mega-list li { margin:0 0 .5rem; }
     .mega-list a, .mega-list button { color:#eaeaea; text-decoration:none; background:transparent; border:0; padding:0; cursor:pointer; }
 
+    @media (max-width:900px) {
+      .explore-inner { width:100%; height:100%; border-radius:0; max-height:100vh; padding-top:56px; }
+      .explore-panel { padding-top:0; align-items:stretch; }
+      .mega-inner { grid-template-columns: 1fr; }
+    }
+
     /* Footer */
     footer.footer { display:flex; align-items:center; justify-content:center; padding:2rem 1rem; background:transparent; color:rgba(255,255,255,0.85); text-align:center; }
     footer.footer .footer__inner { width:100%; max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
 
-    /* Responsive */
-    @media (max-width:900px) {
-      .explore-inner { width:100%; height:100%; border-radius:0; max-height:100vh; padding-top:56px; }
-      .zeal-hero { padding-top:5rem; }
-      .hero-bg { right:-30%; width:520px; height:520px; filter:blur(20px); }
-      .grid--3cols { grid-template-columns: repeat(2,1fr); }
-    }
-    @media (max-width:700px) {
-      .hero-bg { display:none; }
-      .grid--3cols { grid-template-columns: 1fr; }
-      .s-card-media { height:140px; }
-    }
+    /* Utility */
+    .container { width:100%; max-width:var(--max-width); margin:0 auto; padding:0 1rem; min-width:0; }
+    .btn { display:inline-block; padding:.75rem 1.1rem; border-radius:10px; text-decoration:none; min-height:44px; line-height:1; }
+    .btn--light { background:var(--gold); color:#0d052d; font-weight:700; }
+    .btn--secondary { background:transparent; border:1px solid rgba(255,255,255,0.08); color:#fff; }
 
     /* Accessibility focus */
     .explore-inner :focus, a:focus, button:focus { outline:3px solid rgba(255,213,79,0.14); outline-offset:3px; }
+
+    /* Small tweaks */
+    @media (max-width:480px) {
+      .nav-left { display:none; }
+      .hero-title { font-size: clamp(2rem, 8vw, 2.6rem); }
+    }
   </style>
 </head>
+
 <body>
   <!-- Google Tag Manager (noscript) -->
   <noscript>
@@ -145,7 +212,7 @@
 
   <!-- Header -->
   <header class="zeal-header" role="navigation" aria-label="Main">
-    <nav class="zeal-nav container" style="align-items:center;">
+    <div class="container zeal-nav">
       <div class="nav-left">
         <a href="/" class="nav-link">Home</a>
         <a href="#about" class="nav-link">About</a>
@@ -153,19 +220,19 @@
 
       <span class="nav-logo">ZEAL</span>
 
-      <button id="exploreToggle" class="hamburger" aria-label="Toggle Explore Menu" aria-expanded="false" style="margin-left:1rem;">
+      <button id="exploreToggle" class="hamburger" aria-label="Toggle Explore Menu" aria-expanded="false" type="button">
         <span></span><span></span><span></span>
       </button>
-    </nav>
+    </div>
   </header>
 
-  <!-- Explore Panel (single instance) -->
+  <!-- Explore panel (single instance) -->
   <div id="explorePanel" class="explore-panel" aria-hidden="true" role="dialog" aria-label="Explore menu">
     <div class="explore-inner" role="document">
       <button id="exploreClose" class="explore-close" aria-label="Close Explore menu">&times;</button>
 
       <!-- Mega menu -->
-      <div id="megaMenu" class="mega-menu" role="menu" aria-hidden="true" style="width:100%;">
+      <div id="megaMenu" class="mega-menu" role="menu" aria-hidden="true">
         <div class="mega-inner">
           <div class="mega-column">
             <h4 class="mega-toggle" data-target="col-web" role="button" aria-expanded="false">Web Development ▾</h4>
@@ -203,8 +270,8 @@
                   <h5 id="inst-title-inline">Instagram Growth</h5>
                   <p class="s-card-sub">Reels, creative campaigns, and creator partnerships that scale engagement.</p>
                   <div class="s-card-ctas">
-                    <a class="s-btn s-btn-primary" href="https://www.instagram.com/zeal_web/" target="_blank" rel="noopener">Visit Instagram</a>
-                    <a class="s-btn s-btn-ghost" href="mailto:zeal.io@outlook.com?subject=ZEAL%20Catalogue">Get Catalogue</a>
+                    <a class="s-btn s-btn-primary" id="visitInstagramInline" href="https://www.instagram.com/zeal_web/" target="_blank" rel="noopener">Visit Instagram</a>
+                    <a class="s-btn s-btn-ghost" id="instCatalogueInline" href="mailto:zeal.io@outlook.com?subject=ZEAL%20Catalogue">Get Catalogue</a>
                   </div>
                 </div>
               </article>
@@ -217,9 +284,8 @@
   </div>
 
   <!-- Hero -->
-  <section class="zeal-hero" aria-labelledby="hero-title">
+  <section class="zeal-hero hero--luxury" aria-labelledby="hero-title">
     <div class="hero-bg" aria-hidden="true"></div>
-
     <div class="hero-content">
       <h1 id="hero-title" class="hero-title">WE CREATE DIGITAL EXPERIENCES</h1>
       <p class="hero-subtitle">We are a digital agency specializing in web design, development, and branding.</p>
@@ -227,162 +293,168 @@
   </section>
 
   <!-- SERVICES -->
-  <section id="services" class="section section--light" aria-labelledby="services-title">
-    <div class="container">
-      <h2 class="section__title" id="services-title">What we do</h2>
-      <div class="grid grid--4cols">
-        <div class="card">
-          <i class="fas fa-user-check card__icon" aria-hidden="true"></i>
-          <h3 class="card__title">Onboard</h3>
-          <p class="card__text">Fully compliant, automated onboarding flows that reduce friction and build trust from day one.</p>
-        </div>
+  <main>
+    <section id="services" class="section section--light" aria-labelledby="services-title">
+      <div class="container">
+        <h2 class="section__title" id="services-title">What we do</h2>
+        <div class="grid grid--4cols">
+          <div class="card">
+            <i class="fas fa-user-check card__icon" aria-hidden="true"></i>
+            <h3 class="card__title">Onboard</h3>
+            <p class="card__text">Fully compliant, automated onboarding flows that reduce friction and build trust from day one.</p>
+          </div>
 
-        <div class="card">
-          <i class="fas fa-globe card__icon" aria-hidden="true"></i>
-          <h3 class="card__title">Websites</h3>
-          <p class="card__text">Responsive, conversion‑focused websites that elevate brand authority and deliver clarity.</p>
-        </div>
+          <div class="card">
+            <i class="fas fa-globe card__icon" aria-hidden="true"></i>
+            <h3 class="card__title">Websites</h3>
+            <p class="card__text">Responsive, conversion‑focused websites that elevate brand authority and deliver clarity.</p>
+          </div>
 
-        <div class="card">
-          <i class="fas fa-mobile-alt card__icon" aria-hidden="true"></i>
-          <h3 class="card__title">Apps</h3>
-          <p class="card__text">Seamless iOS and Android apps built for performance, polish, and longevity.</p>
-        </div>
+          <div class="card">
+            <i class="fas fa-mobile-alt card__icon" aria-hidden="true"></i>
+            <h3 class="card__title">Apps</h3>
+            <p class="card__text">Seamless iOS and Android apps built for performance, polish, and longevity.</p>
+          </div>
 
-        <div class="card">
-          <i class="fas fa-bezier-curve card__icon" aria-hidden="true"></i>
-          <h3 class="card__title">UX / UI</h3>
-          <p class="card__text">Brand‑aligned interfaces that combine luxury aesthetics with operator‑grade usability.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- DEVELOPER HIGHLIGHTS -->
-  <section id="highlights" class="section section--dark" aria-labelledby="highlights-title">
-    <div class="container">
-      <h2 class="section__title" id="highlights-title">Developer highlights</h2>
-      <div class="grid grid--3cols">
-        <div class="highlight-card">
-          <h3 class="card__title">SaaS speed uplift</h3>
-          <p class="card__text">Cut load times in half, contributing to a 45% conversion lift.</p>
-        </div>
-        <div class="highlight-card">
-          <h3 class="card__title">Staffing automation</h3>
-          <p class="card__text">Built end‑to‑end onboarding with compliance baked in.</p>
-        </div>
-        <div class="highlight-card">
-          <h3 class="card__title">Executive‑grade dashboards</h3>
-          <p class="card__text">Designed premium dashboards that reinforce brand authority and clarity.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIAL SLIDER -->
-  <section id="testimonials" class="section section--light" aria-labelledby="testimonials-title">
-    <div class="container">
-      <h2 class="section__title" id="testimonials-title">Client feedback</h2>
-      <div class="testimonial-slider" aria-live="polite" role="region" aria-label="Client feedback">
-        <div class="testimonial active">
-          <p>“ZEAL transformed our platform into a premium experience. Our customers noticed immediately.”</p>
-          <footer>— Alex R., CEO of StartupX</footer>
-        </div>
-        <div class="testimonial">
-          <p>“The polish and speed improvements were night and day. ZEAL brought discipline and craft.”</p>
-          <footer>— Maya D., Product Lead</footer>
-        </div>
-        <div class="testimonial">
-          <p>“Onboarding drop‑off fell dramatically. The flow feels effortless and branded.”</p>
-          <footer>— Daniel K., Operations</footer>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- INSTAGRAM SECTION -->
-  <section id="instagram" class="section section--light" aria-labelledby="instagram-title">
-    <div class="container">
-      <h2 class="section__title" id="instagram-title">From our Instagram</h2>
-
-      <article class="s-card" id="instagramCard" tabindex="0" aria-labelledby="inst-title">
-        <div class="s-card-media" role="img" aria-label="Instagram preview" style="background-image:url('/assets/zeal2.png');"></div>
-        <div class="s-card-body">
-          <h5 id="inst-title">Instagram Highlight</h5>
-          <p class="s-card-sub">Reels, creative campaigns, and creator partnerships that scale engagement.</p>
-          <div class="s-card-ctas">
-            <a class="s-btn s-btn-primary" id="visitInstagram" href="https://www.instagram.com/zeal_web/" target="_blank" rel="noopener">Visit Instagram</a>
-            <a class="s-btn s-btn-ghost" id="instCatalogue" href="mailto:zeal.io@outlook.com?subject=ZEAL%20Catalogue&body=Please%20send%20me%20the%20catalogue.">Get Catalogue</a>
-            <button class="s-btn s-btn-outline view-services" type="button">View Services</button>
+          <div class="card">
+            <i class="fas fa-bezier-curve card__icon" aria-hidden="true"></i>
+            <h3 class="card__title">UX / UI</h3>
+            <p class="card__text">Brand‑aligned interfaces that combine luxury aesthetics with operator‑grade usability.</p>
           </div>
         </div>
-      </article>
-    </div>
-  </section>
+      </div>
+    </section>
 
-  <!-- ABOUT THE DEVELOPER -->
-  <section id="about" class="section section--light" aria-labelledby="about-title">
-    <div class="container">
-      <h2 class="section__title" id="about-title">Meet the developer</h2>
-      <p class="developer__intro">
-        ZEAL — We build trust into every pixel and craft platforms that feel expensive, move fast, and scale cleanly.
-        From glowing brand visuals to disciplined engineering, we design and develop premium websites, apps, and onboarding
-        flows that speak your customer’s language and strengthen your brand’s authority.
-      </p>
-      <a href="#contact" class="s-btn s-btn-ghost" style="display:inline-block;margin-top:1rem;">Book a Free Consultation</a>
-    </div>
-  </section>
+    <!-- DEVELOPER HIGHLIGHTS -->
+    <section id="highlights" class="section section--dark" aria-labelledby="highlights-title">
+      <div class="container">
+        <h2 class="section__title" id="highlights-title">Developer highlights</h2>
+        <div class="grid grid--3cols">
+          <div class="highlight-card">
+            <h3 class="card__title">SaaS speed uplift</h3>
+            <p class="card__text">Cut load times in half, contributing to a 45% conversion lift.</p>
+          </div>
+          <div class="highlight-card">
+            <h3 class="card__title">Staffing automation</h3>
+            <p class="card__text">Built end‑to‑end onboarding with compliance baked in.</p>
+          </div>
+          <div class="highlight-card">
+            <h3 class="card__title">Executive‑grade dashboards</h3>
+            <p class="card__text">Designed premium dashboards that reinforce brand authority and clarity.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <!-- CALL TO ACTION -->
-  <section id="contact" class="section section--light" aria-labelledby="contact-title">
-    <div class="container contact">
-      <h2 class="section__title" id="contact-title">Build your next digital platform</h2>
-      <p class="contact__text">Book a demo and let’s turn your website or app into your hardest‑working salesperson.</p>
-      <a href="mailto:zeal.io@outlook.com?subject=ZEAL%20Demo%20Request" class="s-btn s-btn-primary" style="margin-top:1rem;display:inline-block;">Book a Demo</a>
-    </div>
-  </section>
+    <!-- TESTIMONIAL SLIDER -->
+    <section id="testimonials" class="section section--light" aria-labelledby="testimonials-title">
+      <div class="container">
+        <h2 class="section__title" id="testimonials-title">Client feedback</h2>
+        <div class="testimonial-slider" aria-live="polite" role="region" aria-label="Client feedback">
+          <div class="testimonial active">
+            <p>“ZEAL transformed our platform into a premium experience. Our customers noticed immediately.”</p>
+            <footer>— Alex R., CEO of StartupX</footer>
+          </div>
+          <div class="testimonial">
+            <p>“The polish and speed improvements were night and day. ZEAL brought discipline and craft.”</p>
+            <footer>— Maya D., Product Lead</footer>
+          </div>
+          <div class="testimonial">
+            <p>“Onboarding drop‑off fell dramatically. The flow feels effortless and branded.”</p>
+            <footer>— Daniel K., Operations</footer>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INSTAGRAM SECTION -->
+    <section id="instagram" class="section section--light" aria-labelledby="instagram-title">
+      <div class="container">
+        <h2 class="section__title" id="instagram-title">From our Instagram</h2>
+
+        <article class="s-card" id="instagramCard" tabindex="0" aria-labelledby="inst-title">
+          <div class="s-card-media" role="img" aria-label="Instagram preview" style="background-image:url('/assets/zeal2.png');"></div>
+          <div class="s-card-body">
+            <h5 id="inst-title">Instagram Highlight</h5>
+            <p class="s-card-sub">Reels, creative campaigns, and creator partnerships that scale engagement.</p>
+
+            <div class="s-card-ctas">
+              <a class="s-btn s-btn-primary" id="visitInstagram" href="https://www.instagram.com/zeal_web/" target="_blank" rel="noopener">Visit Instagram</a>
+              <a class="s-btn s-btn-ghost" id="instCatalogue" href="mailto:zeal.io@outlook.com?subject=ZEAL%20Catalogue">Get Catalogue</a>
+              <button class="s-btn s-btn-outline view-services" type="button">View Services</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ABOUT THE DEVELOPER -->
+    <section id="about" class="section section--light" aria-labelledby="about-title">
+      <div class="container">
+        <h2 class="section__title" id="about-title">Meet the developer</h2>
+
+        <p class="developer__intro">
+          ZEAL — We build trust into every pixel and craft platforms that feel expensive, move fast, and scale cleanly.
+          From glowing brand visuals to disciplined engineering, we design and develop premium websites, apps, and onboarding
+          flows that speak your customer’s language and strengthen your brand’s authority.
+        </p>
+
+        <a href="#contact" class="btn btn--secondary">Book a Free Consultation</a>
+      </div>
+    </section>
+
+    <!-- CALL TO ACTION -->
+    <section id="contact" class="section section--light" aria-labelledby="contact-title">
+      <div class="container contact">
+        <h2 class="section__title" id="contact-title">Build your next digital platform</h2>
+        <p class="contact__text">Book a demo and let’s turn your website or app into your hardest‑working salesperson.</p>
+        <a href="mailto:zeal.io@outlook.com?subject=ZEAL%20Demo%20Request" class="btn btn--light">Book a Demo</a>
+      </div>
+    </section>
+  </main>
 
   <!-- FOOTER -->
   <footer class="footer" role="contentinfo" aria-label="Site footer">
-    <div class="footer__inner">
-      <div class="footer__brand" style="display:flex;align-items:center;gap:.75rem;">
+    <div class="container footer__inner">
+      <div class="footer__brand" style="display:flex;align-items:center;gap:0.75rem;">
         <a href="/" class="nav__logo" aria-label="ZEAL home" style="text-decoration:none;color:var(--gold);font-family:'Anton',sans-serif;">ZEAL</a>
       </div>
+
       <div class="footer__utils" style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
         <div class="footer__lang" role="group" aria-label="Language selector">
           <button class="s-btn s-btn-ghost" type="button" aria-haspopup="listbox" aria-expanded="false">English</button>
         </div>
-        <div class="footer__copy" style="color:rgba(255,255,255,0.7);font-size:.95rem;">
+
+        <div class="footer__copy" style="color:rgba(255,255,255,0.7);font-size:0.95rem;">
           <span>© <span id="year"></span> ZEAL</span>
         </div>
       </div>
     </div>
   </footer>
 
-  <!-- Consolidated UI script (single drop-in) -->
+  <!-- Consolidated UI script (drop-in) -->
   <script>
   (function () {
     'use strict';
-    const q = (sel, ctx=document) => (ctx||document).querySelector(sel);
-    const qq = (sel, ctx=document) => Array.from((ctx||document).querySelectorAll(sel));
-    const debounce = (fn, wait=120) => { let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), wait); }; };
+    const q = (sel, ctx = document) => (ctx || document).querySelector(sel);
+    const qq = (sel, ctx = document) => Array.from((ctx || document).querySelectorAll(sel));
+    const debounce = (fn, wait = 120) => { let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), wait); }; };
 
     function ready(fn){ if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn); else fn(); }
 
     ready(() => {
-      // set year
-      const yEl = document.getElementById('year'); if (yEl) yEl.textContent = new Date().getFullYear();
+      // set copyright year
+      const y = new Date().getFullYear();
+      const yearEl = document.getElementById('year');
+      if (yearEl) yearEl.textContent = y;
 
       // Tawk loader (idempotent)
       (function loadTawk(){ try { if (window.Tawk_API || window.Tawk_LoadStart) return; window.Tawk_API = window.Tawk_API || {}; window.Tawk_LoadStart = new Date(); const s = document.createElement('script'); s.async = true; s.src = 'https://embed.tawk.to/68cf60b510ce81192499da9f/1j5l13ih6'; s.charset = 'UTF-8'; s.setAttribute('crossorigin','*'); const first = document.getElementsByTagName('script')[0]; if (first && first.parentNode) first.parentNode.insertBefore(s, first); else document.head.appendChild(s); } catch(e){ console.warn('Tawk failed', e); } })();
 
       // testimonial slider
-      (function testimonialSlider(){ const slider = q('.testimonial-slider'); if (!slider) return; const items = Array.from(slider.querySelectorAll('.testimonial')); if (!items.length) return; let idx = items.findIndex(i=>i.classList.contains('active')); if (idx < 0) idx = 0; items.forEach((el,i)=>el.classList.toggle('active', i===idx)); let t = setInterval(next, 5000); function show(i){ items.forEach((el,n)=>el.classList.toggle('active', n===i)); } function next(){ idx = (idx+1)%items.length; show(idx); } slider.addEventListener('mouseenter', ()=>clearInterval(t)); slider.addEventListener('mouseleave', ()=>t=setInterval(next,5000)); slider.addEventListener('focusin', ()=>clearInterval(t)); slider.addEventListener('focusout', ()=>t=setInterval(next,5000)); })();
+      (function testimonialSlider(){ const slider = q('.testimonial-slider'); if (!slider) return; const items = Array.from(slider.querySelectorAll('.testimonial')); if (!items.length) return; let idx = items.findIndex(i=>i.classList.contains('active')); if (idx < 0) idx = 0; items.forEach((el,i)=>el.classList.toggle('active', i===idx)); let t = setInterval(()=>{ items[idx].classList.remove('active'); idx = (idx+1)%items.length; items[idx].classList.add('active'); }, 5000); slider.addEventListener('mouseenter', ()=>clearInterval(t)); slider.addEventListener('mouseleave', ()=> t = setInterval(()=>{ items[idx].classList.remove('active'); idx = (idx+1)%items.length; items[idx].classList.add('active'); }, 5000)); slider.addEventListener('focusin', ()=>clearInterval(t)); slider.addEventListener('focusout', ()=> t = setInterval(()=>{ items[idx].classList.remove('active'); idx = (idx+1)%items.length; items[idx].classList.add('active'); }, 5000)); })();
 
-      // reveal on scroll
-      (function revealOnScroll(){ const els = qq('.card, .highlight-card, .testimonial'); if (!els.length) return; els.forEach(el=>el.classList.add('reveal')); try { const obs = new IntersectionObserver((entries, observer)=>{ entries.forEach(entry=>{ if (entry.isIntersecting){ entry.target.classList.add('active'); observer.unobserve(entry.target); } }); }, { threshold: 0.12 }); qq('.reveal').forEach(el=>obs.observe(el)); } catch(e){ qq('.reveal').forEach(el=>el.classList.add('active')); } })();
-
-      // explore & mega menu
+      // explore / mega menu
       (function exploreAndMega(){
         const toggle = q('#exploreToggle');
         const panel = q('#explorePanel');
@@ -390,9 +462,7 @@
         const mega = q('#megaMenu');
         const megaToggles = qq('.mega-toggle', panel || document);
         const getCatalogue = q('#getCatalogue');
-        const exploreAbout = q('#exploreAbout');
-        const exploreServices = q('#exploreServices');
-        const exploreDemo = q('#exploreDemo');
+        const socialLinks = qq('.social-link');
 
         if (!toggle || !panel) return;
 
@@ -400,8 +470,8 @@
         let lastFocused = null;
         const focusable = () => Array.from(panel.querySelectorAll(focusableSelector)).filter(el => !el.hasAttribute('disabled'));
 
-        function openPanel(){ lastFocused = document.activeElement; panel.classList.add('open'); panel.setAttribute('aria-hidden','false'); toggle.setAttribute('aria-expanded','true'); const f = focusable()[0]; if (f) f.focus(); document.documentElement.style.overflow='hidden'; document.body.style.overflow='hidden'; }
-        function closePanel(){ panel.classList.remove('open'); panel.setAttribute('aria-hidden','true'); toggle.setAttribute('aria-expanded','false'); if (lastFocused && typeof lastFocused.focus==='function') lastFocused.focus(); document.documentElement.style.overflow=''; document.body.style.overflow=''; }
+        function openPanel(){ lastFocused = document.activeElement; panel.classList.add('open'); panel.setAttribute('aria-hidden','false'); toggle.setAttribute('aria-expanded','true'); const f = focusable()[0]; if (f) f.focus(); document.documentElement.style.overflow = 'hidden'; document.body.style.overflow = 'hidden'; }
+        function closePanel(){ panel.classList.remove('open'); panel.setAttribute('aria-hidden','true'); toggle.setAttribute('aria-expanded','false'); if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus(); document.documentElement.style.overflow = ''; document.body.style.overflow = ''; }
 
         toggle.addEventListener('click', (e)=>{ e.stopPropagation(); panel.classList.contains('open') ? closePanel() : openPanel(); });
 
@@ -409,77 +479,61 @@
 
         document.addEventListener('click', (e)=>{ if (!panel.classList.contains('open')) return; if (!panel.contains(e.target) && !toggle.contains(e.target)) closePanel(); });
 
-        document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape'){ if (panel.classList.contains('open')) closePanel(); return; } if (!panel.classList.contains('open')) return; if (e.key === 'Tab'){ const nodes = focusable(); if (!nodes.length) return; const first = nodes[0], last = nodes[nodes.length-1]; if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); } else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); } } });
+        document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape'){ if (panel.classList.contains('open')) { e.preventDefault(); closePanel(); } return; } if (!panel.classList.contains('open')) return; if (e.key === 'Tab'){ const nodes = focusable(); if (!nodes.length) return; const first = nodes[0], last = nodes[nodes.length - 1]; if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); } else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); } } });
 
-        megaToggles.forEach(h => { h.addEventListener('click', (ev)=>{ ev.stopPropagation(); const id = h.getAttribute('data-target'); const el = panel.querySelector('#'+id) || document.getElementById(id); if (!el) return; const wasHidden = el.hasAttribute('hidden'); (panel.querySelectorAll('.mega-list')||[]).forEach(list=>list.setAttribute('hidden','')); (panel.querySelectorAll('.mega-toggle')||[]).forEach(t=>t.setAttribute('aria-expanded','false')); if (wasHidden){ el.removeAttribute('hidden'); h.setAttribute('aria-expanded','true'); } else { el.setAttribute('hidden',''); h.setAttribute('aria-expanded','false'); } }); });
+        megaToggles.forEach(h => {
+          h.addEventListener('click', (ev)=>{ ev.stopPropagation(); const id = h.getAttribute('data-target'); const el = panel.querySelector('#' + id) || document.getElementById(id); if (!el) return; const wasHidden = el.hasAttribute('hidden'); (panel.querySelectorAll('.mega-list') || []).forEach(list => list.setAttribute('hidden','')); (panel.querySelectorAll('.mega-toggle') || []).forEach(t => t.setAttribute('aria-expanded','false')); if (wasHidden){ el.removeAttribute('hidden'); h.setAttribute('aria-expanded','true'); } else { el.setAttribute('hidden',''); h.setAttribute('aria-expanded','false'); } });
+        });
 
-        if (getCatalogue) getCatalogue.addEventListener('click', function(e){ e.preventDefault(); const PDF_URL = 'https://example.com/ZEAL-catalogue.pdf'; const subject = encodeURIComponent('Request: ZEAL Catalogue'); const body = encodeURIComponent('Hi ZEAL team,\\n\\nPlease send me the ZEAL services catalogue. You can also download it here: ' + PDF_URL + '\\n\\nThanks.'); window.location.href = 'mailto:zeal.io@outlook.com?subject=' + subject + '&body=' + body; });
+        if (getCatalogue) {
+          getCatalogue.addEventListener('click', function(e){ e.preventDefault(); const PDF_URL = 'https://example.com/ZEAL-catalogue.pdf'; const subject = encodeURIComponent('Request: ZEAL Catalogue'); const body = encodeURIComponent('Hi ZEAL team,\n\nPlease send me the ZEAL services catalogue. You can also download it here: ' + PDF_URL + '\n\nThanks.'); window.location.href = 'mailto:zeal.io@outlook.com?subject=' + subject + '&body=' + body; });
+        }
 
-        exploreAbout?.addEventListener('click', ()=>{ document.querySelector('#about')?.scrollIntoView({behavior:'smooth', block:'start'}); closePanel(); });
-        exploreDemo?.addEventListener('click', ()=>{ document.querySelector('#contact')?.scrollIntoView({behavior:'smooth', block:'start'}); closePanel(); });
-        exploreServices?.addEventListener('click', ()=>{ closePanel(); if (mega) { mega.classList.toggle('open'); mega.setAttribute('aria-hidden', String(!mega.classList.contains('open'))); } });
+        socialLinks.forEach(btn => {
+          btn.addEventListener('click', function () {
+            const service = btn.dataset.service;
+            const colSocialExpanded = q('#col-social-expanded');
+            if (service === 'instagram') {
+              colSocialExpanded?.removeAttribute('hidden');
+              colSocialExpanded?.setAttribute('aria-hidden','false');
+              colSocialExpanded?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            } else {
+              colSocialExpanded?.setAttribute('hidden','');
+              colSocialExpanded?.setAttribute('aria-hidden','true');
+              const urls = { instagram:'https://www.instagram.com/zeal_web/', twitter:'https://twitter.com/', facebook:'https://facebook.com/', youtube:'https://youtube.com/', tiktok:'https://tiktok.com/', linkedin:'https://linkedin.com/' };
+              const url = urls[service] || '#';
+              if (url !== '#') window.open(url, '_blank', 'noopener');
+            }
+          });
+        });
 
         // position mega under header on desktop
-        function positionMega(){ const header = document.querySelector('.zeal-header'); if (!mega || !header) return; const rect = header.getBoundingClientRect(); if (window.innerWidth > 900){ mega.style.position='absolute'; mega.style.top=(window.scrollY + rect.bottom + 8)+'px'; mega.style.left='0'; mega.style.width='100%'; mega.style.height=''; } else { mega.style.position='fixed'; mega.style.top='0'; mega.style.left='0'; mega.style.width='100%'; mega.style.height='100vh'; } }
-        const debPos = debounce(positionMega, 120); window.addEventListener('resize', debPos); window.addEventListener('scroll', debPos); positionMega();
+        function positionMega(){
+          const header = document.querySelector('.zeal-header');
+          if (!mega || !header) return;
+          const rect = header.getBoundingClientRect();
+          if (window.innerWidth > 900) {
+            mega.style.position = 'absolute';
+            mega.style.top = (window.scrollY + rect.bottom + 8) + 'px';
+            mega.style.left = '0';
+            mega.style.width = '100%';
+            mega.style.height = '';
+          } else {
+            mega.style.position = 'fixed';
+            mega.style.top = '0';
+            mega.style.left = '0';
+            mega.style.width = '100%';
+            mega.style.height = '100vh';
+          }
+        }
+        const debPos = debounce(positionMega, 120);
+        window.addEventListener('resize', debPos);
+        window.addEventListener('scroll', debPos);
+        positionMega();
       })();
 
-      // social inline / modal wiring (if present)
-      (function socialAndModal(){
-        const socialLinks = qq('#col-social .social-link');
-        const colSocialExpanded = q('#col-social-expanded');
-        const viewBtns = qq('.view-services');
-        const platformModal = q('#platformModal') || q('.platform-modal');
-        const modalClose = platformModal?.querySelector('.modal-close');
-
-        if (socialLinks.length && colSocialExpanded) {
-          socialLinks.forEach(btn => {
-            btn.addEventListener('click', function () {
-              const service = btn.dataset.service;
-              if (service === 'instagram') {
-                colSocialExpanded.removeAttribute('hidden');
-                colSocialExpanded.setAttribute('aria-hidden', 'false');
-                try { if (window.instgrm && typeof window.instgrm.Embeds === 'object') window.instgrm.Embeds.process(); } catch (err) {}
-                colSocialExpanded.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-              } else {
-                colSocialExpanded.setAttribute('hidden', '');
-                colSocialExpanded.setAttribute('aria-hidden', 'true');
-                const urls = { instagram:'https://www.instagram.com/zeal_web/', twitter:'https://twitter.com/', facebook:'https://facebook.com/', youtube:'https://youtube.com/', tiktok:'https://tiktok.com/', linkedin:'https://linkedin.com/' };
-                const url = urls[service] || '#';
-                if (url !== '#') window.open(url, '_blank', 'noopener');
-              }
-            });
-          });
-        }
-
-        if (viewBtns.length && platformModal) {
-          viewBtns.forEach(b => b.addEventListener('click', () => {
-            platformModal.classList.add('open');
-            platformModal.setAttribute('aria-hidden','false');
-          }));
-          modalClose?.addEventListener('click', () => {
-            platformModal.classList.remove('open');
-            platformModal.setAttribute('aria-hidden','true');
-          });
-
-          document.addEventListener('click', (e) => {
-            if (platformModal && platformModal.classList.contains('open')) {
-              const inner = platformModal.querySelector('.platform-modal-inner');
-              if (inner && !inner.contains(e.target)) {
-                platformModal.classList.remove('open');
-                platformModal.setAttribute('aria-hidden','true');
-              }
-            }
-          });
-
-          document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && platformModal && platformModal.classList.contains('open')) {
-              platformModal.classList.remove('open');
-              platformModal.setAttribute('aria-hidden','true');
-            }
-          });
-        }
-      })();
+      // reveal on scroll (fallback)
+      (function revealOnScroll(){ const els = qq('.card, .highlight-card, .testimonial'); if (!els.length) return; els.forEach(el=>el.classList.add('reveal')); try { const obs = new IntersectionObserver((entries, observer)=>{ entries.forEach(entry=>{ if (entry.isIntersecting){ entry.target.classList.add('active'); observer.unobserve(entry.target); } }); }, { threshold: 0.12 }); qq('.reveal').forEach(el=>obs.observe(el)); } catch(e){ qq('.reveal').forEach(el=>el.classList.add('active')); } })();
 
     }); // ready
   })();
