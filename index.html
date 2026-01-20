@@ -1,144 +1,141 @@
-<!doctype html> <html lang="en"> <head> <!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-B0HZHDFETE"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-B0HZHDFETE'); </script>
-<meta charset="utf-8" /> <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" /> <title>ZEAL — We create digital experiences</title> <meta name="description" content="ZEAL — web design, development, and branding." />
-<!-- Fonts (single, consolidated load) --> <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet"> <!-- Font Awesome (replace kit id) --> <script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script> <!-- Main stylesheet --> <link rel="stylesheet" href="/styles.css">
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-B0HZHDFETE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-B0HZHDFETE');
+  </script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>ZEAL — We create digital experiences</title>
+  <meta name="description" content="ZEAL builds premium websites, apps, and onboarding systems that elevate brand authority and drive measurable results." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome (replace kit id) -->
   <script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script>
 
-  <!-- Main stylesheet -->
+  <!-- Main stylesheet (kept for overrides if you have external CSS) -->
   <link rel="stylesheet" href="/styles.css">
 
+  <!-- Inline critical CSS (consolidated and fixed) -->
+  <style>
+    :root {
+      --orb-size: 680px;
+      --max-width: 1200px;
+      --gold: #ffd54f;
+      --bg-dark: #0d052d;
+    }
 
-  <!-- Inline Luxury-Glow Overrides -->
-<style>
-:root {
-  --orb-size: 680px;
-  --max-width: 1200px;
-  --gold: #ffd54f;
-  --bg-dark: #0d052d;
-}
+    /* Base */
+    * { box-sizing: border-box; }
+    html, body { height:100%; margin:0; font-family: Inter, "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#070417; color:#fff; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+    a { color: inherit; }
 
-/* Base */
-* { box-sizing: border-box; }
-html, body { height:100%; margin:0; font-family: Inter, "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#070417; color:#fff; }
+    /* Header */
+    .zeal-header {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 2200;
+      display:flex; align-items:center; padding:1rem 2%; background:transparent;
+    }
+    .zeal-nav { display:flex; align-items:center; width:100%; gap:1rem; }
+    .nav-left { display:flex; gap:1rem; align-items:center; }
+    .nav-link { color: rgba(255,255,255,0.9); text-decoration:none; font-weight:600; }
+    .nav-logo { margin-left:auto; font-family:'Anton',sans-serif; color:var(--gold); letter-spacing:.06em; font-size:1.05rem; }
+    .hamburger { background:transparent; border:0; width:44px; height:44px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; }
+    .hamburger span { display:block; width:20px; height:2px; background:#fff; margin:3px 0; transition: transform .28s, opacity .18s; }
 
-/* Header */
-.zeal-header {
-  position: fixed; top: 0; left: 0; width: 100%; z-index: 2200;
-  display:flex; align-items:center; padding:1rem 2%; background:transparent;
-}
-.zeal-nav { display:flex; align-items:center; width:100%; gap:1rem; }
-.nav-left { display:flex; gap:1rem; align-items:center; }
-.nav-link { color: rgba(255,255,255,0.9); text-decoration:none; font-weight:600; }
-.nav-logo { margin-left:auto; font-family:'Anton',sans-serif; color:var(--gold); letter-spacing:.06em; font-size:1.05rem; }
-.hamburger { background:transparent; border:0; width:44px; height:44px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; }
-.hamburger span { display:block; width:20px; height:2px; background:#fff; margin:3px 0; transition: transform .28s, opacity .18s; }
+    /* Hero */
+    .zeal-hero { position:relative; height:100vh; display:flex; align-items:center; padding:6rem 4% 2rem; overflow:hidden; z-index:1; }
+    .hero-content { z-index:3; max-width:720px; margin:0 auto; text-align:center; }
+    .hero-title { font-family:'Anton',sans-serif; color:var(--gold); font-size:clamp(2.8rem,6vw,4rem); line-height:1.02; margin:0 0 .6rem; text-shadow:0 0 18px rgba(255,213,79,0.35); }
+    .hero-subtitle { font-family:'Montserrat',sans-serif; color:rgba(255,255,255,0.92); max-width:720px; line-height:1.6; margin:0 auto; }
 
-/* Hero */
-.zeal-hero { position:relative; height:100vh; display:flex; align-items:center; padding:6rem 4% 2rem; overflow:hidden; z-index:1; }
-.hero-content { z-index:3; max-width:720px; }
-.hero-title { font-family:'Anton',sans-serif; color:var(--gold); font-size:clamp(2.8rem,6vw,4rem); line-height:1.02; margin:0 0 .6rem; text-shadow:0 0 18px rgba(255,213,79,0.35); }
-.hero-subtitle { font-family:'Montserrat',sans-serif; color:rgba(255,255,255,0.92); max-width:560px; line-height:1.6; margin:0; }
-.hero-orb {
-  position:absolute; top:6%; right:-12%; width:var(--orb-size); height:var(--orb-size); border-radius:50%;
-  background:center/cover no-repeat url('/assets/zeal_ogimage.png');
-  filter: blur(28px) brightness(1.15) saturate(1.05); opacity:.92; pointer-events:none; animation:orbFloat 12s ease-in-out infinite; z-index:1;
-}
-@keyframes orbFloat { 0%{transform:translateY(0)}50%{transform:translateY(-12px)}100%{transform:translateY(0)} }
+    /* Decorative orb using zeal_ogimage.png */
+    .hero-bg {
+      position:absolute; top:6%; right:-12%; width:var(--orb-size); height:var(--orb-size); border-radius:50%;
+      background:center/cover no-repeat url('/assets/zeal_ogimage.png');
+      filter: blur(28px) brightness(1.15) saturate(1.05); opacity:.92; pointer-events:none;
+      animation:orbFloat 12s ease-in-out infinite; z-index:1;
+    }
+    @keyframes orbFloat { 0%{transform:translateY(0)}50%{transform:translateY(-12px)}100%{transform:translateY(0)} }
 
-/* Footer helpers (fixed brace and explicit layout) */
-footer.footer {
-  display:flex; align-items:center; justify-content:center; padding:2rem 1rem; background:transparent; color:rgba(255,255,255,0.85); text-align:center;
-}
-footer.footer .footer__inner {
-  width:100%; max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;
-}
+    /* Sections */
+    .section { background:#fff; color:#0d052d; border-radius:20px; box-shadow:0 20px 40px rgba(0,0,0,0.1); padding:3rem 2rem; margin:2rem auto; max-width:var(--max-width); }
+    .section--light { background:#f9f9ff; color:#0d052d; }
+    .section--dark { background:var(--bg-dark); color:#fff; }
+    .section__title { text-align:center; text-transform:uppercase; font-family:'Anton',sans-serif; letter-spacing:0.05em; margin-bottom:2rem; color:var(--gold); }
 
-/* Instagram section theme */
-#instagram.section--light {
-  background: linear-gradient(180deg,#0d052d 0%,#08031e 100%);
-  color:#fff; border-radius:20px; box-shadow:0 20px 40px rgba(0,0,0,0.35); padding:3rem 2rem;
-}
-#instagram .section__title { color:var(--gold); text-shadow:0 0 12px rgba(255,213,79,0.35); }
-#instagram .s-card { background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)); border:1px solid rgba(255,213,79,0.08); box-shadow:0 12px 36px rgba(2,6,23,0.7); }
-#instagram .s-card-sub { color: rgba(255,255,255,0.85); }
-#instagram .s-btn-primary { background: var(--gold); color:#0d052d; }
-#instagram .s-btn-outline, #instagram .s-btn-ghost { color:#fff; border-color: rgba(255,255,255,0.15); }
-#instagram .s-card-media { box-shadow:0 0 20px rgba(255,213,79,0.25); border-bottom:1px solid rgba(255,213,79,0.1); }
+    /* Grids */
+    .grid { display:grid; gap:1.25rem; }
+    .grid--3cols { grid-template-columns: repeat(3, 1fr); }
+    .grid--4cols { grid-template-columns: repeat(4, 1fr); }
+    @media (max-width:900px) { .grid--3cols { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width:700px) { .grid--3cols { grid-template-columns: 1fr; } }
 
-/* Prevent text splitting and keep content inside containers */
-.section, .container, .card, .developer__intro, .hero-content, .s-card-body {
-  overflow-wrap:break-word; word-break:break-word; hyphens:auto; -webkit-hyphens:auto; -ms-hyphens:auto; min-width:0;
-}
+    /* Cards */
+    .card, .highlight-card { background:inherit; border-radius:12px; padding:1.5rem; box-shadow:0 4px 20px rgba(0,0,0,0.05); transition:transform .2s, box-shadow .2s; min-width:0; }
+    .card:hover, .highlight-card:hover { transform:translateY(-4px); box-shadow:0 8px 30px rgba(0,0,0,0.1); }
+    .card__title, .highlight-card h3 { margin:0 0 .5rem; font-weight:700; }
+    .card__text, .highlight-card p { margin:0; line-height:1.5; color:rgba(255,255,255,0.92); }
 
-/* Paragraphs and content spacing */
-.section p, .developer__intro, .card__text { margin:0 0 1rem; line-height:1.5; display:block; }
-.developer__intro { padding:0 0.5rem; word-wrap:break-word; max-width:72ch; }
+    /* Testimonial slider */
+    .testimonial-slider { position:relative; overflow:hidden; padding:1rem 0; }
+    .testimonial { opacity:0; transition:opacity .5s ease; padding:1rem; }
+    .testimonial.active { opacity:1; }
+    .testimonial footer { margin-top:.75rem; color:rgba(255,255,255,0.7); font-size:.95rem; }
 
-/* Section containers */
-.section { background:#fff; color:#0d052d; border-radius:20px; box-shadow:0 20px 40px rgba(0,0,0,0.1); padding:3rem 2rem; margin:2rem auto; max-width:1200px; }
-.section--light { background:#f9f9ff; color:#0d052d; }
-.section--dark { background:var(--bg-dark); color:#fff; }
-.section__title { text-align:center; text-transform:uppercase; font-family:'Anton',sans-serif; letter-spacing:0.05em; margin-bottom:2rem; }
+    /* Instagram card */
+    .s-card { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:14px; overflow:hidden; box-shadow:0 12px 36px rgba(2,6,23,0.6); display:flex; flex-direction:column; border:1px solid rgba(255,213,79,0.06); min-width:0; }
+    .s-card-media { height:160px; background-size:cover; background-position:center; }
+    .s-card-body { padding:1rem; display:flex; flex-direction:column; gap:.6rem; }
+    .s-card-ctas { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:auto; }
+    .s-btn { padding:.5rem .9rem; border-radius:10px; font-weight:700; text-decoration:none; display:inline-block; text-align:center; border:0; cursor:pointer; }
+    .s-btn-primary { background:var(--gold); color:#0d052d; }
+    .s-btn-ghost { background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.06); }
 
-/* Grids */
-.grid--4cols, .grid--3cols { display:grid; gap:1.5rem; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); }
-.grid--3cols { grid-template-columns: repeat(3, 1fr); }
-.grid--4cols { grid-template-columns: repeat(4, 1fr); }
+    /* Explore panel / mega menu */
+    .explore-panel {
+      position: fixed; inset: 0; display:flex; align-items:flex-start; justify-content:center; padding-top:72px;
+      background: rgba(6,6,12,0.45); backdrop-filter: blur(6px); opacity:0; pointer-events:none; transform:translateY(-6px);
+      transition: opacity .26s ease, transform .26s ease; z-index:3000;
+    }
+    .explore-panel.open { opacity:1; pointer-events:auto; transform:translateY(0); }
+    .explore-inner { width:min(1100px,96%); background:linear-gradient(180deg, rgba(10,8,20,0.98), rgba(8,6,18,0.96)); border-radius:14px; box-shadow:0 18px 48px rgba(2,6,23,0.6); overflow:hidden; max-height:calc(100vh - 96px); display:flex; flex-direction:column; position:relative; }
+    .explore-close { position:absolute; top:12px; right:12px; background:transparent; border:0; color:#fff; font-size:28px; padding:8px; cursor:pointer; }
+    .mega-inner { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; padding:1.25rem; color:#e6e6e6; max-width:1200px; margin:0 auto; }
+    .mega-column h4 { cursor:pointer; color:var(--gold); margin:0 0 .5rem; font-family:'Anton',sans-serif; }
+    .mega-list { margin:0; padding:0; list-style:none; }
+    .mega-list li { margin:0 0 .5rem; }
+    .mega-list a, .mega-list button { color:#eaeaea; text-decoration:none; background:transparent; border:0; padding:0; cursor:pointer; }
 
-/* Cards & highlights */
-.card, .highlight-card { background:inherit; border-radius:12px; padding:1.5rem; box-shadow:0 4px 20px rgba(0,0,0,0.05); transition:transform .2s, box-shadow .2s; }
-.card:hover, .highlight-card:hover { transform:translateY(-4px); box-shadow:0 8px 30px rgba(0,0,0,0.1); }
+    /* Footer */
+    footer.footer { display:flex; align-items:center; justify-content:center; padding:2rem 1rem; background:transparent; color:rgba(255,255,255,0.85); text-align:center; }
+    footer.footer .footer__inner { width:100%; max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
 
-/* Testimonial slider */
-.testimonial-slider { position:relative; overflow:hidden; padding:1rem 0; }
-.testimonial { opacity:0; transition:opacity .5s ease; }
-.testimonial.active { opacity:1; }
+    /* Responsive */
+    @media (max-width:900px) {
+      .explore-inner { width:100%; height:100%; border-radius:0; max-height:100vh; padding-top:56px; }
+      .zeal-hero { padding-top:5rem; }
+      .hero-bg { right:-30%; width:520px; height:520px; filter:blur(20px); }
+      .grid--3cols { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width:700px) {
+      .hero-bg { display:none; }
+      .grid--3cols { grid-template-columns: 1fr; }
+      .s-card-media { height:140px; }
+    }
 
-/* Card grid */
-.card-grid { display:grid; gap:1.5rem; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); justify-items:center; }
-.card-grid img { width:100%; height:auto; object-fit:contain; }
-
-/* Explore inner (anchored card) */
-.explore-inner {
-  width:min(1100px,96%); background:linear-gradient(180deg, rgba(10,8,20,0.98), rgba(8,6,18,0.96));
-  border-radius:14px; box-shadow:0 18px 48px rgba(2,6,23,0.6); overflow:hidden; max-height:calc(100vh - 96px); display:flex; flex-direction:column; position:relative;
-}
-.explore-close { position:absolute; top:12px; right:12px; background:transparent; border:0; color:#fff; font-size:28px; padding:8px; cursor:pointer; }
-.explore-content { padding:1.25rem; overflow:auto; }
-.mega-menu-inline { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:1rem; }
-.mega-column h4 { cursor:pointer; color:var(--gold); margin:0 0 .5rem; font-family:'Anton',sans-serif; }
-.mega-list { margin:0; padding:0; list-style:none; }
-.mega-list li { margin:0 0 .5rem; }
-.mega-list a, .mega-list button { color:#eaeaea; text-decoration:none; background:transparent; border:0; padding:0; cursor:pointer; }
-
-/* Responsive */
-@media (max-width:900px) {
-  .explore-inner { width:100%; height:100%; border-radius:0; max-height:100vh; padding-top:56px; }
-  .explore-panel { padding-top:0; align-items:stretch; }
-  .grid--3cols { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width:700px) {
-  .grid--3cols { grid-template-columns: 1fr; }
-  .hero-orb { display:none; }
-}
-
-/* Focus styles */
-.explore-inner :focus, a:focus, button:focus { outline:3px solid rgba(255,213,79,0.14); outline-offset:3px; }
-
-/* Layering safety */
-.zeal-header { z-index:2200; }
-.zeal-hero { z-index:1; position:relative; }
-.explore-panel { z-index:3000; }
-
-</style>
-
-<!-- Google Tag Manager -->
-<script>
-  (function(w,d,s,l,i){
-    w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
-    var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&l='+l:'';
-    j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-N87XV2R4');
-</script>
+    /* Accessibility focus */
+    .explore-inner :focus, a:focus, button:focus { outline:3px solid rgba(255,213,79,0.14); outline-offset:3px; }
+  </style>
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
@@ -146,35 +143,87 @@ footer.footer .footer__inner {
     <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N87XV2R4" height="0" width="0" style="display:none;visibility:hidden"></iframe>
   </noscript>
 
-  <!-- Google Fonts (kept here to match your load order) -->
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-
   <!-- Header -->
-  <header class="zeal-header">
-    <nav class="zeal-nav">
+  <header class="zeal-header" role="navigation" aria-label="Main">
+    <nav class="zeal-nav container" style="align-items:center;">
       <div class="nav-left">
+        <a href="/" class="nav-link">Home</a>
+        <a href="#about" class="nav-link">About</a>
+      </div>
 
-<span class="nav-logo">ZEAL</span>
-<!-- Explore panel (drop-in) -->
-<div id="explorePanel" class="explore-panel" aria-hidden="true" role="dialog" aria-label="Explore menu">
-  <div class="explore-inner" role="document">
-    <button id="exploreClose" class="explore-close" aria-label="Close Explore menu">&times;</button>
+      <span class="nav-logo">ZEAL</span>
 
-<!-- Mega menu (hidden by default; script toggles .open) --> <div id="megaMenu" class="mega-menu" role="menu" aria-hidden="true"> <div class="mega-inner" style="max-width:1200px;margin:0 auto;padding:1rem 2rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;color:#ddd;"> <div class="mega-column"> <h4 class="mega-toggle" data-target="col-web" role="button" aria-expanded="false">Web Development ▾</h4> <ul id="col-web" class="mega-list" hidden aria-hidden="true"> <li><a href="#">Business Page</a></li> <li><a href="#">Landing Page</a></li> <li><a href="#">Single HTML + CSS Page</a></li> </ul> </div>
-<div class="mega-column"> <h4 class="mega-toggle" data-target="col-ux" role="button" aria-expanded="false">UX / UI Design ▾</h4> <ul id="col-ux" class="mega-list" hidden aria-hidden="true"> <li><a href="#">JavaScript</a></li> <li><a href="#">React</a></li> <li><a href="#">Vue</a></li> <li><a href="#">CSS</a></li> <li><a href="#">Prototyping & Research</a></li> </ul> </div>      
-<div class="mega-column"> <h4 class="mega-toggle" data-target="col-social" role="button" aria-expanded="false">Social Media ▾</h4> <ul id="col-social" class="mega-list" hidden aria-hidden="true"> <li><button class="social-link" data-service="instagram" type="button">Instagram</button></li> <li><button class="social-link" data-service="twitter" type="button">Twitter</button></li> <li><button class="social-link" data-service="facebook" type="button">Facebook</button></li> <li><a href="#" id="getCatalogue">Get Catalogue (PDF)</a></li> </ul>
-<div id="col-social-expanded" class="mega-expanded" hidden aria-hidden="true" style="margin-top:1rem;"> <article class="s-card" id="instagramCardInline" tabindex="0" aria-labelledby="inst-title-inline" style="max-width:400px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:14px;overflow:hidden;box-shadow:0 12px 36px rgba(2,6,23,0.6);border:1px solid rgba(255,213,79,0.06);"> <div class="s-card-media" role="img" aria-label="Instagram preview" style="height:160px;background-size:cover;background-position:center;background-image:url('/assets/instagram-hero.jpg');"></div> <div class="s-card-body" style="padding:1rem;"> <h5 id="inst-title-inline" style="margin:0;color:var(--gold);font-family:'Anton',sans-serif;font-size:1.05rem;">Instagram Growth</h5> <p class="s-card-sub" style="margin:0;color:#e6e6e6;font-size:.95rem;">Reels, creative campaigns, and creator partnerships that scale engagement.</p> <div class="s-card-ctas" style="margin-top:.75rem;display:flex;gap:.5rem;"> <a class="s-btn s-btn-primary" id="visitInstagramInline" href="https://www.instagram.com/zeal_web/" target="_blank" rel="noopener" style="padding:.5rem .9rem;border-radius:10px;background:var(--gold);color:#0d052d;font-weight:700;text-decoration:none;">Visit Instagram</a> <a class="s-btn s-btn-ghost" id="instCatalogueInline" href="mailto:zeal.io@outlook.com?subject=ZEAL%20Catalogue&body=Please%20send%20me%20the%20catalogue." style="padding:.5rem .9rem;border-radius:10px;background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.06);text-decoration:none;">Get Catalogue</a> </div> </div> </article> </div> </div> </div> </div>
-<div id="megaMenuInline" class="mega-menu-inline">
-<!-- Hero -->
+      <button id="exploreToggle" class="hamburger" aria-label="Toggle Explore Menu" aria-expanded="false" style="margin-left:1rem;">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
 
+  <!-- Explore Panel (single instance) -->
+  <div id="explorePanel" class="explore-panel" aria-hidden="true" role="dialog" aria-label="Explore menu">
+    <div class="explore-inner" role="document">
+      <button id="exploreClose" class="explore-close" aria-label="Close Explore menu">&times;</button>
+
+      <!-- Mega menu -->
+      <div id="megaMenu" class="mega-menu" role="menu" aria-hidden="true" style="width:100%;">
+        <div class="mega-inner">
+          <div class="mega-column">
+            <h4 class="mega-toggle" data-target="col-web" role="button" aria-expanded="false">Web Development ▾</h4>
+            <ul id="col-web" class="mega-list" hidden>
+              <li><a href="#">Business Page</a></li>
+              <li><a href="#">Landing Page</a></li>
+              <li><a href="#">Single HTML + CSS Page</a></li>
+            </ul>
+          </div>
+
+          <div class="mega-column">
+            <h4 class="mega-toggle" data-target="col-ux" role="button" aria-expanded="false">UX / UI Design ▾</h4>
+            <ul id="col-ux" class="mega-list" hidden>
+              <li><a href="#">JavaScript</a></li>
+              <li><a href="#">React</a></li>
+              <li><a href="#">Vue</a></li>
+              <li><a href="#">CSS</a></li>
+              <li><a href="#">Prototyping & Research</a></li>
+            </ul>
+          </div>
+
+          <div class="mega-column">
+            <h4 class="mega-toggle" data-target="col-social" role="button" aria-expanded="false">Social Media ▾</h4>
+            <ul id="col-social" class="mega-list" hidden>
+              <li><button class="social-link" data-service="instagram" type="button">Instagram</button></li>
+              <li><button class="social-link" data-service="twitter" type="button">Twitter</button></li>
+              <li><button class="social-link" data-service="facebook" type="button">Facebook</button></li>
+              <li><a href="#" id="getCatalogue">Get Catalogue (PDF)</a></li>
+            </ul>
+
+            <div id="col-social-expanded" class="mega-expanded" hidden>
+              <article class="s-card" id="instagramCardInline" tabindex="0" aria-labelledby="inst-title-inline">
+                <div class="s-card-media" role="img" aria-label="Instagram preview" style="background-image:url('/assets/zeal2.png');"></div>
+                <div class="s-card-body">
+                  <h5 id="inst-title-inline">Instagram Growth</h5>
+                  <p class="s-card-sub">Reels, creative campaigns, and creator partnerships that scale engagement.</p>
+                  <div class="s-card-ctas">
+                    <a class="s-btn s-btn-primary" href="https://www.instagram.com/zeal_web/" target="_blank" rel="noopener">Visit Instagram</a>
+                    <a class="s-btn s-btn-ghost" href="mailto:zeal.io@outlook.com?subject=ZEAL%20Catalogue">Get Catalogue</a>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end megaMenu -->
+    </div>
+  </div>
+
+  <!-- Hero -->
   <section class="zeal-hero" aria-labelledby="hero-title">
+    <div class="hero-bg" aria-hidden="true"></div>
+
     <div class="hero-content">
       <h1 id="hero-title" class="hero-title">WE CREATE DIGITAL EXPERIENCES</h1>
       <p class="hero-subtitle">We are a digital agency specializing in web design, development, and branding.</p>
     </div>
-
-    <!-- Glowing crescent orb -->
-    <div class="hero-orb" aria-hidden="true"></div>
   </section>
 
   <!-- SERVICES -->
@@ -212,7 +261,7 @@ footer.footer .footer__inner {
   <!-- DEVELOPER HIGHLIGHTS -->
   <section id="highlights" class="section section--dark" aria-labelledby="highlights-title">
     <div class="container">
-      <h2 class="section__title section__title--light" id="highlights-title">Developer highlights</h2>
+      <h2 class="section__title" id="highlights-title">Developer highlights</h2>
       <div class="grid grid--3cols">
         <div class="highlight-card">
           <h3 class="card__title">SaaS speed uplift</h3>
@@ -234,7 +283,7 @@ footer.footer .footer__inner {
   <section id="testimonials" class="section section--light" aria-labelledby="testimonials-title">
     <div class="container">
       <h2 class="section__title" id="testimonials-title">Client feedback</h2>
-      <div class="testimonial-slider" aria-live="polite">
+      <div class="testimonial-slider" aria-live="polite" role="region" aria-label="Client feedback">
         <div class="testimonial active">
           <p>“ZEAL transformed our platform into a premium experience. Our customers noticed immediately.”</p>
           <footer>— Alex R., CEO of StartupX</footer>
@@ -256,19 +305,14 @@ footer.footer .footer__inner {
     <div class="container">
       <h2 class="section__title" id="instagram-title">From our Instagram</h2>
 
-      <!-- Premium Instagram card -->
       <article class="s-card" id="instagramCard" tabindex="0" aria-labelledby="inst-title">
         <div class="s-card-media" role="img" aria-label="Instagram preview" style="background-image:url('/assets/zeal2.png');"></div>
-
         <div class="s-card-body">
           <h5 id="inst-title">Instagram Highlight</h5>
           <p class="s-card-sub">Reels, creative campaigns, and creator partnerships that scale engagement.</p>
-
           <div class="s-card-ctas">
             <a class="s-btn s-btn-primary" id="visitInstagram" href="https://www.instagram.com/zeal_web/" target="_blank" rel="noopener">Visit Instagram</a>
-
             <a class="s-btn s-btn-ghost" id="instCatalogue" href="mailto:zeal.io@outlook.com?subject=ZEAL%20Catalogue&body=Please%20send%20me%20the%20catalogue.">Get Catalogue</a>
-
             <button class="s-btn s-btn-outline view-services" type="button">View Services</button>
           </div>
         </div>
@@ -277,346 +321,168 @@ footer.footer .footer__inner {
   </section>
 
   <!-- ABOUT THE DEVELOPER -->
-<section id="about" class="section section--light" aria-labelledby="about-title">
-  <div class="container">
-    <h2 class="section__title" id="about-title">Meet the developer</h2>
-
-    <p class="developer__intro">
-      ZEAL — We build trust into every pixel and craft platforms that feel expensive, move fast, and scale cleanly.
-      From glowing brand visuals to disciplined engineering, we design and develop premium websites, apps, and onboarding
-      flows that speak your customer’s language and strengthen your brand’s authority.
-    </p>
-
-    <a href="#contact" class="btn btn--secondary">Book a Free Consultation</a>
-  </div>
-</section>
-
-<!-- CALL TO ACTION -->
-<section id="contact" class="section section--light" aria-labelledby="contact-title">
-  <div class="container contact">
-    <h2 class="section__title" id="contact-title">Build your next digital platform</h2>
-    <p class="contact__text">Book a demo and let’s turn your website or app into your hardest‑working salesperson.</p>
-    <a href="mailto:zeal.io@outlook.com?subject=ZEAL%20Demo%20Request" class="btn btn--light">Book a Demo</a>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="footer" role="contentinfo" aria-label="Site footer">
-  <div class="container footer__inner">
-    <!-- Left: brand / logo -->
-    <div class="footer__brand" style="display:flex;align-items:center;gap:0.75rem;">
-      <a href="/" class="nav__logo" aria-label="ZEAL home" style="text-decoration:none;">ZEAL</a>
+  <section id="about" class="section section--light" aria-labelledby="about-title">
+    <div class="container">
+      <h2 class="section__title" id="about-title">Meet the developer</h2>
+      <p class="developer__intro">
+        ZEAL — We build trust into every pixel and craft platforms that feel expensive, move fast, and scale cleanly.
+        From glowing brand visuals to disciplined engineering, we design and develop premium websites, apps, and onboarding
+        flows that speak your customer’s language and strengthen your brand’s authority.
+      </p>
+      <a href="#contact" class="s-btn s-btn-ghost" style="display:inline-block;margin-top:1rem;">Book a Free Consultation</a>
     </div>
+  </section>
 
-    <!-- Right: utilities (language, social, copyright) -->
-    <div class="footer__utils" style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
-      <!-- Language selector (non-functional placeholder) -->
-      <div class="footer__lang" role="group" aria-label="Language selector">
-        <button class="s-btn s-btn-ghost" type="button" aria-haspopup="listbox" aria-expanded="false">English</button>
+  <!-- CALL TO ACTION -->
+  <section id="contact" class="section section--light" aria-labelledby="contact-title">
+    <div class="container contact">
+      <h2 class="section__title" id="contact-title">Build your next digital platform</h2>
+      <p class="contact__text">Book a demo and let’s turn your website or app into your hardest‑working salesperson.</p>
+      <a href="mailto:zeal.io@outlook.com?subject=ZEAL%20Demo%20Request" class="s-btn s-btn-primary" style="margin-top:1rem;display:inline-block;">Book a Demo</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo" aria-label="Site footer">
+    <div class="footer__inner">
+      <div class="footer__brand" style="display:flex;align-items:center;gap:.75rem;">
+        <a href="/" class="nav__logo" aria-label="ZEAL home" style="text-decoration:none;color:var(--gold);font-family:'Anton',sans-serif;">ZEAL</a>
       </div>
-
-      <!-- Copyright -->
-      <div class="footer__copy" style="color:rgba(255,255,255,0.7);font-size:0.95rem;">
-        <span>© 2026 ZEAL</span>
+      <div class="footer__utils" style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+        <div class="footer__lang" role="group" aria-label="Language selector">
+          <button class="s-btn s-btn-ghost" type="button" aria-haspopup="listbox" aria-expanded="false">English</button>
+        </div>
+        <div class="footer__copy" style="color:rgba(255,255,255,0.7);font-size:.95rem;">
+          <span>© <span id="year"></span> ZEAL</span>
+        </div>
       </div>
     </div>
-  </div>
-</footer>
+  </footer>
 
+  <!-- Consolidated UI script (single drop-in) -->
+  <script>
+  (function () {
+    'use strict';
+    const q = (sel, ctx=document) => (ctx||document).querySelector(sel);
+    const qq = (sel, ctx=document) => Array.from((ctx||document).querySelectorAll(sel));
+    const debounce = (fn, wait=120) => { let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), wait); }; };
 
+    function ready(fn){ if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn); else fn(); }
 
-<script>
-/*
-  ZEAL — Consolidated UI script
-  - Single drop-in to replace all previous UI/menu scripts
-  - Place once, just before </body>
-  - Defensive, idempotent, DOM-ready, mobile-friendly
-*/
+    ready(() => {
+      // set year
+      const yEl = document.getElementById('year'); if (yEl) yEl.textContent = new Date().getFullYear();
 
-(function () {
-  'use strict';
+      // Tawk loader (idempotent)
+      (function loadTawk(){ try { if (window.Tawk_API || window.Tawk_LoadStart) return; window.Tawk_API = window.Tawk_API || {}; window.Tawk_LoadStart = new Date(); const s = document.createElement('script'); s.async = true; s.src = 'https://embed.tawk.to/68cf60b510ce81192499da9f/1j5l13ih6'; s.charset = 'UTF-8'; s.setAttribute('crossorigin','*'); const first = document.getElementsByTagName('script')[0]; if (first && first.parentNode) first.parentNode.insertBefore(s, first); else document.head.appendChild(s); } catch(e){ console.warn('Tawk failed', e); } })();
 
-  /* Helpers */
-  const q = (sel, ctx = document) => (ctx || document).querySelector(sel);
-  const qq = (sel, ctx = document) => Array.from((ctx || document).querySelectorAll(sel));
-  const debounce = (fn, wait = 120) => {
-    let t;
-    return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), wait); };
-  };
+      // testimonial slider
+      (function testimonialSlider(){ const slider = q('.testimonial-slider'); if (!slider) return; const items = Array.from(slider.querySelectorAll('.testimonial')); if (!items.length) return; let idx = items.findIndex(i=>i.classList.contains('active')); if (idx < 0) idx = 0; items.forEach((el,i)=>el.classList.toggle('active', i===idx)); let t = setInterval(next, 5000); function show(i){ items.forEach((el,n)=>el.classList.toggle('active', n===i)); } function next(){ idx = (idx+1)%items.length; show(idx); } slider.addEventListener('mouseenter', ()=>clearInterval(t)); slider.addEventListener('mouseleave', ()=>t=setInterval(next,5000)); slider.addEventListener('focusin', ()=>clearInterval(t)); slider.addEventListener('focusout', ()=>t=setInterval(next,5000)); })();
 
-  /* DOM ready */
-  function ready(fn) {
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
-    else fn();
-  }
+      // reveal on scroll
+      (function revealOnScroll(){ const els = qq('.card, .highlight-card, .testimonial'); if (!els.length) return; els.forEach(el=>el.classList.add('reveal')); try { const obs = new IntersectionObserver((entries, observer)=>{ entries.forEach(entry=>{ if (entry.isIntersecting){ entry.target.classList.add('active'); observer.unobserve(entry.target); } }); }, { threshold: 0.12 }); qq('.reveal').forEach(el=>obs.observe(el)); } catch(e){ qq('.reveal').forEach(el=>el.classList.add('active')); } })();
 
-  ready(() => {
-    try { console.log('ZEAL UI script initializing'); } catch (e) {}
+      // explore & mega menu
+      (function exploreAndMega(){
+        const toggle = q('#exploreToggle');
+        const panel = q('#explorePanel');
+        const closeBtn = q('#exploreClose');
+        const mega = q('#megaMenu');
+        const megaToggles = qq('.mega-toggle', panel || document);
+        const getCatalogue = q('#getCatalogue');
+        const exploreAbout = q('#exploreAbout');
+        const exploreServices = q('#exploreServices');
+        const exploreDemo = q('#exploreDemo');
 
-    /* Tawk loader (idempotent) */
-    (function loadTawk() {
-      try {
-        if (window.Tawk_API || window.Tawk_LoadStart) return;
-        window.Tawk_API = window.Tawk_API || {};
-        window.Tawk_LoadStart = new Date();
-        const s = document.createElement('script');
-        s.async = true;
-        s.src = 'https://embed.tawk.to/68cf60b510ce81192499da9f/1j5l13ih6';
-        s.charset = 'UTF-8';
-        s.setAttribute('crossorigin', '*');
-        const first = document.getElementsByTagName('script')[0];
-        if (first && first.parentNode) first.parentNode.insertBefore(s, first);
-        else document.head.appendChild(s);
-      } catch (err) { console.warn('Tawk loader failed', err); }
-    })();
+        if (!toggle || !panel) return;
 
-    /* Testimonial slider */
-    (function testimonialSlider() {
-      const items = qq('.testimonial');
-      if (!items.length) return;
-      let idx = 0;
-      items.forEach((el, i) => el.classList.toggle('active', i === 0));
-      setInterval(() => {
-        items[idx].classList.remove('active');
-        idx = (idx + 1) % items.length;
-        items[idx].classList.add('active');
-      }, 5000);
-    })();
+        const focusableSelector = 'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])';
+        let lastFocused = null;
+        const focusable = () => Array.from(panel.querySelectorAll(focusableSelector)).filter(el => !el.hasAttribute('disabled'));
 
-    /* Reveal on scroll (with fallback) */
-    (function revealOnScroll() {
-      const els = qq('.card, .highlight-card, .testimonial');
-      if (!els.length) return;
-      els.forEach(el => el.classList.add('reveal'));
-      try {
-        const obs = new IntersectionObserver((entries, observer) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('active');
-              observer.unobserve(entry.target);
-            }
+        function openPanel(){ lastFocused = document.activeElement; panel.classList.add('open'); panel.setAttribute('aria-hidden','false'); toggle.setAttribute('aria-expanded','true'); const f = focusable()[0]; if (f) f.focus(); document.documentElement.style.overflow='hidden'; document.body.style.overflow='hidden'; }
+        function closePanel(){ panel.classList.remove('open'); panel.setAttribute('aria-hidden','true'); toggle.setAttribute('aria-expanded','false'); if (lastFocused && typeof lastFocused.focus==='function') lastFocused.focus(); document.documentElement.style.overflow=''; document.body.style.overflow=''; }
+
+        toggle.addEventListener('click', (e)=>{ e.stopPropagation(); panel.classList.contains('open') ? closePanel() : openPanel(); });
+
+        closeBtn?.addEventListener('click', (e)=>{ e.stopPropagation(); closePanel(); });
+
+        document.addEventListener('click', (e)=>{ if (!panel.classList.contains('open')) return; if (!panel.contains(e.target) && !toggle.contains(e.target)) closePanel(); });
+
+        document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape'){ if (panel.classList.contains('open')) closePanel(); return; } if (!panel.classList.contains('open')) return; if (e.key === 'Tab'){ const nodes = focusable(); if (!nodes.length) return; const first = nodes[0], last = nodes[nodes.length-1]; if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); } else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); } } });
+
+        megaToggles.forEach(h => { h.addEventListener('click', (ev)=>{ ev.stopPropagation(); const id = h.getAttribute('data-target'); const el = panel.querySelector('#'+id) || document.getElementById(id); if (!el) return; const wasHidden = el.hasAttribute('hidden'); (panel.querySelectorAll('.mega-list')||[]).forEach(list=>list.setAttribute('hidden','')); (panel.querySelectorAll('.mega-toggle')||[]).forEach(t=>t.setAttribute('aria-expanded','false')); if (wasHidden){ el.removeAttribute('hidden'); h.setAttribute('aria-expanded','true'); } else { el.setAttribute('hidden',''); h.setAttribute('aria-expanded','false'); } }); });
+
+        if (getCatalogue) getCatalogue.addEventListener('click', function(e){ e.preventDefault(); const PDF_URL = 'https://example.com/ZEAL-catalogue.pdf'; const subject = encodeURIComponent('Request: ZEAL Catalogue'); const body = encodeURIComponent('Hi ZEAL team,\\n\\nPlease send me the ZEAL services catalogue. You can also download it here: ' + PDF_URL + '\\n\\nThanks.'); window.location.href = 'mailto:zeal.io@outlook.com?subject=' + subject + '&body=' + body; });
+
+        exploreAbout?.addEventListener('click', ()=>{ document.querySelector('#about')?.scrollIntoView({behavior:'smooth', block:'start'}); closePanel(); });
+        exploreDemo?.addEventListener('click', ()=>{ document.querySelector('#contact')?.scrollIntoView({behavior:'smooth', block:'start'}); closePanel(); });
+        exploreServices?.addEventListener('click', ()=>{ closePanel(); if (mega) { mega.classList.toggle('open'); mega.setAttribute('aria-hidden', String(!mega.classList.contains('open'))); } });
+
+        // position mega under header on desktop
+        function positionMega(){ const header = document.querySelector('.zeal-header'); if (!mega || !header) return; const rect = header.getBoundingClientRect(); if (window.innerWidth > 900){ mega.style.position='absolute'; mega.style.top=(window.scrollY + rect.bottom + 8)+'px'; mega.style.left='0'; mega.style.width='100%'; mega.style.height=''; } else { mega.style.position='fixed'; mega.style.top='0'; mega.style.left='0'; mega.style.width='100%'; mega.style.height='100vh'; } }
+        const debPos = debounce(positionMega, 120); window.addEventListener('resize', debPos); window.addEventListener('scroll', debPos); positionMega();
+      })();
+
+      // social inline / modal wiring (if present)
+      (function socialAndModal(){
+        const socialLinks = qq('#col-social .social-link');
+        const colSocialExpanded = q('#col-social-expanded');
+        const viewBtns = qq('.view-services');
+        const platformModal = q('#platformModal') || q('.platform-modal');
+        const modalClose = platformModal?.querySelector('.modal-close');
+
+        if (socialLinks.length && colSocialExpanded) {
+          socialLinks.forEach(btn => {
+            btn.addEventListener('click', function () {
+              const service = btn.dataset.service;
+              if (service === 'instagram') {
+                colSocialExpanded.removeAttribute('hidden');
+                colSocialExpanded.setAttribute('aria-hidden', 'false');
+                try { if (window.instgrm && typeof window.instgrm.Embeds === 'object') window.instgrm.Embeds.process(); } catch (err) {}
+                colSocialExpanded.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+              } else {
+                colSocialExpanded.setAttribute('hidden', '');
+                colSocialExpanded.setAttribute('aria-hidden', 'true');
+                const urls = { instagram:'https://www.instagram.com/zeal_web/', twitter:'https://twitter.com/', facebook:'https://facebook.com/', youtube:'https://youtube.com/', tiktok:'https://tiktok.com/', linkedin:'https://linkedin.com/' };
+                const url = urls[service] || '#';
+                if (url !== '#') window.open(url, '_blank', 'noopener');
+              }
+            });
           });
-        }, { threshold: 0.12 });
-        qq('.reveal').forEach(el => obs.observe(el));
-      } catch (err) {
-        qq('.reveal').forEach(el => el.classList.add('active'));
-      }
-    })();
-
-    /* Explore panel + Mega menu (Fiverr-like behavior) */
-    (function exploreAndMega() {
-      const toggle = q('#exploreToggle');
-      const panel = q('#explorePanel'); // optional wrapper for full-screen explore
-      const mega = q('#megaMenu');       // existing mega menu (can be inside panel)
-      const closeBtn = panel?.querySelector('#exploreClose') || null;
-      const megaToggles = qq('.mega-toggle', panel || document);
-      const getCatalogue = q('#getCatalogue', panel || document);
-      const exploreServices = q('#exploreServices');
-
-      if (!toggle && !mega) return;
-
-      const focusableSelector = 'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])';
-      let lastFocused = null;
-
-      const focusable = () => panel ? Array.from(panel.querySelectorAll(focusableSelector)).filter(el => !el.hasAttribute('disabled')) : [];
-
-      function openPanel() {
-        if (!panel) return;
-        lastFocused = document.activeElement;
-        panel.classList.add('open');
-        panel.setAttribute('aria-hidden', 'false');
-        toggle?.setAttribute('aria-expanded', 'true');
-        const f = focusable()[0];
-        if (f) f.focus();
-        document.documentElement.style.overflow = 'hidden';
-        document.body.style.overflow = 'hidden';
-      }
-
-      function closePanel() {
-        if (!panel) return;
-        panel.classList.remove('open');
-        panel.setAttribute('aria-hidden', 'true');
-        toggle?.setAttribute('aria-expanded', 'false');
-        if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
-        document.documentElement.style.overflow = '';
-        document.body.style.overflow = '';
-      }
-
-      function openMega() {
-        if (!mega) return;
-        mega.classList.add('open');
-        mega.setAttribute('aria-hidden', 'false');
-      }
-
-      function closeMega() {
-        if (!mega) return;
-        mega.classList.remove('open');
-        mega.setAttribute('aria-hidden', 'true');
-        qq('.mega-list').forEach(l => l.setAttribute('hidden', ''));
-        qq('.mega-toggle').forEach(t => t.setAttribute('aria-expanded', 'false'));
-      }
-
-      if (toggle && panel) {
-        toggle.addEventListener('click', (e) => {
-          e.stopPropagation();
-          if (panel.classList.contains('open')) closePanel();
-          else openPanel();
-          if (panel.classList.contains('open')) closeMega();
-        });
-      }
-
-      if (exploreServices && mega) {
-        exploreServices.addEventListener('click', (e) => {
-          e?.stopPropagation();
-          closePanel();
-          positionMega();
-          const isOpen = mega.classList.toggle('open');
-          mega.setAttribute('aria-hidden', String(!isOpen));
-          if (isOpen) {
-            qq('.mega-list').forEach(list => list.setAttribute('hidden', ''));
-            qq('.mega-toggle').forEach(t => t.setAttribute('aria-expanded', 'false'));
-          }
-        });
-      }
-
-      megaToggles.forEach(h => {
-        h.addEventListener('click', (ev) => {
-          ev.stopPropagation();
-          const id = h.getAttribute('data-target');
-          const el = (panel ? panel.querySelector('#' + id) : document.getElementById(id));
-          if (!el) return;
-          const wasHidden = el.hasAttribute('hidden');
-          (panel ? panel.querySelectorAll('.mega-list') : qq('.mega-list')).forEach(list => list.setAttribute('hidden', ''));
-          (panel ? panel.querySelectorAll('.mega-toggle') : qq('.mega-toggle')).forEach(t => t.setAttribute('aria-expanded', 'false'));
-          if (wasHidden) { el.removeAttribute('hidden'); h.setAttribute('aria-expanded', 'true'); }
-          else { el.setAttribute('hidden', ''); h.setAttribute('aria-expanded', 'false'); }
-        });
-      });
-
-      if (getCatalogue) {
-        getCatalogue.addEventListener('click', function (e) {
-          e.preventDefault();
-          const PDF_URL = 'https://example.com/ZEAL-catalogue.pdf';
-          const subject = encodeURIComponent('Request: ZEAL Catalogue');
-          const body = encodeURIComponent('Hi ZEAL team,\n\nPlease send me the ZEAL services catalogue. You can also download it here: ' + PDF_URL + '\n\nThanks.');
-          window.location.href = 'mailto:zeal.io@outlook.com?subject=' + subject + '&body=' + body;
-        });
-      }
-
-      document.addEventListener('click', (e) => {
-        if (panel && panel.classList.contains('open') && !panel.contains(e.target) && !toggle?.contains(e.target)) closePanel();
-        if (mega && mega.classList.contains('open') && !mega.contains(e.target) && !exploreServices?.contains(e.target)) closeMega();
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          if (panel && panel.classList.contains('open')) closePanel();
-          if (mega && mega.classList.contains('open')) closeMega();
-          return;
         }
-        if (!panel || !panel.classList.contains('open')) return;
-        if (e.key === 'Tab') {
-          const nodes = focusable();
-          if (!nodes.length) return;
-          const first = nodes[0], last = nodes[nodes.length - 1];
-          if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-          else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-        }
-      });
 
-      function positionMega() {
-        const header = q('.zeal-header') || q('header.nav');
-        if (!mega || !header) return;
-        const rect = header.getBoundingClientRect();
-        if (window.innerWidth > 900) {
-          mega.style.position = 'absolute';
-          mega.style.top = (window.scrollY + rect.bottom + 8) + 'px';
-          mega.style.left = '0';
-          mega.style.width = '100%';
-          mega.style.height = '';
-        } else {
-          mega.style.position = 'fixed';
-          mega.style.top = '0';
-          mega.style.left = '0';
-          mega.style.width = '100%';
-          mega.style.height = '100vh';
-        }
-      }
-
-      const debPos = debounce(positionMega, 120);
-      window.addEventListener('resize', debPos);
-      window.addEventListener('scroll', debPos);
-      positionMega();
-    })();
-
-    /* Social inline / modal wiring */
-    (function socialAndModal() {
-      const socialLinks = qq('#col-social .social-link');
-      const colSocialExpanded = q('#col-social-expanded');
-      const viewBtns = qq('.view-services');
-      const platformModal = q('#platformModal') || q('.platform-modal');
-      const modalClose = platformModal?.querySelector('.modal-close');
-
-      if (socialLinks.length && colSocialExpanded) {
-        socialLinks.forEach(btn => {
-          btn.addEventListener('click', function () {
-            const service = btn.dataset.service;
-            if (service === 'instagram') {
-              colSocialExpanded.removeAttribute('hidden');
-              colSocialExpanded.setAttribute('aria-hidden', 'false');
-              try { if (window.instgrm && typeof window.instgrm.Embeds === 'object') window.instgrm.Embeds.process(); } catch (err) {}
-              colSocialExpanded.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            } else {
-              colSocialExpanded.setAttribute('hidden', '');
-              colSocialExpanded.setAttribute('aria-hidden', 'true');
-              const urls = {
-                instagram: 'https://www.instagram.com/zeal_web/',
-                twitter: 'https://twitter.com/',
-                facebook: 'https://facebook.com/',
-                youtube: 'https://youtube.com/',
-                tiktok: 'https://tiktok.com/',
-                linkedin: 'https://linkedin.com/'
-              };
-              const url = urls[service] || '#';
-              if (url !== '#') window.open(url, '_blank', 'noopener');
-            }
-          });
-        });
-      }
-
-      if (viewBtns.length && platformModal) {
-        viewBtns.forEach(b => b.addEventListener('click', () => {
-          platformModal.classList.add('open');
-          platformModal.setAttribute('aria-hidden', 'false');
-        }));
-        modalClose?.addEventListener('click', () => {
-          platformModal.classList.remove('open');
-          platformModal.setAttribute('aria-hidden', 'true');
-        });
-
-        document.addEventListener('click', (e) => {
-          if (platformModal && platformModal.classList.contains('open')) {
-            const inner = platformModal.querySelector('.platform-modal-inner');
-            if (inner && !inner.contains(e.target)) {
-              platformModal.classList.remove('open');
-              platformModal.setAttribute('aria-hidden', 'true');
-            }
-          }
-        });
-
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape' && platformModal && platformModal.classList.contains('open')) {
+        if (viewBtns.length && platformModal) {
+          viewBtns.forEach(b => b.addEventListener('click', () => {
+            platformModal.classList.add('open');
+            platformModal.setAttribute('aria-hidden','false');
+          }));
+          modalClose?.addEventListener('click', () => {
             platformModal.classList.remove('open');
-            platformModal.setAttribute('aria-hidden', 'true');
-          }
-        });
-      }
-    })();
+            platformModal.setAttribute('aria-hidden','true');
+          });
 
-    try { console.log('ZEAL UI script ready'); } catch (e) {}
-  }); // ready
-})(); 
-</script>
+          document.addEventListener('click', (e) => {
+            if (platformModal && platformModal.classList.contains('open')) {
+              const inner = platformModal.querySelector('.platform-modal-inner');
+              if (inner && !inner.contains(e.target)) {
+                platformModal.classList.remove('open');
+                platformModal.setAttribute('aria-hidden','true');
+              }
+            }
+          });
 
+          document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && platformModal && platformModal.classList.contains('open')) {
+              platformModal.classList.remove('open');
+              platformModal.setAttribute('aria-hidden','true');
+            }
+          });
+        }
+      })();
+
+    }); // ready
+  })();
+  </script>
 </body>
 </html>
