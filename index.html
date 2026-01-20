@@ -265,7 +265,7 @@
 #services.section--light a,
 #services.section--light .s-btn,
 #services.section--light button {
-  color: #0d052d !important;
+  color: #eeecf6 !important;
 }
 
 
@@ -312,11 +312,7 @@
     </div>
   </header>
 
-  <!-- Explore panel (single instance) -->
-  <div id="explorePanel" class="explore-panel" aria-hidden="true" role="dialog" aria-label="Explore menu">
-    <div class="explore-inner" role="document">
-      <button id="exploreClose" class="explore-close" aria-label="Close Explore menu">&times;</button>
-
+<!-- Explore panel (single instance) --> <div id="explorePanel" class="explore-panel" aria-hidden="true" role="dialog" aria-label="Explore menu"> <div class="explore-inner" role="document"> <!-- close button: closes panel and returns user to homepage --> <button id="exploreClose" class="explore-close" aria-label="Close Explore menu and return home" type="button">✕</button>
       <!-- Mega menu -->
       <div id="megaMenu" class="mega-menu" role="menu" aria-hidden="true">
         <div class="mega-inner">
@@ -747,6 +743,123 @@
   update();
 })();
 
+
+
+
+
+(function(){
+  const openBtn = document.getElementById('exploreOpenBtn');
+  const toggle = document.getElementById('exploreToggle'); // if you already have a toggle
+  const panel = document.getElementById('explorePanel');
+  const closeBtn = document.getElementById('exploreClose');
+
+  if (!openBtn || !panel) {
+    console.warn('Explore open button or panel missing');
+    return;
+  }
+
+  // Open handler
+  function openPanel() {
+    panel.classList.add('open');
+    panel.setAttribute('aria-hidden','false');
+    openBtn.setAttribute('aria-expanded','true');
+    // if you also use a hamburger toggle, keep it in sync
+    if (toggle) toggle.setAttribute('aria-expanded','true');
+    // focus trap: focus first focusable element inside panel
+    const focusable = panel.querySelector('a, button, [tabindex]:not([tabindex="-1"])');
+    if (focusable) focusable.focus();
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+  }
+
+  // Close handler that optionally returns to homepage
+  function closePanel(returnHome = false) {
+    panel.classList.remove('open');
+    panel.setAttribute('aria-hidden','true');
+    openBtn.setAttribute('aria-expanded','false');
+    if (toggle) toggle.setAttribute('aria-expanded','false');
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+    // restore focus to open button
+    openBtn.focus();
+    if (returnHome) {
+      // navigate to homepage
+      window.location.href = '/';
+    }
+  }
+
+  // Wire events
+  openBtn.addEventListener('click', (e) => { e.stopPropagation(); openPanel(); });
+
+  // If you have an existing header toggle, keep it in sync
+  if (toggle) {
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      panel.classList.contains('open') ? closePanel(false) : openPanel();
+    });
+  }
+
+  // Close button inside panel closes and returns home
+  if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => { e.stopPropagation(); closePanel(true); });
+  }
+
+  // clicking outside closes panel (no navigation)
+  document.addEventListener('click', (e) => {
+    if (!panel.classList.contains('open')) return;
+    if (!panel.contains(e.target) && !openBtn.contains(e.target) && !(toggle && toggle.contains(e.target))) {
+      closePanel(false);
+    }
+  });
+
+  // Escape closes panel (no navigation)
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && panel.classList.contains('open')) {
+      e.preventDefault();
+      closePanel(false);
+    }
+  });
+})();
+
+
+
+(function(){
+  const openBtn = document.getElementById('exploreOpenBtn');
+  const toggle = document.getElementById('exploreToggle');
+  const panel = document.getElementById('explorePanel');
+  const closeBtn = document.getElementById('exploreClose');
+
+  if (!panel) return;
+
+  function openPanel() {
+    panel.classList.add('open');
+    panel.setAttribute('aria-hidden','false');
+    if (openBtn) openBtn.setAttribute('aria-expanded','true');
+    if (toggle) toggle.setAttribute('aria-expanded','true');
+    const f = panel.querySelector('a, button, [tabindex]:not([tabindex="-1"])');
+    if (f) f.focus();
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePanel(returnHome = false) {
+    panel.classList.remove('open');
+    panel.setAttribute('aria-hidden','true');
+    if (openBtn) openBtn.setAttribute('aria-expanded','false');
+    if (toggle) toggle.setAttribute('aria-expanded','false');
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+    if (openBtn) openBtn.focus();
+    if (returnHome) window.location.href = '/';
+  }
+
+  openBtn?.addEventListener('click', (e)=>{ e.stopPropagation(); openPanel(); });
+  toggle?.addEventListener('click', (e)=>{ e.stopPropagation(); panel.classList.contains('open') ? closePanel(false) : openPanel(); });
+  closeBtn?.addEventListener('click', (e)=>{ e.stopPropagation(); closePanel(true); });
+
+  document.addEventListener('click', (e)=>{ if (!panel.classList.contains('open')) return; if (!panel.contains(e.target) && !openBtn.contains(e.target) && !(toggle && toggle.contains(e.target))) closePanel(false); });
+  document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape' && panel.classList.contains('open')) { e.preventDefault(); closePanel(false); } });
+})();
 
   </script>
 </body>
