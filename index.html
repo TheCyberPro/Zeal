@@ -862,5 +862,98 @@
 })();
 
   </script>
+
+
+<script>
+(function(){
+  'use strict';
+
+  function debug(...args){ if (window.console) console.log('[explore]', ...args); }
+
+  function ready(fn){
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
+    else fn();
+  }
+
+  ready(function(){
+    const openBtn = document.getElementById('exploreOpenBtn');
+    const toggle  = document.getElementById('exploreToggle');
+    const panel   = document.getElementById('explorePanel');
+    const closeBtn= document.getElementById('exploreClose');
+
+    debug('elements', { openBtn: !!openBtn, toggle: !!toggle, panel: !!panel, closeBtn: !!closeBtn });
+
+    if (!panel) {
+      console.warn('[explore] missing #explorePanel — cannot proceed');
+      return;
+    }
+
+    const focusableSelector = 'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])';
+    let lastFocused = null;
+
+    function focusFirst(){
+      const f = panel.querySelector(focusableSelector);
+      if (f) f.focus();
+    }
+
+    function openPanel(){
+      lastFocused = document.activeElement;
+      panel.classList.add('open');
+      panel.setAttribute('aria-hidden','false');
+      if (openBtn) openBtn.setAttribute('aria-expanded','true');
+      if (toggle) toggle.setAttribute('aria-expanded','true');
+      focusFirst();
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+      debug('opened');
+    }
+
+    function closePanel(returnHome = false){
+      panel.classList.remove('open');
+      panel.setAttribute('aria-hidden','true');
+      if (openBtn) openBtn.setAttribute('aria-expanded','false');
+      if (toggle) toggle.setAttribute('aria-expanded','false');
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+      if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+      else if (openBtn) openBtn.focus();
+      debug('closed', { returnHome });
+      if (returnHome) window.location.href = '/';
+    }
+
+    // Wire events safely (guard each element)
+    if (openBtn) openBtn.addEventListener('click', e => { e.stopPropagation(); openPanel(); });
+    if (toggle) toggle.addEventListener('click', e => { e.stopPropagation(); panel.classList.contains('open') ? closePanel(false) : openPanel(); });
+    if (closeBtn) closeBtn.addEventListener('click', e => { e.stopPropagation(); closePanel(true); });
+
+    // click outside to close (no navigation)
+    document.addEventListener('click', e => {
+      if (!panel.classList.contains('open')) return;
+      if (!panel.contains(e.target) && !(openBtn && openBtn.contains(e.target)) && !(toggle && toggle.contains(e.target))) {
+        closePanel(false);
+      }
+    });
+
+    // keyboard handling: Escape + Tab trap
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && panel.classList.contains('open')) { e.preventDefault(); closePanel(false); return; }
+      if (!panel.classList.contains('open')) return;
+      if (e.key === 'Tab') {
+        const nodes = Array.from(panel.querySelectorAll(focusableSelector)).filter(n => n.offsetParent !== null);
+        if (!nodes.length) return;
+        const first = nodes[0], last = nodes[nodes.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    });
+
+    // small sanity checks for CSS visibility
+    const computed = getComputedStyle(panel);
+    debug('panel computed styles', { display: computed.display, visibility: computed.visibility, opacity: computed.opacity });
+
+  }); // ready
+})();
+</script>
+
 </body>
 </html>
