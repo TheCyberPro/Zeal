@@ -350,6 +350,42 @@ a, button, span {
   padding-left: 0.5rem;
   word-wrap: break-word;
 }
+
+   /*------------------------------------*\
+       Section Containers — Classic Luxury
+    \*------------------------------------*/
+    .section {
+      background: #fff; color: #0d052d; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      padding: 3rem 2rem; margin: 2rem auto; max-width: 1200px;
+    }
+    .section--light { background: #f9f9ff; }
+    .section--dark { background: #0d052d; color: #fff; }
+    .section__title {
+      text-align: center; text-transform: uppercase; font-family: 'Anton', sans-serif; letter-spacing: 0.05em; margin-bottom: 2rem;
+    }
+    .grid--4cols, .grid--3cols {
+      display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+    }
+
+    /* Cards & Highlight Cards */
+    .card, .highlight-card {
+      background: inherit; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover, .highlight-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.1); }
+
+    /* Testimonial Slider */
+    .testimonial-slider { position: relative; overflow: hidden; padding: 1rem 0; }
+    .testimonial { opacity: 0; transition: opacity 0.5s ease; }
+    .testimonial.active { opacity: 1; }
+
+    /* Buy with Ease Grid */
+    .card-grid {
+      display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); justify-items: center;
+    }
+    .card-grid img { width: 100%; height: auto; object-fit: contain; }
+
+
 /* Explore panel (Fiverr-like) */
 .explore-panel {
   position: fixed;
@@ -718,7 +754,8 @@ a, button, span {
     })();
 
 // reveal on scroll (with fallback) (function revealOnScroll(){ const els = qq('.card, .highlight-card, .testimonial'); if (!els.length) return; els.forEach(el=>el.classList.add('reveal')); try { const obs = new IntersectionObserver((entries, observer)=>{ entries.forEach(entry=>{ if (entry.isIntersecting){ entry.target.classList.add('active'); observer.unobserve(entry.target); } }); }, { threshold: 0.12 }); qq('.reveal').forEach(el=>obs.observe(el)); } catch(e){ qq('.reveal').forEach(el=>el.classList.add('active')); } })(); // header / explore / mega menu (function headerMenus(){ const header = q('.zeal-header') || q('header.nav'); const exploreToggle = q('#exploreToggle'); const explorePanel = q('#explorePanel'); // optional: if you have a separate explore panel const exploreServices = q('#exploreServices'); const megaMenu = q('#megaMenu'); const megaToggles = qq('.mega-toggle'); const getCatalogue = q('#getCatalogue'); if (!header) return; function positionMega(){ if (!megaMenu) return; const rect = header.getBoundingClientRect(); if (window.innerWidth > 900){ megaMenu.style.position='absolute'; megaMenu.style.top=(window.scrollY + rect.bottom + 8)+'px'; megaMenu.style.left='0'; megaMenu.style.width='100%'; megaMenu.style.height=''; } else { megaMenu.style.position='fixed'; megaMenu.style.top='0'; megaMenu.style.left='0'; megaMenu.style.width='100%'; megaMenu.style.height='100vh'; } } function closeExplore(){ explorePanel?.classList.remove('open'); explorePanel?.setAttribute('aria-hidden','true'); exploreToggle?.setAttribute('aria-expanded','false'); exploreToggle?.classList.remove('active'); } function closeMega(){ megaMenu?.classList.remove('open'); megaMenu?.setAttribute('aria-hidden','true'); qq('.mega-list').forEach(l=>l.setAttribute('hidden','')); qq('.mega-toggle').forEach(t=>t.setAttribute('aria-expanded','false')); } if (exploreToggle && explorePanel) { exploreToggle.addEventListener('click', (e)=>{ e.stopPropagation(); const open = explorePanel.classList.toggle('open'); explorePanel.setAttribute('aria-hidden', String(!open)); exploreToggle.setAttribute('aria-expanded', String(open)); exploreToggle.classList.toggle('active', open); if (open) closeMega(); }); } exploreServices?.addEventListener('click', (e)=>{ e?.stopPropagation(); positionMega(); const isOpen = megaMenu?.classList.toggle('open'); if (megaMenu) megaMenu.setAttribute('aria-hidden', String(!isOpen)); if (isOpen){ qq('.mega-list').forEach(list=>list.setAttribute('hidden','')); qq('.mega-toggle').forEach(t=>t.setAttribute('aria-expanded','false')); } closeExplore(); }); if (getCatalogue) { getCatalogue.addEventListener('click', function(e){ e.preventDefault(); const PDF_URL = 'https://example.com/ZEAL-catalogue.pdf'; const subject = encodeURIComponent('Request: ZEAL Catalogue'); const body = encodeURIComponent('Hi ZEAL team,\n\nPlease send me the ZEAL services catalogue. You can also download it here: ' + PDF_URL + '\n\nThanks.'); window.location.href = 'mailto:zeal.io@outlook.com?subject=' + subject + '&body=' + body; }); } megaToggles.forEach(h => { h.addEventListener('click', (ev)=>{ ev.stopPropagation(); const id = h.getAttribute('data-target'); const el = q('#' + id); if (!el) return; const wasHidden = el.hasAttribute('hidden'); qq('.mega-list').forEach(list=>list.setAttribute('hidden','')); qq('.mega-toggle').forEach(t=>t.setAttribute('aria-expanded','false')); if (wasHidden){ el.removeAttribute('hidden'); h.setAttribute('aria-expanded','true'); } else { el.setAttribute('hidden',''); h.setAttribute('aria-expanded','false'); } }); }); document.addEventListener('click', (e)=>{ if (explorePanel && !explorePanel.contains(e.target) && !exploreToggle?.contains(e.target)) closeExplore(); if (megaMenu && !megaMenu.contains(e.target) && !exploreServices?.contains(e.target)) closeMega(); }); document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape'){ closeExplore(); closeMega(); } }); const debPos = debounce(positionMega, 120); window.addEventListener('resize', debPos); window.addEventListener('scroll', debPos); positionMega(); })(); // social inline / modal wiring (if present) (function socialAndModal(){ const socialLinks = qq('#col-social .social-link'); const colSocialExpanded = q('#col-social-expanded'); const viewBtns = qq('.view-services'); const platformModal = q('#platformModal') || q('.platform-modal'); const modalClose = platformModal?.querySelector('.modal-close'); if (socialLinks.length && colSocialExpanded) { socialLinks.forEach(btn => { btn.addEventListener('click', function () { const service = btn.dataset.service; if (service === 'instagram') { colSocialExpanded.removeAttribute('hidden'); colSocialExpanded.setAttribute('aria-hidden', 'false'); try { if (window.instgrm && typeof window.instgrm.Embeds === 'object') window.instgrm.Embeds.process(); } catch (err) {} colSocialExpanded.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } else { colSocialExpanded.setAttribute('hidden', ''); colSocialExpanded.setAttribute('aria-hidden', 'true'); const urls = { instagram:'https://www.instagram.com/zeal_web/', twitter:'https://twitter.com/', facebook:'https://facebook.com/', youtube:'https://youtube.com/', tiktok:'https://tiktok.com/', linkedin:'https://linkedin.com/' }; const url = urls[service] || '#'; if (url !== '#') window.open(url, '_blank', 'noopener'); } }); }); } if (viewBtns.length && platformModal) { viewBtns.forEach(b => b.addEventListener('click', () => { platformModal.classList.add('open'); platformModal.setAttribute('aria-hidden','false'); })); modalClose?.addEventListener('click', () => { platformModal.classList.remove('open'); platformModal.setAttribute('aria-hidden','true'); }); document.addEventListener('click', (e) => { if (platformModal && platformModal.classList.contains('open')) { const inner = platformModal.querySelector('.platform-modal-inner'); if (inner && !inner.contains(e.target)) { platformModal.classList.remove('open'); platformModal.setAttribute('aria-hidden','true'); } } }); document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && platformModal && platformModal.classList.contains('open')) { platformModal.classList.remove('open'); platformModal.setAttribute('aria-hidden','true'); } }); } })(); }); // ready })(); </script>
-<script>
+
+
 (function(){
   'use strict';
   const $ = (s, ctx=document) => (ctx||document).querySelector(s);
