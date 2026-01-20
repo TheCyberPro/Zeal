@@ -660,18 +660,15 @@ a, button, span {
 <script>
 /*
   ZEAL — Consolidated UI script
-  - Single drop-in to replace existing scripts
-  - Defensive, idempotent, DOM-ready
-  - Handles: helpers, Tawk loader, hero reveal, testimonial slider,
-    explore panel, mega menu, social inline, modal wiring, and fallbacks
+  - Single drop-in to replace all previous UI/menu scripts
+  - Place once, just before </body>
+  - Defensive, idempotent, DOM-ready, mobile-friendly
 */
 
 (function () {
   'use strict';
 
-  /* ---------------------------
-     Helpers
-     --------------------------- */
+  /* Helpers */
   const q = (sel, ctx = document) => (ctx || document).querySelector(sel);
   const qq = (sel, ctx = document) => Array.from((ctx || document).querySelectorAll(sel));
   const debounce = (fn, wait = 120) => {
@@ -679,45 +676,33 @@ a, button, span {
     return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), wait); };
   };
 
-  /* ---------------------------
-     Safe DOM ready
-     --------------------------- */
+  /* DOM ready */
   function ready(fn) {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
     else fn();
   }
 
   ready(() => {
-    console.log('ZEAL UI script initializing');
+    try { console.log('ZEAL UI script initializing'); } catch (e) {}
 
-    /* ============================
-       Tawk.to loader (idempotent)
-       ============================ */
+    /* Tawk loader (idempotent) */
     (function loadTawk() {
       try {
         if (window.Tawk_API || window.Tawk_LoadStart) return;
         window.Tawk_API = window.Tawk_API || {};
         window.Tawk_LoadStart = new Date();
-        // optional: set API key if required by your Tawk config
-        // window.Tawk_API.apiKey = '0aa5196f2fb85f3d612c6dc0f9af802fb12a0fc4';
-
         const s = document.createElement('script');
         s.async = true;
         s.src = 'https://embed.tawk.to/68cf60b510ce81192499da9f/1j5l13ih6';
         s.charset = 'UTF-8';
         s.setAttribute('crossorigin', '*');
-
         const first = document.getElementsByTagName('script')[0];
         if (first && first.parentNode) first.parentNode.insertBefore(s, first);
         else document.head.appendChild(s);
-      } catch (err) {
-        console.warn('Tawk loader failed', err);
-      }
+      } catch (err) { console.warn('Tawk loader failed', err); }
     })();
 
-    /* ============================
-       Testimonial slider
-       ============================ */
+    /* Testimonial slider */
     (function testimonialSlider() {
       const items = qq('.testimonial');
       if (!items.length) return;
@@ -730,9 +715,7 @@ a, button, span {
       }, 5000);
     })();
 
-    /* ============================
-       Reveal on scroll (with fallback)
-       ============================ */
+    /* Reveal on scroll (with fallback) */
     (function revealOnScroll() {
       const els = qq('.card, .highlight-card, .testimonial');
       if (!els.length) return;
@@ -748,116 +731,223 @@ a, button, span {
         }, { threshold: 0.12 });
         qq('.reveal').forEach(el => obs.observe(el));
       } catch (err) {
-        // fallback: reveal immediately
         qq('.reveal').forEach(el => el.classList.add('active'));
       }
     })();
 
-// reveal on scroll (with fallback) (function revealOnScroll(){ const els = qq('.card, .highlight-card, .testimonial'); if (!els.length) return; els.forEach(el=>el.classList.add('reveal')); try { const obs = new IntersectionObserver((entries, observer)=>{ entries.forEach(entry=>{ if (entry.isIntersecting){ entry.target.classList.add('active'); observer.unobserve(entry.target); } }); }, { threshold: 0.12 }); qq('.reveal').forEach(el=>obs.observe(el)); } catch(e){ qq('.reveal').forEach(el=>el.classList.add('active')); } })(); // header / explore / mega menu (function headerMenus(){ const header = q('.zeal-header') || q('header.nav'); const exploreToggle = q('#exploreToggle'); const explorePanel = q('#explorePanel'); // optional: if you have a separate explore panel const exploreServices = q('#exploreServices'); const megaMenu = q('#megaMenu'); const megaToggles = qq('.mega-toggle'); const getCatalogue = q('#getCatalogue'); if (!header) return; function positionMega(){ if (!megaMenu) return; const rect = header.getBoundingClientRect(); if (window.innerWidth > 900){ megaMenu.style.position='absolute'; megaMenu.style.top=(window.scrollY + rect.bottom + 8)+'px'; megaMenu.style.left='0'; megaMenu.style.width='100%'; megaMenu.style.height=''; } else { megaMenu.style.position='fixed'; megaMenu.style.top='0'; megaMenu.style.left='0'; megaMenu.style.width='100%'; megaMenu.style.height='100vh'; } } function closeExplore(){ explorePanel?.classList.remove('open'); explorePanel?.setAttribute('aria-hidden','true'); exploreToggle?.setAttribute('aria-expanded','false'); exploreToggle?.classList.remove('active'); } function closeMega(){ megaMenu?.classList.remove('open'); megaMenu?.setAttribute('aria-hidden','true'); qq('.mega-list').forEach(l=>l.setAttribute('hidden','')); qq('.mega-toggle').forEach(t=>t.setAttribute('aria-expanded','false')); } if (exploreToggle && explorePanel) { exploreToggle.addEventListener('click', (e)=>{ e.stopPropagation(); const open = explorePanel.classList.toggle('open'); explorePanel.setAttribute('aria-hidden', String(!open)); exploreToggle.setAttribute('aria-expanded', String(open)); exploreToggle.classList.toggle('active', open); if (open) closeMega(); }); } exploreServices?.addEventListener('click', (e)=>{ e?.stopPropagation(); positionMega(); const isOpen = megaMenu?.classList.toggle('open'); if (megaMenu) megaMenu.setAttribute('aria-hidden', String(!isOpen)); if (isOpen){ qq('.mega-list').forEach(list=>list.setAttribute('hidden','')); qq('.mega-toggle').forEach(t=>t.setAttribute('aria-expanded','false')); } closeExplore(); }); if (getCatalogue) { getCatalogue.addEventListener('click', function(e){ e.preventDefault(); const PDF_URL = 'https://example.com/ZEAL-catalogue.pdf'; const subject = encodeURIComponent('Request: ZEAL Catalogue'); const body = encodeURIComponent('Hi ZEAL team,\n\nPlease send me the ZEAL services catalogue. You can also download it here: ' + PDF_URL + '\n\nThanks.'); window.location.href = 'mailto:zeal.io@outlook.com?subject=' + subject + '&body=' + body; }); } megaToggles.forEach(h => { h.addEventListener('click', (ev)=>{ ev.stopPropagation(); const id = h.getAttribute('data-target'); const el = q('#' + id); if (!el) return; const wasHidden = el.hasAttribute('hidden'); qq('.mega-list').forEach(list=>list.setAttribute('hidden','')); qq('.mega-toggle').forEach(t=>t.setAttribute('aria-expanded','false')); if (wasHidden){ el.removeAttribute('hidden'); h.setAttribute('aria-expanded','true'); } else { el.setAttribute('hidden',''); h.setAttribute('aria-expanded','false'); } }); }); document.addEventListener('click', (e)=>{ if (explorePanel && !explorePanel.contains(e.target) && !exploreToggle?.contains(e.target)) closeExplore(); if (megaMenu && !megaMenu.contains(e.target) && !exploreServices?.contains(e.target)) closeMega(); }); document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape'){ closeExplore(); closeMega(); } }); const debPos = debounce(positionMega, 120); window.addEventListener('resize', debPos); window.addEventListener('scroll', debPos); positionMega(); })(); // social inline / modal wiring (if present) (function socialAndModal(){ const socialLinks = qq('#col-social .social-link'); const colSocialExpanded = q('#col-social-expanded'); const viewBtns = qq('.view-services'); const platformModal = q('#platformModal') || q('.platform-modal'); const modalClose = platformModal?.querySelector('.modal-close'); if (socialLinks.length && colSocialExpanded) { socialLinks.forEach(btn => { btn.addEventListener('click', function () { const service = btn.dataset.service; if (service === 'instagram') { colSocialExpanded.removeAttribute('hidden'); colSocialExpanded.setAttribute('aria-hidden', 'false'); try { if (window.instgrm && typeof window.instgrm.Embeds === 'object') window.instgrm.Embeds.process(); } catch (err) {} colSocialExpanded.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } else { colSocialExpanded.setAttribute('hidden', ''); colSocialExpanded.setAttribute('aria-hidden', 'true'); const urls = { instagram:'https://www.instagram.com/zeal_web/', twitter:'https://twitter.com/', facebook:'https://facebook.com/', youtube:'https://youtube.com/', tiktok:'https://tiktok.com/', linkedin:'https://linkedin.com/' }; const url = urls[service] || '#'; if (url !== '#') window.open(url, '_blank', 'noopener'); } }); }); } if (viewBtns.length && platformModal) { viewBtns.forEach(b => b.addEventListener('click', () => { platformModal.classList.add('open'); platformModal.setAttribute('aria-hidden','false'); })); modalClose?.addEventListener('click', () => { platformModal.classList.remove('open'); platformModal.setAttribute('aria-hidden','true'); }); document.addEventListener('click', (e) => { if (platformModal && platformModal.classList.contains('open')) { const inner = platformModal.querySelector('.platform-modal-inner'); if (inner && !inner.contains(e.target)) { platformModal.classList.remove('open'); platformModal.setAttribute('aria-hidden','true'); } } }); document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && platformModal && platformModal.classList.contains('open')) { platformModal.classList.remove('open'); platformModal.setAttribute('aria-hidden','true'); } }); } })(); }); // ready })(); </script>
+    /* Explore panel + Mega menu (Fiverr-like behavior) */
+    (function exploreAndMega() {
+      const toggle = q('#exploreToggle');
+      const panel = q('#explorePanel'); // optional wrapper for full-screen explore
+      const mega = q('#megaMenu');       // existing mega menu (can be inside panel)
+      const closeBtn = panel?.querySelector('#exploreClose') || null;
+      const megaToggles = qq('.mega-toggle', panel || document);
+      const getCatalogue = q('#getCatalogue', panel || document);
+      const exploreServices = q('#exploreServices');
 
+      if (!toggle && !mega) return;
 
-(function(){
-  'use strict';
-  const $ = (s, ctx=document) => (ctx||document).querySelector(s);
-  const $$ = (s, ctx=document) => Array.from((ctx||document).querySelectorAll(s));
+      const focusableSelector = 'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])';
+      let lastFocused = null;
 
-  const toggle = $('#exploreToggle');
-  const panel  = $('#explorePanel');
-  const closeBtn = panel?.querySelector('#exploreClose');
-  const firstFocusableSelector = 'a, button, input, [tabindex]:not([tabindex="-1"])';
+      const focusable = () => panel ? Array.from(panel.querySelectorAll(focusableSelector)).filter(el => !el.hasAttribute('disabled')) : [];
 
-  if (!toggle || !panel) {
-    console.warn('Explore: missing #exploreToggle or #explorePanel — ensure HTML matches the drop-in.');
-  } else {
-    // focus management helpers
-    const focusable = () => Array.from(panel.querySelectorAll(firstFocusableSelector)).filter(el => !el.hasAttribute('disabled'));
-    let lastFocused = null;
-
-    function openPanel() {
-      lastFocused = document.activeElement;
-      panel.classList.add('open');
-      panel.setAttribute('aria-hidden','false');
-      toggle.setAttribute('aria-expanded','true');
-      // focus first focusable element inside panel
-      const f = focusable()[0];
-      if (f) f.focus();
-      // prevent body scroll on mobile
-      document.documentElement.style.overflow = 'hidden';
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closePanel() {
-      panel.classList.remove('open');
-      panel.setAttribute('aria-hidden','true');
-      toggle.setAttribute('aria-expanded','false');
-      // restore focus
-      if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
-      document.documentElement.style.overflow = '';
-      document.body.style.overflow = '';
-    }
-
-    // toggle handler
-    toggle.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (panel.classList.contains('open')) closePanel();
-      else openPanel();
-    });
-
-    // close button
-    closeBtn?.addEventListener('click', (e) => { e.stopPropagation(); closePanel(); });
-
-    // close on outside click
-    document.addEventListener('click', (e) => {
-      if (!panel.classList.contains('open')) return;
-      if (!panel.contains(e.target) && !toggle.contains(e.target)) closePanel();
-    });
-
-    // Escape key closes and traps focus inside panel when open
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') { if (panel.classList.contains('open')) { e.preventDefault(); closePanel(); } return; }
-      if (!panel.classList.contains('open')) return;
-      // simple focus trap: Tab cycles within panel
-      if (e.key === 'Tab') {
-        const nodes = focusable();
-        if (!nodes.length) return;
-        const first = nodes[0], last = nodes[nodes.length - 1];
-        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      function openPanel() {
+        if (!panel) return;
+        lastFocused = document.activeElement;
+        panel.classList.add('open');
+        panel.setAttribute('aria-hidden', 'false');
+        toggle?.setAttribute('aria-expanded', 'true');
+        const f = focusable()[0];
+        if (f) f.focus();
+        document.documentElement.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden';
       }
-    });
 
-    // Mega column toggles (inside panel)
-    $$('.mega-toggle', panel).forEach(h => {
-      h.addEventListener('click', (ev) => {
-        ev.stopPropagation();
-        const id = h.getAttribute('data-target');
-        const el = panel.querySelector('#' + id) || document.getElementById(id);
-        if (!el) return;
-        const wasHidden = el.hasAttribute('hidden');
-        $$('.mega-list', panel).forEach(list => list.setAttribute('hidden',''));
-        $$('.mega-toggle', panel).forEach(t => t.setAttribute('aria-expanded','false'));
-        if (wasHidden) { el.removeAttribute('hidden'); h.setAttribute('aria-expanded','true'); }
-        else { el.setAttribute('hidden',''); h.setAttribute('aria-expanded','false'); }
+      function closePanel() {
+        if (!panel) return;
+        panel.classList.remove('open');
+        panel.setAttribute('aria-hidden', 'true');
+        toggle?.setAttribute('aria-expanded', 'false');
+        if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
+      }
+
+      function openMega() {
+        if (!mega) return;
+        mega.classList.add('open');
+        mega.setAttribute('aria-hidden', 'false');
+      }
+
+      function closeMega() {
+        if (!mega) return;
+        mega.classList.remove('open');
+        mega.setAttribute('aria-hidden', 'true');
+        qq('.mega-list').forEach(l => l.setAttribute('hidden', ''));
+        qq('.mega-toggle').forEach(t => t.setAttribute('aria-expanded', 'false'));
+      }
+
+      if (toggle && panel) {
+        toggle.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (panel.classList.contains('open')) closePanel();
+          else openPanel();
+          if (panel.classList.contains('open')) closeMega();
+        });
+      }
+
+      if (exploreServices && mega) {
+        exploreServices.addEventListener('click', (e) => {
+          e?.stopPropagation();
+          closePanel();
+          positionMega();
+          const isOpen = mega.classList.toggle('open');
+          mega.setAttribute('aria-hidden', String(!isOpen));
+          if (isOpen) {
+            qq('.mega-list').forEach(list => list.setAttribute('hidden', ''));
+            qq('.mega-toggle').forEach(t => t.setAttribute('aria-expanded', 'false'));
+          }
+        });
+      }
+
+      megaToggles.forEach(h => {
+        h.addEventListener('click', (ev) => {
+          ev.stopPropagation();
+          const id = h.getAttribute('data-target');
+          const el = (panel ? panel.querySelector('#' + id) : document.getElementById(id));
+          if (!el) return;
+          const wasHidden = el.hasAttribute('hidden');
+          (panel ? panel.querySelectorAll('.mega-list') : qq('.mega-list')).forEach(list => list.setAttribute('hidden', ''));
+          (panel ? panel.querySelectorAll('.mega-toggle') : qq('.mega-toggle')).forEach(t => t.setAttribute('aria-expanded', 'false'));
+          if (wasHidden) { el.removeAttribute('hidden'); h.setAttribute('aria-expanded', 'true'); }
+          else { el.setAttribute('hidden', ''); h.setAttribute('aria-expanded', 'false'); }
+        });
       });
-    });
 
-    // reposition on resize (if you anchor under header on desktop)
-    const positionMega = () => {
-      const mega = document.getElementById('megaMenu') || panel.querySelector('.mega-menu-inline');
-      const header = document.querySelector('.zeal-header');
-      if (!mega || !header) return;
-      const rect = header.getBoundingClientRect();
-      if (window.innerWidth > 900) {
-        // anchor under header visually by setting top on panel inner (handled by CSS mostly)
-        panel.style.paddingTop = (rect.bottom + 8) + 'px';
-      } else {
-        panel.style.paddingTop = '0';
+      if (getCatalogue) {
+        getCatalogue.addEventListener('click', function (e) {
+          e.preventDefault();
+          const PDF_URL = 'https://example.com/ZEAL-catalogue.pdf';
+          const subject = encodeURIComponent('Request: ZEAL Catalogue');
+          const body = encodeURIComponent('Hi ZEAL team,\n\nPlease send me the ZEAL services catalogue. You can also download it here: ' + PDF_URL + '\n\nThanks.');
+          window.location.href = 'mailto:zeal.io@outlook.com?subject=' + subject + '&body=' + body;
+        });
       }
-    };
-    window.addEventListener('resize', positionMega);
-    positionMega();
-  }
-})();
+
+      document.addEventListener('click', (e) => {
+        if (panel && panel.classList.contains('open') && !panel.contains(e.target) && !toggle?.contains(e.target)) closePanel();
+        if (mega && mega.classList.contains('open') && !mega.contains(e.target) && !exploreServices?.contains(e.target)) closeMega();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          if (panel && panel.classList.contains('open')) closePanel();
+          if (mega && mega.classList.contains('open')) closeMega();
+          return;
+        }
+        if (!panel || !panel.classList.contains('open')) return;
+        if (e.key === 'Tab') {
+          const nodes = focusable();
+          if (!nodes.length) return;
+          const first = nodes[0], last = nodes[nodes.length - 1];
+          if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+          else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+      });
+
+      function positionMega() {
+        const header = q('.zeal-header') || q('header.nav');
+        if (!mega || !header) return;
+        const rect = header.getBoundingClientRect();
+        if (window.innerWidth > 900) {
+          mega.style.position = 'absolute';
+          mega.style.top = (window.scrollY + rect.bottom + 8) + 'px';
+          mega.style.left = '0';
+          mega.style.width = '100%';
+          mega.style.height = '';
+        } else {
+          mega.style.position = 'fixed';
+          mega.style.top = '0';
+          mega.style.left = '0';
+          mega.style.width = '100%';
+          mega.style.height = '100vh';
+        }
+      }
+
+      const debPos = debounce(positionMega, 120);
+      window.addEventListener('resize', debPos);
+      window.addEventListener('scroll', debPos);
+      positionMega();
+    })();
+
+    /* Social inline / modal wiring */
+    (function socialAndModal() {
+      const socialLinks = qq('#col-social .social-link');
+      const colSocialExpanded = q('#col-social-expanded');
+      const viewBtns = qq('.view-services');
+      const platformModal = q('#platformModal') || q('.platform-modal');
+      const modalClose = platformModal?.querySelector('.modal-close');
+
+      if (socialLinks.length && colSocialExpanded) {
+        socialLinks.forEach(btn => {
+          btn.addEventListener('click', function () {
+            const service = btn.dataset.service;
+            if (service === 'instagram') {
+              colSocialExpanded.removeAttribute('hidden');
+              colSocialExpanded.setAttribute('aria-hidden', 'false');
+              try { if (window.instgrm && typeof window.instgrm.Embeds === 'object') window.instgrm.Embeds.process(); } catch (err) {}
+              colSocialExpanded.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            } else {
+              colSocialExpanded.setAttribute('hidden', '');
+              colSocialExpanded.setAttribute('aria-hidden', 'true');
+              const urls = {
+                instagram: 'https://www.instagram.com/zeal_web/',
+                twitter: 'https://twitter.com/',
+                facebook: 'https://facebook.com/',
+                youtube: 'https://youtube.com/',
+                tiktok: 'https://tiktok.com/',
+                linkedin: 'https://linkedin.com/'
+              };
+              const url = urls[service] || '#';
+              if (url !== '#') window.open(url, '_blank', 'noopener');
+            }
+          });
+        });
+      }
+
+      if (viewBtns.length && platformModal) {
+        viewBtns.forEach(b => b.addEventListener('click', () => {
+          platformModal.classList.add('open');
+          platformModal.setAttribute('aria-hidden', 'false');
+        }));
+        modalClose?.addEventListener('click', () => {
+          platformModal.classList.remove('open');
+          platformModal.setAttribute('aria-hidden', 'true');
+        });
+
+        document.addEventListener('click', (e) => {
+          if (platformModal && platformModal.classList.contains('open')) {
+            const inner = platformModal.querySelector('.platform-modal-inner');
+            if (inner && !inner.contains(e.target)) {
+              platformModal.classList.remove('open');
+              platformModal.setAttribute('aria-hidden', 'true');
+            }
+          }
+        });
+
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && platformModal && platformModal.classList.contains('open')) {
+            platformModal.classList.remove('open');
+            platformModal.setAttribute('aria-hidden', 'true');
+          }
+        });
+      }
+    })();
+
+    try { console.log('ZEAL UI script ready'); } catch (e) {}
+  }); // ready
+})(); 
 </script>
 
 </body>
