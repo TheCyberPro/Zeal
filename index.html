@@ -1,20 +1,6 @@
 <!doctype html> <html lang="en"> <head> <!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-B0HZHDFETE"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-B0HZHDFETE'); </script>
 <meta charset="utf-8" /> <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" /> <title>ZEAL — We create digital experiences</title> <meta name="description" content="ZEAL — web design, development, and branding." />
 <!-- Fonts (single, consolidated load) --> <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet"> <!-- Font Awesome (replace kit id) --> <script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script> <!-- Main stylesheet --> <link rel="stylesheet" href="/styles.css">
-
-
-
-
-
-
-
-
-  <!-- Fonts: preconnect + load only once -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-
-  <!-- Font Awesome (replace the kit id with your real kit id) -->
   <script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script>
 
   <!-- Main stylesheet -->
@@ -364,6 +350,81 @@ a, button, span {
   padding-left: 0.5rem;
   word-wrap: break-word;
 }
+/* Explore panel (Fiverr-like) */
+.explore-panel {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 72px; /* header height */
+  background: rgba(6,6,12,0.45);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-6px);
+  transition: opacity .26s ease, transform .26s ease;
+  z-index: 3000;
+}
+
+/* open state */
+.explore-panel.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* inner card (anchored under header on desktop) */
+.explore-inner {
+  width: min(1100px, 96%);
+  background: linear-gradient(180deg, rgba(10,8,20,0.98), rgba(8,6,18,0.96));
+  border-radius: 14px;
+  box-shadow: 0 18px 48px rgba(2,6,23,0.6);
+  overflow: hidden;
+  max-height: calc(100vh - 96px);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* close button */
+.explore-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 28px;
+  line-height: 1;
+  padding: 8px;
+  cursor: pointer;
+}
+
+/* content area */
+.explore-content { padding: 1.25rem; overflow:auto; }
+
+/* inline mega menu columns (simple grid) */
+.mega-menu-inline { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:1rem; }
+.mega-column h4 { cursor:pointer; color: var(--gold); margin:0 0 .5rem; font-family:'Anton',sans-serif; }
+.mega-list { margin:0; padding:0; list-style:none; }
+.mega-list li { margin:0 0 .5rem; }
+.mega-list a, .mega-list button { color: #eaeaea; text-decoration:none; background:transparent; border:0; padding:0; cursor:pointer; }
+
+/* small screens: full-bleed panel */
+@media (max-width:900px) {
+  .explore-inner { width:100%; height:100%; border-radius:0; max-height:100vh; padding-top: 56px; }
+  .explore-panel { padding-top: 0; align-items: stretch; }
+}
+
+/* focus styles */
+.explore-inner :focus { outline: 3px solid rgba(255,213,79,0.14); outline-offset: 3px; }
+
+/* keep hero layering intact */
+.zeal-hero { z-index: 1; }
+.zeal-header { z-index: 2200; }
+.explore-panel { z-index: 3000; }
+
 </style>
 
 <!-- Google Tag Manager -->
@@ -657,6 +718,110 @@ a, button, span {
     })();
 
 // reveal on scroll (with fallback) (function revealOnScroll(){ const els = qq('.card, .highlight-card, .testimonial'); if (!els.length) return; els.forEach(el=>el.classList.add('reveal')); try { const obs = new IntersectionObserver((entries, observer)=>{ entries.forEach(entry=>{ if (entry.isIntersecting){ entry.target.classList.add('active'); observer.unobserve(entry.target); } }); }, { threshold: 0.12 }); qq('.reveal').forEach(el=>obs.observe(el)); } catch(e){ qq('.reveal').forEach(el=>el.classList.add('active')); } })(); // header / explore / mega menu (function headerMenus(){ const header = q('.zeal-header') || q('header.nav'); const exploreToggle = q('#exploreToggle'); const explorePanel = q('#explorePanel'); // optional: if you have a separate explore panel const exploreServices = q('#exploreServices'); const megaMenu = q('#megaMenu'); const megaToggles = qq('.mega-toggle'); const getCatalogue = q('#getCatalogue'); if (!header) return; function positionMega(){ if (!megaMenu) return; const rect = header.getBoundingClientRect(); if (window.innerWidth > 900){ megaMenu.style.position='absolute'; megaMenu.style.top=(window.scrollY + rect.bottom + 8)+'px'; megaMenu.style.left='0'; megaMenu.style.width='100%'; megaMenu.style.height=''; } else { megaMenu.style.position='fixed'; megaMenu.style.top='0'; megaMenu.style.left='0'; megaMenu.style.width='100%'; megaMenu.style.height='100vh'; } } function closeExplore(){ explorePanel?.classList.remove('open'); explorePanel?.setAttribute('aria-hidden','true'); exploreToggle?.setAttribute('aria-expanded','false'); exploreToggle?.classList.remove('active'); } function closeMega(){ megaMenu?.classList.remove('open'); megaMenu?.setAttribute('aria-hidden','true'); qq('.mega-list').forEach(l=>l.setAttribute('hidden','')); qq('.mega-toggle').forEach(t=>t.setAttribute('aria-expanded','false')); } if (exploreToggle && explorePanel) { exploreToggle.addEventListener('click', (e)=>{ e.stopPropagation(); const open = explorePanel.classList.toggle('open'); explorePanel.setAttribute('aria-hidden', String(!open)); exploreToggle.setAttribute('aria-expanded', String(open)); exploreToggle.classList.toggle('active', open); if (open) closeMega(); }); } exploreServices?.addEventListener('click', (e)=>{ e?.stopPropagation(); positionMega(); const isOpen = megaMenu?.classList.toggle('open'); if (megaMenu) megaMenu.setAttribute('aria-hidden', String(!isOpen)); if (isOpen){ qq('.mega-list').forEach(list=>list.setAttribute('hidden','')); qq('.mega-toggle').forEach(t=>t.setAttribute('aria-expanded','false')); } closeExplore(); }); if (getCatalogue) { getCatalogue.addEventListener('click', function(e){ e.preventDefault(); const PDF_URL = 'https://example.com/ZEAL-catalogue.pdf'; const subject = encodeURIComponent('Request: ZEAL Catalogue'); const body = encodeURIComponent('Hi ZEAL team,\n\nPlease send me the ZEAL services catalogue. You can also download it here: ' + PDF_URL + '\n\nThanks.'); window.location.href = 'mailto:zeal.io@outlook.com?subject=' + subject + '&body=' + body; }); } megaToggles.forEach(h => { h.addEventListener('click', (ev)=>{ ev.stopPropagation(); const id = h.getAttribute('data-target'); const el = q('#' + id); if (!el) return; const wasHidden = el.hasAttribute('hidden'); qq('.mega-list').forEach(list=>list.setAttribute('hidden','')); qq('.mega-toggle').forEach(t=>t.setAttribute('aria-expanded','false')); if (wasHidden){ el.removeAttribute('hidden'); h.setAttribute('aria-expanded','true'); } else { el.setAttribute('hidden',''); h.setAttribute('aria-expanded','false'); } }); }); document.addEventListener('click', (e)=>{ if (explorePanel && !explorePanel.contains(e.target) && !exploreToggle?.contains(e.target)) closeExplore(); if (megaMenu && !megaMenu.contains(e.target) && !exploreServices?.contains(e.target)) closeMega(); }); document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape'){ closeExplore(); closeMega(); } }); const debPos = debounce(positionMega, 120); window.addEventListener('resize', debPos); window.addEventListener('scroll', debPos); positionMega(); })(); // social inline / modal wiring (if present) (function socialAndModal(){ const socialLinks = qq('#col-social .social-link'); const colSocialExpanded = q('#col-social-expanded'); const viewBtns = qq('.view-services'); const platformModal = q('#platformModal') || q('.platform-modal'); const modalClose = platformModal?.querySelector('.modal-close'); if (socialLinks.length && colSocialExpanded) { socialLinks.forEach(btn => { btn.addEventListener('click', function () { const service = btn.dataset.service; if (service === 'instagram') { colSocialExpanded.removeAttribute('hidden'); colSocialExpanded.setAttribute('aria-hidden', 'false'); try { if (window.instgrm && typeof window.instgrm.Embeds === 'object') window.instgrm.Embeds.process(); } catch (err) {} colSocialExpanded.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } else { colSocialExpanded.setAttribute('hidden', ''); colSocialExpanded.setAttribute('aria-hidden', 'true'); const urls = { instagram:'https://www.instagram.com/zeal_web/', twitter:'https://twitter.com/', facebook:'https://facebook.com/', youtube:'https://youtube.com/', tiktok:'https://tiktok.com/', linkedin:'https://linkedin.com/' }; const url = urls[service] || '#'; if (url !== '#') window.open(url, '_blank', 'noopener'); } }); }); } if (viewBtns.length && platformModal) { viewBtns.forEach(b => b.addEventListener('click', () => { platformModal.classList.add('open'); platformModal.setAttribute('aria-hidden','false'); })); modalClose?.addEventListener('click', () => { platformModal.classList.remove('open'); platformModal.setAttribute('aria-hidden','true'); }); document.addEventListener('click', (e) => { if (platformModal && platformModal.classList.contains('open')) { const inner = platformModal.querySelector('.platform-modal-inner'); if (inner && !inner.contains(e.target)) { platformModal.classList.remove('open'); platformModal.setAttribute('aria-hidden','true'); } } }); document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && platformModal && platformModal.classList.contains('open')) { platformModal.classList.remove('open'); platformModal.setAttribute('aria-hidden','true'); } }); } })(); }); // ready })(); </script>
+<script>
+(function(){
+  'use strict';
+  const $ = (s, ctx=document) => (ctx||document).querySelector(s);
+  const $$ = (s, ctx=document) => Array.from((ctx||document).querySelectorAll(s));
+
+  const toggle = $('#exploreToggle');
+  const panel  = $('#explorePanel');
+  const closeBtn = panel?.querySelector('#exploreClose');
+  const firstFocusableSelector = 'a, button, input, [tabindex]:not([tabindex="-1"])';
+
+  if (!toggle || !panel) {
+    console.warn('Explore: missing #exploreToggle or #explorePanel — ensure HTML matches the drop-in.');
+  } else {
+    // focus management helpers
+    const focusable = () => Array.from(panel.querySelectorAll(firstFocusableSelector)).filter(el => !el.hasAttribute('disabled'));
+    let lastFocused = null;
+
+    function openPanel() {
+      lastFocused = document.activeElement;
+      panel.classList.add('open');
+      panel.setAttribute('aria-hidden','false');
+      toggle.setAttribute('aria-expanded','true');
+      // focus first focusable element inside panel
+      const f = focusable()[0];
+      if (f) f.focus();
+      // prevent body scroll on mobile
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePanel() {
+      panel.classList.remove('open');
+      panel.setAttribute('aria-hidden','true');
+      toggle.setAttribute('aria-expanded','false');
+      // restore focus
+      if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+    }
+
+    // toggle handler
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (panel.classList.contains('open')) closePanel();
+      else openPanel();
+    });
+
+    // close button
+    closeBtn?.addEventListener('click', (e) => { e.stopPropagation(); closePanel(); });
+
+    // close on outside click
+    document.addEventListener('click', (e) => {
+      if (!panel.classList.contains('open')) return;
+      if (!panel.contains(e.target) && !toggle.contains(e.target)) closePanel();
+    });
+
+    // Escape key closes and traps focus inside panel when open
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') { if (panel.classList.contains('open')) { e.preventDefault(); closePanel(); } return; }
+      if (!panel.classList.contains('open')) return;
+      // simple focus trap: Tab cycles within panel
+      if (e.key === 'Tab') {
+        const nodes = focusable();
+        if (!nodes.length) return;
+        const first = nodes[0], last = nodes[nodes.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    });
+
+    // Mega column toggles (inside panel)
+    $$('.mega-toggle', panel).forEach(h => {
+      h.addEventListener('click', (ev) => {
+        ev.stopPropagation();
+        const id = h.getAttribute('data-target');
+        const el = panel.querySelector('#' + id) || document.getElementById(id);
+        if (!el) return;
+        const wasHidden = el.hasAttribute('hidden');
+        $$('.mega-list', panel).forEach(list => list.setAttribute('hidden',''));
+        $$('.mega-toggle', panel).forEach(t => t.setAttribute('aria-expanded','false'));
+        if (wasHidden) { el.removeAttribute('hidden'); h.setAttribute('aria-expanded','true'); }
+        else { el.setAttribute('hidden',''); h.setAttribute('aria-expanded','false'); }
+      });
+    });
+
+    // reposition on resize (if you anchor under header on desktop)
+    const positionMega = () => {
+      const mega = document.getElementById('megaMenu') || panel.querySelector('.mega-menu-inline');
+      const header = document.querySelector('.zeal-header');
+      if (!mega || !header) return;
+      const rect = header.getBoundingClientRect();
+      if (window.innerWidth > 900) {
+        // anchor under header visually by setting top on panel inner (handled by CSS mostly)
+        panel.style.paddingTop = (rect.bottom + 8) + 'px';
+      } else {
+        panel.style.paddingTop = '0';
+      }
+    };
+    window.addEventListener('resize', positionMega);
+    positionMega();
+  }
+})();
+</script>
 
 </body>
 </html>
