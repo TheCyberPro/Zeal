@@ -295,6 +295,46 @@
 .nav-logo__img { display:block; height:36px; width:auto; max-width:160px; object-fit:contain; }
 @media (max-width:480px) { .nav-logo__img { height:28px; } }
 
+
+/* Footer controls inside mega menu */
+.mega-footer-controls {
+  grid-column: 1 / -1;
+  display:flex;
+  gap:0.75rem;
+  align-items:center;
+  justify-content:flex-start;
+  padding: 1rem 2rem 0 2rem;
+  border-top: 1px solid rgba(255,255,255,0.03);
+  margin-top: 0.75rem;
+}
+
+/* Back button (visible when a submenu is open) */
+.explore-back {
+  display:inline-flex;
+  align-items:center;
+  gap:0.5rem;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.06);
+  color: #fff;
+  padding: 0.45rem 0.75rem;
+  border-radius: 8px;
+  font-weight:700;
+  cursor: pointer;
+}
+.explore-back[hidden] { display:none; }
+
+/* Catalogue link styling */
+.catalogue-link { text-decoration:none; padding:0.45rem 0.9rem; border-radius:8px; border:1px solid rgba(255,255,255,0.06); color:#fff; background:transparent; }
+.catalogue-link:hover { background: rgba(255,255,255,0.03); color:var(--gold); }
+
+/* Ensure footer controls stack on small screens */
+@media (max-width:900px) {
+  .mega-footer-controls { flex-direction:column; align-items:stretch; gap:0.5rem; padding: 0.75rem 1rem; }
+  .catalogue-link { text-align:center; }
+}
+
+
+
   </style>
 </head>
 
@@ -314,7 +354,7 @@
 
 
 <a href="https://zealweb.xyz" class="nav-logo" aria-label="ZEAL home">
-  <img src="images/zeal2.png" alt="ZEAL Web Logo" class="nav-logo__img" />
+  <img src="assetss/zeal2.png" alt="ZEAL Web Logo" class="nav-logo__img" />
 </a>
 
       <button id="exploreToggle" class="hamburger" aria-label="Toggle Explore Menu" aria-expanded="false" type="button">
@@ -337,6 +377,8 @@
               <li><a href="#">Business Page</a></li>
               <li><a href="#">Landing Page</a></li>
               <li><a href="#">Single HTML + CSS Page</a></li>
+	      <li><a href="#">Ecommerce Store</a></li>
+	      <li><a href="#">Headless CMS Integrations</a></li>
             </ul>
           </div>
 
@@ -347,16 +389,21 @@
               <li><a href="#">React</a></li>
               <li><a href="#">Vue</a></li>
               <li><a href="#">CSS</a></li>
+	      <li><a href="#">Design Systems</a></li>
+	      <li><a href="#">Accessibility Audits</a></li>
               <li><a href="#">Prototyping & Research</a></li>
             </ul>
           </div>
 
           <div class="mega-column">
-            <h4 class="mega-toggle" data-target="col-social" role="button" aria-expanded="false">Social Media ▾</h4>
+            <h4 class="mega-toggle" data-target="col-social" role="button" aria-expanded="false">Brand Engagement ▾</h4>
             <ul id="col-social" class="mega-list" hidden>
               <li><button class="social-link" data-service="instagram" type="button">Instagram</button></li>
               <li><button class="social-link" data-service="twitter" type="button">Twitter</button></li>
               <li><button class="social-link" data-service="facebook" type="button">Facebook</button></li>
+	      <li><button class="social-link" data-service="youtube" type="button">YouTube</button></li>
+	      <li><button class="social-link" data-service="tiktok" type="button">TikTok</button></li>
+ 	      <li><button class="social-link" data-service="linkedin" type="button">LinkedIn</button></li>
               <li><a href="#" id="getCatalogue">Get Catalogue (PDF)</a></li>
             </ul>
 
@@ -374,8 +421,10 @@
               </article>
             </div>
           </div>
-        </div>
-      </div>
+<div class="mega-footer-controls" aria-hidden="false"> <button id="exploreBackUnderServices" class="explore-back" type="button" hidden>← Back</button>
+
+	 <a id="downloadCatalogue" class="catalogue-link btn btn--secondary" href="/assets/ZEAL-catalogue.pdf" download>Download full catalogue (PDF)</a> </div> </div>
+
       <!-- end megaMenu -->
     </div>
   </div>
@@ -1065,6 +1114,81 @@
   }, { passive: true });
 })();
 
+
+
+
+(function(){
+  const panel = document.getElementById('explorePanel');
+  const back = document.getElementById('exploreBackUnderServices');
+  const megaInner = document.querySelector('#megaMenu .mega-inner');
+  const megaToggles = Array.from(document.querySelectorAll('.mega-toggle'));
+  const socialLinks = Array.from(document.querySelectorAll('.social-link'));
+  const lists = Array.from(document.querySelectorAll('.mega-list, .mega-expanded'));
+
+  if (!panel || !megaInner || !back) return;
+
+  // showBack: show the back button when any submenu is visible
+  function showBackIfNeeded(){
+    const anyVisible = lists.some(el => !el.hasAttribute('hidden'));
+    back.hidden = !anyVisible;
+  }
+
+  // show root (hide all lists)
+  function showRoot(){
+    lists.forEach(el => el.setAttribute('hidden',''));
+    back.hidden = true;
+  }
+
+  // wire toggles to show their target and reveal back button
+  megaToggles.forEach(h => {
+    h.addEventListener('click', (ev) => {
+      const id = h.getAttribute('data-target');
+      if (!id) return;
+      // hide others
+      lists.forEach(el => el.setAttribute('hidden',''));
+      const target = document.getElementById(id);
+      if (target) target.removeAttribute('hidden');
+      // reveal back
+      back.hidden = false;
+      // ensure panel is open
+      panel.classList.add('open');
+      panel.setAttribute('aria-hidden','false');
+    });
+  });
+
+  // social links open the expanded area
+  socialLinks.forEach(btn => {
+    btn.addEventListener('click', () => {
+      lists.forEach(el => el.setAttribute('hidden',''));
+      const expanded = document.getElementById('col-social-expanded');
+      if (expanded) expanded.removeAttribute('hidden');
+      back.hidden = false;
+      panel.classList.add('open');
+      panel.setAttribute('aria-hidden','false');
+    });
+  });
+
+  // Back button: return to root; if already root, close panel
+  back.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const anyVisible = lists.some(el => !el.hasAttribute('hidden'));
+    if (!anyVisible) {
+      // at root -> close panel
+      panel.classList.remove('open');
+      panel.setAttribute('aria-hidden','true');
+      return;
+    }
+    // otherwise hide subpanels and show root
+    showRoot();
+  });
+
+  // keep back visibility in sync when panel opens/closes
+  const obs = new MutationObserver(() => showBackIfNeeded());
+  obs.observe(panel, { attributes: true, attributeFilter: ['class'] });
+
+  // initial state
+  showRoot();
+})();
 
 </script>
 
