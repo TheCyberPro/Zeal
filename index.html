@@ -351,49 +351,174 @@
 
 
 
-/* Instagram card sizing and centering */
-#instagram .s-card {
+/* HERO: taller, centered content, left text pinned to lower-left */
+.hero-extended {
+  position: relative;
+  min-height: 68vh;               /* taller hero; adjust to taste (e.g., 75vh) */
+  display: block;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+/* full-bleed background layer */
+.hero-extended .hero-media {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: saturate(0.98) contrast(1);
+  z-index: 0;
+}
+
+/* inner content sits above background */
+.hero-extended .hero-inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 520px; /* left content + right image column */
+  gap: 2rem;
+  align-items: end;                 /* align content toward bottom */
+  width: min(var(--max-width,1100px), 96%);
+  margin: 0 auto;
+  padding: 2.25rem 1rem;
+}
+
+/* left block pinned visually lower-left */
+.hero-left {
+  align-self: end;
+  justify-self: start;
+  max-width: 680px;
+  color: #fff;
+  text-shadow: 0 6px 18px rgba(2,6,23,0.6);
+}
+
+/* hero title and sub */
+.hero-title { margin: 0 0 .5rem; font-size: clamp(1.6rem, 3.6vw, 2.6rem); line-height:1.02; color:var(--gold); font-family:'Anton',sans-serif; }
+.hero-sub { margin: 0 0 1rem; font-size: clamp(0.95rem, 1.6vw, 1.1rem); color: rgba(255,255,255,0.95); }
+
+/* right column preserves your hero image */
+.hero-right { display:flex; align-items:flex-end; justify-content:center; }
+.hero-side-img { width:100%; max-width:520px; height:auto; display:block; object-fit:contain; }
+
+/* overlay box for the left text when you want it visually pinned above image */
+.hero-left .hero-sub {
+  background: linear-gradient(180deg, rgba(8,6,18,0.6), rgba(8,6,18,0.2));
+  padding: .6rem .8rem;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+/* ensure contrast on light hero backgrounds */
+.hero-extended .hero-left, .hero-extended .hero-title, .hero-extended .hero-sub { color: #fff; }
+
+/* Responsive: stack columns on small screens and keep left text above image */
+@media (max-width:900px) {
+  .hero-extended { min-height: 56vh; }
+  .hero-extended .hero-inner { grid-template-columns: 1fr; align-items: center; padding: 1.25rem; }
+  .hero-right { order: 2; margin-top: 0.75rem; }
+  .hero-left { order: 1; text-align: center; align-self: center; }
+  .hero-side-img { max-width: 420px; }
+}
+
+/* Instagram + Developer showcase: centered, responsive cards */
+.showcase-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  align-items: start;
+  justify-items: center;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+/* card base inherits your .s-card styles; override sizing */
+.instagram-card, .developer-card {
   width: 100%;
   max-width: 920px;
-  display: flex;
-  gap: 1.25rem;
+  display: grid;
+  grid-template-columns: 44% 1fr;
+  gap: 1rem;
   align-items: stretch;
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  padding: 0;
-  overflow: hidden;
   border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 12px 36px rgba(2,6,23,0.06);
 }
 
-/* Left media column and right body column */
-#instagram .s-card-media { flex: 0 0 44%; min-width: 220px; height: auto; aspect-ratio: 4/3; background-size: cover; background-position: center; }
-#instagram .s-card-body { flex: 1 1 56%; padding: 1.25rem 1.25rem 1.5rem; display:flex; flex-direction:column; justify-content:center; }
+/* media column uses background-image already set inline */
+.instagram-card .s-card-media,
+.developer-card .s-card-media {
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 0;
+}
 
-/* Tighter title and description spacing */
-#instagram .s-card-body h5 { margin: 0 0 0.5rem; font-size:1.05rem; color:var(--gold); }
-#instagram .s-card-sub { margin: 0 0 0.9rem; color: rgba(255,255,255,0.9); }
+/* body column */
+.instagram-card .s-card-body,
+.developer-card .s-card-body {
+  padding: 1.25rem;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
 
-/* Buttons row: wrap and center on small screens */
+/* titles and text */
+.instagram-card h5, .developer-card h5 { margin:0 0 .5rem; color:var(--gold); }
+.developer__intro { margin:0 0 1rem; line-height:1.6; color: rgba(13,5,45,0.95); }
+
+/* buttons row wrap and center on small screens */
 .s-card-ctas { display:flex; gap:0.6rem; flex-wrap:wrap; align-items:center; }
 
-/* About section: center text and constrain width */
-.developer__intro { max-width: 920px; margin: 0 auto 1rem; line-height:1.6; color: rgba(13,5,45,0.9); }
-
-/* CTA button spacing */
-#about .btn { margin-top: 0.5rem; }
-
-/* Small screens: stack Instagram media above body and reduce paddings */
+/* small screens: stack media above body and single column layout */
 @media (max-width:900px) {
-  #instagram .s-card { flex-direction: column; max-width: 720px; }
-  #instagram .s-card-media { width:100%; aspect-ratio: 16/9; min-height: 180px; }
-  #instagram .s-card-body { padding: 1rem; }
-  .section { padding: 2rem 1rem; }
+  .showcase-row { grid-template-columns: 1fr; }
+  .instagram-card, .developer-card { grid-template-columns: 1fr; }
+  .instagram-card .s-card-media, .developer-card .s-card-media { min-height: 220px; aspect-ratio: 16/9; }
+  .instagram-card .s-card-body, .developer-card .s-card-body { padding: 1rem; text-align: center; }
+  .developer__intro { color: rgba(13,5,45,0.9); }
 }
 
-/* Very small screens: tighten font sizes and spacing */
+/* very small screens: tighten spacing */
 @media (max-width:420px) {
-  #instagram .s-card-body h5 { font-size: 1rem; }
-  .developer__intro { font-size: 0.95rem; padding: 0 0.25rem; }
-  .s-card-ctas { justify-content: center; }
+  .hero-extended { min-height: 48vh; }
+  .hero-title { font-size: 1.4rem; }
+  .developer__intro { font-size: 0.95rem; }
+  .s-card-ctas { justify-content:center; }
+}
+
+
+
+
+
+
+
+/* Extend hero height and create visual fade into next section */
+.zeal-hero, .hero--luxury {
+  min-height: 78vh; /* was 60vh — adjust to taste */
+  padding-bottom: 4rem; /* adds breathing room before next section */
+  position: relative;
+}
+
+/* Add a subtle bottom gradient fade */
+.zeal-hero::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 120px;
+  background: linear-gradient(to bottom, rgba(11,11,26,0.6), rgba(249,249,255,0.02), transparent);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Optional: soften the orb blur to blend better */
+.hero-bg, .hero-orb {
+  filter: blur(32px) brightness(1.1) saturate(1.05);
+  opacity: 0.88;
 }
 
 
@@ -471,20 +596,6 @@
             <li><button class="social-link" data-service="linkedin" type="button">LinkedIn</button></li>
             <li><a href="#" id="getCatalogue">Get Catalogue (PDF)</a></li>
           </ul>
-
-          <div id="col-social-expanded" class="mega-expanded" hidden>
-            <article class="s-card" id="instagramCardInline" tabindex="0" aria-labelledby="inst-title-inline">
-              <div class="s-card-media" role="img" aria-label="Instagram preview" style="background-image:url('/assets/zeal2.png');"></div>
-              <div class="s-card-body">
-                <h5 id="inst-title-inline">Instagram Growth</h5>
-                <p class="s-card-sub">Reels, creative campaigns, and creator partnerships that scale engagement.</p>
-                <div class="s-card-ctas">
-                  <a class="s-btn s-btn-primary" id="visitInstagramInline" href="https://www.instagram.com/zeal_web/" target="_blank" rel="noopener">Visit Instagram</a>
-                  <a class="s-btn s-btn-ghost" id="instCatalogueInline" href="mailto:zeal.io@outlook.com?subject=ZEAL%20Catalogue">Get Catalogue</a>
-                </div>
-              </div>
-            </article>
-          </div>
         </div>
 
         <!-- Footer controls under the services columns -->
@@ -607,46 +718,50 @@
           <div class="testimonial">
             <p>“Onboarding drop‑off fell dramatically. The flow feels effortless and branded.”</p>
             <footer>— Daniel K., Operations</footer>
-          </div>
+	   <div class="testimonial">
+            <p>“Zeal is reliable & remarkable. Their services are top-notch, making every process simple and delivering efficient results consistently.”</p>
+            <footer>— Young M., CEO TDD</footer>
+            </div>  
+	  </div>
         </div>
       </div>
     </section>
 
-    <!-- INSTAGRAM SECTION -->
-    <section id="instagram" class="section section--light" aria-labelledby="instagram-title">
-      <div class="container">
-        <h2 class="section__title" id="instagram-title">From our Instagram</h2>
+<!-- INSTAGRAM SECTION -->
+<section id="instagram" class="section section--light" aria-labelledby="instagram-title">
+  <div class="container">
+    <h2 class="section__title" id="instagram-title">From our Instagram</h2>
 
-        <article class="s-card" id="instagramCard" tabindex="0" aria-labelledby="inst-title">
-          <div class="s-card-media" role="img" aria-label="Instagram preview" style="background-image:url('/assets/zeal2.png');"></div>
-          <div class="s-card-body">
-            <h5 id="inst-title">Instagram Highlight</h5>
-            <p class="s-card-sub">Reels, creative campaigns, and creator partnerships that scale engagement.</p>
-
-            <div class="s-card-ctas">
-              <a class="s-btn s-btn-primary" id="visitInstagram" href="https://www.instagram.com/zeal_web/" target="_blank" rel="noopener">Visit Instagram</a>
-              <a class="s-btn s-btn-ghost" id="instCatalogue" href="mailto:zeal.io@outlook.com?subject=ZEAL%20Catalogue">Get Catalogue</a>
-              <button class="s-btn s-btn-outline view-services" type="button">View Services</button>
-            </div>
+    <div class="showcase-row">
+      <article class="s-card instagram-card" id="instagramCard" tabindex="0" aria-labelledby="inst-title">
+        <div class="s-card-media" role="img" aria-label="Instagram preview" style="background-image:url('/assets/zeal2.png');"></div>
+        <div class="s-card-body">
+          <h5 id="inst-title">Instagram Highlight</h5>
+          <p class="s-card-sub">Reels, creative campaigns, and creator partnerships that scale engagement.</p>
+          <div class="s-card-ctas">
+            <a class="s-btn s-btn-primary" id="visitInstagram" href="https://www.instagram.com/zeal_web/" target="_blank" rel="noopener">Visit Instagram</a>
+            <a class="s-btn s-btn-ghost" id="instCatalogue" href="mailto:zeal.io@outlook.com?subject=ZEAL%20Catalogue">Get Catalogue</a>
+            <button class="s-btn s-btn-outline view-services" type="button">View Services</button>
           </div>
-        </article>
-      </div>
-    </section>
+        </div>
+      </article>
 
-    <!-- ABOUT THE DEVELOPER -->
-    <section id="about" class="section section--light" aria-labelledby="about-title">
-      <div class="container">
-        <h2 class="section__title" id="about-title">Meet the developer</h2>
+      <article class="s-card developer-card" id="developerCard" tabindex="0" aria-labelledby="dev-title">
+        <div class="s-card-media dev-photo" role="img" aria-label="Developer photo" style="background-image:url('/assets/dev-photo.png');"></div>
+        <div class="s-card-body">
+          <h5 id="dev-title">Meet the developer</h5>
+          <p class="developer__intro">ZEAL — We build trust into every pixel and craft platforms that feel expensive, move fast, and scale cleanly. From glowing brand visuals to disciplined engineering, we design and develop premium websites, apps, and onboarding flows that speak your customer’s language and strengthen your brand’s authority.</p>
+          <a href="#contact" class="btn btn--secondary">Book a Free Consultation</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
 
-        <p class="developer__intro">
-          ZEAL — We build trust into every pixel and craft platforms that feel expensive, move fast, and scale cleanly.
-          From glowing brand visuals to disciplined engineering, we design and develop premium websites, apps, and onboarding
-          flows that speak your customer’s language and strengthen your brand’s authority.
-        </p>
 
-        <a href="#contact" class="btn btn--secondary">Book a Free Consultation</a>
-      </div>
-    </section>
+
+
+
 
     <!-- CALL TO ACTION -->
     <section id="contact" class="section section--light" aria-labelledby="contact-title">
