@@ -117,15 +117,6 @@
     .testimonial.active { opacity:1; }
     .testimonial footer { margin-top:.75rem; color:rgba(255,255,255,0.7); font-size:.95rem; }
 
-    /* Instagram card */
-    .s-card { display:flex; flex-direction:column; gap:1rem; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:14px; overflow:hidden; border:1px solid rgba(255,213,79,0.06); }
-    .s-card-media { height:160px; background-size:cover; background-position:center; box-shadow:0 0 20px rgba(255,213,79,0.25); border-bottom:1px solid rgba(255,213,79,0.1); }
-    .s-card-body { padding:1rem; display:flex; flex-direction:column; gap:.6rem; }
-    .s-card-ctas { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:auto; }
-    .s-btn { padding:.5rem .9rem; border-radius:10px; font-weight:700; cursor:pointer; text-decoration:none; display:inline-block; border:0; text-align:center; }
-    .s-btn-primary { background:var(--gold); color:#0d052d; }
-    .s-btn-ghost { background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.06); }
-    @media (max-width:700px) { .s-card { flex-direction:column; } .s-card-media { height:220px; } .s-card-ctas { justify-content:flex-start; } }
 
     /* Explore / Mega menu */
     .explore-panel {
@@ -395,6 +386,47 @@
 
 
 
+/* Instagram card */
+.s-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: 14px;
+  overflow: hidden;
+}
+.s-card-media {
+  height: 160px;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 0 20px rgba(255,213,79,0.25);
+  border-bottom: 1px solid rgba(255,213,79,0.1);
+}
+.s-card-body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+}
+.s-card-ctas {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+.s-btn {
+  padding: .5rem .9rem;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  border: 0;
+  text-align: center;
+}
+.s-btn-primary { background: var(--gold); color: #0d052d; }
+.s-btn-ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.06); }
+
 /* Instagram + Developer showcase: centered, responsive cards */
 .showcase-row {
   display: grid;
@@ -406,7 +438,7 @@
   margin-top: 0.5rem;
 }
 
-/* card base inherits your .s-card styles; override sizing */
+/* card base inherits .s-card styles; override sizing */
 .instagram-card, .developer-card {
   width: 100%;
   max-width: 920px;
@@ -435,17 +467,18 @@
 .instagram-card .s-card-body,
 .developer-card .s-card-body {
   padding: 1.25rem;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 /* titles and text */
-.instagram-card h5, .developer-card h5 { margin:0 0 .5rem; color:var(--gold); }
-.developer__intro { margin:0 0 1rem; line-height:1.6; color: rgba(13,5,45,0.95); }
+.instagram-card h5,
+.developer-card h5 { margin: 0 0 .5rem; color: var(--gold); }
+.developer__intro { margin: 0 0 1rem; line-height: 1.6; color: rgba(13,5,45,0.95); }
 
 /* buttons row wrap and center on small screens */
-.s-card-ctas { display:flex; gap:0.6rem; flex-wrap:wrap; align-items:center; }
+.s-card-ctas { display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; }
 
 /* small screens: stack media above body and single column layout */
 @media (max-width:900px) {
@@ -461,7 +494,7 @@
   .hero-extended { min-height: 48vh; }
   .hero-title { font-size: 1.4rem; }
   .developer__intro { font-size: 0.95rem; }
-  .s-card-ctas { justify-content:center; }
+  .s-card-ctas { justify-content: center; }
 }
 
 
@@ -471,6 +504,116 @@
 
 
 
+/* Instagram card */
+.s-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: 14px;
+  overflow: hidden;
+}
+.s-card-media {
+  height: 160px;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 0 20px rgba(255,213,79,0.25);
+  border-bottom: 1px solid rgba(255,213,79,0.1);
+}
+.s-card-body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+}
+.s-card-ctas {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+.s-btn {
+  padding: .5rem .9rem;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  border: 0;
+  text-align: center;
+}
+.s-btn-primary { background: var(--gold); color: #0d052d; }
+.s-btn-ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.06); }
+
+/* Instagram + Developer showcase: centered, responsive cards */
+.showcase-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  align-items: start;
+  justify-items: center;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+/* card base inherits .s-card styles; override sizing */
+.instagram-card, .developer-card {
+  width: 100%;
+  max-width: 920px;
+  display: grid;
+  grid-template-columns: 44% 1fr;
+  gap: 1rem;
+  align-items: stretch;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 12px 36px rgba(2,6,23,0.06);
+}
+
+/* media column uses background-image already set inline */
+.instagram-card .s-card-media,
+.developer-card .s-card-media {
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 0;
+}
+
+/* body column */
+.instagram-card .s-card-body,
+.developer-card .s-card-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* titles and text */
+.instagram-card h5,
+.developer-card h5 { margin: 0 0 .5rem; color: var(--gold); }
+.developer__intro { margin: 0 0 1rem; line-height: 1.6; color: rgba(13,5,45,0.95); }
+
+/* buttons row wrap and center on small screens */
+.s-card-ctas { display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; }
+
+/* small screens: stack media above body and single column layout */
+@media (max-width:900px) {
+  .showcase-row { grid-template-columns: 1fr; }
+  .instagram-card, .developer-card { grid-template-columns: 1fr; }
+  .instagram-card .s-card-media, .developer-card .s-card-media { min-height: 220px; aspect-ratio: 16/9; }
+  .instagram-card .s-card-body, .developer-card .s-card-body { padding: 1rem; text-align: center; }
+  .developer__intro { color: rgba(13,5,45,0.9); }
+}
+
+/* very small screens: tighten spacing */
+@media (max-width:420px) {
+  .hero-extended { min-height: 48vh; }
+  .hero-title { font-size: 1.4rem; }
+  .developer__intro { font-size: 0.95rem; }
+  .s-card-ctas { justify-content: center; }
+}
 
   </style>
 </head>
@@ -700,7 +843,11 @@
         <div class="s-card-media dev-photo" role="img" aria-label="Developer photo" style="background-image:url('/assets/dev-photo.png');"></div>
         <div class="s-card-body">
           <h5 id="dev-title">Meet the developer</h5>
-          <p class="developer__intro">ZEAL — We build trust into every pixel and craft platforms that feel expensive, move fast, and scale cleanly. From glowing brand visuals to disciplined engineering, we design and develop premium websites, apps, and onboarding flows that speak your customer’s language and strengthen your brand’s authority.</p>
+          <p class="developer__intro">
+            ZEAL — We build trust into every pixel and craft platforms that feel expensive, move fast, and scale cleanly.
+            From glowing brand visuals to disciplined engineering, we design and develop premium websites, apps, and onboarding
+            flows that speak your customer’s language and strengthen your brand’s authority.
+          </p>
           <a href="#contact" class="btn btn--secondary">Book a Free Consultation</a>
         </div>
       </article>
