@@ -389,7 +389,7 @@
 /* Instagram card */
 .s-card {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 1rem;
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
   border-radius: 14px;
@@ -405,7 +405,7 @@
 .s-card-body {
   padding: 1rem;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: .6rem;
 }
 .s-card-ctas {
@@ -507,7 +507,7 @@
 /* Instagram card */
 .s-card {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 1rem;
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
   border-radius: 14px;
@@ -523,7 +523,7 @@
 .s-card-body {
   padding: 1rem;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: .6rem;
 }
 .s-card-ctas {
@@ -613,6 +613,16 @@
   .hero-title { font-size: 1.4rem; }
   .developer__intro { font-size: 0.95rem; }
   .s-card-ctas { justify-content: center; }
+}
+.developer-card .s-card-media {
+  width: 100%;
+  height: 100%;
+  min-height: 220px;            /* or whatever you need */
+  background-image: url('/assets/dev-photo.png');
+  background-size: cover;       /* fills area, preserves aspect */
+  background-position: center;  /* keeps focal point centered */
+  border-radius: 12px;          /* rounded corners */
+  overflow: hidden;             /* ensure corners are clipped */
 }
 
   </style>
