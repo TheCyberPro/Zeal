@@ -287,6 +287,14 @@
       .nav-left { display:none; }
       .hero-title { font-size: clamp(2rem, 8vw, 2.6rem); }
     }
+
+
+
+
+.nav-logo { display:inline-flex; align-items:center; gap:0.5rem; text-decoration:none; }
+.nav-logo__img { display:block; height:36px; width:auto; max-width:160px; object-fit:contain; }
+@media (max-width:480px) { .nav-logo__img { height:28px; } }
+
   </style>
 </head>
 
@@ -305,6 +313,9 @@
       </div>
 
       <span class="nav-logo">ZEAL</span>
+<a href="https://zealweb.xyz" class="nav-logo" aria-label="ZEAL home">
+  <img src="images/zeal-logo.png" alt="ZEAL Web Logo" class="nav-logo__img" />
+</a>
 
       <button id="exploreToggle" class="hamburger" aria-label="Toggle Explore Menu" aria-expanded="false" type="button">
         <span></span><span></span><span></span>
