@@ -66,7 +66,7 @@
     /* Hero */
     .zeal-hero, .hero--luxury {
       position: relative;
-      min-height: 60vh;
+      min-height: 75vh;
       display:flex;
       align-items:center;
       padding: 6rem 4% 2rem;
@@ -89,22 +89,6 @@
       margin: 0 auto;
     }
 
-    /* Decorative orb (hero background) */
-    .hero-bg, .hero-orb {
-      position: absolute;
-      top: 6%;
-      right: -12%;
-      width: var(--orb-size);
-      height: var(--orb-size);
-      border-radius: 50%;
-      background: center/cover no-repeat url('/assets/zeal_ogimage.png');
-      filter: blur(28px) brightness(1.15) saturate(1.05);
-      opacity: 0.92;
-      z-index: 1;
-      pointer-events: none;
-      animation: orbFloat 12s ease-in-out infinite;
-    }
-    @keyframes orbFloat { 0%{transform:translateY(0)}50%{transform:translateY(-12px)}100%{transform:translateY(0)} }
 
     /* Sections */
     .section { background:#fff; color:#0d052d; border-radius:20px; box-shadow:0 20px 40px rgba(0,0,0,0.1); padding:3rem 2rem; margin:2rem auto; max-width:var(--max-width); }
@@ -216,7 +200,7 @@
 
 /* Prevent text selection while dragging */
 .slider-track, .slider-track * { user-select:none; -webkit-user-select:none; -ms-user-select:none; }
-
+]
 /* Small visual polish */
 .slide:focus { outline: 3px solid rgba(255,213,79,0.12); outline-offset:6px; }
 
@@ -351,74 +335,65 @@
 
 
 
-/* HERO: taller, centered content, left text pinned to lower-left */
-.hero-extended {
-  position: relative;
-  min-height: 68vh;               /* taller hero; adjust to taste (e.g., 75vh) */
-  display: block;
-  overflow: hidden;
-  margin-bottom: 2rem;
-}
 
-/* full-bleed background layer */
-.hero-extended .hero-media {
+
+
+
+/* --- Position hero content bottom-left --- */
+.zeal-hero .hero-content,
+.hero--luxury .hero-content {
   position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  filter: saturate(0.98) contrast(1);
-  z-index: 0;
+  bottom: 2.5rem;      /* distance from bottom of hero */
+  left: 4%;            /* aligns with your global padding */
+  text-align: left;
+  margin: 0;
+  max-width: 520px;    /* keeps text readable and elegant */
+  z-index: 3;
 }
 
-/* inner content sits above background */
-.hero-extended .hero-inner {
-  position: relative;
+/* Make hero taller so the bottom-left text has breathing room */
+.zeal-hero, .hero--luxury {
+  min-height: 75vh;    /* previously 75vh */
+  padding-top: 6rem;   /* keep your top spacing */
+  padding-bottom: 0;   /* bottom is now controlled by absolute positioning */
+}
+
+/* Fade hero into next section for a seamless merge */
+.zeal-hero::after,
+.hero--luxury::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 140px;
+  background: linear-gradient(
+    to bottom,
+    rgba(11,11,26,0.0),
+    rgba(11,11,26,0.35),
+    rgba(249,249,255,0.0)
+  );
   z-index: 2;
-  display: grid;
-  grid-template-columns: 1fr 520px; /* left content + right image column */
-  gap: 2rem;
-  align-items: end;                 /* align content toward bottom */
-  width: min(var(--max-width,1100px), 96%);
-  margin: 0 auto;
-  padding: 2.25rem 1rem;
+  pointer-events: none;
 }
 
-/* left block pinned visually lower-left */
-.hero-left {
-  align-self: end;
-  justify-self: start;
-  max-width: 680px;
-  color: #fff;
-  text-shadow: 0 6px 18px rgba(2,6,23,0.6);
+/* Mobile adjustments */
+@media (max-width: 700px) {
+  .zeal-hero .hero-content,
+  .hero--luxury .hero-content {
+    left: 1.5rem;
+    bottom: 1.75rem;
+    max-width: 90%;
+    text-align: left; /* still left-aligned on mobile for premium feel */
+  }
+
+  .zeal-hero, .hero--luxury {
+    min-height: 68vh;
+  }
 }
 
-/* hero title and sub */
-.hero-title { margin: 0 0 .5rem; font-size: clamp(1.6rem, 3.6vw, 2.6rem); line-height:1.02; color:var(--gold); font-family:'Anton',sans-serif; }
-.hero-sub { margin: 0 0 1rem; font-size: clamp(0.95rem, 1.6vw, 1.1rem); color: rgba(255,255,255,0.95); }
 
-/* right column preserves your hero image */
-.hero-right { display:flex; align-items:flex-end; justify-content:center; }
-.hero-side-img { width:100%; max-width:520px; height:auto; display:block; object-fit:contain; }
 
-/* overlay box for the left text when you want it visually pinned above image */
-.hero-left .hero-sub {
-  background: linear-gradient(180deg, rgba(8,6,18,0.6), rgba(8,6,18,0.2));
-  padding: .6rem .8rem;
-  border-radius: 8px;
-  display: inline-block;
-}
-
-/* ensure contrast on light hero backgrounds */
-.hero-extended .hero-left, .hero-extended .hero-title, .hero-extended .hero-sub { color: #fff; }
-
-/* Responsive: stack columns on small screens and keep left text above image */
-@media (max-width:900px) {
-  .hero-extended { min-height: 56vh; }
-  .hero-extended .hero-inner { grid-template-columns: 1fr; align-items: center; padding: 1.25rem; }
-  .hero-right { order: 2; margin-top: 0.75rem; }
-  .hero-left { order: 1; text-align: center; align-self: center; }
-  .hero-side-img { max-width: 420px; }
-}
 
 /* Instagram + Developer showcase: centered, responsive cards */
 .showcase-row {
@@ -495,31 +470,6 @@
 
 
 
-/* Extend hero height and create visual fade into next section */
-.zeal-hero, .hero--luxury {
-  min-height: 78vh; /* was 60vh — adjust to taste */
-  padding-bottom: 4rem; /* adds breathing room before next section */
-  position: relative;
-}
-
-/* Add a subtle bottom gradient fade */
-.zeal-hero::after {
-  content: "";
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  width: 100%;
-  height: 120px;
-  background: linear-gradient(to bottom, rgba(11,11,26,0.6), rgba(249,249,255,0.02), transparent);
-  z-index: 2;
-  pointer-events: none;
-}
-
-/* Optional: soften the orb blur to blend better */
-.hero-bg, .hero-orb {
-  filter: blur(32px) brightness(1.1) saturate(1.05);
-  opacity: 0.88;
-}
 
 
   </style>
