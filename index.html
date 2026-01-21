@@ -358,10 +358,7 @@
         <a href="#about" class="nav-link">About</a>
       </div>
 
-
-<a href="https://zealweb.xyz" class="nav-logo" aria-label="ZEAL home">
-  <img src="assets/zeal2.png" alt="ZEAL Web Logo" class="nav-logo__img" />
-</a>
+      <span class="nav-logo">ZEAL</span>
 
       <button id="exploreToggle" class="hamburger" aria-label="Toggle Explore Menu" aria-expanded="false" type="button">
         <span></span><span></span><span></span>
@@ -1119,79 +1116,45 @@
 })();
 
 
-
-
 (function(){
   const panel = document.getElementById('explorePanel');
   const back = document.getElementById('exploreBackUnderServices');
-  const megaInner = document.querySelector('#megaMenu .mega-inner');
-  const megaToggles = Array.from(document.querySelectorAll('.mega-toggle'));
-  const socialLinks = Array.from(document.querySelectorAll('.social-link'));
-  const lists = Array.from(document.querySelectorAll('.mega-list, .mega-expanded'));
+  if (!panel || !back) return;
 
-  if (!panel || !megaInner || !back) return;
+  const lists = Array.from(document.querySelectorAll('#megaMenu .mega-list, #megaMenu .mega-expanded'));
 
-  // showBack: show the back button when any submenu is visible
-  function showBackIfNeeded(){
-    const anyVisible = lists.some(el => !el.hasAttribute('hidden'));
-    back.hidden = !anyVisible;
+  function anyVisible() {
+    return lists.some(el => !el.hasAttribute('hidden'));
   }
 
-  // show root (hide all lists)
-  function showRoot(){
+  function showRoot() {
     lists.forEach(el => el.setAttribute('hidden',''));
     back.hidden = true;
   }
 
-  // wire toggles to show their target and reveal back button
-  megaToggles.forEach(h => {
-    h.addEventListener('click', (ev) => {
-      const id = h.getAttribute('data-target');
-      if (!id) return;
-      // hide others
-      lists.forEach(el => el.setAttribute('hidden',''));
-      const target = document.getElementById(id);
-      if (target) target.removeAttribute('hidden');
-      // reveal back
-      back.hidden = false;
-      // ensure panel is open
-      panel.classList.add('open');
-      panel.setAttribute('aria-hidden','false');
-    });
+  // Observe clicks that open submenus elsewhere in your code
+  document.querySelector('#megaMenu')?.addEventListener('click', () => {
+    // small timeout to allow other handlers to toggle hidden attributes first
+    setTimeout(() => { back.hidden = !anyVisible(); }, 10);
   });
 
-  // social links open the expanded area
-  socialLinks.forEach(btn => {
-    btn.addEventListener('click', () => {
-      lists.forEach(el => el.setAttribute('hidden',''));
-      const expanded = document.getElementById('col-social-expanded');
-      if (expanded) expanded.removeAttribute('hidden');
-      back.hidden = false;
-      panel.classList.add('open');
-      panel.setAttribute('aria-hidden','false');
-    });
-  });
-
-  // Back button: return to root; if already root, close panel
+  // Back button behavior: if a submenu is open, hide submenus and show root; if already root, close panel
   back.addEventListener('click', (e) => {
     e.stopPropagation();
-    const anyVisible = lists.some(el => !el.hasAttribute('hidden'));
-    if (!anyVisible) {
-      // at root -> close panel
+    if (!anyVisible()) {
       panel.classList.remove('open');
       panel.setAttribute('aria-hidden','true');
       return;
     }
-    // otherwise hide subpanels and show root
     showRoot();
   });
 
-  // keep back visibility in sync when panel opens/closes
-  const obs = new MutationObserver(() => showBackIfNeeded());
+  // Keep back visibility in sync when panel opens/closes
+  const obs = new MutationObserver(() => { back.hidden = !anyVisible(); });
   obs.observe(panel, { attributes: true, attributeFilter: ['class'] });
 
-  // initial state
-  showRoot();
+  // initialize
+  back.hidden = true;
 })();
 
 </script>
