@@ -22,6 +22,7 @@
 
   <!-- Font Awesome (replace your-kit-id with your real kit id) -->
   <script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script>
+<link rel="icon" type="zeal2/png" href="assets/zeal2.png">
 
   <!-- Main stylesheet (external fallback) -->
   <link rel="stylesheet" href="/styles.css">
@@ -291,12 +292,12 @@
 
 
 
-.nav-logo { display:inline-flex; align-items:center; gap:0.5rem; text-decoration:none; }
-.nav-logo__img { display:block; height:36px; width:auto; max-width:160px; object-fit:contain; }
-@media (max-width:480px) { .nav-logo__img { height:28px; } }
 
 
-/* Footer controls inside mega menu */
+
+/* --- Mega menu footer controls and back button (merged with existing explore styles) --- */
+/* Place this after your existing .explore-panel / .explore-inner rules */
+
 .mega-footer-controls {
   grid-column: 1 / -1;
   display:flex;
@@ -306,9 +307,10 @@
   padding: 1rem 2rem 0 2rem;
   border-top: 1px solid rgba(255,255,255,0.03);
   margin-top: 0.75rem;
+  color: var(--muted, #ddd);
 }
 
-/* Back button (visible when a submenu is open) */
+/* Back button (matches explore-close visual tone) */
 .explore-back {
   display:inline-flex;
   align-items:center;
@@ -320,8 +322,12 @@
   border-radius: 8px;
   font-weight:700;
   cursor: pointer;
+  font-size: 0.95rem;
 }
 .explore-back[hidden] { display:none; }
+.explore-back:focus { outline: 3px solid rgba(255,213,79,0.14); outline-offset: 3px; }
+
+
 
 /* Catalogue link styling */
 .catalogue-link { text-decoration:none; padding:0.45rem 0.9rem; border-radius:8px; border:1px solid rgba(255,255,255,0.06); color:#fff; background:transparent; }
