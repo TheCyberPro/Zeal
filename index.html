@@ -19,10 +19,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="zeal2/png" href="assets/zeal2.png">
 
   <!-- Font Awesome (replace your-kit-id with your real kit id) -->
   <script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script>
-<link rel="icon" type="zeal2/png" href="assets/zeal2.png">
 
   <!-- Main stylesheet (external fallback) -->
   <link rel="stylesheet" href="/styles.css">
@@ -291,61 +291,58 @@
 
 
 
-
-
-
-/* Footer controls under the services columns */
+/* --- Mega footer controls and Back button (merge after existing explore styles) --- */
 .mega-footer-controls {
   grid-column: 1 / -1;
-  display:flex;
-  gap:0.75rem;
-  align-items:center;
-  justify-content:flex-start;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: flex-start;
   padding: 1rem 2rem 0 2rem;
   border-top: 1px solid rgba(255,255,255,0.05);
   margin-top: 0.75rem;
+  color: #ddd;
 }
 
-/* Back button styling (matches your panel aesthetic) */
+/* Back button styling (matches explore-close tone) */
 .explore-back {
-  display:inline-flex;
-  align-items:center;
-  gap:0.4rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   background: transparent;
   border: 1px solid rgba(255,255,255,0.08);
   color: #fff;
   padding: 0.45rem 0.75rem;
   border-radius: 8px;
-  font-weight:600;
-  cursor:pointer;
+  font-weight: 600;
+  cursor: pointer;
   font-size: 0.95rem;
 }
-.explore-back[hidden] { display:none; }
-.explore-back:hover { color:var(--gold); border-color:var(--gold); }
+.explore-back[hidden] { display: none; }
+.explore-back:hover { color: var(--gold); border-color: var(--gold); }
+.explore-back:focus { outline: 3px solid rgba(255,213,79,0.14); outline-offset: 3px; }
 
-/* Catalogue link */
+/* Catalogue link styling consistent with mega-list links */
 .catalogue-link {
-  text-decoration:none;
-  padding:0.45rem 0.9rem;
-  border-radius:8px;
-  border:1px solid rgba(255,255,255,0.08);
-  color:#fff;
-  background:transparent;
+  text-decoration: none;
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #fff;
+  background: transparent;
 }
-.catalogue-link:hover {
-  background: rgba(255,255,255,0.05);
-  color:var(--gold);
-}
+.catalogue-link:hover { background: rgba(255,255,255,0.05); color: var(--gold); }
 
-/* Mobile layout */
+/* Responsive: stack footer controls on small screens */
 @media (max-width:900px) {
   .mega-footer-controls {
-    flex-direction:column;
-    align-items:stretch;
+    flex-direction: column;
+    align-items: stretch;
     padding: 0.75rem 1rem;
   }
-  .catalogue-link { text-align:center; }
+  .catalogue-link { text-align: center; }
 }
+
 
   </style>
 </head>
@@ -372,71 +369,92 @@
     </div>
   </header>
 
+
+
+
+
+
 <!-- Explore panel (single instance) -->
- <div id="explorePanel" class="explore-panel" aria-hidden="true" role="dialog" aria-label="Explore menu"> <div class="explore-inner" role="document">
- <!-- close button: closes panel and returns user to homepage -->
-<a id="exploreClose" class="explore-close" aria-label="Close Explore menu and return home" href="/" role="button">✕</a>
+<div id="explorePanel" class="explore-panel" aria-hidden="true" role="dialog" aria-label="Explore menu">
+  <div class="explore-inner" role="document">
+    <!-- close button: closes panel and returns user to homepage -->
+    <a id="exploreClose" class="explore-close" aria-label="Close Explore menu and return home" href="/" role="button">✕</a>
 
-      <!-- Mega menu -->
-      <div id="megaMenu" class="mega-menu" role="menu" aria-hidden="true">
-        <div class="mega-inner">
-          <div class="mega-column">
-            <h4 class="mega-toggle" data-target="col-web" role="button" aria-expanded="false">Web Development ▾</h4>
-            <ul id="col-web" class="mega-list" hidden>
-              <li><a href="#">Business Page</a></li>
-              <li><a href="#">Landing Page</a></li>
-              <li><a href="#">Single HTML + CSS Page</a></li>
-	      <li><a href="#">Ecommerce Store</a></li>
-	      <li><a href="#">Headless CMS Integrations</a></li>
-            </ul>
-          </div>
+    <!-- Mega menu -->
+    <div id="megaMenu" class="mega-menu" role="menu" aria-hidden="true">
+      <div class="mega-inner">
+        <div class="mega-column">
+          <h4 class="mega-toggle" data-target="col-web" role="button" aria-expanded="false">Web Development ▾</h4>
+          <ul id="col-web" class="mega-list" hidden>
+            <li><a href="#">Business Page</a></li>
+            <li><a href="#">Landing Page</a></li>
+            <li><a href="#">Single HTML + CSS Page</a></li>
+            <li><a href="#">Ecommerce Store</a></li>
+            <li><a href="#">Headless CMS Integrations</a></li>
+          </ul>
+        </div>
 
-          <div class="mega-column">
-            <h4 class="mega-toggle" data-target="col-ux" role="button" aria-expanded="false">UX / UI Design ▾</h4>
-            <ul id="col-ux" class="mega-list" hidden>
-              <li><a href="#">JavaScript</a></li>
-              <li><a href="#">React</a></li>
-              <li><a href="#">Vue</a></li>
-              <li><a href="#">CSS</a></li>
-	      <li><a href="#">Design Systems</a></li>
-	      <li><a href="#">Accessibility Audits</a></li>
-              <li><a href="#">Prototyping & Research</a></li>
-            </ul>
-          </div>
+        <div class="mega-column">
+          <h4 class="mega-toggle" data-target="col-ux" role="button" aria-expanded="false">UX / UI Design ▾</h4>
+          <ul id="col-ux" class="mega-list" hidden>
+            <li><a href="#">JavaScript</a></li>
+            <li><a href="#">React</a></li>
+            <li><a href="#">Vue</a></li>
+            <li><a href="#">CSS</a></li>
+            <li><a href="#">Design Systems</a></li>
+            <li><a href="#">Accessibility Audits</a></li>
+            <li><a href="#">Prototyping & Research</a></li>
+          </ul>
+        </div>
 
-          <div class="mega-column">
-            <h4 class="mega-toggle" data-target="col-social" role="button" aria-expanded="false">Brand Engagement ▾</h4>
-            <ul id="col-social" class="mega-list" hidden>
-              <li><button class="social-link" data-service="instagram" type="button">Instagram</button></li>
-              <li><button class="social-link" data-service="twitter" type="button">Twitter</button></li>
-              <li><button class="social-link" data-service="facebook" type="button">Facebook</button></li>
-	      <li><button class="social-link" data-service="youtube" type="button">YouTube</button></li>
-	      <li><button class="social-link" data-service="tiktok" type="button">TikTok</button></li>
- 	      <li><button class="social-link" data-service="linkedin" type="button">LinkedIn</button></li>
-              <li><a href="#" id="getCatalogue">Get Catalogue (PDF)</a></li>
-            </ul>
+        <div class="mega-column">
+          <h4 class="mega-toggle" data-target="col-social" role="button" aria-expanded="false">Brand Engagement ▾</h4>
+          <ul id="col-social" class="mega-list" hidden>
+            <li><button class="social-link" data-service="instagram" type="button">Instagram</button></li>
+            <li><button class="social-link" data-service="twitter" type="button">Twitter</button></li>
+            <li><button class="social-link" data-service="facebook" type="button">Facebook</button></li>
+            <li><button class="social-link" data-service="youtube" type="button">YouTube</button></li>
+            <li><button class="social-link" data-service="tiktok" type="button">TikTok</button></li>
+            <li><button class="social-link" data-service="linkedin" type="button">LinkedIn</button></li>
+            <li><a href="#" id="getCatalogue">Get Catalogue (PDF)</a></li>
+          </ul>
 
-            <div id="col-social-expanded" class="mega-expanded" hidden>
-              <article class="s-card" id="instagramCardInline" tabindex="0" aria-labelledby="inst-title-inline">
-                <div class="s-card-media" role="img" aria-label="Instagram preview" style="background-image:url('/assets/zeal2.png');"></div>
-                <div class="s-card-body">
-                  <h5 id="inst-title-inline">Instagram Growth</h5>
-                  <p class="s-card-sub">Reels, creative campaigns, and creator partnerships that scale engagement.</p>
-                  <div class="s-card-ctas">
-                    <a class="s-btn s-btn-primary" id="visitInstagramInline" href="https://www.instagram.com/zeal_web/" target="_blank" rel="noopener">Visit Instagram</a>
-                    <a class="s-btn s-btn-ghost" id="instCatalogueInline" href="mailto:zeal.io@outlook.com?subject=ZEAL%20Catalogue">Get Catalogue</a>
-                  </div>
+          <div id="col-social-expanded" class="mega-expanded" hidden>
+            <article class="s-card" id="instagramCardInline" tabindex="0" aria-labelledby="inst-title-inline">
+              <div class="s-card-media" role="img" aria-label="Instagram preview" style="background-image:url('/assets/zeal2.png');"></div>
+              <div class="s-card-body">
+                <h5 id="inst-title-inline">Instagram Growth</h5>
+                <p class="s-card-sub">Reels, creative campaigns, and creator partnerships that scale engagement.</p>
+                <div class="s-card-ctas">
+                  <a class="s-btn s-btn-primary" id="visitInstagramInline" href="https://www.instagram.com/zeal_web/" target="_blank" rel="noopener">Visit Instagram</a>
+                  <a class="s-btn s-btn-ghost" id="instCatalogueInline" href="mailto:zeal.io@outlook.com?subject=ZEAL%20Catalogue">Get Catalogue</a>
                 </div>
-              </article>
-            </div>
+              </div>
+            </article>
           </div>
-<div class="mega-footer-controls" aria-hidden="false"> <button id="exploreBackUnderServices" class="explore-back" type="button" hidden>← Back</button>
+        </div>
 
-	 <a id="downloadCatalogue" class="catalogue-link btn btn--secondary" href="/assets/ZEAL-catalogue.pdf" download>Download full catalogue (PDF)</a> </div> </div>
-
-      <!-- end megaMenu -->
+        <!-- Footer controls under the services columns -->
+        <div class="mega-footer-controls" aria-hidden="false">
+          <button id="exploreBackUnderServices" class="explore-back" type="button" hidden>← Back</button>
+          <a id="downloadCatalogue" class="catalogue-link btn btn--secondary" href="/assets/ZEAL-catalogue.pdf" download>Download full catalogue (PDF)</a>
+        </div>
+      </div>
+      <!-- end .mega-inner -->
     </div>
+    <!-- end #megaMenu -->
   </div>
+  <!-- end .explore-inner -->
+</div>
+<!-- end #explorePanel -->
+
+
+
+
+
+
+
+
   <!-- Hero -->
   <section class="zeal-hero hero--luxury" aria-labelledby="hero-title">
     <div class="hero-bg" aria-hidden="true"></div>
@@ -1125,6 +1143,12 @@
 
 
 </script>
+
+
+
+
+
+
 <script>
 (function(){
   const panel = document.getElementById('explorePanel');
