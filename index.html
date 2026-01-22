@@ -515,6 +515,13 @@
   border-radius: 12px;
   overflow: hidden;
   min-height: 220px;
+  background-image: url('/assets/zeal2.png');
+  background-size: cover;       /* fills area, preserves aspect */
+  background-position: center;  /* keeps focal point centered */
+  border-radius: 12px;          /* rounded corners */
+  overflow: hidden;             /* ensure corners are clipped */
+}
+
 }
 
 .inst-img {
@@ -556,6 +563,29 @@
   .instagram-card .s-card-ctas .s-btn {
     width: auto;
   }
+}
+/* Position hero content at bottom center */
+.zeal-hero .hero-content,
+.hero--luxury .hero-content {
+  position: absolute;
+  bottom: 2.5rem;     /* adjust up/down */
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  width: 100%;
+  max-width: 720px;
+  z-index: 3;
+  margin: 0;
+}
+
+/* Subtitle styling */
+.hero-subtitle {
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.35); /* subtle readability layer */
+  padding: .6rem 1rem;
+  border-radius: 8px;
+  color: rgba(255,255,255,0.95);
+  line-height: 1.5;
 }
 
   </style>
