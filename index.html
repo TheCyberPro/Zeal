@@ -737,18 +737,6 @@ html, body {
   overflow-x: hidden;
 }
 
-.hero-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: center/cover no-repeat url('/assets/zeal1.png');
-  filter: brightness(1.1) saturate(1.05);
-  opacity: 0.92;
-  z-index: 1;
-  pointer-events: none;
-}
 
   </style>
 </head>
@@ -848,13 +836,13 @@ html, body {
 
 
   <!-- Hero -->
-  <section class="zeal-hero hero--luxury" aria-labelledby="hero-title">
-    <div class="hero-bg" aria-hidden="true"></div>
-    <div class="hero-content">
-      <h1 id="hero-title" class="hero-title"></h1>
-      <p class="hero-subtitle">We are a digital agency specializing in web design, development, and branding.</p>
-    </div>
-  </section>
+<section class="zeal-hero hero--luxury" aria-labelledby="hero-title">
+  <img src="/assets/zeal1.png" alt="ZEAL hero image" class="hero-img">
+  <div class="hero-content">
+    <h1 id="hero-title" class="hero-title"></h1>
+    <p class="hero-subtitle">We are a digital agency specializing in web design, development, and branding.</p>
+  </div>
+</section>
 
   <!-- SERVICES -->
   <main>
