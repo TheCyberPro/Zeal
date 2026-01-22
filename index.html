@@ -578,15 +578,165 @@
   margin: 0;
 }
 
-/* Subtitle styling */
-.hero-subtitle {
-  display: inline-block;
-  background: rgba(0, 0, 0, 0.35); /* subtle readability layer */
-  padding: .6rem 1rem;
-  border-radius: 8px;
-  color: rgba(255,255,255,0.95);
-  line-height: 1.5;
+
+
+
+
+
+
+/* Ensure consistent box model and safe horizontal padding */
+* { box-sizing: border-box; }
+
+/* Container safety: keeps content from touching device edges */
+#instagram .container,
+#instagram .showcase-row,
+.container { padding-inline: 1rem; }
+
+/* Keep the showcase row centered and constrained */
+.showcase-row {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  justify-items: center;
+  box-sizing: border-box;
+  padding-inline: 0.25rem; /* tiny inner padding to prevent edge slip */
 }
+
+/* Ensure each card never exceeds viewport width on small devices */
+.s-card {
+  width: 100%;
+  max-width: 920px;
+  box-sizing: border-box;
+}
+
+/* Make media framing identical for Instagram and Developer */
+.inst-photo-wrap,
+.dev-photo-wrap,
+.instagram-card .s-card-media,
+.developer-card .s-card-media {
+  width: 100%;
+  min-height: 220px;
+  overflow: hidden;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+  display: block;
+}
+
+/* If using <img> inside wrappers, ensure same behavior */
+.inst-photo-wrap img,
+.dev-photo-wrap img,
+.developer-img,
+.inst-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Prevent horizontal overflow on very small screens */
+html, body { overflow-x: hidden; }
+/* Base button polish */
+.s-btn, .btn {
+  font-weight: 800;
+  letter-spacing: .02em;
+  border-radius: 12px;
+  padding: .75rem 1rem;
+  transition: transform .14s ease, box-shadow .14s ease, opacity .14s ease;
+  will-change: transform, box-shadow;
+  border: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Primary button: bold, warm, and luminous */
+.s-btn-primary {
+  background: linear-gradient(180deg, var(--gold), #e6b84a);
+  color: #0d052d;
+  box-shadow: 0 8px 24px rgba(246,200,95,0.18);
+}
+
+/* Ghost and secondary styles */
+.s-btn-ghost {
+  background: rgba(255,255,255,0.04);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.btn--secondary {
+  background: transparent;
+  color: var(--gold);
+  border: 1px solid rgba(246,200,95,0.12);
+}
+
+/* Hover / focus / active */
+.s-btn-primary:hover,
+.s-btn-ghost:hover,
+.btn--secondary:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 36px rgba(2,6,23,0.12);
+  opacity: 1;
+}
+.s-btn:active { transform: translateY(-1px) scale(.998); }
+.s-btn:focus-visible, .btn:focus-visible {
+  outline: 3px solid rgba(246,200,95,0.18);
+  outline-offset: 4px;
+}
+
+/* Make CTAs larger and full-width on mobile, inline on desktop */
+.s-card-ctas { display:flex; gap:.6rem; flex-direction:column; width:100%; }
+.s-card-ctas .s-btn, .s-card-ctas .btn { width:100%; }
+
+/* Desktop: side-by-side CTAs */
+@media (min-width:720px) {
+  .s-card-ctas { flex-direction:row; justify-content:flex-start; }
+  .s-card-ctas .s-btn, .s-card-ctas .btn { width:auto; min-width: 140px; }
+}
+/* Match card heights visually when possible */
+.showcase-row { align-items: start; }
+.instagram-card, .developer-card { align-items: stretch; }
+
+/* Slightly stronger card frame to match hero glow */
+.instagram-card, .developer-card {
+  border-radius: 14px;
+  border: 1px solid rgba(246,200,95,0.06);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+}
+
+/* Make section title and cards optically centered */
+#instagram .section__title { text-align: center; margin-bottom: 1rem; }
+
+/* Reduce chance of content overflow from long text */
+.s-card-body { word-break: break-word; }
+
+.inst-photo-wrap {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  min-height: 220px;
+}
+
+.inst-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+#instagram .container,
+.showcase-row,
+.s-card {
+  width: 100%;
+  max-width: 1100px;
+  margin-inline: auto;
+  padding-inline: 1rem;
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
 
   </style>
 </head>
@@ -796,21 +946,50 @@
 <!-- INSTAGRAM SECTION -->
 <section id="instagram" class="section section--light" aria-labelledby="instagram-title">
   <div class="container">
-    <h2 class="section__title" id="instagram-title">From our Instagram</h2>
 
-    <div class="showcase-row">
-      <article class="s-card instagram-card" id="instagramCard" tabindex="0" aria-labelledby="inst-title">
-        <div class="s-card-media" role="img" aria-label="Instagram preview" style="background-image:url('/assets/zeal2.png');"></div>
-        <div class="s-card-body">
-          <h5 id="inst-title">Instagram Highlight</h5>
-          <p class="s-card-sub">Reels, creative campaigns, and creator partnerships that scale engagement.</p>
-          <div class="s-card-ctas">
-            <a class="s-btn s-btn-primary" id="visitInstagram" href="https://www.instagram.com/zeal_web/" target="_blank" rel="noopener">Visit Instagram</a>
-            <a class="s-btn s-btn-ghost" id="instCatalogue" href="mailto:zeal.io@outlook.com?subject=ZEAL%20Catalogue">Get Catalogue</a>
-            <button class="s-btn s-btn-outline view-services" type="button">View Services</button>
-          </div>
-        </div>
-      </article>
+<h2 class="section__title" id="instagram-title">From our Instagram</h2>
+
+<div class="showcase-row">
+
+  <article class="s-card instagram-card" id="instagramCard" tabindex="0" aria-labelledby="inst-title">
+
+    <!-- IMAGE WRAPPER (same behavior as dev-photo-wrap) -->
+    <div class="inst-photo-wrap">
+      <img 
+        src="/assets/zeal2.png"
+        srcset="/assets/zeal2-400.webp 400w, /assets/zeal2-800.webp 800w, /assets/zeal2-1600.webp 1600w"
+        sizes="(max-width:900px) 100vw, 420px"
+        alt="Instagram preview"
+        class="inst-img"
+      >
+    </div>
+
+    <div class="s-card-body">
+      <h5 id="inst-title">Instagram Highlight</h5>
+
+      <p class="s-card-sub">
+        Reels, creative campaigns, and creator partnerships that scale engagement.
+      </p>
+
+      <div class="s-card-ctas">
+        <a class="s-btn s-btn-primary" id="visitInstagram"
+           href="https://www.instagram.com/zeal_web/" target="_blank" rel="noopener">
+          Visit Instagram
+        </a>
+
+        <a class="s-btn s-btn-ghost" id="instCatalogue"
+           href="mailto:zeal.io@outlook.com?subject=ZEAL%20Catalogue">
+          Get Catalogue
+        </a>
+
+        <button class="s-btn s-btn-outline view-services" type="button">
+          View Services
+        </button>
+      </div>
+    </div>
+
+  </article>
+
 
       <article class="s-card developer-card" id="developerCard" tabindex="0" aria-labelledby="dev-title">
         <div class="s-card-media dev-photo" role="img" aria-label="Developer photo" style="background-image:url('/assets/dev-photo.png');"></div>
