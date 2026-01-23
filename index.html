@@ -746,10 +746,13 @@ html, body {
   width: 100%;
   height: 100%;
   background: center/cover no-repeat url('/assets/zeal1.png');
+  background-image: url('/assets/hero-zeal.png');
+
   filter: brightness(1.1) saturate(1.05);
   opacity: 0.92;
   z-index: 1;
   pointer-events: none;
+  
 }
 
   </style>
@@ -785,8 +788,17 @@ html, body {
 <!-- Explore panel (single instance) -->
 <div id="explorePanel" class="explore-panel" aria-hidden="true" role="dialog" aria-label="Explore menu">
   <div class="explore-inner" role="document">
+
+
+
+
     <!-- close button: closes panel and returns user to homepage -->
-    <a id="exploreClose" class="explore-close" aria-label="Close Explore menu and return home" href="/" role="button">✕</a>
+<button id="exploreClose" class="explore-close" type="button">×</button>
+
+
+
+
+
 
     <!-- Mega menu -->
     <div id="megaMenu" class="mega-menu" role="menu" aria-hidden="true">
@@ -1630,6 +1642,18 @@ html, body {
   // Initial state
   back.hidden = true;
 })();
+</script>
+
+
+<script>
+  document.getElementById("exploreClose").addEventListener("click", function () {
+    window.location.href = "https://zealweb.xyz";
+  });
+</script>
+<script>
+  document.getElementById("exploreBackUnderServices").addEventListener("click", function () {
+    window.location.href = "https://zealweb.xyz";
+  });
 </script>
 
 </body>
