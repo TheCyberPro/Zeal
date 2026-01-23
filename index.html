@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="icon" type="zeal2/png" href="assets/zeal2.png">
+  <link rel="icon" type="zeal1/png" href="assets/zeal1.png">
 
   <!-- Font Awesome (replace your-kit-id with your real kit id) -->
   <script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script>
@@ -1591,11 +1591,13 @@ html, body {
 
 
 
-
 <script>
 (function(){
   const panel = document.getElementById('explorePanel');
   const back = document.getElementById('exploreBackUnderServices');
+  const closeBtn = document.getElementById('exploreClose');
+  const homeURL = "https://zealweb.xyz";
+
   if (!panel || !back) return;
 
   // All sub‑panels inside the mega menu
@@ -1611,49 +1613,48 @@ html, body {
   // Return to root view
   function showRoot() {
     lists.forEach(el => el.setAttribute('hidden',''));
-    back.hidden = true;
+    back.hidden = false; // <-- ALWAYS VISIBLE NOW
   }
 
-  // When user opens a submenu (your existing code handles the toggle)
+  // When user opens a submenu
   document.querySelector('#megaMenu')?.addEventListener('click', () => {
     setTimeout(() => {
-      back.hidden = !anyVisible();
+      back.hidden = false; // <-- ALWAYS SHOW BACK BUTTON
     }, 10);
   });
 
-  // Back button logic
+  // BACK BUTTON → CLOSE PANEL + REDIRECT HOME
   back.addEventListener('click', (e) => {
     e.stopPropagation();
-    if (!anyVisible()) {
-      // Already at root → close panel
+
+    // Close the panel
+    panel.classList.remove('open');
+    panel.setAttribute('aria-hidden','true');
+
+    // Redirect home
+    window.location.href = homeURL;
+  });
+
+  // X BUTTON → CLOSE PANEL + REDIRECT HOME
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
       panel.classList.remove('open');
       panel.setAttribute('aria-hidden','true');
-      return;
-    }
-    showRoot();
-  });
+      window.location.href = homeURL;
+    });
+  }
 
   // When panel closes, reset back button
   const obs = new MutationObserver(() => {
-    if (!panel.classList.contains('open')) showRoot();
+    if (!panel.classList.contains('open')) {
+      back.hidden = false; // <-- KEEP IT VISIBLE
+    }
   });
   obs.observe(panel, { attributes: true, attributeFilter: ['class'] });
 
   // Initial state
-  back.hidden = true;
+  back.hidden = false; // <-- ALWAYS VISIBLE
 })();
-</script>
-
-
-<script>
-  document.getElementById("exploreClose").addEventListener("click", function () {
-    window.location.href = "https://zealweb.xyz";
-  });
-</script>
-<script>
-  document.getElementById("exploreBackUnderServices").addEventListener("click", function () {
-    window.location.href = "https://zealweb.xyz";
-  });
 </script>
 
 </body>
