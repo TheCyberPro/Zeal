@@ -772,6 +772,62 @@ html, body {
   display: block;
 }
 
+
+/* Slider container */
+.highlights-slider {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-block: 1rem;
+  scrollbar-width: none;
+}
+.highlights-slider::-webkit-scrollbar {
+  display: none;
+}
+
+/* Highlight card */
+.highlight-card {
+  min-width: 280px;
+  scroll-snap-align: start;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(246,200,95,0.15);
+  padding: 1.5rem;
+  border-radius: 14px;
+  flex-shrink: 0;
+  backdrop-filter: blur(4px);
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+/* Gold glow hover */
+.highlight-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 22px rgba(246,200,95,0.35), 
+              0 0 8px rgba(246,200,95,0.25);
+}
+
+/* Navigation dots */
+.highlight-dots {
+  display: flex;
+  justify-content: center;
+  gap: .5rem;
+  margin-top: 1.5rem;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(246,200,95,0.25);
+  transition: background .3s ease, transform .3s ease;
+}
+
+.dot.active {
+  background: var(--gold);
+  transform: scale(1.3);
+}
+
+
   </style>
 </head>
 
@@ -941,25 +997,73 @@ html, body {
 </section>
 
     <!-- DEVELOPER HIGHLIGHTS -->
-    <section id="highlights" class="section section--dark" aria-labelledby="highlights-title">
-      <div class="container">
-        <h2 class="section__title" id="highlights-title">Developer highlights</h2>
-        <div class="grid grid--3cols">
-          <div class="highlight-card">
-            <h3 class="card__title">SaaS speed uplift</h3>
-            <p class="card__text">Cut load times in half, contributing to a 45% conversion lift.</p>
-          </div>
-          <div class="highlight-card">
-            <h3 class="card__title">Staffing automation</h3>
-            <p class="card__text">Built end‑to‑end onboarding with compliance baked in.</p>
-          </div>
-          <div class="highlight-card">
-            <h3 class="card__title">Executive‑grade dashboards</h3>
-            <p class="card__text">Designed premium dashboards that reinforce brand authority and clarity.</p>
-          </div>
-        </div>
+<!-- DEVELOPER HIGHLIGHTS -->
+<section id="highlights" class="section section--dark" aria-labelledby="highlights-title">
+  <div class="container">
+    <h2 class="section__title" id="highlights-title">Developer highlights</h2>
+
+    <!-- SLIDER -->
+    <div class="highlights-slider">
+
+      <div class="highlight-card">
+        <h3 class="card__title">SaaS speed uplift</h3>
+        <p class="card__text">We made the platform load much faster, helping more visitors convert.</p>
       </div>
-    </section>
+
+      <div class="highlight-card">
+        <h3 class="card__title">Staffing automation</h3>
+        <p class="card__text">We automated onboarding so businesses save time and avoid mistakes.</p>
+      </div>
+
+      <div class="highlight-card">
+        <h3 class="card__title">Executive‑grade dashboards</h3>
+        <p class="card__text">We designed clear dashboards that help leaders make better decisions.</p>
+      </div>
+
+      <div class="highlight-card">
+        <h3 class="card__title">Reliable mobile experience</h3>
+        <p class="card__text">The platform now works smoothly on all phones, even with slow networks.</p>
+      </div>
+
+      <div class="highlight-card">
+        <h3 class="card__title">Payment integration</h3>
+        <p class="card__text">We added secure payment options — card, transfer, or mobile money.</p>
+      </div>
+
+      <div class="highlight-card">
+        <h3 class="card__title">Security upgrade</h3>
+        <p class="card__text">We improved security so your data stays safe and trusted.</p>
+      </div>
+
+      <div class="highlight-card">
+        <h3 class="card__title">User‑friendly design</h3>
+        <p class="card__text">We simplified the interface so anyone can use it easily.</p>
+      </div>
+
+      <div class="highlight-card">
+        <h3 class="card__title">Easy content updates</h3>
+        <p class="card__text">You can now update your site without calling a developer.</p>
+      </div>
+
+    </div>
+
+    <!-- NAVIGATION DOTS -->
+    <div class="highlight-dots">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+
+  </div>
+</section>
+
+
+
 
     <!-- TESTIMONIAL SLIDER -->
     <section id="testimonials" class="section section--light" aria-labelledby="testimonials-title">
@@ -1672,6 +1776,30 @@ html, body {
   // Initial state
   back.hidden = false; // <-- ALWAYS VISIBLE
 })();
+</script>
+<script>
+const slider = document.querySelector('.highlights-slider');
+const dots = document.querySelectorAll('.dot');
+const cards = document.querySelectorAll('.highlight-card');
+
+let startX = 0;
+
+/* Mobile swipe */
+slider.addEventListener('touchstart', (e) => {
+  startX = e.touches[0].clientX;
+});
+
+slider.addEventListener('touchmove', (e) => {
+  const diff = e.touches[0].clientX - startX;
+  slider.scrollLeft -= diff * 1.2;
+  startX = e.touches[0].clientX;
+});
+
+/* Dot syncing */
+slider.addEventListener('scroll', () => {
+  const index = Math.round(slider.scrollLeft / slider.clientWidth);
+  dots.forEach((d, i) => d.classList.toggle('active', i === index));
+});
 </script>
 
 </body>
