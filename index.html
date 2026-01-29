@@ -845,25 +845,58 @@ html, body {
 }
 
 
+
+
+/* Explore Button */
 .hero-cta {
-  margin: 1.2rem 0 1.6rem;
+  margin: 1.4rem 0 1.6rem;
 }
 
 .btn-explore {
   display: inline-block;
-  padding: 12px 26px;
+  padding: 14px 32px;
   font-weight: 700;
-  letter-spacing: 0.5px;
-  border-radius: 8px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  border-radius: 10px;
   background: #ffffff;
   color: #000;
-  text-transform: uppercase;
-  transition: transform .3s ease, box-shadow .3s ease;
+  position: relative;
+  overflow: hidden;
+  transition: transform .35s ease, box-shadow .35s ease;
+  
+  /* Glow base */
+  box-shadow:
+    0 0 12px rgba(255,255,255,0.25),
+    0 0 22px rgba(255,255,255,0.15);
 }
 
+/* Hover Glow + Lift */
 .btn-explore:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(255,255,255,0.15);
+  transform: translateY(-4px);
+  box-shadow:
+    0 0 18px rgba(255,255,255,0.45),
+    0 0 32px rgba(255,255,255,0.25),
+    0 8px 30px rgba(255,255,255,0.15);
+}
+
+/* Subtle neon pulse */
+.btn-explore::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at center,
+    rgba(255,255,255,0.25),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+
+.btn-explore:hover::after {
+  opacity: 1;
 }
 
 
@@ -986,20 +1019,25 @@ html, body {
 
 
 
-
-
-  <!-- Hero -->
+<!-- Hero -->
 <section class="zeal-hero hero--luxury" aria-labelledby="hero-title">
   <div class="hero-bg" aria-hidden="true"></div>
+
   <div class="hero-content">
     <h1 id="hero-title" class="hero-title"></h1>
 
-<!-- Explore Button (inserted here) --> 
-	<div class="hero-cta"> <a href="#work" class="btn-explore">EXPLORE OUR WORK</a> </div>
+    <!-- Explore Button -->
+    <div class="hero-cta">
+      <a href="#work" class="btn-explore">EXPLORE OUR WORK</a>
+    </div>
 
-    <p class="hero-subtitle">We are a digital agency specializing in web design, development, and branding.</p>
+    <p class="hero-subtitle">
+      We are a digital agency specializing in web design, development, and branding.
+    </p>
   </div>
 </section>
+
+
 
   <!-- SERVICES -->
   <main>
@@ -1910,6 +1948,37 @@ html, body {
   });
 
 })();
+</script>
+<script>
+document.addEventListener("click", function(e) {
+  const link = e.target.closest('a[href^="#"]');
+  if (!link) return;
+
+  const id = link.getAttribute("href").slice(1);
+  const target = document.getElementById(id);
+  if (!target) return;
+
+  e.preventDefault();
+
+  const headerOffset = 80; // adjust if your header is sticky
+  const elementPosition = target.getBoundingClientRect().top;
+  const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+  window.scrollTo({
+    top: offsetPosition,
+    behavior: "smooth"
+  });
+});
+@keyframes zealPulse {
+  0% { box-shadow: 0 0 12px rgba(255,255,255,0.25); }
+  50% { box-shadow: 0 0 22px rgba(255,255,255,0.45); }
+  100% { box-shadow: 0 0 12px rgba(255,255,255,0.25); }
+}
+
+.btn-explore {
+  animation: zealPulse 3.2s ease-in-out infinite;
+}
+
 </script>
 
 </body>
