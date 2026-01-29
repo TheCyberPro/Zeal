@@ -862,13 +862,13 @@ html, body {
   background: #ffffff;
   color: #000;
   position: relative;
-  overflow: hidden;
-  transition: transform .35s ease, box-shadow .35s ease;
-  
-  /* Glow base */
+  transition: transform .35s ease, box-shadow .35s ease, opacity .35s ease;
+
+  /* Clean ZEAL glow */
   box-shadow:
     0 0 12px rgba(255,255,255,0.25),
-    0 0 22px rgba(255,255,255,0.15);
+    0 0 22px rgba(255,255,255,0.18),
+    0 8px 24px rgba(255,255,255,0.12);
 }
 
 /* Hover Glow + Lift */
@@ -876,27 +876,13 @@ html, body {
   transform: translateY(-4px);
   box-shadow:
     0 0 18px rgba(255,255,255,0.45),
-    0 0 32px rgba(255,255,255,0.25),
-    0 8px 30px rgba(255,255,255,0.15);
+    0 0 32px rgba(255,255,255,0.28),
+    0 12px 36px rgba(255,255,255,0.18);
 }
 
-/* Subtle neon pulse */
+/* Remove the old center-circle effect */
 .btn-explore::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(
-    circle at center,
-    rgba(255,255,255,0.25),
-    transparent 70%
-  );
-  opacity: 0;
-  transition: opacity .35s ease;
-}
-
-.btn-explore:hover::after {
-  opacity: 1;
+  display: none;
 }
 
 
@@ -1949,6 +1935,7 @@ html, body {
 
 })();
 </script>
+
 <script>
 document.addEventListener("click", function(e) {
   const link = e.target.closest('a[href^="#"]');
@@ -1960,7 +1947,7 @@ document.addEventListener("click", function(e) {
 
   e.preventDefault();
 
-  const headerOffset = 80; // adjust if your header is sticky
+  const headerOffset = 80;
   const elementPosition = target.getBoundingClientRect().top;
   const offsetPosition = elementPosition + window.scrollY - headerOffset;
 
@@ -1969,16 +1956,6 @@ document.addEventListener("click", function(e) {
     behavior: "smooth"
   });
 });
-@keyframes zealPulse {
-  0% { box-shadow: 0 0 12px rgba(255,255,255,0.25); }
-  50% { box-shadow: 0 0 22px rgba(255,255,255,0.45); }
-  100% { box-shadow: 0 0 12px rgba(255,255,255,0.25); }
-}
-
-.btn-explore {
-  animation: zealPulse 3.2s ease-in-out infinite;
-}
-
 </script>
 
 </body>
