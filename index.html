@@ -844,6 +844,29 @@ html, body {
   .highlights-slider { gap: 2rem; padding-block: 1.5rem; }
 }
 
+
+.hero-cta {
+  margin: 1.2rem 0 1.6rem;
+}
+
+.btn-explore {
+  display: inline-block;
+  padding: 12px 26px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #000;
+  text-transform: uppercase;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.btn-explore:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(255,255,255,0.15);
+}
+
+
   </style>
 </head>
 
@@ -970,6 +993,10 @@ html, body {
   <div class="hero-bg" aria-hidden="true"></div>
   <div class="hero-content">
     <h1 id="hero-title" class="hero-title"></h1>
+
+<!-- Explore Button (inserted here) --> 
+	<div class="hero-cta"> <a href="#work" class="btn-explore">EXPLORE OUR WORK</a> </div>
+
     <p class="hero-subtitle">We are a digital agency specializing in web design, development, and branding.</p>
   </div>
 </section>
